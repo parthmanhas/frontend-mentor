@@ -27,8 +27,12 @@
       margin: 0;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     p {
-      margin-bottom: 0.75rem;
+      margin-top: 1rem;
     }
 
     :root {
@@ -36,7 +40,7 @@
     }
 
     body {
-      background-color: #D5E1EF;
+      background-color: hsl(212, 45%, 89%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -44,62 +48,57 @@
       font-family: 'Outfit', sans-serif;
     }
 
-    .container {
-      height: 500px;
-      width: 350px;
-      background-color: white;
-      border-radius: 20px;
-      overflow: hidden;
+    main {
+      width: 23rem;
+      background-color: hsl(0, 0%, 100%);
+      border-radius: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      
     }
 
-    .container .image-container {
+    main .image-container {
       width: 100%;
-      display: flex;
-      justify-content: center;
+      padding: 1rem;
     }
-
+    
     img {
-      border-radius: 12px;
-      margin: 20px;
-      width: calc(100% - 20px);
+      border-radius: 1rem;
+      max-width: 100%;
     }
 
-    .container .text-container {
-      margin: 0 35px;
+    main .text-container {
       text-align: center;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      padding: 1rem 2.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .fs-700 {
       font-weight: 700;
       font-size: 1.5rem;
+      color: hsl(218, 44%, 22%);
     }
 
     .fs-400 {
       font-weight: 400;
       font-size: 1rem;
-      color: #A8ACAF;
+      color: hsl(220, 15%, 55%);
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <main>
     <div class="image-container">
-      <img src="./images/image-qr-code.png" />
+      <img src="./images/image-qr-code.png" alt=""/>
     </div>
     <div class="text-container">
-      <p class="fs-700">Improve your front-end skills by building projects</p>
+      <h1 class="fs-700">Improve your front-end skills by building projects</h1>
       <p class="fs-400">Scan the QR code to visit Frontend Mentor and take your coding skills to next level</p>
     </div>
-  </div>
+  </main>
 </body>
 
 </html>
