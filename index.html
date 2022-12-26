@@ -10,9 +10,30 @@
 
   <title>Frontend Mentor | QR code component</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;800&display=swap');
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    figure,
+    blockquote,
+    dl,
+    dd {
+      margin: 0;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+
+    :root {
+      font-size: 15px;
+    }
 
     body {
       background-color: #D5E1EF;
@@ -20,7 +41,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      font-family: Inter;
+      font-family: 'Outfit', sans-serif;
     }
 
     .container {
@@ -49,20 +70,23 @@
     .container .text-container {
       margin: 0 35px;
       text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
 
-    h2 {
-      font-weight: 800;
-      margin-top: 0;
-      font-size: 1.75rem;
+    .fs-700 {
+      font-weight: 700;
+      font-size: 1.5rem;
     }
 
-    h3 {
-      font-weight: 200;
-      margin-top: 0;
-      font-size: 1.25rem;
+    .fs-400 {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #A8ACAF;
     }
-
   </style>
 </head>
 
@@ -72,8 +96,8 @@
       <img src="./images/image-qr-code.png" />
     </div>
     <div class="text-container">
-      <h2>Improve your front-end skills by building projects</h2>
-      <h3>Scan the QR code to visit Frontend Mentor and take your coding skills to next level</h3>
+      <p class="fs-700">Improve your front-end skills by building projects</p>
+      <p class="fs-400">Scan the QR code to visit Frontend Mentor and take your coding skills to next level</p>
     </div>
   </div>
 </body>
