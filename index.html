@@ -20,10 +20,13 @@
       font-size: 14px;
     }
 
-    @media only screen and (max-width: 375px) {
+    @media only screen and (max-width: 376px) {
       main {
         width: 375px;
+        display: flex;
+        flex-direction: column;
       }
+
       main .image-container {
         height: 250px;
         border-radius: 1rem 1rem 0 0;
@@ -34,12 +37,19 @@
       main {
         display: flex;
         justify-content: center;
-        align-items: center;
-        width: 700px;
+        width: 550px;
+        height: 60%;
+        display: flex;
+        align-items: stretch;
       }
 
       main .image-container {
         border-radius: 1rem 0 0 1rem;
+        width: 50%;
+      }
+
+      main .text-container {
+        width: 50%;
       }
     }
 
@@ -70,12 +80,15 @@
     }
 
     img {
-      width: 100%;
+      width: 120%;
       object-fit: cover;
     }
 
     main .text-container {
       padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     main .price-container {
