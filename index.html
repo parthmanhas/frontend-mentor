@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap" rel="stylesheet">
+
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    :root {
+      font-size: 15px;
+      --primary-orange: hsl(25, 97%, 53%);
+      --neutral-light-grey: hsl(217, 12%, 63%);
+      --neutral-medium-grey: hsl(216, 12%, 54%);
+      --neutral-dark-blue: hsl(213, 19%, 18%);
+      --neutral-very-dark-blue: hsl(216, 12%, 8%);
+      --neutral-white: hsl(0, 0%, 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Overpass";
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--neutral-very-dark-blue);
+      height: 100vh;
+    }
+
+    .how-did-we-do {
+      background-color: var(--neutral-dark-blue);
+      padding: 2rem;
+      color: var(--neutral-white);
+      border-radius: 1rem;
+      width: 350px;
+    }
+
+    .star {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: var(--neutral-very-dark-blue);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .numbers {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: var(--neutral-very-dark-blue);
+      color: var(--neutral-medium-grey);
+    }
+
+    .inactive {
+      background-color: var(--neutral-very-dark-blue);
+      color: var(--neutral-medium-grey);
+    }
+
+    .active {
+      background-color: var(--neutral-white);
+      color: var(--primary-orange);
+    }
+
+    li:hover {
+      background-color: var(--neutral-white);
+      color: var(--primary-orange);
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+      border-radius: 2rem;
+      padding: 1rem;
+      text-transform: uppercase;
+      background-color: var(--primary-orange);
+      border: none;
+      color: var(--neutral-white);
+    }
+
+    button:hover {
+      background-color: var(--neutral-white);
+      color: var(--primary-orange);
+      cursor: pointer;
+    }
+
+    p {
+      color: var(--neutral-medium-grey);
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+  <!-- Thank you state start -->
+
+  <!-- You selected Add rating here out of 5 -->
+
+  <!-- Thank you! -->
+
+  <!-- We appreciate you taking the time to give a rating. If you ever need more support,
+  don’t hesitate to get in touch! -->
+
+  <!-- Thank you state end -->
+
+
+  <main class="how-did-we-do">
+    <div class="star">
+      <img src="./images/icon-star.svg" alt="">
+    </div>
+    <h1>How did we do?</h1>
+    <p> Please let us know how we did with your support request. All feedback is appreciated
+      to help us improve our offering!</p>
+    <ul class="numbers">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+    <button>Submit</button>
+  </main>
+  <main class="thank-you"></main>
+</body>
+
+<script>
+  let stars = 0;
+  const list = document.querySelectorAll('li')
+  list.forEach(el => {
+    el.addEventListener('click', (e) => {
+      stars = +e.originalTarget.innerText;
+      list.forEach(el => el.classList.remove('.active'));
+      list.forEach(el => el.classList.add('.inactive'));
+      e.originalTarget.classList.remove('.inactive');
+      e.originalTarget.classList.add('.active');
+    });
+  })
+</script>
+
+</html>
