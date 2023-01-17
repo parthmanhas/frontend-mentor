@@ -48,7 +48,7 @@
       width: 350px;
     }
 
-    .thankyou{
+    .thankyou {
       display: none;
       flex-direction: column;
       justify-content: center;
@@ -137,19 +137,6 @@
 
 
 <body>
-
-  <!-- Thank you state start -->
-
-  <!-- You selected Add rating here out of 5 -->
-
-  <!-- Thank you! -->
-
-  <!-- We appreciate you taking the time to give a rating. If you ever need more support,
-  don’t hesitate to get in touch! -->
-
-  <!-- Thank you state end -->
-
-
   <main>
     <div class="how-did-we-do">
       <div class="star">
@@ -167,7 +154,6 @@
       </ul>
       <button>Submit</button>
     </div>
-
     <div class="thankyou">
       <svg width="162" height="108" xmlns="http://www.w3.org/2000/svg">
         <g fill="none">
@@ -210,10 +196,7 @@
       <p>We appreciate you taking the time to give a rating. If you ever need more support,
         don’t hesitate to get in touch!</p>
     </div>
-
   </main>
-
-
 </body>
 
 <script>
@@ -228,11 +211,11 @@
   })
   list.forEach(el => {
     el.addEventListener('click', (e) => {
-      stars = +e.originalTarget.innerText;
+      stars = +e.srcElement.innerText;
       list.forEach(el => el.classList.remove('li-active'));
       list.forEach(el => el.classList.add('inactive'));
-      e.originalTarget.classList.remove('inactive');
-      e.originalTarget.classList.add('li-active');
+      e.srcElement.classList.remove('inactive');
+      e.srcElement.classList.add('li-active');
     });
   })
 </script>
