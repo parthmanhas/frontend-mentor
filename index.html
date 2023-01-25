@@ -15,123 +15,8 @@
   <title>Frontend Mentor | Interactive rating component</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    :root {
-      font-size: 15px;
-      --primary-orange: hsl(25, 97%, 53%);
-      --neutral-light-grey: hsl(217, 12%, 63%);
-      --neutral-medium-grey: hsl(216, 12%, 54%);
-      --neutral-dark-blue: hsl(213, 19%, 18%);
-      --neutral-very-dark-blue: hsl(216, 12%, 8%);
-      --neutral-white: hsl(0, 0%, 100%);
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: "Overpass";
-    }
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--neutral-very-dark-blue);
-      height: 100vh;
-    }
-
-    .how-did-we-do,
-    .thankyou {
-      background-color: var(--neutral-dark-blue);
-      padding: 2rem;
-      color: var(--neutral-white);
-      border-radius: 1rem;
-      width: 350px;
-    }
-
-    .thankyou {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .star {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      background-color: var(--neutral-very-dark-blue);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .numbers {
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      padding: 0;
-    }
-
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      background-color: var(--neutral-very-dark-blue);
-      color: var(--neutral-medium-grey);
-    }
-
-    .li-active,
-    li:hover {
-      background-color: var(--primary-orange);
-      color: var(--neutral-white);
-      cursor: pointer;
-    }
-
-    .inactive {
-      background-color: var(--neutral-very-dark-blue);
-      color: var(--neutral-medium-grey);
-    }
-
-    .active {
-      background-color: var(--neutral-white);
-      color: var(--primary-orange);
-    }
-
-    button {
-      width: 100%;
-      border-radius: 2rem;
-      padding: 1rem;
-      text-transform: uppercase;
-      background-color: var(--primary-orange);
-      border: none;
-      color: var(--neutral-white);
-    }
-
-    button:hover {
-      background-color: var(--neutral-white);
-      color: var(--primary-orange);
-      cursor: pointer;
-    }
-
-    p {
-      color: var(--neutral-medium-grey);
-    }
-
-    .stars-selected-text {
-      background-color: var(--neutral-very-dark-blue);
-      color: var(--primary-orange);
-      border-radius: 1rem;
-      padding: 0.35rem 1rem;
-      margin-top: 2rem;
-    }
-
-    .thankyou-heading {
-      margin-bottom: 0;
-    }
-  </style>
+  <link href="./css/index.css" rel="stylesheet">
+  <script defer src="./js/index.js"></script>
 </head>
 
 
@@ -145,16 +30,33 @@
       <h1>How did we do?</h1>
       <p> Please let us know how we did with your support request. All feedback is appreciated
         to help us improve our offering!</p>
-      <ul class="numbers">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-      </ul>
-      <button>Submit</button>
+      <form id="form">
+        <fieldset class="rating-form">
+          <div class="rating-container">
+            <input type="radio" name="rating" id="one" value="1" />
+            <label for="one">1</label>
+          </div>
+          <div class="rating-container">
+            <input type="radio" name="rating" id="two" value="2" />
+            <label for="two">2</label>
+          </div>
+          <div class="rating-container">
+            <input type="radio" name="rating" id="three" value="3" />
+            <label for="three">3</label>
+          </div>
+          <div class="rating-container">
+            <input type="radio" name="rating" id="four" value="4" />
+            <label for="four">4</label>
+          </div>
+          <div class="rating-container">
+            <input type="radio" name="rating" id="five" value="5" />
+            <label for="five">5</label>
+          </div>
+        </fieldset>
+        <button id="btn-submit" type="submit" disabled>Submit</button>
+      </form>
     </div>
-    <div class="thankyou">
+    <div class="thankyou hidden">
       <svg width="162" height="108" xmlns="http://www.w3.org/2000/svg">
         <g fill="none">
           <path
@@ -198,26 +100,5 @@
     </div>
   </main>
 </body>
-
-<script>
-  let stars = 0;
-  const list = document.querySelectorAll('li');
-  const submit = document.querySelector('button');
-
-  submit.addEventListener('click', () => {
-    document.querySelector('.how-did-we-do').style.display = 'none';
-    document.querySelector('.thankyou').style.display = 'flex';
-    document.querySelector('.stars-selected-text').innerText = `You Selected out ${stars} of 5`
-  })
-  list.forEach(el => {
-    el.addEventListener('click', (e) => {
-      stars = +e.srcElement.innerText;
-      list.forEach(el => el.classList.remove('li-active'));
-      list.forEach(el => el.classList.add('inactive'));
-      e.srcElement.classList.remove('inactive');
-      e.srcElement.classList.add('li-active');
-    });
-  })
-</script>
 
 </html>
