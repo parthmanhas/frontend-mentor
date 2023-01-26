@@ -1,0 +1,10 @@
+Challenges Completed
+1. interactive-rating-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/interactive-rating-component)
+    - [preview](https://deploy-preview-1--strong-sfogliatella-18183c.netlify.app/)
+2. qr-code-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/qr-code-component)
+    - [preview](https://marvelous-malasada-b44c6e.netlify.app/)
+3. preview-card-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/preview-card-component)
+    - [preview](https://spiffy-cuchufli-ee2271.netlify.app/)
