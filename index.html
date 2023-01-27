@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <title>Frontend Mentor | NFT preview card component</title>
+  <style>
+    :root {
+      --soft-blue: hsl(215, 51%, 70%);
+      --cyan: hsl(178, 100%, 50%);
+      --very-dark-blue-main-bg: hsl(217, 54%, 11%);
+      --very-dark-blue-card-bg: hsl(216, 50%, 16%);
+      --very-dark-blue-line: hsl(215, 32%, 27%);
+      --white: hsl(0, 0%, 100%);
+      --text: hsl(214.6, 23.1%, 50%);
+
+      --transition: 0.3s all;
+
+      font-size: 18px;
+      font-family: 'Outfit', sans-serif;
+
+    }
+
+    *,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--very-dark-blue-main-bg);
+    }
+
+    main {
+      height: 500px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      background-color: var(--very-dark-blue-card-bg);
+      padding: 1.75rem 1.25rem;
+      border-radius: 1rem;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .info-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0.75rem 0;
+    }
+
+    .time-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .author-info-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .author-img {
+      width: 10%;
+      border: 1px solid var(--white);
+      margin-right: 0.75rem;
+      margin-bottom: 0;
+      border-radius: 50%;
+    }
+
+    .eth-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    hr {
+      width: 100%;
+      color: var(--very-dark-blue-line);
+      margin: 0.75rem 0;
+    }
+
+    svg {
+      margin-right: 0.5rem;
+    }
+
+    p {
+      font-weight: 300;
+      color: var(--text);
+    }
+
+    main>p:first-of-type {
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    main:hover {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    main:hover>p:first-of-type,
+    main:hover>.author-info-container>p>span {
+      color: var(--cyan);
+      transition: var(--transition);
+    }
+
+    .nft-image {
+      width: 100%;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      visibility: hidden;
+      opacity: 0;
+      justify-content: center;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    main:hover>.nft-image>.overlay {
+      visibility: visible;
+      opacity: 1;
+      background: rgba(0, 251, 255, 0.6);
+    }
+
+    .eth-container>p {
+      color: var(--cyan);
+    }
+
+    .info-container>.eth-container>p {
+      font-weight: 600;
+    }
+
+    span {
+      color: var(--white);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="nft-image">
+      <div class="overlay">
+        <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" fill-rule="evenodd">
+            <path d="M0 0h48v48H0z" />
+            <path
+              d="M24 9C14 9 5.46 15.22 2 24c3.46 8.78 12 15 22 15 10.01 0 18.54-6.22 22-15-3.46-8.78-11.99-15-22-15Zm0 25c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10Zm0-16c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6Z"
+              fill="#FFF" fill-rule="nonzero" />
+          </g>
+        </svg>
+      </div>
+      <img src="./images/image-equilibrium.jpg" alt="nft-image">
+    </div>
+    <p>Equilibrium #3429</p>
+    <p>Our Equilibrium collection promotes balance and calm.</p>
+    <div class="info-container">
+      <div class="eth-container">
+        <svg width="11" height="18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 10.216 5.5 18 0 10.216l5.5 3.263 5.5-3.262ZM5.5 0l5.496 9.169L5.5 12.43 0 9.17 5.5 0Z"
+            fill="#00FFF8" />
+        </svg>
+        <p>0.041 ETH</p>
+      </div>
+      <div class="time-container">
+        <svg width="17" height="17" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M8.305 2.007a6.667 6.667 0 1 0 0 13.334 6.667 6.667 0 0 0 0-13.334Zm2.667 7.334H8.305a.667.667 0 0 1-.667-.667V6.007a.667.667 0 0 1 1.334 0v2h2a.667.667 0 0 1 0 1.334Z"
+            fill="#8BACD9" />
+        </svg>
+        <p>3 days left</p>
+      </div>
+    </div>
+    <hr>
+    <div class="author-info-container">
+      <img class="author-img" src="./images/image-avatar.png">
+      <p>Creation of <span>Jules Wyvern</span></p>
+    </div>
+  </main>
+</body>
+
+</html>
