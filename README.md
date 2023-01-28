@@ -11,3 +11,6 @@ Challenges Completed
 4. nft-preview-card-component
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/nft-preview-card-component)
     - [preview](https://bright-biscochitos-5c6e80.netlify.app/)
+5. order-summary-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/order-summary-component)
+    - [preview](https://fantastic-daffodil-bb8969.netlify.app/)
