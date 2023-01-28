@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Order summary card</title>
+  <style>
+    :root {
+      --primary-pale-blue: hsl(225, 100%, 94%);
+      --primary-bright-blue: hsl(245, 75%, 52%);
+      --primary-bright-blue-hover: hsl(245, 83%, 64%);
+      
+      --neutral-pale-blue: hsl(225, 100%, 98%);
+      --neutral-desat-blue: hsl(224, 23%, 55%);
+      --neutral-dark-blue: hsl(223, 47%, 23%);
+
+      --background-color: rgb(229, 235, 249);
+
+      font-size: 16px;
+      font-family: 'Red Hat Display', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding-bottom: 1rem;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      background-image: url('./images/pattern-background-mobile.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-color: var(--background-color);
+    }
+
+    @media only screen and (min-width: 375px) {
+      body {
+        background-image: url('./images/pattern-background-desktop.svg');
+      };
+    }
+
+    main {
+      max-width: 375px;
+      border-radius: 1rem;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .annual-plan-card {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--neutral-pale-blue);
+      padding-bottom: 0;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+
+    .annual-plan-card > img {
+      width: 20%;
+      height: 20%;
+    }
+
+    .order-info-container {
+      padding: 2rem;
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    p.primary {
+      width: 100%;
+      background-color: var(--primary-bright-blue);
+      border-radius: 0.5rem;
+      border: none;
+      padding: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 10px var(--neutral-dark-blue);
+      cursor: pointer;
+    }
+
+    p.primary:hover {
+      box-shadow: none;
+      background-color: var(--primary-bright-blue-hover);
+    }
+
+    p.secondary {
+      cursor: pointer;
+      background-color: transparent;
+      padding: 1rem;
+      border: none;
+      padding: 0;
+      font-weight: 700;
+    }
+
+    .annual-plan-text > *, .annual-plan-card > * {
+      padding: 0;
+    }
+
+    .order-info-container > p {
+      text-align: center;
+      color: var(--neutral-desat-blue);
+    }
+
+    .annual-plan-text > p {
+      color: var(--neutral-desat-blue);
+    }
+
+    .order-info-container > :nth-last-child(2) {
+      color: white;
+    }
+
+    .annual-plan-card > p {
+      text-decoration: underline;
+    }
+
+    .annual-plan-card > p:hover {
+      cursor: pointer;
+      color: blue;
+    } 
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="img-container">
+      <img alt="" src="./images/illustration-hero.svg">
+    </div>
+    <div class="order-info-container">
+      <h1>Order Summary</h1>
+      <p>You can now listen to millions of songs, audiobooks, and podcasts on any
+        device anywhere you like!</p>
+      <div class="annual-plan-card">
+        <img alt="" src="./images/icon-music.svg">
+        <div class="annual-plan-text">
+          <h3>Annual Plan</h3>
+          <p>$59.99/year</p>
+        </div>
+        <p>Change</p>
+      </div>
+      <p class="primary">Proceed to Payment</p>
+      <p class="secondary">Cancel Order</p>
+    </div>
+  </main>
+</body>
+
+</html>
