@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+  <title>Frontend Mentor | Stats preview card component</title>
+  <style>
+    :root {
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    * {
+      color: white;
+      box-sizing: border-box;
+    }
+
+    .attribution {
+      position: absolute;
+      bottom: 0;
+      font-size: 11px;
+      text-align: center;
+      color: white;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: hsl(233, 47%, 7%);
+    }
+
+    main {
+      display: flex;
+      background-color: hsl(244, 38%, 16%);
+      max-width: 80vw;
+      height: 500px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    span {
+      color: hsl(277, 64%, 61%);
+    }
+
+    .figures {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .figure {
+      margin-right: 1rem;
+    }
+
+    .left {
+      width: 50%;
+      padding: 4rem;
+      padding-right: 7rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .right {
+      width: 50%;
+      position: relative;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .figure>h1 {
+      margin-bottom: 0;
+    }
+
+    .figure>p {
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      color: hsla(0, 0%, 100%, 0.6);
+      font-size: 0.75rem;
+    }
+
+    .left>p {
+      color: hsla(0, 0%, 100%, 0.75);
+    }
+
+    .right-mobile {
+      display: none;
+    }
+
+    @media only screen and (max-width: 376px) {
+      main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .right-mobile {
+        display: block;
+        position: relative;
+      }
+
+      .left {
+        padding: 1rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .right {
+        display: none;
+      }
+
+      .figures {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: hsla(276.8, 100%, 33.9%, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="right-mobile">
+      <div class="overlay"></div>
+      <img alt="" src="./images/image-header-desktop.jpg">
+    </div>
+    <div class="left">
+      <h1>Get <span>insights</span> that help your business grow.</h1>
+      <p>Discover the benefits of data analytics and make better decisions regarding revenue, customer
+        experience, and overall efficiency.</p>
+      <div class="figures">
+        <div class="figure">
+          <h1>10k+</h1>
+          <p>Companies</p>
+        </div>
+        <div class="figure">
+          <h1>314</h1>
+          <p>Templates</p>
+        </div>
+        <div class="figure">
+          <h1>12M+</h1>
+          <p>Quertes</p>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="overlay"></div>
+      <img alt="" src="./images/image-header-desktop.jpg">
+    </div>
+
+  </main>
+  <div class="attribution">
+    <p>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a></p>
+    <p>Coded by <a href="https://github.com/parthmanhas" target="_blank">Parth Manhas</a></p>
+  </div>
+
+</body>
+
+</html>
