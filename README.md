@@ -14,3 +14,6 @@ Challenges Completed
 5. order-summary-component
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/order-summary-component)
     - [preview](https://fantastic-daffodil-bb8969.netlify.app/)
+6. stats-preview-card-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/stats-preview-card-component)
+    - [preview](https://fastidious-rugelach-ee23fb.netlify.app/)
