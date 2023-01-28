@@ -46,7 +46,11 @@
     @media only screen and (min-width: 375px) {
       body {
         background-image: url('./images/pattern-background-desktop.svg');
-      };
+      }
+
+      main {
+        max-width: 450px;
+      }
     }
 
     main {
@@ -125,6 +129,11 @@
       color: var(--neutral-desat-blue);
     }
 
+    .annual-plan-text > p:first-child {
+      font-weight: 700;
+      color: black;
+    }
+
     .order-info-container > :nth-last-child(2) {
       color: white;
     }
@@ -152,7 +161,7 @@
       <div class="annual-plan-card">
         <img alt="" src="./images/icon-music.svg">
         <div class="annual-plan-text">
-          <h3>Annual Plan</h3>
+          <p>Annual Plan</p>
           <p>$59.99/year</p>
         </div>
         <p>Change</p>
