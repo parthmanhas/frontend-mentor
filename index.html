@@ -14,6 +14,7 @@
       --primary-pale-blue: hsl(225, 100%, 94%);
       --primary-bright-blue: hsl(245, 75%, 52%);
       --primary-bright-blue-hover: hsl(245, 83%, 64%);
+      --box-shadow: hsla(223, 47%, 23%, 0.3);
       
       --neutral-pale-blue: hsl(225, 100%, 98%);
       --neutral-desat-blue: hsl(224, 23%, 55%);
@@ -35,12 +36,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 99vh;
+      min-height: 100vh;
       background-image: url('./images/pattern-background-mobile.svg');
       background-repeat: no-repeat;
       background-position: center;
-      background-size: cover;
-      background-color: var(--background-color);
+      background-size: contain;
+      background-color: var(--primary-pale-blue);
     }
 
     @media only screen and (min-width: 375px) {
