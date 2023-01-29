@@ -1,4 +1,4 @@
-Challenges Completed
+Challenges Completed (noting it down here because commits are registered only on default branch and I want to see my own progress in commit graph I don't want to litter my profile with too many repo)
 1. qr-code-component
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/qr-code-component)
     - [preview](https://marvelous-malasada-b44c6e.netlify.app/)
