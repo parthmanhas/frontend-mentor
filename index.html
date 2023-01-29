@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Four card feature section</title>
+  <style>
+    :root {
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      background-color: hsl(0, 0%, 98%);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 1rem 0;
+    }
+
+    .top-container {
+      text-align: center;
+      width: 45%;
+      margin-bottom: 3rem;
+    }
+
+    .top-container>h1:first-child {
+      color: hsl(229, 6%, 66%);
+      font-weight: 400;
+    }
+
+    .top-container>h1:nth-child(2),
+    h3 {
+      color: hsl(234, 12%, 34%);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .top-container>p {
+      color: hsl(229, 6%, 66%);
+    }
+
+    .bottom-container {
+      display: flex;
+    }
+
+    .col-2 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card {
+      padding: 2rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      margin: 1rem;
+      height: 175px;
+      width: 275px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      box-shadow: 0px 0px 20px hsl(229, 6%, 66%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .text-container>p {
+      color: hsl(229, 6%, 66%);
+    }
+
+    .image-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .red-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-top: 4px solid hsl(0, 78%, 62%);
+    }
+
+    .cyan-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-top: 4px solid hsl(180, 62%, 55%);
+    }
+
+    .orange-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-top: 4px solid hsl(34, 97%, 64%);
+    }
+
+    .blue-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-top: 4px solid hsl(212, 86%, 64%);
+    }
+
+    @media only screen and (max-width: 376px) {
+      .bottom-container {
+        flex-direction: column;
+      }
+
+      .top-container {
+        width: 90%;
+        font-size: 0.75rem;
+        text-align: center;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="top-container">
+      <h1>Reliable, efficient delivery</h1>
+      <h1>Powered by Technology</h1>
+      <p>Our Artificial Intelligence powered tools use millions of project data points
+        to ensure that your project is successful</p>
+    </div>
+    <div class="bottom-container">
+      <div class="col-1">
+        <div class="card">
+          <div class="cyan-border"></div>
+          <div class="text-container">
+            <h3>Supervisor</h3>
+            <p>Monitors activity to identify project roadblocks</p>
+          </div>
+          <div class="image-container">
+            <img alt="" src="./images/icon-supervisor.svg">
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="card">
+          <div class="red-border"></div>
+          <div class="text-container">
+            <h3>Team Builder</h3>
+            <p>Scans our talent network to create the optimal team for your project</p>
+          </div>
+          <div class="image-container">
+            <img alt="" src="./images/icon-team-builder.svg">
+          </div>
+        </div>
+        <div class="card">
+          <div class="orange-border"></div>
+          <div class="text-container">
+            <h3>Karma</h3>
+            <p>Regularly evaluates our talent to ensure quality</p>
+          </div>
+          <div class="image-container">
+            <img alt="" src="./images/icon-karma.svg">
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="blue-border"></div>
+          <div class="text-container">
+            <h3>Calculator</h3>
+            <p>Uses data from past projects to provide better delivery estimates</p>
+          </div>
+          <div class="image-container">
+            <img alt="" src="./images/icon-calculator.svg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/parthmanhas" target="_blank">Parth Manhas</a>.
+    </p>
+  </footer>
+</body>
+
+</html>
