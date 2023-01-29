@@ -20,3 +20,6 @@ Challenges Completed (noting it down here because commits are registered only on
 7. 3-column-preview-card-component
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/3-column-preview-card-component)
     - [preview](https://visionary-bienenstitch-a8e8a7.netlify.app)
+8. profile-card-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/profile-card-component)
+    - [preview](https://jovial-alpaca-fe3638.netlify.app/)
