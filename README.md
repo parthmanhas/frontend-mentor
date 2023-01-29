@@ -29,3 +29,6 @@ Challenges Completed (noting it down here because commits are registered only on
 10. four-card-feature-section
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/four-card-feature-section)
     - [preview](https://resplendent-daifuku-6e0111.netlify.app/)
+11. single-price-grid-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/single-price-grid-component)
+    - [preview](https://effulgent-sorbet-fceb57.netlify.app/)
