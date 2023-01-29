@@ -23,3 +23,6 @@ Challenges Completed (noting it down here because commits are registered only on
 8. profile-card-component
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/profile-card-component)
     - [preview](https://jovial-alpaca-fe3638.netlify.app/)
+9. social-proof-section
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/social-proof-section)
+    - [preview](https://quiet-pasca-9c2d2c.netlify.app/)
