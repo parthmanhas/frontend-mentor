@@ -26,3 +26,6 @@ Challenges Completed (noting it down here because commits are registered only on
 9. social-proof-section
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/social-proof-section)
     - [preview](https://quiet-pasca-9c2d2c.netlify.app/)
+10. four-card-feature-section
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/four-card-feature-section)
+    - [preview](https://resplendent-daifuku-6e0111.netlify.app/)
