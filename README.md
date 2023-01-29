@@ -17,3 +17,6 @@ Challenges Completed
 6. stats-preview-card-component
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/stats-preview-card-component)
     - [preview](https://fastidious-rugelach-ee23fb.netlify.app/)
+7. 3-column-preview-card-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/3-column-preview-card-component)
+    - [preview](https://visionary-bienenstitch-a8e8a7.netlify.app)
