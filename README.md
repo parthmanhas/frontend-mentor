@@ -32,3 +32,6 @@ Challenges Completed (noting it down here because commits are registered only on
 11. single-price-grid-component
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/single-price-grid-component)
     - [preview](https://effulgent-sorbet-fceb57.netlify.app/)
+12. huddle-landing-page
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/huddle-landing-page)
+    - [preview](https://majestic-semolina-7f42b2.netlify.app/)
