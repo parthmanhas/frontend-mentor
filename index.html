@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+
+  <title>Frontend Mentor | FAQ Accordion Card</title>
+  <style>
+    :root {
+      font-size: 12px;
+      font-family: 'Kumbh Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(hsl(273, 75%, 66%), hsl(240, 73%, 65%));
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    main {
+      display: flex;
+      border-radius: 1rem;
+      background-color: white;
+      max-width: 50vw;
+      min-height: 65vh;
+      align-items: center;
+      position: relative;
+    }
+
+    section:first-of-type {
+      width: 50vw;
+      height: 38vh;
+      overflow-x: clip;
+    }
+
+    section:last-of-type {
+      padding: 3rem;
+      padding-left: 0;
+      width: 100%;
+    }
+
+    .woman {
+      left: -60px;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .pattern {
+      width: 153%;
+      left: -257px;
+      top: -149px;
+      z-index: 1;
+    }
+
+    .box {
+      position: absolute;
+      z-index: 3;
+      left: -129px;
+      top: 188px;
+    }
+
+    .accordion-unexpanded {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid hsl(240, 5%, 91%);
+      width: 100%;
+    }
+
+    .accordion-unexpanded:hover {
+      cursor: pointer;
+      color: hsl(14, 88%, 65%);
+    }
+
+    .accordion-unexpanded>img {
+      margin: 1rem;
+    }
+
+    .accordion-expanded {
+      display: none;
+      color: hsl(240, 6%, 50%);
+    }
+
+    .image-container {
+      position: relative;
+    }
+
+    .image-container>img {
+      position: absolute;
+    }
+
+    @media only screen and (max-width: 376px) {
+      main {
+        flex-direction: column;
+        min-width: 90vw;
+        min-height: 50vh;
+      }
+
+      .woman {
+        left: 0;
+        top: -132px;
+      }
+
+      .pattern {
+        width: 100%;
+        left: 0;
+        top: -167px;
+      }
+
+      section:first-of-type {
+        height: 9vh;
+        width: 78vw;
+      }
+
+      .box {
+        left: 31px;
+        top: -30px;
+        width: 26%;
+      }
+
+      section:last-of-type {
+        padding-left: 3rem;
+      }
+
+      section:last-of-type>h1 {
+        text-align: center;
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<script>
+  window.onload = function () {
+    const accordionList = [];
+    document.querySelectorAll('.accordion').forEach(accordion => {
+      accordionList.push({
+        accordion,
+        expanded: false
+      })
+    });
+    accordionList.forEach(item => {
+      item.accordion.addEventListener('click', (e) => {
+        item.expanded = !item.expanded;
+        if (item.expanded) {
+          item.accordion.querySelector('.accordion-expanded').style.display = 'block';
+          item.accordion.querySelector('.accordion-unexpanded > p').style.fontWeight = '700';
+          item.accordion.querySelector('.accordion-unexpanded > img').style.transform = 'rotate(180deg)';
+
+        } else {
+          item.accordion.querySelector('.accordion-expanded').style.display = 'none';
+          item.accordion.querySelector('.accordion-unexpanded > p').style.fontWeight = '400';
+          item.accordion.querySelector('.accordion-unexpanded > img').style.transform = 'rotate(0deg)';
+        }
+      })
+    })
+  }
+</script>
+
+<body>
+  <main>
+    <img class="box" alt="" src="./images/illustration-box-desktop.svg">
+    <section>
+      <div class="image-container">
+        <img class="woman" alt="" src="./images/illustration-woman-online-desktop.svg">
+        <img class="pattern" alt="" src="./images/bg-pattern-desktop.svg">
+      </div>
+    </section>
+    <section>
+      <h1>FAQ</h1>
+      <div class="accordion">
+        <div class="accordion-unexpanded">
+          <p>
+            How many team members can I invite?
+          </p>
+          <img alt="" src="./images/icon-arrow-down.svg">
+        </div>
+        <p class="accordion-expanded">
+          You can invite up to 2 additional users on the Free plan. There is no limit on
+          team members for the Premium plan.
+        </p>
+      </div>
+      <div class="accordion">
+        <div class="accordion-unexpanded">
+          <p>
+            What is the maximum file upload size?
+          </p>
+          <img alt="" src="./images/icon-arrow-down.svg">
+        </div>
+        <p class="accordion-expanded">
+          No more than 2GB. All files in your account must fit your allotted storage space.
+        </p>
+      </div>
+      <div class="accordion">
+        <div class="accordion-unexpanded">
+          <p>
+            How do I reset my password?
+          </p>
+          <img alt="" src="./images/icon-arrow-down.svg">
+        </div>
+        <p class="accordion-expanded">
+          Click “Forgot password” from the login page or “Change password” from your profile page.
+          A reset link will be emailed to you.
+        </p>
+      </div>
+      <div class="accordion">
+        <div class="accordion-unexpanded">
+          <p>
+            Can I cancel my subscription?
+          </p>
+          <img alt="" src="./images/icon-arrow-down.svg">
+        </div>
+        <p class="accordion-expanded">
+          Yes! Send us a message and we’ll process your request no questions asked.
+        </p>
+      </div>
+      <div class="accordion">
+        <div class="accordion-unexpanded">
+          <p>
+            Do you provide additional support?
+          </p>
+          <img alt="" src="./images/icon-arrow-down.svg">
+        </div>
+        <p class="accordion-expanded">
+          Chat and email support is available 24/7. Phone lines are open during normal business hours.
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
