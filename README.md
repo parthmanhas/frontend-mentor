@@ -35,3 +35,6 @@ Challenges Completed (noting it down here because commits are registered only on
 12. huddle-landing-page
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/huddle-landing-page)
     - [preview](https://majestic-semolina-7f42b2.netlify.app/)
+13. faq-accordion-card
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/faq-accordion-card)
+    - [preview](https://delicate-chaja-4bddc4.netlify.app/)
