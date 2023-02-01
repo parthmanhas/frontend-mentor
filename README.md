@@ -38,3 +38,11 @@ Challenges Completed (noting it down here because commits are registered only on
 13. faq-accordion-card
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/faq-accordion-card)
     - [preview](https://delicate-chaja-4bddc4.netlify.app/)
+14. article-preview-component
+    - completed desktop, need to fix share button behaviour in mobile
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/article-preview-component)
+    - [preview]()
+
+
+
+    
