@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+
+  <title>Frontend Mentor | Article preview component</title>
+  <style>
+    :root {
+      font-size: 13px;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      position: relative;
+      background-color: hsl(210, 46%, 95%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    main {
+      display: flex;
+      width: 800px;
+      height: 250px;
+      border-radius: 0.5rem;
+    }
+
+    .main--left {
+      width: 40%;
+      height: 100%;
+      display: flex;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .main--right {
+      width: 60%;
+      height: 100%;
+      padding: 2.5rem;
+      background-color: white;
+    }
+
+    .main--right>p:first-of-type {
+      color: hsl(217, 19%, 35%);
+      font-size: 1.5rem;
+      padding-bottom: 1rem;
+    }
+
+    .main--right>p:last-of-type {
+      color: hsl(212, 23%, 69%);
+    }
+
+    .author-info {
+      display: flex;
+      width: 100%;
+      margin-top: 1rem;
+      justify-content: space-between;
+    }
+
+    .author-info--left {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-info--left>img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    .author-info--right {
+      width: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .author-info-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 100%;
+    }
+
+    .author-info-text>p:first-of-type {
+      color: hsl(217, 19%, 35%);
+      font-weight: 700;
+    }
+
+    .author-info-text>p:last-of-type {
+      color: hsl(212, 23%, 69%);
+    }
+
+    .hover-box {
+      position: absolute;
+      background-color: hsl(217, 19%, 35%);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      top: -50px;
+      z-index: 1;
+      display: none;
+    }
+
+    .hover-box>p {
+      text-transform: uppercase;
+      color: hsl(212, 23%, 69%);
+      letter-spacing: 0.25rem;
+    }
+
+    .hover-box>img {
+      width: 20px;
+      cursor: pointer;
+    }
+
+    .hover-box>* {
+      margin-right: 1rem;
+      z-index: 10;
+    }
+
+    .down-arrow {
+      height: 30px;
+      width: 30px;
+      background-color: hsl(217, 19%, 35%);
+      position: absolute;
+      top: 15px;
+      left: calc(50% - 15px);
+      transform: rotateZ(135deg);
+      z-index: 0;
+    }
+
+    .share-bg {
+      width: 30px;
+      height: 30px;
+      background-color: hsl(214, 17%, 51%);
+      border-radius: 50%;
+      padding: 0.55rem;
+      cursor: pointer;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .hover-box-mobile {
+      background-color: hsl(217, 19%, 35%);
+      padding: 0.75rem 1rem;
+      z-index: 99;
+      width: 100%;
+      display: none;
+    }
+
+    @media only screen and (max-width: 376px) {
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      main {
+        flex-direction: column;
+        height: auto;
+        width: auto;
+        padding: 2rem;
+      }
+
+      .main--left {
+        width: 100%;
+      }
+
+      .main--right {
+        width: 100%;
+      }
+
+      .hover-box-mobile {
+        justify-content: space-around;
+        align-items: center;
+        padding: 1.5rem;
+      }
+
+      .hover-box-mobile>.hover-box-mobile--left>p {
+        text-transform: uppercase;
+        color: hsl(212, 23%, 69%);
+        letter-spacing: 0.25rem;
+      }
+
+      .hover-box-mobile>img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      .hover-box-mobile>* {
+        margin-right: 1rem;
+        z-index: 10;
+      }
+
+      .hover-box-mobile--left {
+        display: flex;
+      }
+
+      .hover-box-mobile--left>* {
+        margin-right: 1rem;
+      }
+
+      .hover-box {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<script>
+  window.onload = function () {
+    const share = document.querySelector('.author-info--right > div > img');
+    const hover = document.querySelector('.hover-box');
+    const shareMobile = document.querySelector('.hover-box-mobile > .share-bg');
+    const hoverMobile = document.querySelector('.hover-box-mobile');
+    const authorInfo = document.querySelector('.author-info');
+    let isHoverVisible = false;
+    share.addEventListener('click', () => {
+      isHoverVisible = !isHoverVisible;
+      if (isHoverVisible) {
+        hover.style.display = 'flex';
+      } else {
+        hover.style.display = 'none';
+      }
+    })
+    window.onresize = function () {
+      if (window.innerWidth > 376) {
+
+      } else {
+        let isHoverVisible = false;
+        share.addEventListener('click', () => {
+          isHoverVisible = !isHoverVisible;
+          console.log(isHoverVisible, 'share')
+          if (isHoverVisible) {
+            hoverMobile.style.display = 'flex';
+            authorInfo.style.display = 'none';
+          } else {
+            hoverMobile.style.display = 'none';
+            authorInfo.style.display = 'flex';
+          }
+        })
+
+        shareMobile.addEventListener('click', () => {
+          console.log(isHoverVisible, 'shareMobile')
+          if (isHoverVisible) {
+            hoverMobile.style.display = 'none';
+            authorInfo.style.display = 'flex';
+          } else {
+            hoverMobile.style.display = 'flex';
+            authorInfo.style.display = 'none';
+          }
+          isHoverVisible = !isHoverVisible;
+        })
+      }
+    }
+
+
+  }
+</script>
+
+<body>
+
+  <main>
+    <div class="main--left">
+      <img alt="" src="./images/drawers.jpg">
+    </div>
+    <div class="main--right">
+      <p>Shift the overall look and feel by adding these wonderful
+        touches to furniture in your home</p>
+      <p>Ever been in a room and felt like something was missing? Perhaps
+        it felt slightly bare and uninviting. I’ve got some simple tips
+        to help you make any room feel complete.</p>
+      <div class="author-info">
+        <div class="author-info--left">
+          <img alt="" src="./images/avatar-michelle.jpg">
+          <div class="author-info-text">
+            <p>Michelle Appleton</p>
+            <p>28 Jun 2020</p>
+          </div>
+        </div>
+        <div class="author-info--right">
+          <div class="share-bg">
+            <img alt="" src="./images/icon-share.svg">
+          </div>
+          <div class="hover-box">
+            <div class="down-arrow"></div>
+            <p>Share</p>
+            <img alt="" src="./images/icon-facebook.svg">
+            <img alt="" src="./images/icon-twitter.svg">
+            <img alt="" src="./images/icon-pinterest.svg">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="hover-box-mobile">
+      <div class="hover-box-mobile--left">
+        <p>Share</p>
+        <img alt="" src="./images/icon-facebook.svg">
+        <img alt="" src="./images/icon-twitter.svg">
+        <img alt="" src="./images/icon-pinterest.svg">
+      </div>
+      <div class="share-bg">
+        <img alt="" src="./images/icon-share.svg">
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
