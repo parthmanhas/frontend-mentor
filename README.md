@@ -39,9 +39,10 @@ Challenges Completed (noting it down here because commits are registered only on
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/faq-accordion-card)
     - [preview](https://delicate-chaja-4bddc4.netlify.app/)
 14. article-preview-component
+    - fixed round corners in mobile and desktop, fix hover behaviour in mobile
     - completed desktop, need to fix share button behaviour in mobile
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/article-preview-component)
-    - [preview]()
+    - [preview](https://resplendent-marzipan-4d09b7.netlify.app/)
 
 
 
