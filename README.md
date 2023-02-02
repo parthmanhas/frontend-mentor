@@ -41,6 +41,9 @@ Challenges Completed (noting it down here because commits are registered only on
 14. article-preview-component
     - fixed round corners in mobile and desktop, fix hover behaviour in mobile
     - completed desktop, need to fix share button behaviour in mobile
+    - improvement-areas 
+        - improve hover logic for both use cases
+        - add animations for hover box display
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/article-preview-component)
     - [preview](https://resplendent-marzipan-4d09b7.netlify.app/)
 
