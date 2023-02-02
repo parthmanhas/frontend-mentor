@@ -36,13 +36,16 @@
       display: flex;
       width: 800px;
       height: 250px;
-      border-radius: 0.5rem;
     }
 
     .main--left {
       width: 40%;
       height: 100%;
       display: flex;
+    }
+
+    .main--left > img {
+      border-radius: 0.5rem 0 0 0.5rem;
     }
 
     img {
@@ -54,6 +57,7 @@
       height: 100%;
       padding: 2.5rem;
       background-color: white;
+      border-radius: 0 0.5rem 0.5rem 0;
     }
 
     .main--right>p:first-of-type {
@@ -187,8 +191,13 @@
         width: 100%;
       }
 
+      .main--left > img {
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+
       .main--right {
         width: 100%;
+        border-radius: 0 0 0.5rem 0.5rem;
       }
 
       .hover-box-mobile {
@@ -203,7 +212,7 @@
         letter-spacing: 0.25rem;
       }
 
-      .hover-box-mobile>img {
+      .hover-box-mobile>.hover-box-mobile--left>img {
         width: 20px;
         height: 20px;
         cursor: pointer;
@@ -236,51 +245,47 @@
     const hoverMobile = document.querySelector('.hover-box-mobile');
     const authorInfo = document.querySelector('.author-info');
     let isHoverVisible = false;
-    share.addEventListener('click', () => {
-      isHoverVisible = !isHoverVisible;
-      if (isHoverVisible) {
-        hover.style.display = 'flex';
-      } else {
-        hover.style.display = 'none';
-      }
-    })
-    window.onresize = function () {
-      if (window.innerWidth > 376) {
 
-      } else {
-        let isHoverVisible = false;
-        share.addEventListener('click', () => {
-          isHoverVisible = !isHoverVisible;
-          console.log(isHoverVisible, 'share')
-          if (isHoverVisible) {
-            hoverMobile.style.display = 'flex';
-            authorInfo.style.display = 'none';
-          } else {
-            hoverMobile.style.display = 'none';
-            authorInfo.style.display = 'flex';
-          }
-        })
-
-        shareMobile.addEventListener('click', () => {
-          console.log(isHoverVisible, 'shareMobile')
-          if (isHoverVisible) {
-            hoverMobile.style.display = 'none';
-            authorInfo.style.display = 'flex';
-          } else {
-            hoverMobile.style.display = 'flex';
-            authorInfo.style.display = 'none';
-          }
-          isHoverVisible = !isHoverVisible;
-        })
-      }
+    if (window.outerWidth > 376) {
+      share.addEventListener('click', () => {
+        isHoverVisible = !isHoverVisible;
+        if (isHoverVisible) {
+          hover.style.display = 'flex';
+        } else {
+          hover.style.display = 'none';
+        }
+      })
     }
 
-
+    if (window.outerWidth <= 376) {
+      let isHoverVisible = false;
+      share.addEventListener('click', () => {
+        hover.style.display = 'none'
+        isHoverVisible = !isHoverVisible;
+        if (isHoverVisible) {
+          hoverMobile.style.display = 'flex';
+          authorInfo.style.display = 'none';
+        } else {
+          hoverMobile.style.display = 'none';
+          authorInfo.style.display = 'flex';
+        }
+      })
+      
+      shareMobile.addEventListener('click', () => {
+        hover.style.display = 'none'
+        if (isHoverVisible) {
+          hoverMobile.style.display = 'none';
+          authorInfo.style.display = 'flex';
+        } else {
+          hoverMobile.style.display = 'flex';
+          authorInfo.style.display = 'none';
+        }
+        isHoverVisible = !isHoverVisible;
+      })
+    }
   }
 </script>
-
 <body>
-
   <main>
     <div class="main--left">
       <img alt="" src="./images/drawers.jpg">
