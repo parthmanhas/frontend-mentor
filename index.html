@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <title>Frontend Mentor | Base Apparel coming soon page</title>
+  <style>
+    :root {
+      font-size: 16px;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    main {
+      display: flex;
+    }
+
+    .main--left {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 3rem 8rem;
+      max-height: 100vh;
+    }
+
+    h1 {
+      font-size: 6rem;
+      line-height: 5.5rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1rem;
+      color: hsl(0, 6%, 24%);
+    }
+
+    span {
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    
+    p, span {
+      color: hsl(0, 36%, 70%);
+    }
+
+    .input-field {
+      width: 100%;
+      position: relative;
+    }
+
+    .input-field > img {
+      position: absolute;
+      top: 25%;
+      right: 20%;
+    }
+
+    .input-field > button {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    button {
+      padding: 0.75rem 2rem;
+      border-radius: 2.5rem;
+      border: none;
+      background-image: linear-gradient(hsl(0, 80%, 86%), to hsl(0, 74%, 74%))
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 1.5rem;
+      border: 1px solid hsl(0, 36%, 70%);
+    }
+
+    .main--right {
+      width: 50%;
+      overflow: hidden;
+    }
+
+    .main--right > img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="main--left">
+      <div class="logo"><img alt="" src="./images/logo.svg"></div>
+      <h1><span>We're</span> coming soon</h1>
+      <p>Hello fellow shoppers! We're currently building our new fashion store.
+        Add your email below to stay up-to-date with announcements and our launch deals.</p>
+      <form class="input-field">
+        <input placeholder="Email Address">
+        <img alt="" src="./images/icon-error.svg">
+        <button type="submit"><img alt="" src="./images/icon-arrow.svg"></button>
+      </form>
+    </div>
+
+    <div class="main--right">
+      <img alt="" src="./images/hero-desktop.jpg">
+    </div>
+  </main>
+</body>
+
+</html>
