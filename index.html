@@ -30,7 +30,7 @@
 
     main {
       display: flex;
-      background-image: url(./images/bg-pattern-desktop.svg); 
+      background-image: url(./images/bg-pattern-desktop.svg);
     }
 
     .main--left {
@@ -144,6 +144,61 @@
     .error-active {
       border: 2px solid hsl(0, 93%, 68%);
     }
+
+    .mobile {
+      display: none;
+    }
+
+    @media only screen and (max-width: 412px) {
+
+      main {
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .mobile {
+        display: block;
+      }
+
+      .main--left {
+        padding: 0;
+        width: 100%;
+        text-align: center;
+        align-items: center;
+      }
+
+      .logo {
+        padding: 2rem;
+        width: 100%;
+        display: flex;
+      }
+
+      h1 {
+        font-size: 3rem;
+        line-height: normal;
+        letter-spacing: 0.45rem;
+        padding: 2rem;
+        padding-bottom: 0;
+      }
+
+      .main--right {
+        display: none;
+      }
+
+      p,
+      form {
+        padding: 1rem 2rem;
+      }
+
+      .main--left>img {
+        width: 100%;
+      }
+
+      .input-field > img {
+        right: 27%;
+      }
+    }
   </style>
 </head>
 
@@ -153,10 +208,10 @@
     const email = document.getElementById('email-input');
     const emailError = document.querySelector('.input-field + label');
     const errorImg = document.querySelector('#error-img');
-    
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if(!email.validity.valid) {
+      if (!email.validity.valid) {
         showError();
       }
     });
@@ -172,7 +227,7 @@
     })
 
     function showError() {
-      errorImg.style.display =  'block';
+      errorImg.style.display = 'block';
       email.classList.add('error-active');
       if (email.validity.valueMissing) {
         emailError.textContent = "You need to enter an email address.";
@@ -187,6 +242,7 @@
   <main>
     <div class="main--left">
       <div class="logo"><img alt="" src="./images/logo.svg"></div>
+      <img class="mobile" alt="" src="./images/hero-mobile.jpg">
       <h1><span>We're</span> coming soon</h1>
       <p>Hello fellow shoppers! We're currently building our new fashion store.
         Add your email below to stay up-to-date with announcements and our launch deals.</p>
