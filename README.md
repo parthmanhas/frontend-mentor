@@ -51,7 +51,7 @@ Challenges Completed (noting it down here because commits are registered only on
     - [preview](https://imaginative-basbousa-e179b5.netlify.app/)
 16. intro-component-with-sign-up-form 
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/intro-component-with-sign-up-form)
-    - [preview](https://imaginative-basbousa-e179b5.netlify.app/)
+    - [preview](https://vermillion-conkies-30490b.netlify.app/)
 17. ping-single-column-coming-soon 
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/ping-single-column-coming-soon)
-    - [preview](https://imaginative-basbousa-e179b5.netlify.app/)
+    - [preview](https://eclectic-alpaca-df9f1d.netlify.app/)
