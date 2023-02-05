@@ -1,0 +1,177 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 20px;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+input,
+button {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 0.65rem;
+}
+
+body {
+    min-height: 97vh;
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    width: 100px;
+}
+
+h1 {
+    font-weight: 300;
+    color: hsl(0, 0%, 59%);
+    margin-bottom: 0;
+}
+
+h1>span {
+    font-weight: 700;
+    color: hsl(209, 33%, 12%);
+}
+
+p {
+    color: hsl(209, 33%, 12%);
+    margin-top: 0.5rem;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+input {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid hsl(223, 100%, 88%);
+    margin-right: 0.75rem;
+    width: 350px;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    border-radius: 1rem;
+    border: none;
+    padding: 0.5rem 2rem;
+    background-color: hsl(223, 87%, 63%);
+    color: white;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: hsl(223, 90%, 68%);
+    box-shadow: 0 0 5px hsl(223, 90%, 68%);
+}
+
+.illustration {
+    max-width: 500px;
+    margin-bottom: 2rem;
+}
+
+.footer {
+    display: flex;
+}
+
+svg {
+    width: 25px;
+    margin: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid hsl(223, 87%, 63%);
+    padding: 0.25rem;
+    color: hsl(223, 87%, 63%);
+}
+
+svg:hover {
+    background-color: hsl(223, 87%, 63%);
+    cursor: pointer;
+    color: white;
+}
+
+.copyright {
+    font-size: 0.65rem;
+    color: hsl(0, 0%, 59%);
+}
+
+.notified {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.error-active {
+    border: 1px solid hsl(354, 100%, 66%);
+}
+
+.email {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.error {
+    position: absolute;
+    top: 100%;
+    padding-left: 1rem;
+    font-size: 0.5rem;
+    padding-top: 0.25rem;
+    font-style: italic;
+    color: hsl(354, 100%, 66%);
+    display: none;
+}
+
+@media only screen and (max-width: 530px) {
+    form {
+        flex-direction: column;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 1.25rem;
+        padding: 0.75rem 0;
+    }
+
+    input {
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 0.65rem;
+        margin-bottom: 1.5rem;
+    }
+
+    button {
+        padding: 0.65rem;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .logo {
+        width: 60px;
+    }
+
+    .error {
+        top: 60%;
+        padding-left: 0.65rem;
+    }
+}
