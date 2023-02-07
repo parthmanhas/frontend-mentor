@@ -9,6 +9,49 @@
 
   <title>Frontend Mentor | News homepage</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+    html {
+      font-family: 'Inter', sans-serif;;
+    }
+
+    header {
+      padding: 5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+    }
+
+    li {
+      margin: 0 1.5rem;
+      color: hsl(236, 13%, 42%);
+      font-size: 1rem;
+    }
+
+    main {
+      padding: 5rem;
+    }
+
+    .top, .articles {
+      display: flex;
+    }
+
+    .highlight {
+      width: 70%;
+    }
+
+    .highlight__image > img {
+      width: 100%;
+    }
+
+    .new {
+      background-color: hsl(240, 100%, 5%);
+      margin-left: 2rem;
+    }
+  </style>
   </style>
 </head>
 
@@ -28,7 +71,9 @@
   <main>
     <div class="top">
       <div class="highlight">
-        <div class="highlight__image"></div>
+        <div class="highlight__image">
+          <img alt="" src="./assets/images/image-web-3-desktop.jpg">
+        </div>
         <div class="highlight__content">
           <div class="heading">
             <h1>The Bright Future of Web 3.0?</h1>
