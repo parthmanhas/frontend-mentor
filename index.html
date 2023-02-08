@@ -267,10 +267,26 @@
         height: 100vh;
         width: 60vw;
         position: absolute;
-        right: 0;
+        right: -100vw;
         background-color: hsl(36, 100%, 99%);
         z-index: 2;
         padding: 1rem;
+        animation: slide 0.5s forwards;
+      }
+
+      @keyframes slide {
+        100% {
+          right: 0;
+        }
+      }
+
+      @keyframes slide-out {
+        0% {
+          right: 0;
+        }
+        100% {
+          right: -100vw;
+        }
       }
 
       .non-overlay>ul {
@@ -294,21 +310,42 @@
     const menuButton = document.querySelector('.hamburger > img');
     let isOpen = false;
     const mobileHamburgerMenu = document.querySelector('.mobile-hamburger-menu');
+    const body = document.querySelector('body');
+
+    const config = { attributes: true, childList: true, subtree: true };
+
+    const callback = (mutationList, observer) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === 'attributes') {
+          const closeButton = document.querySelector('.close-container > img');
+          closeButton.addEventListener('click', () => {
+            document.querySelector('body').removeAttribute('scroll');
+            document.querySelector('body').removeAttribute('style');
+            isOpen = false;
+            if (!isOpen) {
+              mobileHamburgerMenu.querySelector('.non-overlay').style.animation = 'slide-out 0.5s forwards';
+              setTimeout(() => {
+                mobileHamburgerMenu.classList.remove('open');
+                mobileHamburgerMenu.querySelector('.non-overlay').style.animation = 'slide 0.5s forwards';
+              }, 500);
+            }
+          })
+          // closeButton.removeEventListener(closeButton, 'click');
+        }
+      }
+    };
+
+    const observer = new MutationObserver(callback);
+    observer.observe(body, config);
 
     menuButton.addEventListener('click', () => {
-      isOpen = !isOpen;
-      console.log(isOpen);
+      document.querySelector('body').style.scroll = 'no';
+      document.querySelector('body').style.overflow = 'hidden';
+      isOpen = true;
       if (isOpen) {
         mobileHamburgerMenu.classList.add('open');
       }
-      const closeButtom = document.querySelector('.close-container > img');
-      closeButton.addEventListener('click', () => {
-        isOpen = !isOpen;
-        console.log(isOpen);
-        if (!isOpen) {
-          mobileHamburgerMenu.classList.remove('open');
-        }
-      })
+
     });
 
 
