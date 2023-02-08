@@ -10,8 +10,9 @@
   <title>Frontend Mentor | News homepage</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+
     html {
-      font-family: 'Inter', sans-serif;;
+      font-family: 'Inter', sans-serif;
     }
 
     header {
@@ -31,11 +32,18 @@
       font-size: 1rem;
     }
 
-    main {
-      padding: 5rem;
+    li:hover {
+      cursor: pointer;
+      color: hsl(35, 77%, 62%);
     }
 
-    .top, .articles {
+    main {
+      padding: 15rem;
+      padding-top: 0;
+    }
+
+    .top,
+    .articles {
       display: flex;
     }
 
@@ -43,17 +51,269 @@
       width: 70%;
     }
 
-    .highlight__image > img {
+    .highlight__content {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+
+    .highlight__content>.heading {
+      width: 70%;
+    }
+
+    .highlight__content>.heading>h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .highlight__content>.content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      margin-left: 1rem;
+    }
+
+    .highlight__content>.content>p {
+      font-size: 1.3rem;
+      color: hsl(236, 13%, 42%);
+      margin-top: 0;
+    }
+
+    .highlight__content>.content>button {
+      padding: 1rem 2rem;
+      border-radius: 0;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.25rem;
+      background-color: hsl(5, 85%, 63%);
+      color: hsl(36, 100%, 99%);
+      width: 50%;
+    }
+
+    .highlight__content>.content>button:hover {
+      background-color: hsl(240, 100%, 5%);
+      cursor: pointer;
+    }
+
+    .highlight__image>img {
       width: 100%;
     }
 
     .new {
       background-color: hsl(240, 100%, 5%);
       margin-left: 2rem;
+      color: hsl(36, 100%, 99%);
+      padding: 2rem;
+    }
+
+    .new__heading>h1 {
+      font-size: 4rem;
+      padding-top: 0;
+      margin-top: 0;
+      font-weight: 400;
+      color: hsl(35, 77%, 62%);
+    }
+
+    .article-summary {
+      border-bottom: 1px solid hsl(233, 8%, 79%);
+    }
+
+    .article-summary:hover {
+      color: hsl(35, 77%, 62%);
+      cursor: pointer;
+    }
+
+    .article-summary>p {
+      color: hsl(233, 8%, 79%);
+      padding-bottom: 2rem;
+    }
+
+    .articles {
+      margin-top: 5rem;
+    }
+
+    .article {
+      display: flex;
+      flex: 1;
+      height: 170px;
+      overflow: hidden;
+    }
+
+    .article:hover {
+      color: hsl(5, 85%, 63%);
+      cursor: pointer;
+    }
+
+    .article__image>img {
+      width: 124px;
+      object-fit: contain;
+    }
+
+    .article__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 1.75rem;
+    }
+
+    .article__content>h1 {
+      margin: 0;
+      font-weight: 700;
+      color: hsl(233, 8%, 79%);
+      font-size: 5rem;
+    }
+
+    .article__content>p:first-of-type {
+      font-weight: 800;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .article__content>p:last-of-type {
+      color: hsl(236, 13%, 42%);
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    .mobile-hamburger-menu {
+      display: none;
+    }
+
+    @media only screen and (max-width: 412px) {
+      header {
+        padding: 1rem;
+      }
+
+      ul {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+        cursor: pointer;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      .top {
+        display: block;
+      }
+
+      .highlight {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      .new {
+        margin-left: 0;
+      }
+
+      .highlight__content>.heading {
+        width: 100%;
+      }
+
+      .highlight__content {
+        display: block;
+      }
+
+      .articles {
+        display: block;
+      }
+
+      .highlight__content>.content {
+        margin-left: 0;
+      }
+
+      .mobile-hamburger-menu {
+        display: none;
+      }
+
+      .open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background-color: hsl(36, 100%, 99%);
+        top: 0;
+        right: 0;
+        width: 100%;
+      }
+
+      .close-container {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .close-container:hover {
+        cursor: pointer;
+      }
+
+      .overlay {
+        width: 100vw;
+        background-color: hsla(0, 0%, 0%, 0.5);
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        z-index: 1;
+      }
+
+      .non-overlay {
+        height: 100vh;
+        width: 60vw;
+        position: absolute;
+        right: 0;
+        background-color: hsl(36, 100%, 99%);
+        z-index: 2;
+        padding: 1rem;
+      }
+
+      .non-overlay>ul {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        margin-top: 10rem;
+      }
+
+      li {
+        font-size: 1.55rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+      }
     }
   </style>
   </style>
 </head>
+<script>
+  window.onload = function () {
+    const menuButton = document.querySelector('.hamburger > img');
+    let isOpen = false;
+    const mobileHamburgerMenu = document.querySelector('.mobile-hamburger-menu');
+
+    menuButton.addEventListener('click', () => {
+      isOpen = !isOpen;
+      console.log(isOpen);
+      if (isOpen) {
+        mobileHamburgerMenu.classList.add('open');
+      }
+      const closeButtom = document.querySelector('.close-container > img');
+      closeButton.addEventListener('click', () => {
+        isOpen = !isOpen;
+        console.log(isOpen);
+        if (!isOpen) {
+          mobileHamburgerMenu.classList.remove('open');
+        }
+      })
+    });
+
+
+  }
+</script>
 
 <body>
   <header>
@@ -67,6 +327,9 @@
         <li>Categories</li>
       </ul>
     </nav>
+    <div class="hamburger">
+      <img alt="" src="./assets/images/icon-menu.svg">
+    </div>
   </header>
   <main>
     <div class="top">
@@ -108,30 +371,30 @@
     </div>
     <div class="articles">
       <div class="article">
-        <div class="image">
-          <img alt="" src="">
+        <div class="article__image">
+          <img alt="" src="./assets/images/image-retro-pcs.jpg">
         </div>
-        <div class="content">
+        <div class="article__content">
           <h1>01</h1>
           <p>Reviving Retro PCs</p>
           <p>What happens when old PCs are given modern upgrades?</p>
         </div>
       </div>
       <div class="article">
-        <div class="image">
-          <img alt="" src="">
+        <div class="article__image">
+          <img alt="" src="./assets/images/image-top-laptops.jpg">
         </div>
-        <div class="content">
+        <div class="article__content">
           <h1>02</h1>
           <p>Top 10 Laptops of 2022</p>
           <p>Our best picks for various needs and budgets.</p>
         </div>
       </div>
       <div class="article">
-        <div class="image">
-          <img alt="" src="">
+        <div class="article__image">
+          <img alt="" src="./assets/images/image-gaming-growth.jpg">
         </div>
-        <div class="content">
+        <div class="article__content">
           <h1>03</h1>
           <p>The Growth of Gaming</p>
           <p>How the pandemic has sparked fresh opportunities.</p>
@@ -139,6 +402,22 @@
       </div>
     </div>
   </main>
+
+  <div class="mobile-hamburger-menu">
+    <div class="overlay"></div>
+    <div class="non-overlay">
+      <div class="close-container">
+        <img alt="" src="./assets/images/icon-menu-close.svg">
+      </div>
+      <ul>
+        <li>Home</li>
+        <li>New</li>
+        <li>Popular</li>
+        <li>Trending</li>
+        <li>Categories</li>
+      </ul>
+    </div>
+  </div>
 </body>
 
 </html>
