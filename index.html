@@ -110,7 +110,7 @@
     }
 
     .show {
-      display: block;
+      display: inline-block;
     }
 
     .name {
@@ -131,6 +131,7 @@
       width: 7px;
       border-radius: 100%;
       background-color: hsl(1, 90%, 64%);
+      margin-bottom: 0.15rem;
     }
 
     .date-container > p {
@@ -177,6 +178,16 @@
 
       p {
         font-size: 0.75rem;
+      }
+
+      .dot {
+        margin-bottom: 0;
+      }
+    }
+
+    @media only screen and (max-width: 513px) {
+      .action-details {
+        width: 90%;
       }
     }
 
