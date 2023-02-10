@@ -193,7 +193,25 @@
 
   </style>
 </head>
+<script>
+  window.onload = function() {
+    const markAllAsRead = document.querySelector('.heading-container > p');
+    const notificationNumber = document.querySelector('.notifications');
+    const notifications = document.querySelectorAll('.notification');
+    const dots = document.querySelectorAll('.dot');
 
+    markAllAsRead.addEventListener('click', () => {
+      notificationNumber.textContent = '0';
+      notifications.forEach(notification => {
+        notification.classList.remove('has-background');
+      })
+      dots.forEach(dot => {
+        dot.classList.remove('show');
+        dot.classList.add('hide');
+      })
+    })
+  }
+</script>
 <body>
   <main>
     <div class="heading-container">
