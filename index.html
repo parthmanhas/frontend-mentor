@@ -13,9 +13,80 @@
 
     html {
       font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+    }
+    
+    body {
+      background-image: url('./images/bg-main-desktop.png');
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    main {
+      position: relative;
+      min-height: 100vh;
+      width: 70%;
+    }
+    
+    input {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      border: 1px solid hsl(270, 3%, 87%);
+      border-radius: 5px;
+      padding: 0.5rem;
+      outline: none;
+    }
+
+    .enter-card-details-container {}
+
+    .card {
+      position: absolute;
+      left: 0;
+    }
+
+    .enter-card-details-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100%;
+    }
+    
+    form {
+      padding: 5rem;
+      width: 500px;
+    }
+    
+    .cardholder-container,
+    .card-number-container,
+    .cvv-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+
+    .card-details-container {
+      display: flex;
+    }
+
+    .expiry-date-input-container > input {
+      width: 30%;
+    }
+
+    .expiry-date-input-container > input:first-of-type {
+      margin-right: 1rem;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+
+    .thankyou-container {
+      display: none;
     }
   </style>
 </head>
+
 <body>
   <main>
     <div class="enter-card-details-container">
@@ -49,11 +120,13 @@
         <div class="card-details-container">
           <div class="expiry-date-container">
             <label for="month">Exp. Date(MM/YY)</label>
-            <input id="month" name="month" placeholder="MM" type="number" minlength="2" maxlength="2" required>
-            <input id="year" name="year" placeholder="YY" type="number" minlength="2" maxlength="2" required>
+            <div class="expiry-date-input-container">
+              <input id="month" name="month" placeholder="MM" type="number" minlength="2" maxlength="2" required>
+              <input id="year" name="year" placeholder="YY" type="number" minlength="2" maxlength="2" required>
+            </div>
           </div>
           <div class="cvv-container">
-            <label for="cvv"></label>
+            <label for="cvv">CVV</label>
             <input id="cvv" name="cvv" placeholder="e.g 123" type="number" minlength="3" maxlength="3" required>
           </div>
         </div>
@@ -86,9 +159,9 @@
 
   </main>
 
-  0000 0000 0000 0000
+  <!-- 0000 0000 0000 0000
   Jane Appleseed
-  00/00
+  00/00 -->
 </body>
 
 </html>
