@@ -15,20 +15,20 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 18px;
     }
-    
+
     body {
       background-image: url('./images/bg-main-desktop.png');
       background-repeat: no-repeat;
       display: flex;
       justify-content: flex-end;
     }
-    
+
     main {
       position: relative;
       min-height: 100vh;
       width: 70%;
     }
-    
+
     input {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1rem;
@@ -51,12 +51,23 @@
       align-items: center;
       height: 100%;
     }
-    
+
     form {
       padding: 5rem;
-      width: 500px;
+      width: 400px;
     }
-    
+
+    form>* {
+      color: hsl(278, 68%, 11%);
+    }
+
+    input[type="number"] {
+      -webkit-appearance: none;
+      -moz-appearance: textfield !important;
+      appearance: none;
+      margin: 0;
+    }
+
     .cardholder-container,
     .card-number-container,
     .cvv-container {
@@ -69,11 +80,15 @@
       display: flex;
     }
 
-    .expiry-date-input-container > input {
+    .expiry-date-input-container {
+      margin-top: 0.5rem;
+    }
+
+    .expiry-date-input-container>input {
       width: 30%;
     }
 
-    .expiry-date-input-container > input:first-of-type {
+    .expiry-date-input-container>input:first-of-type {
       margin-right: 1rem;
     }
 
@@ -83,6 +98,27 @@
 
     .thankyou-container {
       display: none;
+    }
+
+    button {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      font-family: 'Space Grotesk', sans-serif;
+      padding: 0.5rem;
+      font-size: 0.75rem;
+      background-color: hsl(278, 68%, 11%);
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .cvv-container {
+      width: 50%;
+    }
+
+    ::placeholder {
+      color: hsl(279, 6%, 55%);
     }
   </style>
 </head>
@@ -121,8 +157,8 @@
           <div class="expiry-date-container">
             <label for="month">Exp. Date(MM/YY)</label>
             <div class="expiry-date-input-container">
-              <input id="month" name="month" placeholder="MM" type="number" minlength="2" maxlength="2" required>
-              <input id="year" name="year" placeholder="YY" type="number" minlength="2" maxlength="2" required>
+              <input id="month" name="month" placeholder="MM" type="number" minlength="2" maxlength="2" required min="1" max="12">
+              <input id="year" name="year" placeholder="YY" type="number" minlength="2" maxlength="2" required min="23" max="50">
             </div>
           </div>
           <div class="cvv-container">
