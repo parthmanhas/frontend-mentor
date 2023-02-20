@@ -112,7 +112,7 @@
       text-align: center;
     }
 
-    .thankyou-container > p {
+    .thankyou-container>p {
       color: hsl(279, 6%, 55%);
     }
 
@@ -203,8 +203,8 @@
         background-image: none;
       }
 
-      .card-front {
-        width: 100%;
+      .card {
+        display: none;
       }
     }
   </style>
@@ -217,7 +217,47 @@
     const formContainer = document.querySelector('form');
     const cardHolderName = document.querySelector('#name');
 
-    const formElements = [cardHolderName, ...formInputs];
+    const namePatternRegex = new RegExp('^[a-zA-Z ]*$');
+    const numberPatternRegex = new RegExp('^[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$');
+    const monthPatternRegex = new RegExp('^[0-9][0-9]*$');
+    const yearPatternRegex = new RegExp('^[0-9][0-9]$');
+    const cvvPatternRegex = new RegExp('^[0-9]{3}$');
+
+    let formElements = [...formInputs];
+    formElements = formElements.map(element => {
+      if (element.id === 'name') {
+        return {
+          element: cardHolderName,
+          pattern: namePatternRegex,
+          errorMessage: 'Please enter correct details'
+        }
+      } else if (element.id === 'number') {
+        return {
+          element,
+          pattern: numberPatternRegex,
+          errorMessage: 'Please enter correct details'
+        }
+
+      } else if (element.id === 'month') {
+        return {
+          element,
+          pattern: monthPatternRegex,
+          errorMessage: 'Please enter correct details'
+        }
+      } else if (element.id === 'year') {
+        return {
+          element,
+          pattern: yearPatternRegex,
+          errorMessage: 'Please enter correct details'
+        }
+      } else if (element.id === 'cvv') {
+        return {
+          element,
+          pattern: cvvPatternRegex,
+          errorMessage: 'Please enter correct details'
+        }
+      }
+    })
     const cardHolderError = document.querySelector('.name-error');
     const cardNumber = formInputs[0];
     const cardNumberError = document.querySelector('.card-number-error');
@@ -231,50 +271,32 @@
 
     const submitButton = document.querySelector('button');
 
-    const namePatternRegex = new RegExp('^[a-zA-Z ]*$');
-    const numberPatternRegex = new RegExp('^[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$');
-    const monthPatternRegex = new RegExp('^[0-9][0-9]*$');
-    const yearPatternRegex = new RegExp('^[0-9][0-9]$');
-    const cvvPatternRegex = new RegExp('^[0-9]{3}$');
-
     submitButton.addEventListener('click', () => {
-      formElements.forEach(input => {
+      formElements.forEach(obj => {
+        const input = obj.element;
         input.value = input.value.trim();
         if (!input.value) {
           input.classList.add('error');
           input.parentElement.querySelector('.error-text').style.display = 'block';
           input.parentElement.querySelector('.error-text').textContent = 'Can\'t be blank';
+        } else if (!obj.pattern.test(input.value)) {
+          input.classList.add('error');
+          input.parentElement.querySelector('.error-text').style.display = 'block';
+          input.parentElement.querySelector('.error-text').textContent = obj.errorMessage;
+        } else {
+          console.log('no error in form')
         }
 
-        if (input.id === 'name' && !namePatternRegex.test(input.value)) {
-          input.classList.add('error');
-          input.parentElement.querySelector('.error-text').style.display = 'block';
-          input.parentElement.querySelector('.error-text').textContent = 'Please enter correct details';
-        } else if (input.id === 'number' && !numberPatternRegex.test(input.value)) {
-          input.classList.add('error');
-          input.parentElement.querySelector('.error-text').style.display = 'block';
-          input.parentElement.querySelector('.error-text').textContent = 'Please enter correct details';
-        } else if (input.id === 'month' && !monthPatternRegex.test(input.value)) {
-          input.classList.add('error');
-          input.parentElement.querySelector('.error-text').style.display = 'block';
-          input.parentElement.querySelector('.error-text').textContent = 'Please enter correct details';
-        } else if (input.id === 'year' && !yearPatternRegex.test(input.value)) {
-          input.classList.add('error');
-          input.parentElement.querySelector('.error-text').style.display = 'block';
-          input.parentElement.querySelector('.error-text').textContent = 'Please enter correct details';
-        } else if (input.id === 'cvv' && !cvvPatternRegex.test(input.value)) {
-          input.classList.add('error');
-          input.parentElement.querySelector('.error-text').style.display = 'block';
-          input.parentElement.querySelector('.error-text').textContent = 'Please enter correct details';
-        } else {
-          formContainer.style.display = 'none';
-          thankyouContainer.style.display = 'block';
-        }
-        // make an api call 
+        
         console.log('button')
 
       })
     })
+
+    {
+      element,
+      
+    }
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -283,8 +305,8 @@
       // thankyouContainer.style.display = 'block';
     })
 
-    formElements.forEach(element => {
-      element.addEventListener('input', () => {
+    formElements.forEach(obj => {
+      obj.element.addEventListener('input', () => {
         const error = element.parentElement.querySelector('.error-text');
 
         element.classList.remove('error');
