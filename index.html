@@ -217,7 +217,8 @@
     const formContainer = document.querySelector('form');
     const cardHolderName = document.querySelector('#name');
 
-    const namePatternRegex = new RegExp('^[a-zA-Z ]*$');
+    const emptyPatternRegex = new RegExp('^$');
+    const namePatternRegex = new RegExp('^[a-zA-Z]+[a-zA-Z ]*$');
     const numberPatternRegex = new RegExp('^[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$');
     const monthPatternRegex = new RegExp('^[0-9][0-9]*$');
     const yearPatternRegex = new RegExp('^[0-9][0-9]$');
@@ -228,33 +229,81 @@
       if (element.id === 'name') {
         return {
           element: cardHolderName,
-          pattern: namePatternRegex,
-          errorMessage: 'Please enter correct details'
+          errorPresent: false,
+          errorPatterns: [
+            {
+              pattern: emptyPatternRegex,
+              message: 'Can\'t be blank'
+            },
+            {
+              pattern: namePatternRegex,
+              message: 'Please enter correct details'
+            }
+          ],
         }
       } else if (element.id === 'number') {
         return {
           element,
-          pattern: numberPatternRegex,
-          errorMessage: 'Please enter correct details'
+          errorPresent: false,
+          errorPatterns: [
+            {
+              pattern: emptyPatternRegex,
+              message: 'Can\'t be blank'
+            },
+            {
+              pattern: numberPatternRegex,
+              message: 'Please enter correct details'
+            }
+          ]
         }
 
       } else if (element.id === 'month') {
         return {
           element,
-          pattern: monthPatternRegex,
-          errorMessage: 'Please enter correct details'
+          errorPresent: false,
+          errorPatterns: [
+            {
+              pattern: emptyPatternRegex,
+              message: 'Can\'t be blank'
+            },
+            {
+              pattern: monthPatternRegex,
+              message: 'Please enter correct details'
+            }
+          ]
+
         }
       } else if (element.id === 'year') {
         return {
           element,
-          pattern: yearPatternRegex,
-          errorMessage: 'Please enter correct details'
+          errorPresent: false,
+          errorPatterns: [
+            {
+              pattern: emptyPatternRegex,
+              message: 'Can\'t be blank'
+            },
+            {
+              pattern: yearPatternRegex,
+              message: 'Please enter correct details'
+            }
+          ]
+
         }
       } else if (element.id === 'cvv') {
         return {
           element,
-          pattern: cvvPatternRegex,
-          errorMessage: 'Please enter correct details'
+          errorPresent: false,
+          errorPatterns: [
+            {
+              pattern: emptyPatternRegex,
+              message: 'Can\'t be blank'
+            },
+            {
+              pattern: cvvPatternRegex,
+              message: 'Please enter correct details'
+            }
+          ]
+
         }
       }
     })
@@ -274,29 +323,16 @@
     submitButton.addEventListener('click', () => {
       formElements.forEach(obj => {
         const input = obj.element;
-        input.value = input.value.trim();
-        if (!input.value) {
-          input.classList.add('error');
-          input.parentElement.querySelector('.error-text').style.display = 'block';
-          input.parentElement.querySelector('.error-text').textContent = 'Can\'t be blank';
-        } else if (!obj.pattern.test(input.value)) {
-          input.classList.add('error');
-          input.parentElement.querySelector('.error-text').style.display = 'block';
-          input.parentElement.querySelector('.error-text').textContent = obj.errorMessage;
-        } else {
-          console.log('no error in form')
-        }
-
-        
-        console.log('button')
-
+        obj.errorPatterns.forEach(errorPattern => {
+          if (!errorPattern.pattern.test(input.value)) {
+            obj.errorPresent = true;
+            input.classList.add('error');
+            input.parentElement.querySelector('.error-text').style.display = 'block';
+            input.parentElement.querySelector('.error-text').textContent = errorPattern.message;
+          }
+        })
       })
     })
-
-    {
-      element,
-      
-    }
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -307,15 +343,12 @@
 
     formElements.forEach(obj => {
       obj.element.addEventListener('input', () => {
+        const element = obj.element;
         const error = element.parentElement.querySelector('.error-text');
+        obj.errorPresent = false;
 
         element.classList.remove('error');
         error.style.display = 'none';
-
-        if (element.validity.valueMissing) {
-          element.classList.remove('error');
-          error.style.display = 'none';
-        }
 
         if (element.id === 'name') {
           document.querySelector('.customer-name > p').textContent = element.value;
