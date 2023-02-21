@@ -217,7 +217,7 @@
     const formContainer = document.querySelector('form');
     const cardHolderName = document.querySelector('#name');
 
-    const emptyPatternRegex = new RegExp('^$');
+    const emptyPatternRegex = new RegExp('^(?!\s*$).+');
     const namePatternRegex = new RegExp('^[a-zA-Z]+[a-zA-Z ]*$');
     const numberPatternRegex = new RegExp('^[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$');
     const monthPatternRegex = new RegExp('^[0-9][0-9]*$');
@@ -319,6 +319,7 @@
     const form = document.querySelector('form');
 
     const submitButton = document.querySelector('button');
+    let errorPresent = false;
 
     submitButton.addEventListener('click', () => {
       formElements.forEach(obj => {
@@ -326,19 +327,25 @@
         obj.errorPatterns.forEach(errorPattern => {
           if (!errorPattern.pattern.test(input.value)) {
             obj.errorPresent = true;
+            errorPreset |= true;
             input.classList.add('error');
             input.parentElement.querySelector('.error-text').style.display = 'block';
             input.parentElement.querySelector('.error-text').textContent = errorPattern.message;
           }
         })
       })
+
+      if (!errorPresent) {
+        formContainer.style.display = 'none';
+        thankyouContainer.style.display = 'block';
+      }
     })
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      console.log('form')
-      // formContainer.style.display = 'none';
-      // thankyouContainer.style.display = 'block';
+      if (!errorPresent) {
+        console.log('make an api call');
+      }
     })
 
     formElements.forEach(obj => {
