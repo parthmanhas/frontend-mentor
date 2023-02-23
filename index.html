@@ -142,8 +142,10 @@
       background-image: url(./images/bg-card-front.png);
       background-repeat: no-repeat;
       object-fit: contain;
-      width: 446px;
-      height: 245px;
+      max-width: 37vw;
+      width: 37vw;
+      max-height: 20vw;
+      height: 20vw;
       border-radius: 5px;
       color: white;
       position: absolute;
@@ -152,7 +154,7 @@
     }
 
     .card-number>p {
-      font-size: 2.05rem;
+      font-size: 2.475vw;
       margin: 0;
       margin-bottom: 1rem;
     }
@@ -161,7 +163,7 @@
     .expiry>p {
       margin: 0;
       margin-top: 1rem;
-      font-size: 0.65rem;
+      font-size: 1.25vw;
       text-transform: uppercase;
       letter-spacing: 0.15rem;
     }
@@ -194,9 +196,14 @@
       display: flex;
     }
 
-    @media onlyscreen and (max-width: 412px) {
+    @media screen and (max-width: 412px) {
       main {
         background-color: white;
+        width: 100%;
+      }
+
+      .enter-card-details-container {
+        flex-direction: column;
       }
 
       body {
@@ -205,6 +212,20 @@
 
       .card {
         display: none;
+      }
+
+      .card-mobile {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-front {
+        position: inherit;
+        width: inherit;
+      }
+
+      .card-back {
+        position: inherit;
       }
     }
   </style>
@@ -480,6 +501,36 @@
           <div class="magnetic-strip"></div>
           <div class="cvv-container"></div>
           <div class="card-text"></div>
+        </div>
+      </div>
+
+      <div class="mobile-container">
+        <div class="card-mobile">
+          <div class="card-front">
+            <div class="logo-container">
+              <img src="./images/card-logo.svg" alt="">
+            </div>
+            <div class="details-container">
+              <div class="card-number">
+                <p>0000 0000 0000 0000</p>
+              </div>
+              <div class="customer-details">
+                <div class="customer-name">
+                  <p>Jane Appleseed</p>
+                </div>
+                <div class="expiry">
+                  <p>00</p>
+                  <p>/</p>
+                  <p>00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="magnetic-strip"></div>
+            <div class="cvv-container"></div>
+            <div class="card-text"></div>
+          </div>
         </div>
       </div>
       <form novalidate>
