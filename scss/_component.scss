@@ -1,0 +1,166 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    font-family: "Hanken Grotesk";
+    font-size: 18px;
+    background-color: $very-light-blue;
+}
+
+.score-card-container {
+    height: 512px;
+    width: 736px;
+    display: flex;
+    background-color: white;
+    border-radius: 2.5rem;
+    box-shadow: 0 0 100px 10px $light-blue;
+    .score-container {
+        color: white;
+        width: 50%;
+        border-radius: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: $gradient-1;
+        &__heading {
+            font-size: 2rem;
+        }
+        &__score {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            margin-bottom: 5rem;
+            margin-top: 7rem;
+            .circle {
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                background: $gradient-2;
+                position: absolute;
+                text-align: center;
+                z-index: 0;
+            }
+            h1 {
+                font-size: 6rem;
+                z-index: 1;
+            }
+        }
+
+        &__result {
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+        }
+
+        &__result-description {
+            width: 75%;
+            text-align: center;
+        }
+    }
+    .summary-container {
+        width: 50%;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 3rem;
+
+        &__heading {
+            font-size: 2rem;
+        }
+
+        span {
+            color: $dark-navy-light;
+        }
+
+        img {
+            margin-right: 1rem;
+        }
+
+        &__reaction {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            background-color: $light-red;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 3rem;
+            &-heading {
+                display: flex;
+                color: $red;
+            }
+        }
+
+        &__memory {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            background-color: $light-yellow;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            &-heading {
+                display: flex;
+                color: $yellow;
+            }
+        }
+
+        &__verbal {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            background-color: $light-green;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            &-heading {
+                display: flex;
+                color: $green;
+            }
+        }
+
+        &__visual {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            background-color: $very-light-blue;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            &-heading {
+                display: flex;
+                color: $blue;
+            }
+        }
+
+        button {
+            width: 100%;
+            border-radius: 2rem;
+            border: none;
+            padding: 1.15rem;
+            font-family: "Hanken Grotesk";
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            background-color: $dark-navy;
+            color: white;
+
+            &:hover {
+                background: $gradient-1;
+                cursor: pointer;
+            }
+        }
+    }
+}

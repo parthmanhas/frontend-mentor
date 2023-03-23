@@ -1,602 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-
-  <title>Frontend Mentor | Interactive card details form</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
-
-    html {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 18px;
-      box-sizing: border-box;
-    }
-
-    body {
-      /* background-image: url('./images/bg-main-desktop.png'); */
-      display: flex;
-      justify-content: flex-end;
-      margin: 0;
-      padding: 0;
-    }
-    
-    main {
-      min-height: 100vh;
-      width: 100%;
-      display: flex;
-      place-items: center;
-    }
-    
-    .background-image {
-      background-image: url('./images/bg-main-desktop.png');
-      background-repeat: no-repeat;
-      width: 30%;
-      height: 100%;
-      position: relative;
-    }
-
-    input {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem;
-      border: 1px solid hsl(270, 3%, 87%);
-      border-radius: 5px;
-      padding: 0.5rem;
-      outline: none;
-    }
-
-    input:focus:valid {
-      border: 2px solid hsl(278, 68%, 11%);
-    }
-
-    input:focus:invalid,
-    input:invalid,
-    .error {
-      border: 2px solid hsl(0, 100%, 66%) !important;
-    }
-
-    .enter-card-details-container {
-      width: 70%;
-    }
-
-    .card {
-      position: absolute;
-      left: 0;
-    }
-
-    .enter-card-details-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
-
-    form {
-      width: 400px;
-    }
-
-    input[type="number"] {
-      -webkit-appearance: none;
-      -moz-appearance: textfield !important;
-      appearance: none;
-      margin: 0;
-    }
-
-    .cardholder-container,
-    .card-number-container,
-    .cvv-container {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1rem;
-    }
-
-    .card-details-container {
-      display: flex;
-    }
-
-    .expiry-date-input-container {
-      margin-top: 0.5rem;
-    }
-
-    .expiry-date-input-container>input {
-      width: 30%;
-    }
-
-    .expiry-date-input-container>input:first-of-type {
-      margin-right: 1rem;
-    }
-
-    label {
-      margin-bottom: 0.5rem;
-    }
-
-    .thankyou-container {
-      display: none;
-      width: 350px;
-      text-align: center;
-    }
-
-    .thankyou-container>p {
-      color: hsl(279, 6%, 55%);
-    }
-
-    button {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      font-family: 'Space Grotesk', sans-serif;
-      padding: 0.5rem;
-      font-size: 1rem;
-      background-color: hsl(278, 68%, 11%);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .cvv-container {
-      width: 50%;
-    }
-
-    ::placeholder {
-      color: hsl(279, 6%, 55%);
-    }
-
-    .card-front {
-      background-image: url(./images/bg-card-front.png);
-      background-repeat: no-repeat;
-      object-fit: contain;
-      border-radius: 5px;
-      color: white;
-      position: absolute;
-      top: -34vh;
-      left: -21vw;
-    }
-
-    .card-number>p {
-      font-size: 2.475vw;
-      margin: 0;
-      margin-bottom: 1rem;
-    }
-
-    .customer-name>p,
-    .expiry>p {
-      margin: 0;
-      margin-top: 1rem;
-      font-size: 1.25vw;
-      text-transform: uppercase;
-      letter-spacing: 0.15rem;
-    }
-
-    .logo-container,
-    .details-container {
-      padding: 1rem;
-    }
-
-    .customer-details {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .card-back {
-      width: 446px;
-      background-image: url(./images/bg-card-back.png);
-      height: 245px;
-      left: -15vw;
-      position: absolute;
-    }
-
-    .error-text {
-      color: hsl(0, 100%, 66%);
-      font-size: 0.85rem;
-    }
-
-    .expiry {
-      display: flex;
-    }
-
-    @media screen and (max-width: 412px) {
-      main {
-        background-color: white;
-        width: 100%;
-      }
-
-      .enter-card-details-container {
-        flex-direction: column;
-      }
-
-      body {
-        background-image: none;
-      }
-
-      .card {
-        display: none;
-      }
-
-      .card-mobile {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .card-front {
-        position: inherit;
-        width: inherit;
-      }
-
-      .card-back {
-        position: inherit;
-      }
-    }
-
-    @media screen and (min-width: 1390px) {
-      .card-front {
-        width: 447px;
-        height: 245px;
-        left: 7vw;
-      }
-    }
-
-    @media screen and (min-width: 1280px) {
-      .card-front {
-        width: 399px;
-        height: 213px;
-        left: -18vw;
-      }
-    }
-
-    @media screen and (min-width: 720px) {
-      .card-front {
-        width: 447px;
-        height: 245px;
-      }
-    }
-  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" type="text/css" href="css/main.css/main.css">
+  <title>Frontend Mentor | Results summary component</title>
 </head>
-<script>
-  window.onload = function () {
-    const formInputs = document.querySelectorAll('input');
-
-    const thankyouContainer = document.querySelector('.thankyou-container');
-    const formContainer = document.querySelector('form');
-    const cardHolderName = document.querySelector('#name');
-
-    const emptyPatternRegex = new RegExp('^(?!\s*$).+');
-    const namePatternRegex = new RegExp('^[a-zA-Z]+[a-zA-Z ]*$');
-    const numberPatternRegex = new RegExp('^[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$');
-    const monthPatternRegex = new RegExp('^[0-9][0-9]*$');
-    const yearPatternRegex = new RegExp('^[0-9][0-9]$');
-    const cvvPatternRegex = new RegExp('^[0-9]{3}$');
-
-    let formElements = [...formInputs];
-    formElements = formElements.map(element => {
-      if (element.id === 'name') {
-        return {
-          element: cardHolderName,
-          errorPresent: false,
-          errorPatterns: [
-            {
-              pattern: emptyPatternRegex,
-              message: 'Can\'t be blank'
-            },
-            {
-              pattern: namePatternRegex,
-              message: 'Please enter correct details'
-            }
-          ],
-        }
-      } else if (element.id === 'number') {
-        return {
-          element,
-          errorPresent: false,
-          errorPatterns: [
-            {
-              pattern: emptyPatternRegex,
-              message: 'Can\'t be blank'
-            },
-            {
-              pattern: numberPatternRegex,
-              message: 'Please enter correct details'
-            }
-          ]
-        }
-
-      } else if (element.id === 'month') {
-        return {
-          element,
-          errorPresent: false,
-          errorPatterns: [
-            {
-              pattern: emptyPatternRegex,
-              message: 'Can\'t be blank'
-            },
-            {
-              pattern: monthPatternRegex,
-              message: 'Please enter correct details'
-            }
-          ]
-
-        }
-      } else if (element.id === 'year') {
-        return {
-          element,
-          errorPresent: false,
-          errorPatterns: [
-            {
-              pattern: emptyPatternRegex,
-              message: 'Can\'t be blank'
-            },
-            {
-              pattern: yearPatternRegex,
-              message: 'Please enter correct details'
-            }
-          ]
-
-        }
-      } else if (element.id === 'cvv') {
-        return {
-          element,
-          errorPresent: false,
-          errorPatterns: [
-            {
-              pattern: emptyPatternRegex,
-              message: 'Can\'t be blank'
-            },
-            {
-              pattern: cvvPatternRegex,
-              message: 'Please enter correct details'
-            }
-          ]
-
-        }
-      }
-    })
-    const cardHolderError = document.querySelector('.name-error');
-    const cardNumber = formInputs[0];
-    const cardNumberError = document.querySelector('.card-number-error');
-    const month = formInputs[1];
-    const monthError = document.querySelector('.month-error');
-    const year = formInputs[2];
-    const yearError = document.querySelector('.year-error');
-    const cvv = formInputs[3];
-    const cvvError = document.querySelector('.cvv-error');
-    const form = document.querySelector('form');
-
-    const submitButton = document.querySelector('button');
-    let errorPresent = false;
-
-    submitButton.addEventListener('click', () => {
-      formElements.forEach(obj => {
-        const input = obj.element;
-        obj.errorPatterns.forEach(errorPattern => {
-          if (!errorPattern.pattern.test(input.value)) {
-            obj.errorPresent = true;
-            errorPreset |= true;
-            input.classList.add('error');
-            input.parentElement.querySelector('.error-text').style.display = 'block';
-            input.parentElement.querySelector('.error-text').textContent = errorPattern.message;
-          }
-        })
-      })
-
-      if (!errorPresent) {
-        formContainer.style.display = 'none';
-        thankyouContainer.style.display = 'block';
-      }
-    })
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!errorPresent) {
-        console.log('make an api call');
-      }
-    })
-
-    formElements.forEach(obj => {
-      obj.element.addEventListener('input', () => {
-        const element = obj.element;
-        const error = element.parentElement.querySelector('.error-text');
-        obj.errorPresent = false;
-
-        element.classList.remove('error');
-        error.style.display = 'none';
-
-        if (element.id === 'name') {
-          document.querySelector('.customer-name > p').textContent = element.value;
-          if (!namePatternRegex.test(element.value)) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Wrong Format, letters only';
-          }
-          if (!element.value) {
-            element.classList.remove('error');
-            error.style.display = 'none';
-          }
-        }
-
-        if (element.id === 'number' && element.value.length > 4) {
-          let number = element.value;
-          number = number.split('').filter(ele => ele !== ' ');
-          number = number.map((ele, index) => (index + 1) % 4 === 0 ? `${ele} ` : ele).join('');
-          element.value = number.trim();
-        }
-
-        if (element.id === 'number') {
-          document.querySelector('.card-number > p').textContent = element.value;
-          const notNumberRegex = new RegExp('[^0-9 ]+');
-
-          if (notNumberRegex.test(element.value)) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Invalid Format';
-          }
-
-
-          if (element.length.value >= 16 && !patternRegex.test(element.value)) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Please enter valid card details';
-          }
-
-          if (!element.value) {
-            element.classList.remove('error');
-            error.style.display = 'none';
-          }
-        }
-
-        if (element.id === 'month') {
-          document.querySelector('.expiry > p:first-of-type').textContent = element.value;
-          if (!monthPatternRegex.test(element.value)) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Invalid Format';
-          }
-
-          if (Number(element.value) < 1 || Number(element.value) > 12) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Please enter valid month';
-          }
-
-          if (!element.value) {
-            element.classList.remove('error');
-            error.style.display = 'none';
-          }
-        }
-
-        if (element.id === 'year') {
-          document.querySelector('.expiry > p:last-of-type').textContent = element.value;
-          if (element.value.length >= 2 && !yearPatternRegex.test(element.value)) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Invalid Format';
-          }
-
-          if (element.value.length >= 2 && Number(element.value) < 23 || Number(element.value) > 40) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Please enter valid month';
-          }
-
-          if (!element.value) {
-            element.classList.remove('error');
-            error.style.display = 'none';
-          }
-        }
-
-        if (element.id === 'cvv') {
-          if (element.value.length >= 3 && !cvvPatternRegex.test(element.value)) {
-            element.classList.add('error');
-            error.style.display = 'block';
-            error.textContent = 'Please enter 3 digits';
-          }
-        }
-      })
-    })
-  }
-</script>
-
 <body>
-  <main>
-    <div class="background-image"></div>
-    <div class="enter-card-details-container">
-      <div class="card">
-        <div class="card-front">
-          <div class="logo-container">
-            <img src="./images/card-logo.svg" alt="">
-          </div>
-          <div class="details-container">
-            <div class="card-number">
-              <p>0000 0000 0000 0000</p>
-            </div>
-            <div class="customer-details">
-              <div class="customer-name">
-                <p>Jane Appleseed</p>
-              </div>
-              <div class="expiry">
-                <p>00</p>
-                <p>/</p>
-                <p>00</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card-back">
-          <div class="magnetic-strip"></div>
-          <div class="cvv-container"></div>
-          <div class="card-text"></div>
-        </div>
+  <div class="score-card-container">
+    <div class="score-container">
+      <div class="score-container__heading">Your Result</div>
+      <div class="score-container__score">
+        <div class="circle"></div>
+        <h1>76</h1>
+        <p>of 100</p>
       </div>
-
-      <div class="mobile-container">
-        <div class="card-mobile">
-          <div class="card-front">
-            <div class="logo-container">
-              <img src="./images/card-logo.svg" alt="">
-            </div>
-            <div class="details-container">
-              <div class="card-number">
-                <p>0000 0000 0000 0000</p>
-              </div>
-              <div class="customer-details">
-                <div class="customer-name">
-                  <p>Jane Appleseed</p>
-                </div>
-                <div class="expiry">
-                  <p>00</p>
-                  <p>/</p>
-                  <p>00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-back">
-            <div class="magnetic-strip"></div>
-            <div class="cvv-container"></div>
-            <div class="card-text"></div>
-          </div>
-        </div>
-      </div>
-      <form novalidate>
-        <div class="cardholder-container">
-          <label for="name">Cardholder Name</label>
-          <input id="name" name="cardholderName" placeholder="e.g Jane Appleseed">
-          <span class="name-error error-text"></span>
-        </div>
-        <div class="card-number-container">
-          <label for="number">Card Number</label>
-          <input id="number" name="cardNumber" placeholder="e.g 1234 5678 9123 0000" maxlength="19">
-          <span class="card-number-error error-text"></span>
-        </div>
-        <div class="card-details-container">
-          <div class="expiry-date-container">
-            <label for="month">Exp. Date (MM/YY)</label>
-            <div class="expiry-date-input-container">
-              <input id="month" name="month" placeholder="MM">
-              <input id="year" name="year" placeholder="YY">
-              <span class="expiry-error error-text"></span>
-            </div>
-          </div>
-          <div class="cvv-container">
-            <label for="cvv">CVV</label>
-            <input id="cvv" name="cvv" placeholder="e.g 123">
-            <span class="cvv-error error-text"></span>
-          </div>
-        </div>
-        <button type="submit">Confirm</button>
-      </form>
-      <div class="thankyou-container">
-        <img alt="" src="./images/icon-complete.svg">
-        <h1>Thank you!</h1>
-        <p>We've added your card details</p>
-        <button>Continue</button>
+      <div class="score-container__result">Great</div>
+      <div class="score-container__result-description">
+        <p>You scored higher than 65% of the people who have taken these tests.</p>
       </div>
     </div>
-  </main>
+    <div class="summary-container">
+      <div class="summary-container__heading">Summary</div>
+      <div class="summary-container__reaction">
+        <div class="summary-container__reaction-heading">
+          <img src="./assets/images/icon-reaction.svg" alt="">
+          <p>Reaction</p>
+        </div>
+        <div class="summary-container__reaction-score">
+          <p>80 <span>/ 100</span></p>
+        </div>
+      </div>
+      <div class="summary-container__memory">
+        <div class="summary-container__memory-heading">
+          <img src="./assets/images/icon-memory.svg" alt="">
+          <p>Memory</p>
+        </div>
+        <div class="summary-container__memory-score">
+          <p>92 <span>/ 100</span></p>
+        </div>
+      </div>
+      <div class="summary-container__verbal">
+        <div class="summary-container__verbal-heading">
+          <img src="./assets/images/icon-verbal.svg" alt="">
+          <p>Verbal</p>
+        </div>
+        <div class="summary-container__verbal-score">
+          <p>61 <span>/ 100</span></p>
+        </div>
+      </div>
+      <div class="summary-container__visual">
+        <div class="summary-container__visual-heading">
+          <img src="./assets/images/icon-visual.svg" alt="">
+          <p>Visual</p>
+        </div>
+        <div class="summary-container__visual-score">
+          <p>73 <span>/ 100</span></p>
+        </div>
+      </div>
+      <button>Continue</button>
+    </div>
+  </div>
 </body>
-
 </html>
