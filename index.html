@@ -18,18 +18,26 @@
     }
 
     body {
-      background-image: url('./images/bg-main-desktop.png');
-      background-repeat: no-repeat;
+      /* background-image: url('./images/bg-main-desktop.png'); */
       display: flex;
       justify-content: flex-end;
+      margin: 0;
+      padding: 0;
     }
-
+    
     main {
-      position: relative;
       min-height: 100vh;
-      width: 70%;
+      width: 100%;
       display: flex;
       place-items: center;
+    }
+    
+    .background-image {
+      background-image: url('./images/bg-main-desktop.png');
+      background-repeat: no-repeat;
+      width: 30%;
+      height: 100%;
+      position: relative;
     }
 
     input {
@@ -52,7 +60,7 @@
     }
 
     .enter-card-details-container {
-      width: 100%;
+      width: 70%;
     }
 
     .card {
@@ -142,10 +150,6 @@
       background-image: url(./images/bg-card-front.png);
       background-repeat: no-repeat;
       object-fit: contain;
-      max-width: 37vw;
-      width: 37vw;
-      max-height: 20vw;
-      height: 20vw;
       border-radius: 5px;
       color: white;
       position: absolute;
@@ -226,6 +230,29 @@
 
       .card-back {
         position: inherit;
+      }
+    }
+
+    @media screen and (min-width: 1390px) {
+      .card-front {
+        width: 447px;
+        height: 245px;
+        left: 7vw;
+      }
+    }
+
+    @media screen and (min-width: 1280px) {
+      .card-front {
+        width: 399px;
+        height: 213px;
+        left: -18vw;
+      }
+    }
+
+    @media screen and (min-width: 720px) {
+      .card-front {
+        width: 447px;
+        height: 245px;
       }
     }
   </style>
@@ -475,6 +502,7 @@
 
 <body>
   <main>
+    <div class="background-image"></div>
     <div class="enter-card-details-container">
       <div class="card">
         <div class="card-front">
