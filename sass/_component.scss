@@ -1,0 +1,229 @@
+:root {
+    font-size: 18px;
+    font-family: "Space Grotesk";
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: $black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem 0;
+
+    .social-link-container > img,
+    svg {
+        margin-right: 1rem;
+        color: white;
+        &:hover {
+            color: $green;
+            cursor: pointer;
+        }
+    }
+}
+
+.page-one-container {
+    height: 100vh;
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid white;
+    h1 {
+        &:first-of-type {
+            margin-top: 8rem;
+        }
+    }
+
+    p {
+        margin-top: 3rem;
+        max-width: 500px;
+    }
+
+    .img-container {
+        top: -13%;
+        right: 0;
+        z-index: -1;
+        position: absolute;
+        width: 445px;
+        height: 720px;
+        background-color: $grey;
+    }
+
+    button {
+        margin-top: 5rem;
+    }
+}
+
+.page-two-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 5rem;
+
+    .skill {
+        margin-right: 6rem;
+        margin-bottom: 5rem;
+        h1 {
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.page-three-container {
+    width: 100%;
+    max-width: 1200px;
+    &__info {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    &__projects {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 5rem;
+        .project {
+            width: 48%;
+            height: 500px;
+            background-color: $grey;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 5rem;
+            &__img {
+                width: 100%;
+                height: 100%;
+            }
+            &__info {
+                h1 {
+                    text-transform: uppercase;
+                }
+
+                p {
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+
+.page-four-background-container {
+    background-color: $grey;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-four-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid $grey-white;
+    padding-bottom: 5rem;
+    margin-top: 5rem;
+    position: relative;
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: $grey;
+        z-index: -1;
+    }
+    .contact-description {
+        p {
+            margin-top: 3rem;
+            max-width: 500px;
+        }
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 40%;
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid white;
+            color: white;
+            font-family: 'Space Grotesk';
+            font-size: 1.5rem;
+            outline: none;
+            padding-left: 1rem;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            width: calc(100% - 1rem);
+        }
+
+        textarea {
+            width: calc(100% - 1rem);
+            padding-left: 1rem;
+            font-family: 'Space Grotesk';
+            font-size: 1.5rem;
+            background-color: transparent;
+            border: none;
+            color: white;
+            border-bottom: 3px solid white;
+            outline: none;
+        }
+
+        & > button {
+            margin-top: 2rem;
+            align-self: flex-end;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    .social-link-container > img,
+    svg {
+        margin-right: 1rem;
+        color: white;
+        &:hover {
+            color: $green;
+            cursor: pointer;
+        }
+    }
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-family: "Space Grotesk";
+    text-transform: uppercase;
+    line-height: 45px;
+}
+
+.underline-thick {
+    border-bottom: 7px solid $green;
+}
+
+.underline-thin {
+    border-bottom: 5px solid $green;
+}

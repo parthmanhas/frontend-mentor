@@ -1,0 +1,237 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap");
+:root {
+  font-size: 18px;
+  font-family: "Space Grotesk";
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #151515;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem 0;
+}
+nav .social-link-container > img,
+nav svg {
+  margin-right: 1rem;
+  color: white;
+}
+nav .social-link-container > img:hover,
+nav svg:hover {
+  color: #4EE1A0;
+  cursor: pointer;
+}
+
+.page-one-container {
+  height: 100vh;
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid white;
+}
+.page-one-container h1:first-of-type {
+  margin-top: 8rem;
+}
+.page-one-container p {
+  margin-top: 3rem;
+  max-width: 500px;
+}
+.page-one-container .img-container {
+  top: -13%;
+  right: 0;
+  z-index: -1;
+  position: absolute;
+  width: 445px;
+  height: 720px;
+  background-color: #242424;
+}
+.page-one-container button {
+  margin-top: 5rem;
+}
+
+.page-two-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 5rem;
+}
+.page-two-container .skill {
+  margin-right: 6rem;
+  margin-bottom: 5rem;
+}
+.page-two-container .skill h1 {
+  margin-bottom: 1rem;
+}
+
+.page-three-container {
+  width: 100%;
+  max-width: 1200px;
+}
+.page-three-container__info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.page-three-container__projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+.page-three-container__projects .project {
+  width: 48%;
+  height: 500px;
+  background-color: #242424;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
+.page-three-container__projects .project__img {
+  width: 100%;
+  height: 100%;
+}
+.page-three-container__projects .project__info h1 {
+  text-transform: uppercase;
+}
+.page-three-container__projects .project__info p {
+  text-transform: uppercase;
+}
+
+.page-four-background-container {
+  background-color: #242424;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-four-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #d9d9d9;
+  padding-bottom: 5rem;
+  margin-top: 5rem;
+  position: relative;
+}
+.page-four-container .background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #242424;
+  z-index: -1;
+}
+.page-four-container .contact-description p {
+  margin-top: 3rem;
+  max-width: 500px;
+}
+.page-four-container .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 40%;
+}
+.page-four-container .form input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
+  font-family: "Space Grotesk";
+  font-size: 1.5rem;
+  outline: none;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  width: calc(100% - 1rem);
+}
+.page-four-container .form textarea {
+  width: calc(100% - 1rem);
+  padding-left: 1rem;
+  font-family: "Space Grotesk";
+  font-size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  color: white;
+  border-bottom: 3px solid white;
+  outline: none;
+}
+.page-four-container .form > button {
+  margin-top: 2rem;
+  align-self: flex-end;
+}
+.page-four-container .form > button:hover {
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+footer .social-link-container > img,
+footer svg {
+  margin-right: 1rem;
+  color: white;
+}
+footer .social-link-container > img:hover,
+footer svg:hover {
+  color: #4EE1A0;
+  cursor: pointer;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: "Space Grotesk";
+  text-transform: uppercase;
+  line-height: 45px;
+}
+
+.underline-thick {
+  border-bottom: 7px solid #4EE1A0;
+}
+
+.underline-thin {
+  border-bottom: 5px solid #4EE1A0;
+}
+
+.xl {
+  font-size: 88px;
+  line-height: 88px;
+  letter-spacing: 2.5px;
+}
+
+.l {
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 1.5px;
+}
+
+.m {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+/*# sourceMappingURL=main.css.map */
