@@ -1,8 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap");
+:root {
+  font-size: 18px;
+}
+
 * {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -12,7 +16,6 @@ body {
   height: 100vh;
   width: 100%;
   font-family: "Hanken Grotesk";
-  font-size: 18px;
   background-color: #ECF2FF;
 }
 
@@ -35,7 +38,8 @@ body {
   background: linear-gradient(180deg, rgb(105, 67, 255) 0%, rgb(47, 44, 233) 100%);
 }
 .score-card-container .score-container__heading {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  color: #CAC9FF;
 }
 .score-card-container .score-container__score {
   width: 100%;
@@ -44,8 +48,8 @@ body {
   align-items: center;
   flex-direction: column;
   position: relative;
-  margin-bottom: 5rem;
-  margin-top: 7rem;
+  margin-bottom: 4rem;
+  margin-top: 4rem;
 }
 .score-card-container .score-container__score .circle {
   height: 200px;
@@ -57,16 +61,17 @@ body {
   z-index: 0;
 }
 .score-card-container .score-container__score h1 {
-  font-size: 6rem;
+  font-size: 4rem;
   z-index: 1;
 }
 .score-card-container .score-container__result {
-  font-size: 2.75rem;
+  font-size: 1.85rem;
   margin-bottom: 1rem;
 }
 .score-card-container .score-container__result-description {
   width: 75%;
   text-align: center;
+  color: #CAC9FF;
 }
 .score-card-container .summary-container {
   width: 50%;
@@ -75,26 +80,26 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 3rem;
+  padding: 2rem;
 }
 .score-card-container .summary-container__heading {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 .score-card-container .summary-container span {
   color: rgba(48, 59, 89, 0.5333333333);
 }
 .score-card-container .summary-container img {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 .score-card-container .summary-container__reaction {
   display: flex;
   width: 100%;
   justify-content: space-between;
   background-color: hsl(0, 100%, 95%);
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
   border-radius: 0.75rem;
-  margin-top: 3rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 .score-card-container .summary-container__reaction-heading {
   display: flex;
@@ -105,8 +110,8 @@ body {
   width: 100%;
   justify-content: space-between;
   background-color: hsl(60, 100%, 95%);
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
   border-radius: 0.75rem;
 }
 .score-card-container .summary-container__memory-heading {
@@ -118,8 +123,8 @@ body {
   width: 100%;
   justify-content: space-between;
   background-color: hsl(120, 100%, 95%);
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
   border-radius: 0.75rem;
 }
 .score-card-container .summary-container__verbal-heading {
@@ -131,8 +136,8 @@ body {
   width: 100%;
   justify-content: space-between;
   background-color: #ECF2FF;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
   border-radius: 0.75rem;
 }
 .score-card-container .summary-container__visual-heading {
@@ -143,9 +148,9 @@ body {
   width: 100%;
   border-radius: 2rem;
   border: none;
-  padding: 1.15rem;
+  padding: 1rem;
   font-family: "Hanken Grotesk";
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-top: 1rem;
   background-color: #303B59;
   color: white;
@@ -153,6 +158,46 @@ body {
 .score-card-container .summary-container button:hover {
   background: linear-gradient(180deg, rgb(105, 67, 255) 0%, rgb(47, 44, 233) 100%);
   cursor: pointer;
+}
+
+@media screen and (max-width: 570px) {
+  .score-card-container {
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+  .score-card-container .score-container {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .score-card-container .score-container__heading {
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: #CAC9FF;
+  }
+  .score-card-container .score-container__result-description {
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    color: #CAC9FF;
+  }
+  .score-card-container .score-container__result {
+    font-size: 1.5rem;
+  }
+  .score-card-container .score-container__score {
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  .score-card-container .score-container__score h1 {
+    font-size: 3rem;
+  }
+  .score-card-container .score-container__score .circle {
+    height: 140px;
+    width: 140px;
+  }
+  .score-card-container .summary-container {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

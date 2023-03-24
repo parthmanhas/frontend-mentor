@@ -1,7 +1,11 @@
+:root {
+    font-size: 18px;
+}
+
 * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -11,7 +15,6 @@ body {
     height: 100vh;
     width: 100%;
     font-family: "Hanken Grotesk";
-    font-size: 18px;
     background-color: $very-light-blue;
 }
 
@@ -32,7 +35,8 @@ body {
         align-items: center;
         background: $gradient-1;
         &__heading {
-            font-size: 2rem;
+            font-size: 1.5rem;
+            color: $light-blue;
         }
         &__score {
             width: 100%;
@@ -41,8 +45,8 @@ body {
             align-items: center;
             flex-direction: column;
             position: relative;
-            margin-bottom: 5rem;
-            margin-top: 7rem;
+            margin-bottom: 4rem;
+            margin-top: 4rem;
             .circle {
                 height: 200px;
                 width: 200px;
@@ -53,19 +57,20 @@ body {
                 z-index: 0;
             }
             h1 {
-                font-size: 6rem;
+                font-size: 4rem;
                 z-index: 1;
             }
         }
 
         &__result {
-            font-size: 2.75rem;
+            font-size: 1.85rem;
             margin-bottom: 1rem;
         }
 
         &__result-description {
             width: 75%;
             text-align: center;
+            color: $light-blue;
         }
     }
     .summary-container {
@@ -75,10 +80,10 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        padding: 3rem;
+        padding: 2rem;
 
         &__heading {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         span {
@@ -86,7 +91,7 @@ body {
         }
 
         img {
-            margin-right: 1rem;
+            margin-right: 0.5rem;
         }
 
         &__reaction {
@@ -94,10 +99,10 @@ body {
             width: 100%;
             justify-content: space-between;
             background-color: $light-red;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 1rem;
             border-radius: 0.75rem;
-            margin-top: 3rem;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
             &-heading {
                 display: flex;
                 color: $red;
@@ -109,8 +114,8 @@ body {
             width: 100%;
             justify-content: space-between;
             background-color: $light-yellow;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
             border-radius: 0.75rem;
             &-heading {
                 display: flex;
@@ -123,8 +128,8 @@ body {
             width: 100%;
             justify-content: space-between;
             background-color: $light-green;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
             border-radius: 0.75rem;
             &-heading {
                 display: flex;
@@ -137,8 +142,8 @@ body {
             width: 100%;
             justify-content: space-between;
             background-color: $very-light-blue;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
             border-radius: 0.75rem;
             &-heading {
                 display: flex;
@@ -150,9 +155,9 @@ body {
             width: 100%;
             border-radius: 2rem;
             border: none;
-            padding: 1.15rem;
+            padding: 1rem;
             font-family: "Hanken Grotesk";
-            font-size: 1.5rem;
+            font-size: 1rem;
             margin-top: 1rem;
             background-color: $dark-navy;
             color: white;
@@ -161,6 +166,52 @@ body {
                 background: $gradient-1;
                 cursor: pointer;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .score-card-container {
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+
+        .score-container {
+            width: 100%;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+            &__heading {
+                font-size: 1rem;
+                margin-top: 1rem;
+                color: $light-blue;
+            }
+            
+            &__result-description {
+                font-size: 0.85rem;
+                margin-bottom: 2rem;
+                color: $light-blue;
+            }
+
+            &__result {
+                font-size: 1.5rem;
+            }
+
+            &__score {
+                margin-top: 2.5rem;
+                margin-bottom: 3rem;
+                h1 {
+                    font-size: 3rem;
+                }
+                .circle {
+                    height: 140px;
+                    width: 140px;
+                }
+            }
+        }
+
+        .summary-container {
+            width: 100%;
         }
     }
 }
