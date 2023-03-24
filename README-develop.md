@@ -61,3 +61,6 @@ Challenges Completed (noting it down here because commits are registered only on
 19. notifications-homepage
     - [code](https://github.com/parthmanhas/frontend-mentor/tree/notifications-page)
     - [preview](https://exquisite-longma-aba5d6.netlify.app/)
+20. results-summary-component
+    - [code](https://github.com/parthmanhas/frontend-mentor/tree/results-summary-component)
+    - [preview](https://cerulean-babka-7fc8a4.netlify.app/)
