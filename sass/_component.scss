@@ -162,7 +162,7 @@ nav {
             border: none;
             border-bottom: 2px solid white;
             color: white;
-            font-family: 'Space Grotesk';
+            font-family: "Space Grotesk";
             font-size: 1.5rem;
             outline: none;
             padding-left: 1rem;
@@ -174,7 +174,7 @@ nav {
         textarea {
             width: calc(100% - 1rem);
             padding-left: 1rem;
-            font-family: 'Space Grotesk';
+            font-family: "Space Grotesk";
             font-size: 1.5rem;
             background-color: transparent;
             border: none;
@@ -218,12 +218,28 @@ button {
     font-family: "Space Grotesk";
     text-transform: uppercase;
     line-height: 45px;
+    &::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 4px;
+        background: $green;
+        transition: width 0.3s;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+    &:hover::after {
+        width: 100%;
+    }
 }
 
-.underline-thick {
-    border-bottom: 7px solid $green;
+.name {
+    display: inline-block;
 }
 
-.underline-thin {
-    border-bottom: 5px solid $green;
+.line {
+    animation: run 0.75s ease;
+    background-color: $green;
+    height: 7px;
 }

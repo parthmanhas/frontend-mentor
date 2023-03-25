@@ -208,13 +208,29 @@ button {
   text-transform: uppercase;
   line-height: 45px;
 }
-
-.underline-thick {
-  border-bottom: 7px solid #4EE1A0;
+button::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 4px;
+  background: #4EE1A0;
+  transition: width 0.3s;
+}
+button:hover {
+  cursor: pointer;
+}
+button:hover::after {
+  width: 100%;
 }
 
-.underline-thin {
-  border-bottom: 5px solid #4EE1A0;
+.name {
+  display: inline-block;
+}
+
+.line {
+  animation: run 0.75s ease;
+  background-color: #4EE1A0;
+  height: 7px;
 }
 
 .xl {
@@ -232,6 +248,15 @@ button {
 .m {
   font-size: 24px;
   line-height: 32px;
+}
+
+@keyframes run {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
