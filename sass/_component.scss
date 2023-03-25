@@ -23,7 +23,6 @@ nav {
     width: 100%;
     max-width: 1200px;
     margin: 2rem 0;
-
     .social-link-container > img,
     svg {
         margin-right: 1rem;
@@ -41,6 +40,7 @@ nav {
     width: 100%;
     position: relative;
     border-bottom: 1px solid white;
+    animation: start 0.75s ease;
     h1 {
         &:first-of-type {
             margin-top: 8rem;
@@ -65,6 +65,14 @@ nav {
     button {
         margin-top: 5rem;
     }
+}
+
+.error-text {
+    color: $red;
+}
+
+.error-border {
+    border-bottom: 2px solid $red !important;
 }
 
 .page-two-container {
@@ -242,4 +250,16 @@ button {
     animation: run 0.75s ease;
     background-color: $green;
     height: 7px;
+}
+
+.dot {
+    display: none;
+}
+
+.m1 {
+    margin-bottom: 1rem;
+}
+
+.valid-border {
+    border-bottom: 2px solid $green !important;
 }

@@ -7,6 +7,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="js/index.js"></script>
 
   <title>Frontend Mentor | Single-page developer portfolio</title>
 </head>
@@ -38,11 +39,11 @@
     <h1 class="xl">I am <div class="name">
         Parth Manhas
         <div class="line"></div>
-      </div>.
+      </div><span class="dot">.</span>
     </h1>
     <p class="m">Based in India, I'm a front end developer passionate about building accessible web apps that users
       love.</p>
-    <button><span class="m">Contact Me</span></button>
+    <button class="contact"><span class="m">Contact Me</span></button>
     <div class="img-container"></div>
   </div>
   <div class="page-two-container">
@@ -79,7 +80,7 @@
   <div class="page-three-container">
     <div class="page-three-container__info">
       <h1 class="xl">Projects</h1>
-      <button><span class="m">Contact Me</span></button>
+      <button class="contact"><span class="m">Contact Me</span></button>
     </div>
     <div class="page-three-container__projects">
       <div class="project">
@@ -137,19 +138,30 @@
       </div>
       <form class="form" method="post">
         <div class="name-container">
-          <input name="name" placeholder="Name" type="text">
+          <input name="name" placeholder="Name" type="text" oninput="validateField(this, 'name')">
+          <p class="error-text m1"></p>
         </div>
         <div class="email-container">
-          <input name="email" placeholder="Email" type="email">
+          <input name="email" placeholder="Email" type="email" onchange="validateField(this, 'email')">
+          <p class="error-text m1"></p>
         </div>
         <div class="message-container">
-          <textarea name="message" placeholder="Message"></textarea>
+          <textarea name="message" placeholder="Message" oninput="validateField(this, 'message')"></textarea>
+          <p class="error-text m1"></p>
         </div>
         <button type="submit"><span class="m">Send Message</span></button>
       </form>
     </div>
     <footer>
       <p class="m">parthmanhas</p>
+      <svg class="scroll-to-top" fill="currentColor" width="30" height="30" viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg">
+        <title />
+        <path
+          d="M114,74.5a19.92,19.92,0,0,0-28.5,0L57,103a9.9,9.9,0,0,0,14,14L99.5,88.5,128,117a9.9,9.9,0,0,0,14-14Z" />
+        <path
+          d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165Z" />
+      </svg>
       <div class="social-link-container">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24">
           <path fill="currentColor" fill-rule="evenodd"

@@ -42,6 +42,7 @@ nav svg:hover {
   width: 100%;
   position: relative;
   border-bottom: 1px solid white;
+  animation: start 0.75s ease;
 }
 .page-one-container h1:first-of-type {
   margin-top: 8rem;
@@ -61,6 +62,14 @@ nav svg:hover {
 }
 .page-one-container button {
   margin-top: 5rem;
+}
+
+.error-text {
+  color: #FF6F5B;
+}
+
+.error-border {
+  border-bottom: 2px solid #FF6F5B !important;
 }
 
 .page-two-container {
@@ -233,6 +242,18 @@ button:hover::after {
   height: 7px;
 }
 
+.dot {
+  display: none;
+}
+
+.m1 {
+  margin-bottom: 1rem;
+}
+
+.valid-border {
+  border-bottom: 2px solid #4EE1A0 !important;
+}
+
 .xl {
   font-size: 88px;
   line-height: 88px;
@@ -256,6 +277,14 @@ button:hover::after {
   }
   100% {
     width: 100%;
+  }
+}
+@keyframes start {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
