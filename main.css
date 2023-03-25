@@ -42,25 +42,33 @@ nav svg:hover {
   width: 100%;
   position: relative;
   border-bottom: 1px solid white;
+}
+.page-one-container h1 {
   animation: start 0.75s ease;
+  background-color: #151515;
+  display: inline-flex;
 }
 .page-one-container h1:first-of-type {
   margin-top: 8rem;
 }
 .page-one-container p {
+  animation: start 0.75s ease;
   margin-top: 3rem;
   max-width: 500px;
 }
 .page-one-container .img-container {
-  top: -13%;
+  top: 0;
   right: 0;
   z-index: -1;
   position: absolute;
   width: 445px;
   height: 720px;
-  background-color: #242424;
+}
+.page-one-container .img-container img {
+  width: 100%;
 }
 .page-one-container button {
+  animation: start 0.75s ease;
   margin-top: 5rem;
 }
 
@@ -244,6 +252,7 @@ button:hover::after {
 
 .dot {
   display: none;
+  background-color: transparent;
 }
 
 .m1 {
@@ -252,6 +261,30 @@ button:hover::after {
 
 .valid-border {
   border-bottom: 2px solid #4EE1A0 !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hover-red:hover {
+  color: #FF6F5B;
+}
+
+.hover-blue:hover {
+  color: #2370cf;
+}
+
+.hover-yellow:hover {
+  color: #c5e85f;
+}
+
+.hover-green:hover {
+  color: #4EE1A0;
+}
+
+.hover-orange:hover {
+  color: #fc7a33;
 }
 
 .xl {

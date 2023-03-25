@@ -40,29 +40,37 @@ nav {
     width: 100%;
     position: relative;
     border-bottom: 1px solid white;
-    animation: start 0.75s ease;
     h1 {
+        animation: start 0.75s ease;
+        background-color: $black;
+        display: inline-flex;
         &:first-of-type {
             margin-top: 8rem;
         }
     }
-
+    
     p {
+        animation: start 0.75s ease;
         margin-top: 3rem;
         max-width: 500px;
     }
-
+    
     .img-container {
-        top: -13%;
+        top: 0;
         right: 0;
         z-index: -1;
         position: absolute;
         width: 445px;
         height: 720px;
-        background-color: $grey;
-    }
+        // background-color: $grey;
 
+        img {
+            width: 100%;
+        }
+    }
+    
     button {
+        animation: start 0.75s ease;
         margin-top: 5rem;
     }
 }
@@ -254,6 +262,7 @@ button {
 
 .dot {
     display: none;
+    background-color: transparent;
 }
 
 .m1 {
@@ -262,4 +271,28 @@ button {
 
 .valid-border {
     border-bottom: 2px solid $green !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.hover-red:hover {
+    color: $red;
+}
+
+.hover-blue:hover {
+    color: $blue;
+}
+
+.hover-yellow:hover {
+    color: $yellow;
+}
+
+.hover-green:hover {
+    color: $green;
+}
+
+.hover-orange:hover {
+    color: $orange;
 }
