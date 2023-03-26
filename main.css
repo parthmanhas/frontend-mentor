@@ -384,8 +384,14 @@ nav a:last-of-type {
   }
 }
 .page-three-container__projects .project__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+}
+.page-three-container__projects .project__img img {
+  width: 50%;
 }
 .page-three-container__projects .project__info h1 {
   text-transform: uppercase;
