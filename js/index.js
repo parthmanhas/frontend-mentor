@@ -59,7 +59,7 @@ function validateField(field, fieldName, onSubmit = false) {
     field.classList.remove('error-border');
     if (field.value.length === 0) {
         field.classList.add('error-border');
-        error.textContent = 'Please enter some value';
+        error.textContent = 'Please fill in the field';
         fieldValid = false;
     }
     else if (fieldName === 'name' && !correctNameRegex.test(field.value)) {

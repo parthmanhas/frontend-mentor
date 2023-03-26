@@ -7,6 +7,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -16,9 +17,11 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-top: 0;
 }
 
 nav {
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -27,7 +30,6 @@ nav {
 }
 nav .social-link-container > img,
 nav svg {
-  margin-right: 1rem;
   color: white;
 }
 nav .social-link-container > img:hover,
@@ -35,13 +37,50 @@ nav svg:hover {
   color: #4EE1A0;
   cursor: pointer;
 }
+nav a {
+  margin-right: 1rem;
+}
+nav a:last-of-type {
+  margin-right: 0;
+}
 
 .page-one-container {
   height: 100vh;
+  padding: 2rem;
   max-width: 1200px;
   width: 100%;
   position: relative;
   border-bottom: 1px solid white;
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-one-container {
+    height: 50vh;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-one-container {
+    height: 68vh;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-one-container {
+    height: 65vh;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-one-container {
+    height: 70vh;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-one-container {
+    height: 75vh;
+  }
+}
+@media screen and (min-width: 870px) and (max-width: 973px) {
+  .page-one-container {
+    height: 80vh;
+  }
 }
 .page-one-container h1 {
   animation: start 0.75s ease;
@@ -51,18 +90,101 @@ nav svg:hover {
 .page-one-container h1:first-of-type {
   margin-top: 8rem;
 }
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-one-container h1:first-of-type {
+    margin-top: 5rem;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-one-container h1:first-of-type {
+    margin-top: 3rem;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-one-container h1:first-of-type {
+    margin-top: 5rem;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-one-container h1:first-of-type {
+    margin-top: 5rem;
+  }
+}
 .page-one-container p {
   animation: start 0.75s ease;
   margin-top: 3rem;
   max-width: 500px;
 }
+@media screen and (min-width: 974px) and (max-width: 1072px) {
+  .page-one-container p {
+    max-width: 400px;
+  }
+}
+@media screen and (min-width: 870px) and (max-width: 973px) {
+  .page-one-container p {
+    max-width: 350px;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-one-container p {
+    max-width: 300px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-one-container p {
+    max-width: 280px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-one-container p {
+    max-width: 250px;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-one-container p {
+    max-width: 200px;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-one-container p {
+    width: 175px;
+  }
+}
 .page-one-container .img-container {
   top: 0;
-  right: 0;
+  right: 2rem;
   z-index: -1;
   position: absolute;
   width: 445px;
   height: 720px;
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-one-container .img-container {
+    width: 385px;
+    height: 720px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-one-container .img-container {
+    width: 350px;
+    height: 720px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-one-container .img-container {
+    width: 300px;
+    height: 720px;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-one-container .img-container {
+    width: 250px;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-one-container .img-container {
+    width: 200px;
+  }
 }
 .page-one-container .img-container img {
   width: 100%;
@@ -70,6 +192,11 @@ nav svg:hover {
 .page-one-container button {
   animation: start 0.75s ease;
   margin-top: 5rem;
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-one-container button {
+    margin-top: 2rem;
+  }
 }
 
 .error-text {
@@ -82,11 +209,59 @@ nav svg:hover {
 
 .page-two-container {
   display: flex;
+  padding: 2rem;
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
   max-width: 1200px;
   margin-top: 5rem;
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-two-container {
+    border-bottom: 2px solid white;
+    padding-bottom: 4rem;
+    margin-bottom: 5rem;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-two-container {
+    border-bottom: 2px solid white;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-two-container {
+    border-bottom: 2px solid white;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-two-container {
+    border-bottom: 2px solid white;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-two-container {
+    border-bottom: 2px solid white;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+  }
+}
+@media screen and (min-width: 870px) and (max-width: 973px) {
+  .page-two-container {
+    border-bottom: 2px solid white;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+  }
 }
 .page-two-container .skill {
   margin-right: 6rem;
@@ -95,10 +270,54 @@ nav svg:hover {
 .page-two-container .skill h1 {
   margin-bottom: 1rem;
 }
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-two-container .skill {
+    margin-right: 0rem;
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-two-container .skill {
+    margin-right: 0rem;
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-two-container .skill {
+    margin-right: 1rem;
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-two-container .skill {
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-two-container .skill {
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 870px) and (max-width: 973px) {
+  .page-two-container .skill {
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+  }
+}
 
 .page-three-container {
   width: 100%;
   max-width: 1200px;
+  padding: 2rem;
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-three-container {
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 2px solid white;
+  }
 }
 .page-three-container__info {
   display: flex;
@@ -111,6 +330,11 @@ nav svg:hover {
   justify-content: space-between;
   margin-top: 5rem;
 }
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-three-container__projects {
+    margin-top: 3rem;
+  }
+}
 .page-three-container__projects .project {
   width: 48%;
   height: 500px;
@@ -118,6 +342,46 @@ nav svg:hover {
   display: flex;
   flex-direction: column;
   margin-bottom: 5rem;
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-three-container__projects .project {
+    height: 200px;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-three-container__projects .project {
+    height: 250px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-three-container__projects .project {
+    height: 300px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-three-container__projects .project {
+    height: 400px;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-three-container__projects .project {
+    height: 400px;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-three-container__projects .project {
+    margin-bottom: 1rem;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-three-container__projects .project {
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-three-container__projects .project {
+    margin-bottom: 2rem;
+  }
 }
 .page-three-container__projects .project__img {
   width: 100%;
@@ -142,12 +406,52 @@ nav svg:hover {
 .page-four-container {
   width: 100%;
   max-width: 1200px;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   border-bottom: 2px solid #d9d9d9;
   padding-bottom: 5rem;
   margin-top: 5rem;
   position: relative;
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-four-container {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-four-container {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-four-container {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-four-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-four-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-four-container {
+    margin-top: 2rem;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-four-container {
+    margin-top: 3rem;
+  }
 }
 .page-four-container .background {
   position: absolute;
@@ -160,11 +464,47 @@ nav svg:hover {
   margin-top: 3rem;
   max-width: 500px;
 }
+@media screen and (min-width: 870px) and (max-width: 973px) {
+  .page-four-container .contact-description {
+    margin-top: 3rem;
+    max-width: 400px;
+  }
+}
 .page-four-container .form {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   width: 40%;
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .page-four-container .form {
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .page-four-container .form {
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .page-four-container .form {
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .page-four-container .form {
+    margin-top: 2rem;
+    width: 80%;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .page-four-container .form {
+    margin-top: 2rem;
+    width: 70%;
+  }
 }
 .page-four-container .form input {
   background-color: transparent;
@@ -202,19 +542,25 @@ footer {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 2rem;
   max-width: 1200px;
   margin-top: 3rem;
   margin-bottom: 4rem;
 }
 footer .social-link-container > img,
 footer svg {
-  margin-right: 1rem;
   color: white;
 }
 footer .social-link-container > img:hover,
 footer svg:hover {
   color: #4EE1A0;
   cursor: pointer;
+}
+footer a {
+  margin-right: 1rem;
+}
+footer a:last-child {
+  margin-right: 0;
 }
 
 button {
@@ -267,6 +613,23 @@ a {
   text-decoration: none;
 }
 
+@media screen and (min-width: 1150px) and (max-width: 1250px) {
+  nav {
+    max-width: 1080px;
+  }
+  .page-one-container {
+    max-width: 1080px;
+  }
+  .page-two-container {
+    max-width: 1080px;
+  }
+  .page-three-container {
+    max-width: 1080px;
+  }
+  footer {
+    max-width: 1080px;
+  }
+}
 .hover-red:hover {
   color: #FF6F5B;
 }
@@ -288,9 +651,72 @@ a {
 }
 
 .xl {
-  font-size: 88px;
-  line-height: 88px;
+  font-size: 78px;
+  line-height: 78px;
   letter-spacing: 2.5px;
+}
+@media screen and (min-width: 1150px) and (max-width: 1250px) {
+  .xl {
+    font-size: 68px;
+    line-height: 68px;
+    letter-spacing: 2.25px;
+  }
+}
+@media screen and (min-width: 1072px) and (max-width: 1149px) {
+  .xl {
+    font-size: 68px;
+    line-height: 68px;
+    letter-spacing: 2px;
+  }
+}
+@media screen and (min-width: 974px) and (max-width: 1072px) {
+  .xl {
+    font-size: 58px;
+    line-height: 58px;
+    letter-spacing: 1.75px;
+  }
+}
+@media screen and (min-width: 870px) and (max-width: 973px) {
+  .xl {
+    font-size: 48px;
+    line-height: 48px;
+    letter-spacing: 1.5px;
+  }
+}
+@media screen and (min-width: 780px) and (max-width: 869px) {
+  .xl {
+    font-size: 44px;
+    line-height: 44px;
+    letter-spacing: 1.25px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 779px) {
+  .xl {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: 1px;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 699px) {
+  .xl {
+    font-size: 34px;
+    line-height: 34px;
+    letter-spacing: 1px;
+  }
+}
+@media screen and (min-width: 530px) and (max-width: 599px) {
+  .xl {
+    font-size: 30px;
+    line-height: 30px;
+    letter-spacing: 0.75px;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 529px) {
+  .xl {
+    font-size: 26px;
+    line-height: 26px;
+    letter-spacing: 0.75px;
+  }
 }
 
 .l {
@@ -302,6 +728,24 @@ a {
 .m {
   font-size: 24px;
   line-height: 32px;
+}
+@media screen and (min-width: 870px) and (max-width: 1072px) {
+  .m {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 869px) {
+  .m {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+@media screen and (min-width: 450px) and (max-width: 529px) {
+  .m {
+    font-size: 16px;
+    line-height: 20px;
+  }
 }
 
 @keyframes run {
