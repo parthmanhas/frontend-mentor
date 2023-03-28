@@ -135,6 +135,7 @@ nav a:last-of-type {
 .page-one-container button {
   animation: start 0.75s ease;
   margin-top: 5rem;
+  margin-bottom: min(5vw, 11rem);
 }
 @media screen and (max-width: 460px) {
   .page-one-container button {
