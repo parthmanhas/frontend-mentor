@@ -45,42 +45,11 @@ nav a:last-of-type {
 }
 
 .page-one-container {
-  height: 100vh;
   padding: 2rem;
   max-width: 1200px;
   width: 100%;
   position: relative;
   border-bottom: 1px solid white;
-}
-@media screen and (min-width: 460px) and (max-width: 529px) {
-  .page-one-container {
-    height: 50vh;
-  }
-}
-@media screen and (min-width: 530px) and (max-width: 599px) {
-  .page-one-container {
-    height: 68vh;
-  }
-}
-@media screen and (min-width: 600px) and (max-width: 699px) {
-  .page-one-container {
-    height: 65vh;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 779px) {
-  .page-one-container {
-    height: 70vh;
-  }
-}
-@media screen and (min-width: 780px) and (max-width: 869px) {
-  .page-one-container {
-    height: 75vh;
-  }
-}
-@media screen and (min-width: 870px) and (max-width: 973px) {
-  .page-one-container {
-    height: 80vh;
-  }
 }
 .page-one-container h1 {
   animation: start 0.75s ease;
@@ -89,6 +58,11 @@ nav a:last-of-type {
 }
 .page-one-container h1:first-of-type {
   margin-top: 8rem;
+}
+@media screen and (max-width: 460px) {
+  .page-one-container h1:first-of-type {
+    margin-top: 0rem;
+  }
 }
 @media screen and (min-width: 530px) and (max-width: 599px) {
   .page-one-container h1:first-of-type {
@@ -112,43 +86,8 @@ nav a:last-of-type {
 }
 .page-one-container p {
   animation: start 0.75s ease;
-  margin-top: 3rem;
-  max-width: 500px;
-}
-@media screen and (min-width: 974px) and (max-width: 1072px) {
-  .page-one-container p {
-    max-width: 400px;
-  }
-}
-@media screen and (min-width: 870px) and (max-width: 973px) {
-  .page-one-container p {
-    max-width: 350px;
-  }
-}
-@media screen and (min-width: 780px) and (max-width: 869px) {
-  .page-one-container p {
-    max-width: 300px;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 779px) {
-  .page-one-container p {
-    max-width: 280px;
-  }
-}
-@media screen and (min-width: 600px) and (max-width: 699px) {
-  .page-one-container p {
-    max-width: 250px;
-  }
-}
-@media screen and (min-width: 530px) and (max-width: 599px) {
-  .page-one-container p {
-    max-width: 200px;
-  }
-}
-@media screen and (min-width: 460px) and (max-width: 529px) {
-  .page-one-container p {
-    width: 175px;
-  }
+  margin-top: min(3.84vw, 3rem);
+  max-width: min(48.4vw, 500px);
 }
 .page-one-container .img-container {
   top: 0;
@@ -156,7 +95,11 @@ nav a:last-of-type {
   z-index: -1;
   position: absolute;
   width: 445px;
-  height: 720px;
+}
+@media screen and (max-width: 460px) {
+  .page-one-container .img-container {
+    width: 150px;
+  }
 }
 @media screen and (min-width: 780px) and (max-width: 869px) {
   .page-one-container .img-container {
@@ -181,7 +124,7 @@ nav a:last-of-type {
     width: 250px;
   }
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (min-width: 460px) and (max-width: 530px) {
   .page-one-container .img-container {
     width: 200px;
   }
@@ -192,6 +135,11 @@ nav a:last-of-type {
 .page-one-container button {
   animation: start 0.75s ease;
   margin-top: 5rem;
+}
+@media screen and (max-width: 460px) {
+  .page-one-container button {
+    margin-top: 1rem;
+  }
 }
 @media screen and (min-width: 460px) and (max-width: 529px) {
   .page-one-container button {
@@ -216,7 +164,14 @@ nav a:last-of-type {
   max-width: 1200px;
   margin-top: 5rem;
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (max-width: 460px) {
+  .page-two-container {
+    border-bottom: 2px solid white;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+  }
+}
+@media screen and (min-width: 461px) and (max-width: 530px) {
   .page-two-container {
     border-bottom: 2px solid white;
     padding-bottom: 4rem;
@@ -270,7 +225,13 @@ nav a:last-of-type {
 .page-two-container .skill h1 {
   margin-bottom: 1rem;
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (max-width: 460px) {
+  .page-two-container .skill {
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+  }
+}
+@media screen and (min-width: 461px) and (max-width: 530px) {
   .page-two-container .skill {
     margin-right: 0rem;
     margin-bottom: 2rem;
@@ -330,7 +291,12 @@ nav a:last-of-type {
   justify-content: space-between;
   margin-top: 5rem;
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (max-width: 460px) {
+  .page-three-container__projects {
+    margin-top: 2rem;
+  }
+}
+@media screen and (min-width: 461px) and (max-width: 529px) {
   .page-three-container__projects {
     margin-top: 3rem;
   }
@@ -343,32 +309,12 @@ nav a:last-of-type {
   flex-direction: column;
   margin-bottom: 5rem;
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (max-width: 460px) {
   .page-three-container__projects .project {
-    height: 200px;
+    margin-bottom: 1rem;
   }
 }
-@media screen and (min-width: 530px) and (max-width: 599px) {
-  .page-three-container__projects .project {
-    height: 250px;
-  }
-}
-@media screen and (min-width: 600px) and (max-width: 699px) {
-  .page-three-container__projects .project {
-    height: 300px;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 779px) {
-  .page-three-container__projects .project {
-    height: 400px;
-  }
-}
-@media screen and (min-width: 780px) and (max-width: 869px) {
-  .page-three-container__projects .project {
-    height: 400px;
-  }
-}
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (min-width: 461px) and (max-width: 529px) {
   .page-three-container__projects .project {
     margin-bottom: 1rem;
   }
@@ -420,7 +366,14 @@ nav a:last-of-type {
   margin-top: 5rem;
   position: relative;
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (max-width: 460px) {
+  .page-four-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 461px) and (max-width: 530px) {
   .page-four-container {
     flex-direction: column;
   }
@@ -449,7 +402,12 @@ nav a:last-of-type {
     align-items: center;
   }
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (max-width: 460px) {
+  .page-four-container {
+    margin-top: 2rem;
+  }
+}
+@media screen and (min-width: 460px) and (max-width: 530px) {
   .page-four-container {
     margin-top: 2rem;
   }
@@ -476,11 +434,22 @@ nav a:last-of-type {
     max-width: 400px;
   }
 }
+@media screen and (max-width: 529px) {
+  .page-four-container .contact-description {
+    text-align: center;
+  }
+}
 .page-four-container .form {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   width: 40%;
+}
+@media screen and (max-width: 530px) {
+  .page-four-container .form {
+    margin-top: 2rem;
+    width: 100%;
+  }
 }
 @media screen and (min-width: 530px) and (max-width: 599px) {
   .page-four-container .form {
@@ -488,7 +457,7 @@ nav a:last-of-type {
     width: 100%;
   }
 }
-@media screen and (min-width: 460px) and (max-width: 529px) {
+@media screen and (min-width: 460px) and (max-width: 530px) {
   .page-four-container .form {
     margin-top: 2rem;
     width: 100%;
@@ -592,6 +561,60 @@ button:hover::after {
   width: 100%;
 }
 
+@media screen and (max-width: 350px) {
+  nav {
+    padding: 1rem;
+    margin: 1rem;
+    align-items: center;
+  }
+  nav a {
+    margin-right: 0.5rem;
+  }
+  .page-one-container {
+    padding: 1rem;
+    padding-bottom: 2rem;
+  }
+  .page-one-container .img-container {
+    right: 1rem;
+  }
+  .page-two-container {
+    margin-top: 0;
+  }
+  .project {
+    height: 100px !important;
+  }
+  .page-four-container .form *, .page-four-container .form input, .page-four-container .form textarea {
+    font-size: 0.75rem;
+  }
+  .page-four-container .contact-description h1 {
+    font-size: 2rem;
+  }
+  .page-four-container .contact-description p {
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+  }
+  button {
+    line-height: 0;
+  }
+  footer {
+    margin: 0;
+    padding: 1rem;
+    align-items: center;
+  }
+  footer a {
+    margin-right: 0.5rem;
+  }
+}
+@media screen and (min-width: 351px) and (max-width: 500px) {
+  .project {
+    height: 200px !important;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 800px) {
+  .project {
+    height: 300px !important;
+  }
+}
 .name {
   display: inline-block;
 }
@@ -599,7 +622,7 @@ button:hover::after {
 .line {
   animation: run 0.75s ease;
   background-color: #4EE1A0;
-  height: 7px;
+  height: min(0.56vw, 7px);
 }
 
 .dot {
@@ -619,23 +642,6 @@ a {
   text-decoration: none;
 }
 
-@media screen and (min-width: 1150px) and (max-width: 1250px) {
-  nav {
-    max-width: 1080px;
-  }
-  .page-one-container {
-    max-width: 1080px;
-  }
-  .page-two-container {
-    max-width: 1080px;
-  }
-  .page-three-container {
-    max-width: 1080px;
-  }
-  footer {
-    max-width: 1080px;
-  }
-}
 .hover-red:hover {
   color: #FF6F5B;
 }
@@ -657,71 +663,22 @@ a {
 }
 
 .xl {
-  font-size: 78px;
-  line-height: 78px;
-  letter-spacing: 2.5px;
+  font-size: min(6.24vw, 78px);
+  line-height: min(6.24vw, 78px);
+  letter-spacing: min(0.2vw, 2.5px);
 }
-@media screen and (min-width: 1150px) and (max-width: 1250px) {
+@media screen and (max-width: 480px) {
   .xl {
-    font-size: 68px;
-    line-height: 68px;
-    letter-spacing: 2.25px;
+    font-size: min(5.24vw, 78px);
+    line-height: min(5.24vw, 78px);
+    letter-spacing: min(0.3vw, 2.5px);
   }
 }
-@media screen and (min-width: 1072px) and (max-width: 1149px) {
+@media screen and (max-width: 350px) {
   .xl {
-    font-size: 68px;
-    line-height: 68px;
-    letter-spacing: 2px;
-  }
-}
-@media screen and (min-width: 974px) and (max-width: 1072px) {
-  .xl {
-    font-size: 58px;
-    line-height: 58px;
-    letter-spacing: 1.75px;
-  }
-}
-@media screen and (min-width: 870px) and (max-width: 973px) {
-  .xl {
-    font-size: 48px;
-    line-height: 48px;
-    letter-spacing: 1.5px;
-  }
-}
-@media screen and (min-width: 780px) and (max-width: 869px) {
-  .xl {
-    font-size: 44px;
-    line-height: 44px;
-    letter-spacing: 1.25px;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 779px) {
-  .xl {
-    font-size: 40px;
-    line-height: 40px;
-    letter-spacing: 1px;
-  }
-}
-@media screen and (min-width: 600px) and (max-width: 699px) {
-  .xl {
-    font-size: 34px;
-    line-height: 34px;
-    letter-spacing: 1px;
-  }
-}
-@media screen and (min-width: 530px) and (max-width: 599px) {
-  .xl {
-    font-size: 30px;
-    line-height: 30px;
-    letter-spacing: 0.75px;
-  }
-}
-@media screen and (min-width: 460px) and (max-width: 529px) {
-  .xl {
-    font-size: 26px;
-    line-height: 26px;
-    letter-spacing: 0.75px;
+    font-size: min(5.5vw, 78px);
+    line-height: min(5.5vw, 78px);
+    letter-spacing: min(0.1vw, 2.5px);
   }
 }
 
@@ -732,26 +689,8 @@ a {
 }
 
 .m {
-  font-size: 24px;
-  line-height: 32px;
-}
-@media screen and (min-width: 870px) and (max-width: 1072px) {
-  .m {
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-@media screen and (min-width: 500px) and (max-width: 869px) {
-  .m {
-    font-size: 18px;
-    line-height: 26px;
-  }
-}
-@media screen and (min-width: 450px) and (max-width: 529px) {
-  .m {
-    font-size: 16px;
-    line-height: 20px;
-  }
+  font-size: min(3.5vw, 24px);
+  line-height: min(3.5vw, 32px);
 }
 
 @keyframes run {

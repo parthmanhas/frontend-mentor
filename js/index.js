@@ -1,28 +1,56 @@
 let pageOneContainer;
 let pageTwoContainer;
 let skills;
+let imgContainer;
+let niceToMeetYouText;
 
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
 
 window.onscroll = function () {
+    if (window.screen.width < 800) {
+        return;
+    };
     let num = window.scrollY + window.innerHeight - (pageTwoContainer.offsetTop + pageTwoContainer.offsetTop / 10)
     num = (num / 1000) * 2;
     skills.forEach(skill => skill.style.opacity = num > 1 ? '1' : `${num}`);
 }
 
+window.addEventListener('resize', () => {
+    // max-width of img is 445px
+    if (+window.screen.width * 0.37 >= 445) return;
+    imgContainer.style.width = `${+window.screen.width * 0.37}px`;
+    if (window.screen.width > 600)
+        niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
+    else
+        niceToMeetYouText.style.marginTop = `0`;
+})
+
 window.onload = function () {
     pageOneContainer = document.querySelector('.page-one-container');
+    imgContainer = pageOneContainer.querySelector('.img-container');
+    niceToMeetYouText = pageOneContainer.querySelector('h1:first-of-type');
     const line = pageOneContainer.querySelector('.line');
     const dot = pageOneContainer.querySelector('.dot');
+
+
+    imgContainer.style.width = `${+window.screen.width * 0.37}px`;
+    if (window.screen.width > 600)
+        niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
+    else
+        niceToMeetYouText.style.marginTop = `0`;
+
     line.addEventListener('animationend', () => {
         dot.style.display = 'inline-flex';
     })
     const contactMeButton = document.querySelectorAll('.contact');
     pageTwoContainer = document.querySelector('.page-two-container');
     skills = pageTwoContainer.querySelectorAll('.skill');
-    skills.forEach(skill => skill.style.opacity = '0');
+    
+    if (window.screen.width > 800) {
+        skills.forEach(skill => skill.style.opacity = '0');
+    };
 
     const pageFourBackgroundContainer = document.querySelector('.page-four-background-container');
     contactMeButton.forEach(button => button.addEventListener('click', () => pageFourBackgroundContainer.scrollIntoView({ behavior: "smooth" })));

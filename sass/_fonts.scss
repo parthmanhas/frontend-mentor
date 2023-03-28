@@ -1,53 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap");
 
 .xl {
-    font-size: 78px;
-    line-height: 78px;
-    letter-spacing: 2.5px;
-    @media screen and (min-width: 1150px) and (max-width: 1250px) {
-        font-size: 68px;
-        line-height: 68px;
-        letter-spacing: 2.25px;
+    font-size: min(6.24vw, 78px);
+    line-height: min(6.24vw, 78px);
+    letter-spacing: min(0.2vw, 2.5px);
+    @media screen and (max-width: 480px) {
+        font-size: min(5.24vw, 78px);
+        line-height: min(5.24vw, 78px);
+        letter-spacing: min(0.3vw, 2.5px);
     }
-    @media screen and (min-width: 1072px) and (max-width: 1149px) {
-        font-size: 68px;
-        line-height: 68px;
-        letter-spacing: 2px;
-    }
-    @media screen and (min-width: 974px) and (max-width: 1072px) {
-        font-size: 58px;
-        line-height: 58px;
-        letter-spacing: 1.75px;
-    }
-    @media screen and (min-width: 870px) and (max-width: 973px) {
-        font-size: 48px;
-        line-height: 48px;
-        letter-spacing: 1.5px;
-    }
-    @media screen and (min-width: 780px) and (max-width: 869px) {
-        font-size: 44px;
-        line-height: 44px;
-        letter-spacing: 1.25px;
-    }
-    @media screen and (min-width: 700px) and (max-width: 779px) {
-        font-size: 40px;
-        line-height: 40px;
-        letter-spacing: 1px;
-    }
-    @media screen and (min-width: 600px) and (max-width: 699px) {
-        font-size: 34px;
-        line-height: 34px;
-        letter-spacing: 1px;
-    }
-    @media screen and (min-width: 530px) and (max-width: 599px) {
-        font-size: 30px;
-        line-height: 30px;
-        letter-spacing: 0.75px;
-    }
-    @media screen and (min-width: 460px) and (max-width: 529px) {
-        font-size: 26px;
-        line-height: 26px;
-        letter-spacing: 0.75px;
+
+    @media screen and (max-width: 350px) {
+        font-size: min(5.5vw, 78px);
+        line-height: min(5.5vw, 78px);
+        letter-spacing: min(0.1vw, 2.5px);
     }
 }
 
@@ -55,22 +21,9 @@
     font-size: 48px;
     line-height: 56px;
     letter-spacing: 1.5px;
-    
 }
 
 .m {
-    font-size: 24px;
-    line-height: 32px;
-    @media screen and (min-width: 870px) and (max-width: 1072px) {
-        font-size: 20px;
-        line-height: 28px;
-    }
-    @media screen and (min-width: 500px) and (max-width: 869px) {
-        font-size: 18px;
-        line-height: 26px;
-    }
-    @media screen and (min-width: 450px) and (max-width: 529px) {
-        font-size: 16px;
-        line-height: 20px;
-    }
+    font-size: min(3.5vw, 24px);
+    line-height: min(3.5vw, 32px);
 }
