@@ -17,15 +17,15 @@ window.onscroll = function () {
     skills.forEach(skill => skill.style.opacity = num > 1 ? '1' : `${num}`);
 }
 
-window.addEventListener('resize', () => {
-    // max-width of img is 445px
-    if (+window.screen.width * 0.37 >= 445) return;
-    imgContainer.style.width = `${+window.screen.width * 0.37}px`;
-    if (window.screen.width > 600)
-        niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
-    else
-        niceToMeetYouText.style.marginTop = `0`;
-})
+// window.addEventListener('resize', () => {
+//     // max-width of img is 445px
+//     if (+window.screen.width * 0.37 >= 445) return;
+//     imgContainer.style.width = `${+window.screen.width * 0.37}px`;
+//     if (window.screen.width > 600)
+//         niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
+//     else
+//         niceToMeetYouText.style.marginTop = `0`;
+// })
 
 window.onload = function () {
     pageOneContainer = document.querySelector('.page-one-container');
@@ -33,9 +33,7 @@ window.onload = function () {
     niceToMeetYouText = pageOneContainer.querySelector('h1:first-of-type');
     const line = pageOneContainer.querySelector('.line');
     const dot = pageOneContainer.querySelector('.dot');
-
-
-    imgContainer.style.width = `${+window.screen.width * 0.37}px`;
+    
     if (window.screen.width > 600)
         niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
     else

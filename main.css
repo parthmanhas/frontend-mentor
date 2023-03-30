@@ -57,31 +57,11 @@ nav a:last-of-type {
   display: inline-flex;
 }
 .page-one-container h1:first-of-type {
-  margin-top: 8rem;
+  margin-top: min(10vw, 7rem);
 }
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 600px) {
   .page-one-container h1:first-of-type {
     margin-top: 0rem;
-  }
-}
-@media screen and (min-width: 530px) and (max-width: 599px) {
-  .page-one-container h1:first-of-type {
-    margin-top: 5rem;
-  }
-}
-@media screen and (min-width: 460px) and (max-width: 529px) {
-  .page-one-container h1:first-of-type {
-    margin-top: 3rem;
-  }
-}
-@media screen and (min-width: 600px) and (max-width: 699px) {
-  .page-one-container h1:first-of-type {
-    margin-top: 5rem;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 779px) {
-  .page-one-container h1:first-of-type {
-    margin-top: 5rem;
   }
 }
 .page-one-container p {
@@ -95,39 +75,7 @@ nav a:last-of-type {
   z-index: -1;
   position: absolute;
   width: 445px;
-}
-@media screen and (max-width: 460px) {
-  .page-one-container .img-container {
-    width: 150px;
-  }
-}
-@media screen and (min-width: 780px) and (max-width: 869px) {
-  .page-one-container .img-container {
-    width: 385px;
-    height: 720px;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 779px) {
-  .page-one-container .img-container {
-    width: 350px;
-    height: 720px;
-  }
-}
-@media screen and (min-width: 600px) and (max-width: 699px) {
-  .page-one-container .img-container {
-    width: 300px;
-    height: 720px;
-  }
-}
-@media screen and (min-width: 530px) and (max-width: 599px) {
-  .page-one-container .img-container {
-    width: 250px;
-  }
-}
-@media screen and (min-width: 460px) and (max-width: 530px) {
-  .page-one-container .img-container {
-    width: 200px;
-  }
+  width: min(37vw, 445px);
 }
 .page-one-container .img-container img {
   width: 100%;
