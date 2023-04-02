@@ -532,7 +532,9 @@ button:hover::after {
   .project {
     height: 100px !important;
   }
-  .page-four-container .form *, .page-four-container .form input, .page-four-container .form textarea {
+  .page-four-container .form *,
+  .page-four-container .form input,
+  .page-four-container .form textarea {
     font-size: 0.75rem;
   }
   .page-four-container .contact-description h1 {
@@ -611,6 +613,16 @@ a {
   color: #fc7a33;
 }
 
+.toast-success {
+  position: sticky;
+  bottom: 2rem;
+  padding: 1rem;
+  font-size: 2rem;
+  border: 1px solid white;
+  background-color: #242424;
+  display: none;
+}
+
 .xl {
   font-size: min(6.24vw, 78px);
   line-height: min(6.24vw, 78px);
@@ -656,6 +668,14 @@ a {
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

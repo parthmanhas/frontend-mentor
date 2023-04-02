@@ -486,7 +486,9 @@ button {
     }
     .page-four-container {
         .form {
-            *, input, textarea {
+            *,
+            input,
+            textarea {
                 font-size: 0.75rem;
             }
         }
@@ -515,14 +517,12 @@ button {
 }
 
 @media screen and (min-width: 351px) and (max-width: 500px) {
-    
     .project {
         height: 200px !important;
     }
 }
 
 @media screen and (min-width: 501px) and (max-width: 800px) {
-    
     .project {
         height: 300px !important;
     }
@@ -573,4 +573,14 @@ a {
 
 .hover-orange:hover {
     color: $orange;
+}
+
+.toast-success {
+    position: sticky;
+    bottom: 2rem;
+    padding: 1rem;
+    font-size: 2rem;
+    border: 1px solid white;
+    background-color: $grey;
+    display: none;
 }

@@ -70,6 +70,15 @@ window.onload = function () {
         const nameInputValid = validateField(nameInput, 'name', true);
         const emailInputValid = validateField(emailInput, 'email', true);
         const messageInputValid = validateField(messageInput, 'message', true);
+
+        // display toast
+        const toast = document.querySelector('.toast-success');
+        toast.style.display = 'block';
+        toast.addEventListener('animationend', () => {
+            toast.style.display = 'none';
+        })
+        toast.style.animation = 'fade 2s ease';
+        
         if (nameInputValid && emailInputValid && messageInputValid) {
             console.log('hit da endpoint');
         }
