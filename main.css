@@ -576,6 +576,12 @@ button:hover::after {
   height: min(0.56vw, 7px);
 }
 
+.error-line {
+  animation: run 0.75s ease;
+  background-color: #FF6F5B;
+  height: min(0.56vw, 7px);
+}
+
 .dot {
   display: none;
   background-color: transparent;
@@ -613,7 +619,7 @@ a {
   color: #fc7a33;
 }
 
-.toast-success {
+.toast-success, .toast-error {
   position: sticky;
   bottom: 2rem;
   padding: 1rem;
