@@ -33,7 +33,7 @@ window.onload = function () {
     niceToMeetYouText = pageOneContainer.querySelector('h1:first-of-type');
     const line = pageOneContainer.querySelector('.line');
     const dot = pageOneContainer.querySelector('.dot');
-    
+
     if (window.screen.width > 600)
         niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
     else
@@ -45,7 +45,7 @@ window.onload = function () {
     const contactMeButton = document.querySelectorAll('.contact');
     pageTwoContainer = document.querySelector('.page-two-container');
     skills = pageTwoContainer.querySelectorAll('.skill');
-    
+
     if (window.screen.width > 800) {
         skills.forEach(skill => skill.style.opacity = '0');
     };
@@ -67,18 +67,29 @@ window.onload = function () {
     [nameInput, emailInput, messageInput].forEach(input => input.addEventListener('invalid', (e) => e.preventDefault()));
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+
         const nameInputValid = validateField(nameInput, 'name', true);
         const emailInputValid = validateField(emailInput, 'email', true);
         const messageInputValid = validateField(messageInput, 'message', true);
 
+        const formValid = nameInputValid && emailInputValid && messageInputValid;
+
         // display toast
         const toast = document.querySelector('.toast-success');
-        toast.style.display = 'block';
-        toast.addEventListener('animationend', () => {
-            toast.style.display = 'none';
-        })
-        toast.style.animation = 'fade 2s ease';
-        
+        if (formValid && (!toast.style.display || toast.style.display === 'none')) {
+            toast.style.animation = '';
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.animation = 'fade 1s linear';
+                const animationEndCleanup = () => {
+                    toast.style.display = 'none';
+                    toast.style.animation = '';
+                    toast.removeEventListener('animationend', animationEndCleanup);
+                }
+                toast.addEventListener('animationend', animationEndCleanup);
+            }, 1000);
+        }
+
         if (nameInputValid && emailInputValid && messageInputValid) {
             console.log('hit da endpoint');
         }

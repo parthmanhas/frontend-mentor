@@ -579,7 +579,7 @@ a {
     position: sticky;
     bottom: 2rem;
     padding: 1rem;
-    font-size: 2rem;
+    font-size: min(2rem, 4vw);
     border: 1px solid white;
     background-color: $grey;
     display: none;
