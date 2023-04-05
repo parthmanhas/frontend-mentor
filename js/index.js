@@ -19,16 +19,6 @@ window.onscroll = function () {
     skills.forEach(skill => skill.style.opacity = num > 1 ? '1' : `${num}`);
 }
 
-// window.addEventListener('resize', () => {
-//     // max-width of img is 445px
-//     if (+window.screen.width * 0.37 >= 445) return;
-//     imgContainer.style.width = `${+window.screen.width * 0.37}px`;
-//     if (window.screen.width > 600)
-//         niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
-//     else
-//         niceToMeetYouText.style.marginTop = `0`;
-// })
-
 function validateField(field, fieldName, onSubmit = false) {
     const correctNameRegex = new RegExp('^[a-zA-Z ]+$');
     const correctEmailRegex = new RegExp('^[a-z.0-9]+@[a-z]+.[a-z]+$');
@@ -144,27 +134,54 @@ window.onload = async function () {
             email: emailInput.value,
             message: messageInput.value
         }
+        const toastSuccess = document.querySelector('.toast-success');
+        const toastError = document.querySelector('.toast-error');
         let dataSentSuccess = true;
-        if (nameInputValid && emailInputValid && messageInputValid) {
+        if (nameInputValid && emailInputValid && messageInputValid && !getWithExpiry('messageSent')) {
             try {
                 await setDoc(doc(db, 'messages', docData.email), docData);
+                setWithExpiry('messageSent', true, 900000);
             } catch (e) {
                 dataSentSuccess = false;
             }
 
-            const toastSuccess = document.querySelector('.toast-success');
-            const toastError = document.querySelector('.toast-error');
-            dataSentSuccess ? displayToast(toastSuccess, dataSentSuccess) : displayToast(toastError, dataSentSuccess);
+            
+            dataSentSuccess ? displayToast(toastSuccess, 'dataSendSuccess') : displayToast(toastError, 'dataSendFail');
+        }
+
+        function setWithExpiry(key, value, ttl) {
+            const now = new Date();
+            const item = {
+                value: value,
+                expiry: now.getTime() + ttl
+            }
+            localStorage.setItem(key, JSON.stringify(item));
+        }
+
+        function getWithExpiry(key) {
+            const value = localStorage.getItem(key);
+            if (!value) return null;
+            const item = JSON.parse(value);
+            const now = new Date();
+            if(now.getTime() > item.expiry) {
+                localStorage.removeItem(key);
+                return null;
+            }
+            displayToast(toastError, 'dataSendingBefore15Min');
+            return item.value;
         }
 
         // display toast
-        function displayToast(toast, dataSentSuccess) {
+        function displayToast(toast, event) {
             const lineDiv = document.createElement('div');
-            if (dataSentSuccess) {
+            if (event === 'dataSendSuccess') {
                 toast.textContent = 'Message Sent Successfully!';
                 lineDiv.classList.add('line');
-            } else {
+            } else if (event === 'dataSendFail') {
                 toast.textContent = 'Error Sending Message!';
+                lineDiv.classList.add('error-line');
+            } else if (event === 'dataSendingBefore15Min') {
+                toast.textContent = 'Please try again after 15 minutes!';
                 lineDiv.classList.add('error-line');
             }
             if ((!toast.style.display || toast.style.display === 'none')) {
