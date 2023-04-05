@@ -57,7 +57,7 @@ nav a:last-of-type {
   display: inline-flex;
 }
 .page-one-container h1:first-of-type {
-  margin-top: min(10vw, 7rem);
+  margin-top: min(10vw, 4rem);
 }
 @media screen and (max-width: 600px) {
   .page-one-container h1:first-of-type {
@@ -567,7 +567,10 @@ button:hover::after {
   }
 }
 .name {
-  display: inline-block;
+  display: inherit;
+  height: min(10px, 1vw);
+  background-color: #4EE1A0;
+  width: 0;
 }
 
 .line {

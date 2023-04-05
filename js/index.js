@@ -60,34 +60,54 @@ function validateField(field, fieldName, onSubmit = false) {
     }
 }
 
+const timer = ms => new Promise(res => setTimeout(res, ms))
+
 window.onload = async function () {
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
-        
     };
 
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const messages = collection(db, 'messages');
-    const user = await getDocs(messages);
-    console.log(user)
+    // const app = initializeApp(firebaseConfig);
+    // const db = getFirestore(app);
+    // const messages = collection(db, 'messages');
+    // const user = await getDocs(messages);
 
     pageOneContainer = document.querySelector('.page-one-container');
     imgContainer = pageOneContainer.querySelector('.img-container');
     niceToMeetYouText = pageOneContainer.querySelector('h1:first-of-type');
-    const line = pageOneContainer.querySelector('.line');
-    const dot = pageOneContainer.querySelector('.dot');
-
-    if (window.screen.width > 600)
-        niceToMeetYouText.style.marginTop = `${0.006 * +window.screen.width}rem`;
-    else
-        niceToMeetYouText.style.marginTop = `0`;
-
-    line.addEventListener('animationend', () => {
-        dot.style.display = 'inline-flex';
-    })
+    const navbarText = document.querySelector('nav>p:first-of-type');
+    const IamText = pageOneContainer.querySelectorAll('h1')[1];
+    const name = pageOneContainer.querySelector('.name');
+    const smallDescriptionText = pageOneContainer.querySelector('p:first-of-type');
+    async function scrambleLetters(correctOrder, currentText, element, time, underline = false, wordRotationCount = 3) {
+        const perInterationWidth = Math.ceil(element.clientWidth / correctOrder.length);
+        let currentWidth = 0;
+        for (let i = 0; i < correctOrder.length; i++) {
+            let j = 0;
+            while (j < wordRotationCount) {
+                const index = Math.floor(Math.random() * 100) % correctOrder.length;
+                currentText = currentText.substring(0, i) + correctOrder[index] + currentText.substring(i + 1);
+                element.textContent = currentText;
+                await timer(time);
+                j++;
+            }
+            currentText = currentText.substring(0, i) + correctOrder[i] + currentText.substring(i + 1);
+            element.textContent = currentText;
+            if (underline) {
+                currentWidth += perInterationWidth;
+                if (currentWidth > element.clientWidth) {
+                    currentWidth = element.clientWidth;
+                }
+                nameLine.style.width = `${currentWidth}px`;
+            }
+        }
+    }
+    const nameLine = pageOneContainer.querySelector('.name');
+    scrambleLetters('parthmanhas', navbarText.textContent, navbarText, 25);
+    scrambleLetters('Nice to meet you!', niceToMeetYouText.textContent, niceToMeetYouText, 15);
+    scrambleLetters('I am Parth Manhas.', IamText.textContent, IamText, 15, true);
     const contactMeButton = document.querySelectorAll('.contact');
     pageTwoContainer = document.querySelector('.page-two-container');
     skills = pageTwoContainer.querySelectorAll('.skill');
@@ -131,12 +151,13 @@ window.onload = async function () {
             } catch (e) {
                 dataSentSuccess = false;
             }
+
+            const toastSuccess = document.querySelector('.toast-success');
+            const toastError = document.querySelector('.toast-error');
+            dataSentSuccess ? displayToast(toastSuccess, dataSentSuccess) : displayToast(toastError, dataSentSuccess);
         }
 
         // display toast
-        const toastSuccess = document.querySelector('.toast-success');
-        const toastError = document.querySelector('.toast-error');
-        
         function displayToast(toast, dataSentSuccess) {
             const lineDiv = document.createElement('div');
             if (dataSentSuccess) {
@@ -161,8 +182,6 @@ window.onload = async function () {
                 }, 1000);
             }
         }
-
-        dataSentSuccess ? displayToast(toastSuccess, dataSentSuccess) : displayToast(toastError, dataSentSuccess);
     })
 }
 
