@@ -1,5 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-import { getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
+const PUBLIC_KEY = 'QuKsI7P8KUIiXCqvo';
+const TEMPLATE_ID = 'template_kvzyje8';
+const SERVICE_ID = 'service_dzlgedv';
 let pageOneContainer;
 let pageTwoContainer;
 let skills;
@@ -54,15 +55,8 @@ const timer = ms => new Promise(res => setTimeout(res, ms))
 
 window.onload = async function () {
 
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-    };
-
-    // Initialize Firebase
-    // const app = initializeApp(firebaseConfig);
-    // const db = getFirestore(app);
-    // const messages = collection(db, 'messages');
-    // const user = await getDocs(messages);
+    // init emailjs config
+    emailjs.init(PUBLIC_KEY);
 
     pageOneContainer = document.querySelector('.page-one-container');
     imgContainer = pageOneContainer.querySelector('.img-container');
@@ -129,7 +123,7 @@ window.onload = async function () {
         const messageInputValid = validateField(messageInput, 'message', true);
 
         const formValid = nameInputValid && emailInputValid && messageInputValid;
-        const docData = {
+        const templateParams = {
             name: nameInput.value,
             email: emailInput.value,
             message: messageInput.value
@@ -137,15 +131,22 @@ window.onload = async function () {
         const toastSuccess = document.querySelector('.toast-success');
         const toastError = document.querySelector('.toast-error');
         let dataSentSuccess = true;
-        if (nameInputValid && emailInputValid && messageInputValid && !getWithExpiry('messageSent')) {
+        // if (formValid && !getWithExpiry('messageSent')) {
+        if (formValid) {
             try {
-                await setDoc(doc(db, 'messages', docData.email), docData);
-                setWithExpiry('messageSent', true, 900000);
+                // send email to my account
+                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+                    .then(function (response) {
+                        dataSentSuccess = true;
+                    }, function (error) {
+                        dataSentSuccess = false;
+                    });
+                // setWithExpiry('messageSent', true, 900000);
             } catch (e) {
                 dataSentSuccess = false;
             }
 
-            
+
             dataSentSuccess ? displayToast(toastSuccess, 'dataSendSuccess') : displayToast(toastError, 'dataSendFail');
         }
 
@@ -163,7 +164,7 @@ window.onload = async function () {
             if (!value) return null;
             const item = JSON.parse(value);
             const now = new Date();
-            if(now.getTime() > item.expiry) {
+            if (now.getTime() > item.expiry) {
                 localStorage.removeItem(key);
                 return null;
             }
@@ -200,5 +201,7 @@ window.onload = async function () {
             }
         }
     })
+
+
 }
 
