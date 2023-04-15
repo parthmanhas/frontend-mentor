@@ -1,0 +1,27 @@
+.xl {
+    font-size: min(6.24vw, 78px);
+    line-height: min(6.24vw, 78px);
+    letter-spacing: min(0.2vw, 2.5px);
+    @media screen and (max-width: 480px) {
+        font-size: min(5.24vw, 78px);
+        line-height: min(5.24vw, 78px);
+        letter-spacing: min(0.3vw, 2.5px);
+    }
+
+    @media screen and (max-width: 350px) {
+        font-size: min(5.5vw, 78px);
+        line-height: min(5.5vw, 78px);
+        letter-spacing: min(0.1vw, 2.5px);
+    }
+}
+
+.l {
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: 1.5px;
+}
+
+.m {
+    font-size: min(3.5vw, 24px);
+    line-height: min(3.5vw, 32px);
+}

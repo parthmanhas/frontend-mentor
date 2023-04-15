@@ -1,0 +1,46 @@
+@import "../../partials/colors";
+nav {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    max-width: 1400px;
+    margin: 2rem 0;
+    .nav-links {
+        display: flex;
+        a {
+            display: block;
+            text-decoration: none;
+            &::after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 4px;
+                background: $green;
+                transition: width 0.3s;
+            }
+            &:hover::after {
+                width: 100%;
+            }
+        }
+        a:link,
+        a:visited,
+        a:active {
+            color: white;
+        }
+    }
+    .social-link-container > img,
+    svg {
+        color: white;
+        &:hover {
+            color: $green;
+            cursor: pointer;
+        }
+    }
+    a {
+        margin-right: 1rem;
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+}
