@@ -1,0 +1,9 @@
+<div class="projects-container">
+    <div class="projects-container__info">
+        <h1 class="xl">Projects</h1>
+        <button class="contact"><span class="m">Contact Me</span></button>
+    </div>
+    <div class="projects-container__projects">
+        <app-project *ngFor="let project of projects" [project]="project"></app-project>
+    </div>
+</div>

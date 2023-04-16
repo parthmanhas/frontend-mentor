@@ -1,0 +1,9 @@
+<div class="project">
+    <div class="project__img">
+        <img alt="" [src]="project.imgUrl">
+    </div>
+    <div *ngIf="!project.empty" class="project__info">
+        <h1 class="m">{{project.name}}</h1>
+        <p class="m">{{project.technologiesUsed}}</p>
+    </div>
+</div>

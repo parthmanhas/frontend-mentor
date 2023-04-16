@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { IProject } from "src/components/project/project.component";
 import { ISkill } from "src/components/skill/skill.component";
 
 @Component({
@@ -44,5 +45,10 @@ export class HomeComponent {
             hoverColor: 'green'
         },
     ]
+
+    public projects: IProject[] = [
+        { empty: true },
+        { empty: true }
+    ];
 
 }

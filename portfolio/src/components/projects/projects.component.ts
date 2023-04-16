@@ -1,8 +1,14 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { IProject } from "../project/project.component";
 
 @Component({
-    templateUrl: './projects.component.html'
+    selector: 'app-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
+
+    @Input()
+    public projects: IProject[] = [];
 
 }
