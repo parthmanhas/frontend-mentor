@@ -22,8 +22,6 @@ export class HeroComponent {
     @ViewChild('underline')
     public underline!: ElementRef;
 
-    public timer = (ms: number) => new Promise(res => setTimeout(res, ms));
-
     public async scrambleLetters(
         correctOrder: string,
         currentText: string,
@@ -33,13 +31,14 @@ export class HeroComponent {
         wordRotationCount = 3) {
         const perInterationWidth = Math.ceil(element.clientWidth / correctOrder.length);
         let currentWidth = 0;
+        const timer = (ms: number) => new Promise(res => setTimeout(res, ms));
         for (let i = 0; i < correctOrder.length; i++) {
             let j = 0;
             while (j < wordRotationCount) {
                 const index = Math.floor(Math.random() * 100) % correctOrder.length;
                 currentText = currentText.substring(0, i) + correctOrder[index] + currentText.substring(i + 1);
                 element.textContent = currentText;
-                await this.timer(time);
+                await timer(time);
                 j++;
             }
             currentText = currentText.substring(0, i) + correctOrder[i] + currentText.substring(i + 1);
@@ -56,7 +55,6 @@ export class HeroComponent {
 
     async ngAfterViewInit() {
         this.scrambleLetters('Nice to meet you!', this.headingOne.nativeElement.textContent, this.headingOne.nativeElement, 5);
-        await this.timer(10);
         this.scrambleLetters('I am Parth Manhas.', this.headingTwo.nativeElement.textContent, this.headingTwo.nativeElement, 5, true);
     }
 

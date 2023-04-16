@@ -2,21 +2,27 @@
 @import '../../partials/colors';
 
 .hero {
-    padding: 2rem;
     max-width: $max-width;
     width: 100%;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid white;
+    position: relative;
+    padding-bottom: calc(min(37vw, 445px) - 5rem);
+    .text-container {
+        width: 75%;
+    }
     h1 {
         animation: start 0.75s ease;
         background-color: $black;
         display: inline-flex;
-        &:first-of-type {
-            margin-top: min(10vw, 4rem);
-            @media screen and (max-width: 600px) {
-                margin-top: 0rem;
-            }
-        }
+        // &:first-of-type {
+        //     margin-top: 0;
+        //     // margin-top: min(10vw, 4rem);
+        //     // @media screen and (max-width: 600px) {
+        //     //     margin-top: 0rem;
+        //     // }
+        // }
     }
 
     p {
@@ -30,7 +36,7 @@
         right: 2rem;
         z-index: -1;
         position: absolute;
-        width: 445px;
+        max-width: 450px;
         // background-color: $grey;
         width: min(37vw, 445px);
 
@@ -48,13 +54,14 @@
 
     button {
         animation: start 0.75s ease;
-        margin-top: 5rem;
-        margin-bottom: min(5vw, 11rem);
-        @media screen and (max-width: 460px) {
-            margin-top: 1rem;
-        }
-        @media screen and (min-width: 460px) and (max-width: 529px) {
-            margin-top: 2rem;
-        }
+        margin-top: 5vw;
+        // margin-top: 5rem;
+        // margin-bottom: min(5vw, 11rem);
+        // @media screen and (max-width: 460px) {
+        //     margin-top: 1rem;
+        // }
+        // @media screen and (min-width: 460px) and (max-width: 529px) {
+        //     margin-top: 2rem;
+        // }
     }
 }

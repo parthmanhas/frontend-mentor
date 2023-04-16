@@ -2,52 +2,51 @@
 
 .skills-container {
     display: flex;
-    padding: 2rem;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    height: 30vh;
+    height: 40vh;
     max-width: $max-width;
-    margin-top: 5rem;
-    border-bottom: 1px solid white;
-    @media screen and (max-width: 460px) {
-        border-bottom: 2px solid white;
-        padding-bottom: 2rem;
-        margin-top: 2rem;
-    }
-    @media screen and (min-width: 461px) and (max-width: 530px) {
-        border-bottom: 2px solid white;
-        padding-bottom: 4rem;
-        margin-bottom: 5rem;
-    }
-    @media screen and (min-width: 530px) and (max-width: 599px) {
-        border-bottom: 2px solid white;
-        padding-bottom: 3rem;
-        margin-bottom: 3rem;
-        margin-top: 3rem;
-    }
-    @media screen and (min-width: 600px) and (max-width: 699px) {
-        border-bottom: 2px solid white;
-        padding-bottom: 3rem;
-        margin-bottom: 3rem;
-        margin-top: 3rem;
-    }
-    @media screen and (min-width: 700px) and (max-width: 779px) {
-        border-bottom: 2px solid white;
-        padding-bottom: 3rem;
-        margin-bottom: 3rem;
-        margin-top: 3rem;
-    }
-    @media screen and (min-width: 780px) and (max-width: 869px) {
-        border-bottom: 2px solid white;
-        padding-bottom: 3rem;
-        margin-bottom: 3rem;
-        margin-top: 3rem;
-    }
-    @media screen and (min-width: 870px) and (max-width: 973px) {
-        border-bottom: 2px solid white;
-        padding-bottom: 3rem;
-        margin-bottom: 3rem;
-        margin-top: 3rem;
-    }
+    border-bottom: 2px solid white;
+    // @media screen and (max-width: 460px) {
+    //     border-bottom: 2px solid white;
+    //     padding-bottom: 2rem;
+    //     margin-top: 2rem;
+    // }
+    // @media screen and (min-width: 461px) and (max-width: 530px) {
+    //     border-bottom: 2px solid white;
+    //     padding-bottom: 4rem;
+    //     margin-bottom: 5rem;
+    // }
+    // @media screen and (min-width: 530px) and (max-width: 599px) {
+    //     border-bottom: 2px solid white;
+    //     padding-bottom: 3rem;
+    //     margin-bottom: 3rem;
+    //     margin-top: 3rem;
+    // }
+    // @media screen and (min-width: 600px) and (max-width: 699px) {
+    //     border-bottom: 2px solid white;
+    //     padding-bottom: 3rem;
+    //     margin-bottom: 3rem;
+    //     margin-top: 3rem;
+    // }
+    // @media screen and (min-width: 700px) and (max-width: 779px) {
+    //     border-bottom: 2px solid white;
+    //     padding-bottom: 3rem;
+    //     margin-bottom: 3rem;
+    //     margin-top: 3rem;
+    // }
+    // @media screen and (min-width: 780px) and (max-width: 869px) {
+    //     border-bottom: 2px solid white;
+    //     padding-bottom: 3rem;
+    //     margin-bottom: 3rem;
+    //     margin-top: 3rem;
+    // }
+    // @media screen and (min-width: 870px) and (max-width: 973px) {
+    //     border-bottom: 2px solid white;
+    //     padding-bottom: 3rem;
+    //     margin-bottom: 3rem;
+    //     margin-top: 3rem;
+    // }
 }

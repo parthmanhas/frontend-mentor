@@ -4,7 +4,6 @@
 .contact-container {
     width: 100%;
     max-width: $max-width;
-    padding: 2rem;
     display: flex;
     @media screen and (max-width: 460px) {
         flex-direction: column;

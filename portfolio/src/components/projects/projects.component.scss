@@ -3,14 +3,12 @@
 .projects-container {
     width: 100%;
     max-width: $max-width;
-    padding: 2rem;
-    border-bottom: 1px solid white;
-    padding-top: 5vw;
-    @media screen and (min-width: 460px) and (max-width: 529px) {
-        margin-bottom: 5rem;
-        padding-bottom: 5rem;
-        border-bottom: 2px solid white;
-    }
+    border-bottom: 2px solid white;
+    // @media screen and (min-width: 460px) and (max-width: 529px) {
+    //     margin-bottom: 5rem;
+    //     padding-bottom: 5rem;
+    //     border-bottom: 2px solid white;
+    // }
     &__info {
         display: flex;
         width: 100%;
@@ -20,12 +18,12 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-top: 5rem;
-        @media screen and (max-width: 460px) {
-            margin-top: 2rem;
-        }
-        @media screen and (min-width: 461px) and (max-width: 529px) {
-            margin-top: 3rem;
-        }
+        margin-top: 5vw;
+        // @media screen and (max-width: 460px) {
+        //     margin-top: 2rem;
+        // }
+        // @media screen and (min-width: 461px) and (max-width: 529px) {
+        //     margin-top: 3rem;
+        // }
     }
 }
