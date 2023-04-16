@@ -1,0 +1,33 @@
+<div class="contact-container">
+    <div class="contact-description">
+        <h1 class="xl">Contact</h1>
+        <p class="m">I would love to hear your project and how I could help. Please fill in the form, and I'll get back
+            to
+            you as soon as possible.</p>
+    </div>
+    <form [formGroup]="form" class="form" (submit)="submit($event)">
+        <div class="name-container">
+            <input [class.error-border]="nameInvalid" name="name" placeholder="Name" type="text" formControlName="name">
+            <p *ngIf="nameInvalid" class="error-text m1">Please enter valid name</p>
+        </div>
+        <div class="email-container">
+            <input [class.error-border]="emailInvalid" name="email" placeholder="Email" type="email"
+                formControlName="email">
+            <p *ngIf="emailInvalid" class="error-text m1">Please enter valid email</p>
+        </div>
+        <div class="message-container">
+            <textarea [class.error-border]="messageInvalid" name="message" placeholder="Message"
+                formControlName="message"></textarea>
+            <p *ngIf="messageInvalid" class="error-text m1">Please enter valid message</p>
+        </div>
+        <button type="submit"><span class="m">Send Message</span></button>
+    </form>
+</div>
+<div #toastSuccess class="toast-success">
+    Message Sent Successfully!
+    <div class="line"></div>
+</div>
+<div #toastError class="toast-error">
+    Message Sent Successfully!
+    <div class="error-line"></div>
+</div>

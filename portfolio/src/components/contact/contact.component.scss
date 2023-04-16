@@ -1,0 +1,167 @@
+@import "../../partials/colors";
+@import "../../partials/miscelleneous";
+
+.contact-container {
+    width: 100%;
+    max-width: $max-width;
+    padding: 2rem;
+    display: flex;
+    @media screen and (max-width: 460px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    @media screen and (min-width: 461px) and (max-width: 530px) {
+        flex-direction: column;
+    }
+    @media screen and (min-width: 530px) and (max-width: 599px) {
+        flex-direction: column;
+    }
+    @media screen and (min-width: 600px) and (max-width: 699px) {
+        flex-direction: column;
+    }
+    @media screen and (min-width: 700px) and (max-width: 779px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    @media screen and (min-width: 780px) and (max-width: 869px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    justify-content: space-between;
+    border-bottom: 2px solid $grey-white;
+    padding-bottom: 5rem;
+    margin-top: 5rem;
+    @media screen and (max-width: 460px) {
+        margin-top: 2rem;
+    }
+    @media screen and (min-width: 460px) and (max-width: 530px) {
+        margin-top: 2rem;
+    }
+    @media screen and (min-width: 530px) and (max-width: 599px) {
+        margin-top: 3rem;
+    }
+    position: relative;
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: $grey;
+        z-index: -1;
+    }
+    .contact-description {
+        p {
+            margin-top: 3rem;
+            max-width: 500px;
+        }
+        @media screen and (min-width: 870px) and (max-width: 973px) {
+            margin-top: 3rem;
+            max-width: 400px;
+        }
+        @media screen and (max-width: 529px) {
+            text-align: center;
+        }
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 40%;
+
+        div {
+            margin-bottom: 1.5rem;
+        }
+        @media screen and (max-width: 530px) {
+            margin-top: 2rem;
+            width: 100%;
+        }
+        @media screen and (min-width: 530px) and (max-width: 599px) {
+            margin-top: 2rem;
+            width: 100%;
+        }
+        @media screen and (min-width: 460px) and (max-width: 530px) {
+            margin-top: 2rem;
+            width: 100%;
+        }
+        @media screen and (min-width: 600px) and (max-width: 699px) {
+            margin-top: 2rem;
+            width: 100%;
+        }
+        @media screen and (min-width: 700px) and (max-width: 779px) {
+            margin-top: 2rem;
+            width: 80%;
+        }
+        @media screen and (min-width: 780px) and (max-width: 869px) {
+            margin-top: 2rem;
+            width: 70%;
+        }
+        input {
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid white;
+            color: white;
+            font-family: "Space Grotesk";
+            font-size: 1.5rem;
+            outline: none;
+            padding-left: 1rem;
+            padding-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            width: calc(100% - 1rem);
+        }
+
+        textarea {
+            width: calc(100% - 1rem);
+            padding-left: 1rem;
+            font-family: "Space Grotesk";
+            font-size: 1.5rem;
+            background-color: transparent;
+            border: none;
+            color: white;
+            border-bottom: 3px solid white;
+            outline: none;
+        }
+
+        & > button {
+            margin-top: 2rem;
+            align-self: flex-end;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.error-text {
+    color: $red;
+}
+
+.error-border {
+    border-bottom: 2px solid $red !important;
+}
+
+.success-line {
+    animation: run 0.75s ease;
+    background-color: $green;
+    height: min(0.56vw, 7px);
+}
+
+.error-line {
+    animation: run 0.75s ease;
+    background-color: $red;
+    height: min(0.56vw, 7px);
+}
+
+.toast-success, .toast-error {
+    position: sticky;
+    bottom: 2rem;
+    padding: 1rem;
+    font-size: min(2rem, 4vw);
+    border: 1px solid white;
+    background-color: $grey;
+    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
