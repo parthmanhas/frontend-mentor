@@ -1,0 +1,64 @@
+@import '../../partials/colors';
+
+// .skills {
+//     margin-right: 6rem;
+//     margin-bottom: 5rem;
+//     h1 {
+//         margin-bottom: 1rem;
+//     }
+//     @media screen and (max-width: 460px) {
+//         margin-right: 0rem;
+//         margin-bottom: 1rem;
+//     }
+//     @media screen and (min-width: 461px) and (max-width: 530px) {
+//         margin-right: 0rem;
+//         margin-bottom: 2rem;
+//     }
+//     @media screen and (min-width: 530px) and (max-width: 599px) {
+//         margin-right: 0rem;
+//         margin-bottom: 2rem;
+//     }
+//     @media screen and (min-width: 600px) and (max-width: 699px) {
+//         margin-right: 1rem;
+//         margin-bottom: 2rem;
+//     }
+//     @media screen and (min-width: 700px) and (max-width: 779px) {
+//         margin-right: 2rem;
+//         margin-bottom: 2rem;
+//     }
+//     @media screen and (min-width: 780px) and (max-width: 869px) {
+//         margin-right: 2rem;
+//         margin-bottom: 2rem;
+//     }
+//     @media screen and (min-width: 870px) and (max-width: 973px) {
+//         margin-right: 2rem;
+//         margin-bottom: 2rem;
+//     }
+// }
+
+.skill {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hover-red:hover {
+    color: $red;
+}
+
+.hover-blue:hover {
+    color: $blue;
+}
+
+.hover-yellow:hover {
+    color: $yellow;
+}
+
+.hover-green:hover {
+    color: $green;
+}
+
+.hover-orange:hover {
+    color: $orange;
+}
