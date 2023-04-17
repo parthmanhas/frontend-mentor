@@ -9,17 +9,25 @@ nav {
         display: flex;
         a {
             display: block;
-            text-decoration: none;
+            text-align: center;
             &::after {
                 content: "";
-                display: block;
+                display: none;
                 width: 0;
                 height: 4px;
-                background: $green;
-                transition: width 0.3s;
+                background: $red;
+                // transition: width 0.3s;
+            }
+            &:hover {
+                cursor: pointer;
+                color: $red;
             }
             &:hover::after {
                 width: 100%;
+                display: block;
+                content: "In Progress";
+                text-align: center;
+                color: $green;
             }
         }
         a:link,
