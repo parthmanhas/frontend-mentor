@@ -11,4 +11,11 @@ export class ProjectsComponent {
     @Input()
     public projects: IProject[] = [];
 
+    public scrollToBottom() {
+        window.scroll({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+
 }

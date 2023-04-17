@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { IProject } from "src/components/project/project.component";
 import { ISkill } from "src/components/skill/skill.component";
 

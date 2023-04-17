@@ -58,4 +58,11 @@ export class HeroComponent {
         this.scrambleLetters('I am Parth Manhas.', this.headingTwo.nativeElement.textContent, this.headingTwo.nativeElement, 5, true);
     }
 
+    public scrollToBottom() {
+        window.scroll({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+
 }

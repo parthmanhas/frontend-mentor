@@ -5,24 +5,11 @@
     width: 100%;
     max-width: $max-width;
     display: flex;
-    @media screen and (max-width: 460px) {
+    @media screen and (max-width: 779px) {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-    @media screen and (min-width: 461px) and (max-width: 530px) {
-        flex-direction: column;
-    }
-    @media screen and (min-width: 530px) and (max-width: 599px) {
-        flex-direction: column;
-    }
-    @media screen and (min-width: 600px) and (max-width: 699px) {
-        flex-direction: column;
-    }
-    @media screen and (min-width: 700px) and (max-width: 779px) {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
     }
     @media screen and (min-width: 780px) and (max-width: 869px) {
         flex-direction: column;
@@ -31,17 +18,8 @@
     }
     justify-content: space-between;
     border-bottom: 2px solid $grey-white;
-    padding-bottom: 5rem;
-    margin-top: 5rem;
-    @media screen and (max-width: 460px) {
-        margin-top: 2rem;
-    }
-    @media screen and (min-width: 460px) and (max-width: 530px) {
-        margin-top: 2rem;
-    }
-    @media screen and (min-width: 530px) and (max-width: 599px) {
-        margin-top: 3rem;
-    }
+    padding-bottom: 5vw;
+    margin-top: 5vw;
     position: relative;
     .background {
         position: absolute;
@@ -55,45 +33,20 @@
             margin-top: 3rem;
             max-width: 500px;
         }
-        @media screen and (min-width: 870px) and (max-width: 973px) {
-            margin-top: 3rem;
-            max-width: 400px;
-        }
-        @media screen and (max-width: 529px) {
-            text-align: center;
-        }
     }
     .form {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         width: 40%;
-
+        margin-top: 2rem;
         div {
             margin-bottom: 1.5rem;
         }
-        @media screen and (max-width: 530px) {
-            margin-top: 2rem;
+        @media screen and (max-width: 699px) {
             width: 100%;
         }
-        @media screen and (min-width: 530px) and (max-width: 599px) {
-            margin-top: 2rem;
-            width: 100%;
-        }
-        @media screen and (min-width: 460px) and (max-width: 530px) {
-            margin-top: 2rem;
-            width: 100%;
-        }
-        @media screen and (min-width: 600px) and (max-width: 699px) {
-            margin-top: 2rem;
-            width: 100%;
-        }
-        @media screen and (min-width: 700px) and (max-width: 779px) {
-            margin-top: 2rem;
-            width: 80%;
-        }
-        @media screen and (min-width: 780px) and (max-width: 869px) {
-            margin-top: 2rem;
+        @media screen and (min-width: 700px) and (max-width: 869px) {
             width: 70%;
         }
         input {

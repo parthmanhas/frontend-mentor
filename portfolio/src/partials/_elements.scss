@@ -5,9 +5,11 @@ button {
     font-family: "Space Grotesk";
     text-transform: uppercase;
     line-height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
     &::after {
         content: "";
-        display: block;
         width: 0;
         height: 4px;
         background: $green;
