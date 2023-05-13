@@ -1,0 +1,25 @@
+@import './colors';
+
+.primary {
+    background-color: $purple-dark;
+    color: $white;
+    &:hover {
+        background-color: $purple-light;
+    }
+}
+
+.secondary {
+    background-color: $grey-light;
+    color: $purple-dark;
+    &:hover {
+        background-color: $white-dark;
+    }
+}
+
+.destructive {
+    background-color: $red-dark;
+    color: $white;
+    &:hover {
+        background-color: $red-light;
+    }
+}
