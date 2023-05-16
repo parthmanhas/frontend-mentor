@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 
 @Component({
     selector: 'app-navbar',
@@ -7,4 +7,14 @@ import { Component } from "@angular/core";
 })
 export class NavbarComponent {
 
+    @Output()
+    public createNewTask = new EventEmitter<boolean>();
+
+    public addNewTaskButtonDisabled = false;
+
+    public buttonClick(buttonName: string): void {
+        if (buttonName === 'addNewTask') {
+            this.createNewTask.emit(true);
+        }
+    }
 }
