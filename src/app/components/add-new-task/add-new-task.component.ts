@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Output } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -13,7 +13,7 @@ export class AddNewTaskComponent {
     public selectedOption: string = 'Todo';
 
     public options: string[] = ['Todo', 'Doing', 'Done'];
-    public form: FormGroup;
+    public form: UntypedFormGroup;
 
     private submitted = false;
 
@@ -29,9 +29,9 @@ export class AddNewTaskComponent {
     }
 
     constructor() {
-        this.form = new FormGroup({
-            title: new FormControl('', Validators.required),
-            description: new FormControl('', Validators.required)
+        this.form = new UntypedFormGroup({
+            title: new UntypedFormControl('', Validators.required),
+            description: new UntypedFormControl('', Validators.required)
         });
     }
 
@@ -46,7 +46,7 @@ export class AddNewTaskComponent {
 
 
     addSubtask() {
-        this.form.addControl(uuidv4(), new FormControl('', Validators.required));
+        this.form.addControl(uuidv4(), new UntypedFormControl('', Validators.required));
     }
 
     removeSubtask(uuid: string): void {
