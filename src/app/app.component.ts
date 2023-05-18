@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'kanban';
+  public sidebarVisible = false;
+  public createNewTask = false;
+
+  hideSidebarEvent() {
+    this.sidebarVisible = !this.sidebarVisible;
+  }
+
+  createNewTaskEvent() {
+    this.createNewTask = true;
+  }
+
+  closeModalEvent() {
+    this.createNewTask = false;
+  }
 }

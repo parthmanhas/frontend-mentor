@@ -1,12 +1,43 @@
-$purple-dark: #635FC7;
+$purple-dark: #635fc7;
+$purple-dark-75: #625fc7bb; 
+$purple-dark-50: #625fc788; 
+$purple-dark-25: #625fc739; 
 $purple-light: #A8A4FF;
 $black: #000112;
-$black-light: #20212C;
+$black-75: #000000b6;
+$black-50: #0000008b;
+$black-25: #00000038;
+$grey-very-dark: #20212C;
 $grey-dark: #2B2C37;
-$grey-light: #3E3F4E;
-$white-dark: #F4F7FD;
+$grey-medium: #3E3F4E;
+$grey-medium-75: #3e3f4ec8;
+$grey-medium-50: #3e3f4e89;
+$grey-light: #F4F7FD;
 $white: #FFFFFF;
 $red-dark: #EA5555;
 $red-light: #FF9898;
 $grey: #828FA3;
+$grey-light-75: #828fa3ca;
+$grey-light-50: #828fa388;
+$grey-light-25: #828fa33a;
 $light-blue: #E4EBFA;
+$blue: #49C4E5;
+.purple-text {
+    color: $purple-dark !important;
+}
+
+.grey-medium-text {
+    color: $grey-medium !important;
+}
+
+.grey-medium-50-text {
+    color: $grey-medium-50 !important;
+}
+
+.grey-medium-75-text {
+    color: $grey-medium-75 !important;
+}
+
+.grey-light-text {
+    color: $grey-light !important;
+}

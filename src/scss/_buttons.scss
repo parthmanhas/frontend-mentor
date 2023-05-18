@@ -1,25 +1,40 @@
-@import './colors';
+@import "./colors";
 
-.primary {
+.btn {
+    border: none;
+    padding: 10px;
+    border-radius: 16px;
+    font-weight: bold;
+}
+
+.btn-primary {
     background-color: $purple-dark;
     color: $white;
     &:hover {
         background-color: $purple-light;
+        cursor: pointer;
     }
 }
 
-.secondary {
-    background-color: $grey-light;
+.btn-secondary {
+    background-color: #625fc70e;
     color: $purple-dark;
     &:hover {
-        background-color: $white-dark;
+        background-color: #625fc742;
+        cursor: pointer;
     }
 }
 
-.destructive {
+.btn-destructive {
     background-color: $red-dark;
     color: $white;
     &:hover {
         background-color: $red-light;
+        cursor: pointer;
     }
+}
+
+.btn-disabled {
+    background-color: $purple-dark-25;
+    color: $grey-medium-50;
 }

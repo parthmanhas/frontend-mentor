@@ -1,2 +1,4 @@
-<app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
+<app-navbar (createNewTask)="createNewTaskEvent()"></app-navbar>
+<app-sidebar (hideSidebarEvent)="hideSidebarEvent()"></app-sidebar>
+<app-board [sidebarVisible]="sidebarVisible"></app-board>
+<app-add-new-task (closeModalEvent)="closeModalEvent()" *ngIf="createNewTask"></app-add-new-task>
