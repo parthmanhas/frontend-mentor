@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+    <div class="modal container p-2">
+        <p class="bold m">Edit Column Name</p>
+        <div class="columns-container mt-1">
+            <p class="bold grey-medium-50-text">Column Name</p>
+            <div class="input-container">
+                <input [ngClass]="{ 'error-border': isControlInvalid(uuid) }" [formControlName]="uuid" />
+                <span *ngIf="isControlInvalid(uuid)" class="error error-abs-pos">Can't be empty</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-1" (click)="updateColumn()">Update Column</button>
+    </div>
+</form>

@@ -10,6 +10,11 @@ import { BoardComponent } from './components/board/board.component';
 import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './state/app.reducer';
+import { AddNewBoardComponent } from './components/add-new-board/add-new-board.component';
+import { AddNewColumnComponent } from './components/add-new-column/add-new-column.component';
+import { EditColumnComponent } from './components/edit-column/edit-column.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ViewTaskComponent } from './components/view-task/view-task.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +22,19 @@ import { appReducer } from './state/app.reducer';
     SidebarComponent,
     NavbarComponent,
     BoardComponent,
-    AddNewTaskComponent
+    AddNewTaskComponent,
+    AddNewBoardComponent,
+    AddNewColumnComponent,
+    EditColumnComponent,
+    ViewTaskComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ app: appReducer })
+    StoreModule.forRoot({ app: appReducer }),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

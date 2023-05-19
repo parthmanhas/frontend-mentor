@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "./state/app.state";
+import { toggleSidebar } from "./state/app.actions";
 
 @Component({
   selector: 'app-root',
@@ -9,16 +12,20 @@ export class AppComponent {
   title = 'kanban';
   public sidebarVisible = false;
   public createNewTask = false;
+  public createNewBoard = false;
+  public addNewColumnModalVisible = false;
+  public editColumnModalVisible = false;
 
-  hideSidebarEvent() {
+  constructor(private store: Store<{ app: AppState }>) {
+    this.store.select(state => state).subscribe(state => {
+      this.createNewBoard = state.app.createBoardModalVisible;
+      this.addNewColumnModalVisible = state.app.addNewColumnModalVisible;
+      this.editColumnModalVisible = state.app.editColumnModalVisible;
+    });
+  }
+
+  hideSidebarVisibleEvent() {
     this.sidebarVisible = !this.sidebarVisible;
-  }
-
-  createNewTaskEvent() {
-    this.createNewTask = true;
-  }
-
-  closeModalEvent() {
-    this.createNewTask = false;
+    this.store.dispatch(toggleSidebar({ sidebarVisible: this.sidebarVisible }));
   }
 }

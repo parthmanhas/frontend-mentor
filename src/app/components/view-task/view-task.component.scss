@@ -21,7 +21,7 @@
     background-color: $white;
     border-radius: 5px;
     min-height: 60vh;
-    width: 25vw;
+    width: 30vw;
     & > * {
         width: 100%;
         & > p {
@@ -30,41 +30,31 @@
     }
 }
 
+.title-container {
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    & > p {
+        width: 70%;
+    }
+}
+
 .subtask {
     display: flex;
-    align-items: center;
-    input {
-        flex-grow: 1;
-    }
-    svg {
-        flex-shrink: 0;
-        fill: $cross-color;
-        cursor: pointer;
-        &:hover {
-            fill: $red-dark !important;
-        }
-    }
-}
-
-textarea {
-    max-width: 100%;
-    min-width: 100%;
-}
-
-input,
-textarea {
-    padding: 0.5rem;
-    border: 1px solid #828fa341;
+    justify-content: flex-start;
+    background-color: $grey-light-25;
     border-radius: 2px;
-    flex-grow: 1;
-    outline: 0 none;
-    &:focus {
-        border: 2px solid $purple-dark;
+    & > *:hover {
+        cursor: pointer;
     }
 }
 
-.error-cross {
-    fill: $red-dark !important;
+.checkbox {
+    accent-color: $purple-dark;
+}
+
+.completed {
+    text-decoration: line-through;
 }
 
 .status-dropdown {
@@ -120,21 +110,3 @@ textarea {
 //     opacity: 0;
 //     height: 0;
 // }
-
-.input-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: relative;
-    width: 100%;
-}
-
-.error {
-    color: $red-dark;
-    position: absolute;
-    padding-right: 1rem;
-}
-
-.error-border {
-    border: 1px solid $red-dark;
-}

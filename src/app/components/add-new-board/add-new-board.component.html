@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+    <div class="modal container p-2">
+        <p class="bold m">Add New Board</p>
+        <div class="title-container d-flex flex-column mt-1">
+            <p class="bold grey-medium-50-text">Board Name</p>
+            <div class="input-container">
+                <input [ngClass]="{ 'error-border': isControlInvalid('name') }" formControlName="name"
+                    placeholder="e.g. Take coffee break" />
+                <span *ngIf="isControlInvalid('name')" class="error">Can't be empty</span>
+            </div>
+        </div>
+        <div class="columns-container mt-1">
+            <p class="bold grey-medium-50-text">Board Columns</p>
+            <div *ngFor="let uuid of getFormControlsArray()" class="column mb-1">
+                <div class="input-container">
+                    <input [ngClass]="{ 'error-border': isControlInvalid(uuid) }" [formControlName]="uuid" />
+                    <span *ngIf="isControlInvalid(uuid)" class="error">Can't be empty</span>
+                </div>
+                <svg (click)="removeColumn(uuid)" class="ml-1" width="15" height="15"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g fill="fill" fill-rule="evenodd">
+                        <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
+                        <path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <button class="btn btn-secondary" (click)="addColumn()">+ Add New Column</button>
+        <button type="submit" class="btn btn-primary mt-1" (click)="createBoard()">Create New Board</button>
+    </div>
+</form>

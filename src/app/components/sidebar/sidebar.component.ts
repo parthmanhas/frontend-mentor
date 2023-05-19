@@ -1,4 +1,7 @@
 import { Component, EventEmitter, HostBinding, Output } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { createBoardModalVisible, selectBoard } from "src/app/state/app.actions";
+import { AppState } from "src/app/state/app.state";
 
 type Board = {
     name: String;
@@ -17,7 +20,7 @@ const mockedBoard = [
 })
 export class SidebarComponent {
 
-    @Output() 
+    @Output()
     hideSidebarEvent = new EventEmitter<boolean>();
 
 
@@ -38,15 +41,26 @@ export class SidebarComponent {
     public hide = false;
 
     public boardList: Board[] = mockedBoard;
-    public isActive = 0;
+    public isActive = -1;
+
+    constructor(private store: Store<{ app: AppState }>) {
+        this.store.select(state => state).subscribe(state => {
+            this.boardList = state.app.boards;
+        });
+    }
 
     setActive(index: number): void {
         this.isActive = index;
+        this.store.dispatch(selectBoard({ boardName: this.boardList[index].name as string }));
     }
 
     hideSidebar() {
         this.hide = !this.hide;
         this.hideSidebarEvent.emit(this.hide);
+    }
+
+    openCreateBoardModal() {
+        this.store.dispatch(createBoardModalVisible({ createBoardModalVisible: true }));
     }
 
 }

@@ -1,8 +1,21 @@
-<!-- <div class="empty-board">
+<div *ngIf="!currentBoard && !minOneBoardAvailable" class="empty-board"
+    [class.empty-board-sidebar-open]="!sidebarVisible">
+    <p class="pb-1 semi-bold grey-medium-50-text">Create a New Board to get started.</p>
+    <button class="btn btn-primary" (click)="openCreateBoardModal()">+ Add New Board</button>
+</div>
+
+<div *ngIf="!currentBoard && minOneBoardAvailable" class="empty-board"
+    [class.empty-board-sidebar-open]="!sidebarVisible">
+    <p class="pb-1 semi-bold grey-medium-50-text">No board selected. Select a board or create a new board</p>
+    <button class="btn btn-primary">+ Add New Board</button>
+</div>
+
+<div *ngIf="currentBoard && !minOneColumnAvailable" class="empty-board"
+    [class.empty-board-sidebar-open]="!sidebarVisible">
     <p class="pb-1 semi-bold grey-medium-50-text">This board is empty. Create a new column to get started.</p>
-    <button class="btn btn-primary">+ Add New Column</button>
-</div> -->
-<div class="lane mr-2">
+    <button class="btn btn-primary" (click)="openAddNewColumnModal()">+ Add New Column</button>
+</div>
+<!-- <div class="lane mr-2">
     <div class="p-1">
         <p class="mb-1 grey-medium-50-text bold"><span class="oval blue mr-1"></span>TODO (4)</p>
     </div>
@@ -10,8 +23,35 @@
         <p class="task-heading bold">Build UI for onboarding flow</p>
         <p class="task-subheading grey-medium-50-text bold">0 of 3 subtasks</p>
     </div>
+</div> -->
+<div *ngFor="let column of currentBoard?.columns" class="column lane mr-2">
+    <div class="column-heading p-1">
+        <p class="mb-1 grey-medium-50-text bold"><span class="oval blue mr-1"></span>{{column.name}}</p>
+        <div class="column-edit-options">
+            <svg (click)="showEditColumnModal(column)" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" id="edit">
+                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                <path
+                    d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z">
+                </path>
+            </svg>
+            <svg (click)="deleteColumn(column)" width="15" height="15" xmlns="http://www.w3.org/2000/svg">
+                <g fill="fill" fill-rule="evenodd">
+                    <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
+                    <path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
+                </g>
+            </svg>
+        </div>
+    </div>
+    <div *ngFor="let task of column.tasks" class="task p-2 mb-1">
+        <p class="task-heading bold">{{task.title}}</p>
+        <p *ngIf="(task?.subtasks?.length ?? 0) > 0" class="task-subheading grey-medium-50-text bold">
+            0 of {{ task?.subtasks?.length }} subtasks done
+        </p>
+        <p *ngIf="!task?.subtasks" class="task-subheading grey-medium-50-text bold">No subtasks</p>
+    </div>
 </div>
-<div class="lane mr-2">
+<div *ngIf="currentBoard && minOneColumnAvailable" (click)="openAddNewColumnModal()" class="lane mr-2">
     <div class="p-1">
         <p class="mb-1 grey-light-text bold">Add new column</p>
     </div>
