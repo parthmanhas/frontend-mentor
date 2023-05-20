@@ -18,7 +18,7 @@
             </div>
         </div>
         <button class="btn btn-secondary" (click)="addColumn()">+ Add New Column</button>
-        <button type="submit" class="btn btn-primary mt-1" (click)="addNewColumn()">Add column(s)</button>
+        <button type="submit" class="btn btn-primary mt-1" (click)="submit()">Add column(s)</button>
         <span *ngIf="submitted && !hasFormControls" class="error pt-1">Please add atleast one column</span>
     </div>
 </form>

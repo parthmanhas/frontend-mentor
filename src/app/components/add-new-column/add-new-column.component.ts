@@ -4,51 +4,35 @@ import { Store } from "@ngrx/store";
 import { addBoard, addColumn, addNewColumnModalVisible } from "src/app/state/app.actions";
 import { AppState, Board, Column } from "src/app/state/app.state";
 import { v4 as uuidv4 } from 'uuid';
+import { BaseModalComponent } from "../base-modal/base-modal.component";
 
 @Component({
     selector: 'app-add-new-column',
     templateUrl: './add-new-column.component.html',
     styleUrls: ['./add-new-column.component.scss']
 })
-export class AddNewColumnComponent {
-    public isDropdownOpen: boolean = false;
-    public form: FormGroup;
-
-    public currentBoard: Board | null = null;
-
-    public submitted = false;
-    public hasFormControls = false;
-
-
-    // private currentBoard: string;
-    // private activeColumn: string;
-
-    @Output()
-    public closeModalEvent = new EventEmitter<boolean>();
-
-    @HostListener('document:click', ['$event'])
-    onClick(event: MouseEvent) {
-        if (this.isOutsideModalClicked(event.target)) {
-            // Click occurred outside the modal
-            this.store.dispatch(addNewColumnModalVisible({ addNewColumnModalVisible: false }));
-        }
+export class AddNewColumnComponent extends BaseModalComponent {
+    override whenClickOccuredOutsideModal(): void {
+        this.store.dispatch(addNewColumnModalVisible({ addNewColumnModalVisible: false }));
     }
-
-    constructor(private store: Store<{ app: AppState }>) {
-        this.form = new FormGroup({
-        });
-        this.store.select(state => state).subscribe(state => {
-            const currentBoardName = state.app.currentBoard;
-            this.currentBoard = state.app.boards.filter(b => b.name === currentBoardName)[0];
-        });
-    }
-
-    isOutsideModalClicked(target: EventTarget | null): boolean {
-        // Check if the target element or any of its parents have the "modal" class
+    override checkIfOutsideModalClicked(target: EventTarget | null): boolean {
         if (target instanceof Element && target.localName === 'app-add-new-column') {
             return true;
         }
         return false;
+    }
+    override addFormControls(): void {
+    }
+
+    public currentBoard: Board | null = null;
+    public hasFormControls = false;
+
+    constructor(private store: Store<{ app: AppState }>) {
+        super();
+        this.store.select(state => state).subscribe(state => {
+            const currentBoardName = state.app.currentBoard;
+            this.currentBoard = state.app.boards.filter(b => b.name === currentBoardName)[0];
+        });
     }
 
     addColumn() {
@@ -67,14 +51,13 @@ export class AddNewColumnComponent {
         return Object.keys(this.form.controls);
     }
 
-    addNewColumn(): void {
-        this.submitted = true;
-        this.hasFormControls = Object.keys(this.form.controls).length > 0;;
-        if (this.form.valid && this.hasFormControls) {
-            // create a board
+    override submitWhenFormValid(): void {
+        this.hasFormControls = Object.keys(this.form.controls).length > 0;
+        if (this.hasFormControls) {
             const columns: Column[] = [];
             Object.entries(this.form.value).forEach(([key, value]) => {
                 columns.push({
+                    id: uuidv4(),
                     name: value as string,
                     parentBoardName: this.currentBoard!.name
                 })
@@ -82,20 +65,6 @@ export class AddNewColumnComponent {
             this.form = new FormGroup({
             });
             this.store.dispatch(addColumn({ columns }));
-            this.submitted = false;
-        } else {
-            this.markFormControlsAsTouched();
         }
-    }
-
-    markFormControlsAsTouched() {
-        Object.values(this.form.controls).forEach(control => {
-            control.markAsDirty();
-        });
-    }
-
-    isControlInvalid(controlName: string): boolean {
-        const control = this.form.get(controlName);
-        return control?.invalid && this.submitted || false;
     }
 }

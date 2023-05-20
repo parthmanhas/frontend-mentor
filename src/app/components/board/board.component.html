@@ -24,7 +24,7 @@
         <p class="task-subheading grey-medium-50-text bold">0 of 3 subtasks</p>
     </div>
 </div> -->
-<div *ngFor="let column of currentBoard?.columns" class="column lane mr-2">
+<div *ngFor="let column of currentBoard?.columns" class="column lane mr-2" droppable="true" (dragover)="onDragOver($event)" (drop)="onDrop($event, column.name)">
     <div class="column-heading p-1">
         <p class="mb-1 grey-medium-50-text bold"><span class="oval blue mr-1"></span>{{column.name}}</p>
         <div class="column-edit-options">
@@ -43,10 +43,10 @@
             </svg>
         </div>
     </div>
-    <div *ngFor="let task of column.tasks" class="task p-2 mb-1">
+    <div *ngFor="let task of column.tasks" draggable="true" (dragstart)="onDragStart($event, task)" class="task p-2 mb-1" (click)="openViewTaskModal(task)">
         <p class="task-heading bold">{{task.title}}</p>
         <p *ngIf="(task?.subtasks?.length ?? 0) > 0" class="task-subheading grey-medium-50-text bold">
-            0 of {{ task?.subtasks?.length }} subtasks done
+            {{ getCompletedSubtasksCount(task) }} of {{ task?.subtasks?.length }} subtasks done
         </p>
         <p *ngIf="!task?.subtasks" class="task-subheading grey-medium-50-text bold">No subtasks</p>
     </div>
