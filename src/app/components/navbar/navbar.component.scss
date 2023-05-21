@@ -1,3 +1,6 @@
+@import "../../../scss/buttons";
+@import "../../../scss/colors";
+
 :host {
     display: flex;
     width: 100%;
@@ -18,7 +21,68 @@
 .menu-items-container {
     display: flex;
     align-items: center;
+    position: relative;
     & > * {
         margin-left: 5px;
+    }
+}
+
+.board-options-modal {
+    position: absolute;
+    top: 150%;
+    z-index: 99;
+    width: max-content;
+    background-color: ghostwhite;
+    border-radius: 3px;
+    border: 1px solid rgba(99, 95, 199, 0.5);
+}
+
+.option {
+    padding: 0.5rem;
+    cursor: pointer;
+    &:hover {
+        background-color: $grey-light-25;
+    }
+}
+
+svg {
+    cursor: pointer;
+    box-sizing: content-box;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.confirm-delete-board-modal {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: $black-50;
+}
+
+.confirm-delete-board-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+    z-index: 99;
+    max-width: 30vw;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    & > p:nth-child(2) {
+        color: #828fa3;
+    }
+    .confirm-delete-board-button-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        button {
+            flex-grow: 0.45;
+        }
     }
 }
