@@ -1,0 +1,68 @@
+@import "../../../scss/buttons";
+@import "../../../scss/colors";
+
+:host {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: $black-50;
+}
+
+.edit-board-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+    z-index: 99;
+    max-width: 30vw;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+
+    & > p {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.column {
+    display: flex;
+    align-items: center;
+    input {
+        flex-grow: 1;
+    }
+    svg {
+        flex-shrink: 0;
+        fill: $cross-color;
+        cursor: pointer;
+        &:hover {
+            fill: $red-dark !important;
+        }
+    }
+}
+
+input {
+    padding: 0.5rem;
+    border: 1px solid #828fa341;
+    border-radius: 2px;
+    flex-grow: 1;
+    outline: 0 none;
+    font-size: 1rem;
+    &:focus {
+        border: 2px solid $purple-dark;
+    }
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+    span {
+        position: absolute;
+    }
+}

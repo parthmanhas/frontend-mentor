@@ -1,0 +1,25 @@
+<form [formGroup]="form" class="edit-board-container">
+    <p class="l bold mb-1">Edit Board</p>
+    <p class="semi-bold grey-medium-50-text">Board Name</p>
+    <div class="input-container">
+        <input class="semi-bold" [ngClass]="{ 'error-border': isControlInvalid('latestBoardName') }"
+            formControlName="latestBoardName">
+        <span *ngIf="isControlInvalid('latestBoardName')" class="error mr-1">Can't be empty</span>
+    </div>
+    <p class="semi-bold grey-medium-50-text mt-1 mb-1">Board Columns</p>
+    <div class="column mb-1" *ngFor="let formGroup of columnsFormArray.controls; let i = index;">
+        <div class="input-container">
+            <input class="semi-bold" [ngClass]="{ 'error-border': isControlInvalidByIndex('columns', i) }"
+                [formControl]="getLatestNameFormControl(i)">
+            <span *ngIf="isControlInvalidByIndex('columns', i)" class="error mr-1">Can't be empty</span>
+        </div>
+        <svg (click)="removeColumnInput(i)" class="ml-1" width="15" height="15" xmlns="http://www.w3.org/2000/svg">
+            <g fill="fill" fill-rule="evenodd">
+                <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
+                <path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
+            </g>
+        </svg>
+    </div>
+    <button (click)="addColumnFormControl()" class="btn btn-secondary mb-1">+ Add New Column</button>
+    <button (click)="submit()" class="btn btn-primary">Save Changes</button>
+</form>
