@@ -5,4 +5,7 @@
 <app-add-new-board (closeModalEvent)="createNewBoard = false" *ngIf="createNewBoard"></app-add-new-board>
 <app-add-new-column *ngIf="addNewColumnModalVisible"></app-add-new-column>
 <app-edit-column *ngIf="editColumnModalVisible"></app-edit-column>
-<app-view-task></app-view-task>
+<app-view-task *ngIf="viewTaskModalVisible"></app-view-task>
+<app-edit-board *ngIf="editBoardModalVisible"></app-edit-board>
+<app-edit-task *ngIf="editTaskModalVisible"></app-edit-task>
+<!-- <app-view-task *ngIf="true"></app-view-task> -->

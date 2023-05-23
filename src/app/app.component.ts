@@ -15,12 +15,18 @@ export class AppComponent {
   public createNewBoard = false;
   public addNewColumnModalVisible = false;
   public editColumnModalVisible = false;
+  public viewTaskModalVisible = false;
+  public editBoardModalVisible = false;
+  public editTaskModalVisible = false;
 
   constructor(private store: Store<{ app: AppState }>) {
     this.store.select(state => state).subscribe(state => {
       this.createNewBoard = state.app.createBoardModalVisible;
       this.addNewColumnModalVisible = state.app.addNewColumnModalVisible;
       this.editColumnModalVisible = state.app.editColumnModalVisible;
+      this.viewTaskModalVisible = state.app.viewTaskModalVisible;
+      this.editBoardModalVisible = state.app.editBoardModalVisible;
+      this.editTaskModalVisible = state.app.editTaskModalVisible;
     });
   }
 

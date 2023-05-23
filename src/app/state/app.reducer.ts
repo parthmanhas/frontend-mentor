@@ -9,10 +9,14 @@ const initialState: AppState = {
     theme: 'light',
     currentBoard: null,
     currentColumn: undefined,
+    currentTask: null,
     sidebarVisible: false,
     createBoardModalVisible: false,
     addNewColumnModalVisible: false,
-    editColumnModalVisible: false
+    editColumnModalVisible: false,
+    viewTaskModalVisible: false,
+    editBoardModalVisible: false,
+    editTaskModalVisible: false
 };
 
 // export const appReducer = createReducer(
@@ -30,7 +34,7 @@ export const appReducer = createReducer(
     })),
     on(Actions.deleteBoard, (state, { board }) => ({
         ...state,
-        boards: state.boards.filter(b => b.name !== board.name)
+        boards: state.boards.filter(b => b.id !== board.id)
     })),
     on(Actions.addColumn, (state, { columns }) => ({
         ...state,
@@ -73,11 +77,15 @@ export const appReducer = createReducer(
             return b;
         })
     })),
-    
-    on(Actions.editBoard, (state, { board }) => {
-        console.log('Not implemented yet!')
-        return state;
-    }),
+
+    on(Actions.editBoard, (state, { editBoardModalVisible }) => ({
+        ...state,
+        editBoardModalVisible
+    })),
+    on(Actions.toggleEditTask, (state, { editTaskModalVisible }) => ({
+        ...state,
+        editTaskModalVisible
+    })),
     on(Actions.selectBoard, (state, { boardName }) => ({
         ...state,
         currentBoard: state.boards.filter(b => b.name === boardName)[0].name
@@ -109,8 +117,11 @@ export const appReducer = createReducer(
             if (b.name === currentColumn.parentBoardName) {
                 const updatedColumns = b.columns?.map(c => {
                     if (c.name === currentColumnName) {
-                        const t = { ...c, name: latestColumnName };
-                        return t
+                        const updatedTasks = c.tasks?.map(t => {
+                            const updatedSubtasks = t.subtasks?.map(st => ({ ...st, parentColumnName: latestColumnName }))
+                            return { ...t, subtasks: updatedSubtasks, parentColumnName: latestColumnName }
+                        })
+                        return { ...c, name: latestColumnName, tasks: updatedTasks };
                     }
                     return c;
                 })
@@ -142,4 +153,116 @@ export const appReducer = createReducer(
             return b;
         })
     })),
+    on(Actions.toggleViewTask, (state, { viewTaskModalVisible, task }) => ({
+        ...state,
+        viewTaskModalVisible,
+        currentTask: task
+    })),
+    on(Actions.updateTaskStatus, (state, { task, status }) => ({
+        ...state,
+        boards: state.boards.map(b => {
+            if (b.name === task.parentBoardName) {
+                const updatedColumns = b.columns?.map(c => {
+                    if (c.name === task.parentColumnName) {
+                        const updatedTasks = c.tasks?.filter(t => t.title !== task.title);
+                        return { ...c, tasks: updatedTasks };
+                    } else if (c.name === status) {
+                        const updatedTasks = c.tasks ? [...c.tasks, { ...task, parentColumnName: status }] : [{ ...task, parentColumnName: status }];
+                        return { ...c, tasks: updatedTasks };
+                    }
+                    return c;
+                })
+                return { ...b, columns: updatedColumns }
+            }
+            return b;
+        })
+    })),
+    on(Actions.updateSubtasksStatus, (state, { task }) => ({
+        ...state,
+        boards: state.boards.map(b => {
+            if (b.name === task.parentBoardName) {
+                const updatedColumns = b.columns?.map(c => {
+                    if (c.name === task.parentColumnName) {
+                        const updatedTasks = c.tasks?.map(t => {
+                            if (t.title === task.title) {
+                                const updatedSubtasks = t.subtasks?.map(st => {
+                                    const updatedSubtask = task.subtasks?.filter(tst => tst.title === st.title)[0];
+                                    if (updatedSubtask) {
+                                        return { ...st, ...updatedSubtask };
+                                    } else {
+                                        return st
+                                    }
+                                })
+                                return { ...t, subtasks: updatedSubtasks };
+                            }
+                            return t;
+                        })
+                        return { ...c, tasks: updatedTasks };
+                    }
+                    return c;
+                })
+                return { ...b, columns: updatedColumns }
+            }
+            return b;
+        })
+    })),
+    on(Actions.deleteTask, (state, { task }) => ({
+        ...state,
+        currentTask: null,
+        viewTaskModalVisible: false,
+        boards: state.boards.map(b => {
+            if (b.name === task?.parentBoardName) {
+                const updatedColumns = b.columns?.map(c => {
+                    if (c.name === task.parentColumnName) {
+                        const updatedTasks = c.tasks?.filter(t => t.title !== task.title);
+                        return { ...c, tasks: updatedTasks };
+                    }
+                    return c;
+                })
+                return { ...b, columns: updatedColumns }
+            }
+            return b;
+        })
+    })),
+    on(Actions.updateTask, (state, { previousTask, updatedTask }) => ({
+        ...state,
+        currentTask: updatedTask,
+        boards: state.boards.map(b => {
+            if (b.name === previousTask.parentBoardName) {
+                const updatedColumns = b.columns?.map(c => {
+                    if (c.name === previousTask.parentColumnName) {
+                        const filteredTaskAfterRemovingPreviousTask = c.tasks?.filter(t => t.title !== previousTask.title) || [];
+                        return { ...c, tasks: [...filteredTaskAfterRemovingPreviousTask, updatedTask] }
+                    }
+                    return c;
+                })
+                return { ...b, columns: updatedColumns }
+            }
+            return b;
+        })
+    })),
+    on(Actions.updateBoard, (state, { previousBoardName, latestBoardName, columns }) => ({
+        ...state,
+        viewTaskModalVisible: false,
+        currentBoard: latestBoardName,
+        boards: state.boards.map(b => {
+            if (b.name === previousBoardName) {
+                const updatedColumns = b.columns?.map(c => {
+                    const latestData = columns?.filter(col => col.previousName === c.name)[0];
+                    if (latestData) {
+                        return { ...c, name: latestData.latestName, parentBoardName: latestBoardName };
+                    }
+                    return { ...c, parentBoardName: latestBoardName };
+                })
+                return { ...b, columns: updatedColumns, name: latestBoardName }
+            }
+            return b;
+        })
+    })),
+    on(Actions.setCurrentTask, (state, { task }) => ({
+        ...state,
+        currentTask: state.boards.filter(b => b.name === task.parentBoardName)[0]
+            .columns?.filter(c => c.name === task.parentColumnName)[0]
+            .tasks?.filter(t => t.title === task.title)[0]
+    }))
 );
