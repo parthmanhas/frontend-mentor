@@ -1,17 +1,28 @@
 import { Component, EventEmitter, HostListener, Output } from "@angular/core";
-import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { addBoard, createBoardModalVisible } from "src/app/state/app.actions";
 import { AppState, Board } from "src/app/state/app.state";
 import { v4 as uuidv4 } from 'uuid';
 import { BaseModalComponent } from "../base-modal/base-modal.component";
 
+type TColumn = FormGroup<{
+    id: FormControl<string | null>,
+    name: FormControl<string | null>
+}>
+
+type TForm = {
+    id: FormControl<string | null>,
+    name: FormControl<string | null>
+    columns: FormArray<TColumn>
+}
+
 @Component({
     selector: 'app-add-new-board',
     templateUrl: './add-new-board.component.html',
     styleUrls: ['./add-new-board.component.scss']
 })
-export class AddNewBoardComponent extends BaseModalComponent {
+export class AddNewBoardComponent extends BaseModalComponent<TForm> {
     override whenClickOccuredOutsideModal(): void {
         this.store.dispatch(createBoardModalVisible({ createBoardModalVisible: false }));
     }
@@ -21,46 +32,35 @@ export class AddNewBoardComponent extends BaseModalComponent {
         }
         return false;
     }
-    override addFormControls(): void {
-        this.form.addControl('name', new FormControl('', Validators.required));
-    }
 
     @Output()
     public closeModalEvent = new EventEmitter<boolean>();
 
-    constructor(private store: Store<{ app: AppState }>) {
+    constructor(private store: Store<{ app: AppState }>, private formBuilder: FormBuilder) {
         super();
+        this.form = this.formBuilder.group({
+            id: [uuidv4(), Validators.required],
+            name: ['', Validators.required],
+            columns: this.formBuilder.array<TColumn>([])
+        });
     }
 
     addColumn() {
-        this.form.addControl(uuidv4(), new FormControl(null, Validators.required));
+        this.form.controls.columns.push(this.formBuilder.group({
+            id: uuidv4(),
+            name: ['', Validators.required]
+        }));
     }
 
-    removeColumn(uuid: string): void {
-        this.form.removeControl(uuid);
+    get columns() {
+        return this.form.controls.columns.controls;
     }
 
-    getFormControlsArray(): any[] {
-        return Object.keys(this.form.controls).filter(key => key !== 'name');
+    removeColumn(index: number) {
+        this.form.controls.columns.removeAt(index);
     }
 
     override submitWhenFormValid(): void {
-        const board: Board = {
-            id: uuidv4(),
-            name: '',
-            columns: []
-        };
-        Object.entries(this.form.value).forEach(([key, value]) => {
-            if (key === 'name') board['name'] = value as string;
-            else board.columns!.push({
-                id: uuidv4(),
-                name: value as string,
-                parentBoardName: board.name
-            })
-        });
-        this.store.dispatch(addBoard({ board }));
-        this.form = new FormGroup({
-            name: new FormControl('', Validators.required)
-        });
+        this.store.dispatch(addBoard({ board: this.form.value as Board }));
     }
 }

@@ -3,12 +3,12 @@
         <p class="bold m">Add New Column(s)</p>
         <div class="columns-container mt-1">
             <p class="bold grey-medium-50-text">Column(s) Name</p>
-            <div *ngFor="let uuid of getFormControlsArray()" class="column mb-1">
+            <div *ngFor="let column of columns; let i = index" class="column mb-1">
                 <div class="input-container">
-                    <input [ngClass]="{ 'error-border': isControlInvalid(uuid) }" [formControlName]="uuid" />
-                    <span *ngIf="isControlInvalid(uuid)" class="error error-abs-pos">Can't be empty</span>
+                    <input [ngClass]="{ 'error-border': column.invalid && submitted }" [formControl]="column.controls.name" />
+                    <span *ngIf="column.invalid && submitted" class="error error-abs-pos">Can't be empty</span>
                 </div>
-                <svg (click)="removeColumn(uuid)" class="ml-1" width="15" height="15"
+                <svg (click)="removeColumn(i)" class="ml-1" width="15" height="15"
                     xmlns="http://www.w3.org/2000/svg">
                     <g fill="fill" fill-rule="evenodd">
                         <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
