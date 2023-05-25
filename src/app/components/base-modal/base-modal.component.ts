@@ -1,20 +1,18 @@
 import { Component, HostListener, TemplateRef, ViewChild } from "@angular/core";
-import { FormArray, FormArrayName, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormArray, FormArrayName, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
     template: ''
 })
-export abstract class BaseModalComponent {
+export abstract class BaseModalComponent<T extends { [K in keyof T]: AbstractControl<any, any>; }> {
 
-    @ViewChild('addNewBoardHtml', { static: true }) addNewBoardHtml: TemplateRef<any> | undefined;
-
-    public form: FormGroup;
+    public form!: FormGroup<T>;
     public isDropdownOpen: boolean = false;
     public submitted = false;
 
     abstract whenClickOccuredOutsideModal(): void;
     abstract checkIfOutsideModalClicked(target: EventTarget | null): boolean;
-    abstract addFormControls(): void;
+    // abstract addFormControls(): void;
     abstract submitWhenFormValid(): void;
 
     @HostListener('document:click', ['$event'])
@@ -30,9 +28,7 @@ export abstract class BaseModalComponent {
     }
 
     constructor() {
-        this.form = new FormGroup({ 
-        });
-        this.addFormControls();
+        // this.addFormControls();
     }
 
     toggleDropdown() {
@@ -41,6 +37,12 @@ export abstract class BaseModalComponent {
 
     isControlInvalid(controlName: string): boolean {
         const control = this.form.get(controlName);
+        return control?.invalid && this.submitted || false;
+    }
+
+    // valid only for level 1 nesting
+    isControlInvalidFormGroup(formGroupName: string, controlName: string) {
+        const control = this.form.get(formGroupName)?.get(controlName);
         return control?.invalid && this.submitted || false;
     }
 

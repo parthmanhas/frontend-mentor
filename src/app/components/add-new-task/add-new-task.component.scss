@@ -13,6 +13,65 @@
     background-color: $black-50;
 }
 
+:host.dark-theme {
+    .container {
+        background: #20212c;
+        p {
+            color: white !important;
+        }
+    }
+
+    input {
+        color: white !important;
+        background-color: #2b2c37;
+    }
+    
+    textarea {
+        color: white !important;
+        background-color: #2b2c37;
+    }
+
+    .btn-secondary {
+        background-color: white;
+    }
+
+    .status-dropdown {
+        background-color: #20212c;
+    }
+
+    .dropdown {
+        background-color: rgba(130, 143, 163, 0.15);
+        .option {
+            color: white;
+        }
+    }
+    .column-heading > p {
+        color: #828fa3 !important;
+    }
+    .empty-board {
+        background: #20212c;
+        & > p {
+            color: #828fa3 !important;
+        }
+    }
+    .add-new-column {
+        background-color: rgba(43, 44, 55, 0.25);
+        & h2 {
+            color: #828fa3 !important;
+        }
+    }
+    .task {
+        background-color: #2b2c37;
+        box-shadow: none;
+        .task-heading {
+            color: white;
+        }
+        .task-subheading {
+            color: #828fa3 !important;
+        }
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
