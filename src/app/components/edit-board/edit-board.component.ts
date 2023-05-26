@@ -3,16 +3,36 @@ import { BaseModalComponent } from "../base-modal/base-modal.component";
 import { Store } from "@ngrx/store";
 import { FormControl, FormArray, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AppState, Board, Column } from "src/app/state/app.state";
-import { addColumn, editBoard, selectBoard, updateBoard } from "src/app/state/app.actions";
+import { addColumn, deleteColumn, editBoard, selectBoard, updateBoard } from "src/app/state/app.actions";
+import { v4 as uuidv4 } from 'uuid';
+
+
+type TColumn = FormGroup<{
+    id: FormControl<string | null>,
+    name: FormControl<string | null>,
+    parentBoardId: FormControl<string | null>,
+    visible: FormControl<boolean | null>,
+    delete: FormControl<boolean | null>
+}>
+
+type TBoard = FormGroup<{
+    id: FormControl<string | null>,
+    name: FormControl<string | null>
+}>
+
+type TForm = {
+    board: TBoard,
+    columns: FormArray<TColumn>
+}
 
 @Component({
     selector: 'app-edit-board',
     templateUrl: './edit-board.component.html',
     styleUrls: ['./edit-board.component.scss']
 })
-export class EditBoardComponent extends BaseModalComponent {
+export class EditBoardComponent extends BaseModalComponent<TForm> {
 
-    public currentBoard: Board | null = null;
+    public currentBoard!: Board;
 
     override whenClickOccuredOutsideModal(): void {
         this.store.dispatch(editBoard({ editBoardModalVisible: false }));
@@ -23,69 +43,96 @@ export class EditBoardComponent extends BaseModalComponent {
         }
         return false;
     }
-    override addFormControls(): void {
-        this.form.addControl('previousBoardName', new FormControl('', Validators.required));
-        this.form.addControl('latestBoardName', new FormControl('', Validators.required));
-        this.form.addControl('columns', new FormArray([]));
-    }
+
     override submitWhenFormValid(): void {
-        const newColumns: Column[] = this.form.value.columns.filter((c: any) => !c.previousName).map((c: any) => ({ name: c.latestName, parentBoardName: this.currentBoard!.name }));
-        const existingColumns = this.form.value.columns.filter((c: any) => c.previousName && c.latestName && c.previousName !== c.latestName);
-        if (newColumns.length > 0) {
-            this.store.dispatch(addColumn({ columns: newColumns }));
-        }
-
-        this.store.dispatch(updateBoard({ previousBoardName: this.form.value.previousBoardName, latestBoardName: this.form.value.latestBoardName, columns: existingColumns }));
-
-        this.store.dispatch(selectBoard({ boardName: this.form.value.latestBoardName }));
-
-        this.form = this.formBuilder.group({
-            previousBoardName: [this.currentBoard?.name, Validators.required],
-            latestBoardName: [this.currentBoard?.name, Validators.required],
-            columns: this.formBuilder.array([])
+        // console.log(this.form.value)
+        const toDelete = this.form.value.columns?.filter(c => c.delete === true);
+        const toAdd = this.form.value.columns?.filter(c => c.delete === false);
+        this.store.dispatch(
+            updateBoard({
+                boardId: this.currentBoard?.id!,
+                latestBoardName: this.form.value.board!.name!,
+                columns: toAdd?.map(c => ({ id: c.id!, name: c.name!, parentBoardId: c.parentBoardId! }))
+            })
+        );
+        toDelete?.forEach(c => {
+            this.store.dispatch(deleteColumn({ column: { id: c.id!, name: c.name!, parentBoardId: c.parentBoardId! } }));
         })
-        this.currentBoard?.columns?.forEach(column => {
-            this.columnsFormArray.push(this.formBuilder.group({
-                previousName: column.name,
-                latestName: column.name
-            }));
-        });
     }
+
 
     constructor(private store: Store<{ app: AppState }>, private formBuilder: FormBuilder) {
         super();
+        this.form = this.formBuilder.group({
+            board: this.formBuilder.group({
+                id: ['', Validators.required],
+                name: ['', Validators.required]
+            }),
+            columns: this.formBuilder.array<TColumn>([])
+        })
         this.store.select(state => state).subscribe(state => {
-            const currentBoardName = state.app.currentBoard;
-            this.currentBoard = state.app.boards.filter(b => b.name === currentBoardName)[0];
+            if (!state.app.currentBoardId) return;
+            this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
+            this.columns.clear();
             this.currentBoard.columns?.forEach(column => {
-                this.columnsFormArray.push(this.formBuilder.group({
-                    previousName: column.name,
-                    latestName: column.name
+                this.columns.push(this.formBuilder.group({
+                    id: [column.id, Validators.required],
+                    name: [column.name, Validators.required],
+                    parentBoardId: [this.currentBoard.id, Validators.required],
+                    visible: [true, Validators.required],
+                    delete: [false, Validators.required]
                 }));
-            });
 
-            this.form.get('previousBoardName')?.setValue(currentBoardName);
-            this.form.get('latestBoardName')?.setValue(currentBoardName);
+            });
+            this.board.setValue({
+                name: this.currentBoard.name,
+                id: this.currentBoard.id
+            });
         });
     }
 
-    get columnsFormArray(): FormArray<FormGroup> {
-        return this.form.get('columns') as FormArray<FormGroup>;
+    get columns() {
+        return this.form.controls.columns;
     }
 
-    getLatestNameFormControl(index: number): FormControl {
-        return this.columnsFormArray.at(index).get('latestName') as FormControl;
+    // getColumnName(index: number): FormControl {
+    //     return this.columns.at(index).get('name') as FormControl;
+    // }
+
+    getColumnName(formGroup: TBoard): FormControl {
+        return formGroup.controls.name;
     }
 
-    addColumnFormControl() {
-        this.columnsFormArray.push(this.formBuilder.group({
-            previousName: '',
-            latestName: ''
-        }));
+    get board() {
+        return this.form.controls.board;
     }
 
-    removeColumnInput(index: number) {
-        this.columnsFormArray.removeAt(index);
+    get boardName(): FormControl {
+        return this.form.controls.board.controls.name;
+    }
+
+    get boardId(): FormControl {
+        return this.board.controls.id;
+    }
+
+    addColumn() {
+        const formGroup = this.formBuilder.group({
+            id: [uuidv4(), Validators.required],
+            name: ['', Validators.required],
+            parentBoardId: [this.currentBoard?.id, Validators.required],
+            visible: [true, Validators.required],
+            delete: [false, Validators.required]
+        })
+        this.columns.push(formGroup);
+    }
+
+    get visibleColumns() {
+        return this.columns.controls.filter(control => control.controls.visible.value === true);
+    }
+
+    removeColumn(id: string | null) {
+        const index = this.columns.controls.findIndex(control => control.controls.id.value === id);
+        this.columns.at(index).patchValue({ delete: true, visible: false });
     }
 
 }

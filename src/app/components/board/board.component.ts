@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { addColumn, addNewColumnModalVisible, createBoardModalVisible, deleteColumn, editColumn, toggleViewTask, updateTaskStatus } from "src/app/state/app.actions";
+import { addNewColumnModalVisible, createBoardModalVisible, toggleViewTask, updateTaskParentColumn } from "src/app/state/app.actions";
 import { AppState, Board, Column, Task } from "src/app/state/app.state";
 
 @Component({
@@ -32,8 +32,7 @@ export class BoardComponent {
 
     constructor(private store: Store<{ app: AppState }>) {
         this.store.select(state => state).subscribe(state => {
-            const currentBoardName = state.app.currentBoard;
-            this.currentBoard = state.app.boards.filter(b => b.name === currentBoardName)[0];
+            this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
             this.sidebarVisible = state.app.sidebarVisible;
             this.minOneBoardAvailable = state.app.boards.length > 0;
             this.minOneColumnAvailable = (this.currentBoard?.columns?.length ?? -1) > 0;
@@ -47,15 +46,6 @@ export class BoardComponent {
 
     openAddNewColumnModal() {
         this.store.dispatch(addNewColumnModalVisible({ addNewColumnModalVisible: true }));
-    }
-
-    showEditColumnModal(column: Column) {
-        this.store.dispatch(editColumn({ editColumnModalVisible: true, column }));
-    }
-
-    deleteColumn(column: Column) {
-        // ask for confirmation if not empty other wise delete simply
-        this.store.dispatch(deleteColumn({ column }));
     }
 
     openViewTaskModal(task: Task) {
@@ -73,14 +63,14 @@ export class BoardComponent {
         event.preventDefault();
     }
 
-    onDrop(event: DragEvent, columnName: string) {
+    onDrop(event: DragEvent, newColumnId: string) {
         event.preventDefault();
         const droppedData = event.dataTransfer?.getData('text/plain');
         if (droppedData) {
             const task = JSON.parse(droppedData) as Task;
             // do not update if moved in same column
-            if (task.parentColumnName !== columnName) {
-                this.store.dispatch(updateTaskStatus({ task, status: columnName }));
+            if (task.parentColumnId !== newColumnId) {
+                this.store.dispatch(updateTaskParentColumn({ task, newColumnId }));
             }
             // Handle the dropped subtask, e.g., update its column or perform any necessary actions
         }

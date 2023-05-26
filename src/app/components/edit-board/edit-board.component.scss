@@ -13,6 +13,29 @@
     background-color: $black-50;
 }
 
+:host.dark-theme {
+    .edit-board-container {
+        background: #20212c;
+        p {
+            color: white !important;
+        }
+    }
+
+    input {
+        color: white !important;
+        background-color: #2b2c37;
+    }
+
+    textarea {
+        color: white !important;
+        background-color: #2b2c37;
+    }
+
+    .btn-secondary {
+        background-color: white;
+    }
+}
+
 .edit-board-container {
     background-color: white;
     padding: 2rem;

@@ -11,6 +11,46 @@
     // align-items: center;
     // justify-content: center;
     transition: 0.5s;
+    overflow: auto;
+}
+
+:host.dark-theme {
+    background: #20212C;
+    .column-heading > p {
+        color: #828FA3 !important;
+    }
+    .empty-board {
+        background: #20212C;
+        & > p {
+            color: #828FA3 !important;
+        }
+    }
+    .add-new-column {
+        background-color: rgba(43, 44, 55, 0.25);
+        & h2 {
+            color: #828FA3 !important;
+        }
+        &:hover {
+            h2 {
+                color: $purple-dark !important;
+            }
+        }
+    }
+    .task {
+        background-color: #2B2C37;
+        box-shadow: none;
+        .task-heading {
+            color: white;
+        }
+        .task-subheading {
+            color: #828FA3 !important;
+        }
+        &:hover {
+            p {
+                color: $purple-dark;
+            }
+        }
+    }
 }
 
 .empty-board {
@@ -59,7 +99,7 @@
 }
 
 .column {
-    width: 18rem;
+    min-width: 18rem;
 }
 
 svg {
