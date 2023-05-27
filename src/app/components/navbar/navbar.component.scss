@@ -6,6 +6,40 @@
     width: 100%;
 }
 
+// :host.light-theme {
+//     background: white;
+//     .logo-container > p, .action-container > p {
+//         color: black
+//     }
+// }
+
+:host.dark-theme {
+    background: #2B2C37;
+    border-bottom: 1px solid #3E3F4E;
+    .btn-disabled {
+        color: darken(white, 50%);
+    }
+    .btn-primary {
+        color: white;
+    }
+    .logo-container > p, .action-container > p {
+        color: white
+    }
+    .board-options-modal {
+        background-color: #2B2C37;
+        border: 1px solid #383A4D;
+        & p:nth-child(1) {
+            color: rgb(130, 143, 163) !important;
+        }
+    }
+    .confirm-delete-board-container {
+        background-color: #2B2C37;
+        .btn-secondary {
+            background-color: white;
+        }
+    }
+}
+
 .logo-container {
     width: 30vw;
     display: flex;

@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from "@angular/core";
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { deleteBoard, editBoard } from "src/app/state/app.actions";
+import { deleteBoard, editBoard, toggleAddNewTask } from "src/app/state/app.actions";
 import { AppState, Board } from "src/app/state/app.state";
 
 @Component({
@@ -10,9 +10,6 @@ import { AppState, Board } from "src/app/state/app.state";
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-
-    @Output()
-    public createNewTask = new EventEmitter<boolean>();
 
     public addNewTaskButtonDisabled = true;
 
@@ -23,16 +20,13 @@ export class NavbarComponent {
 
     constructor(private store: Store<{ app: AppState }>) {
         this.store.select(state => state).subscribe(state => {
-            const currentBoardName = state.app.currentBoard;
-            this.currentBoard = state.app.boards.filter(b => b.name === currentBoardName)[0];
+            this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
             this.addNewTaskButtonDisabled = !((this.currentBoard?.columns?.length ?? 0) > 0);
         });
     }
-
-    public buttonClick(buttonName: string): void {
-        if (buttonName === 'addNewTask' && !this.addNewTaskButtonDisabled) {
-            this.createNewTask.emit(true);
-        }
+    
+    addNewTask() {
+        this.store.dispatch(toggleAddNewTask({ addNewTaskModalVisible: true }));
     }
 
     deleteBoard() {

@@ -13,6 +13,52 @@
     background-color: $black-50;
 }
 
+:host.dark-theme {
+    .container {
+        background-color: #2b2c37;
+        p {
+            color: white !important;
+        }
+    }
+
+    .btn-secondary {
+        background-color: white;
+    }
+
+    input:not([type="checkbox"]) {
+        background-color: #2b2c37;
+        color: white !important;
+    }
+
+    textarea {
+        color: rgba(255, 255, 255, 0.25) !important;
+        background-color: #2b2c37;
+    }
+
+    .status-dropdown {
+        background-color: #2b2c37;
+    }
+
+    .dropdown {
+        background-color: rgba(130, 143, 163, 0.15);
+        p {
+            color: white;
+        }
+    }
+
+    .description-container + p,
+    .status-container > p {
+        color: white !important;
+    }
+
+    .task-options-modal {
+        background-color: rgba(130, 143, 163, 0.1);
+        & > p:nth-child(1) {
+            color: rgb(130, 143, 163) !important;
+        }
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;

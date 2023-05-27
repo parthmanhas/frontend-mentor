@@ -9,12 +9,9 @@
 <div class="action-container m-2">
     <p class="xl semi-bold">{{currentBoard?.name}}</p>
     <div class="menu-items-container">
-        <button (click)="buttonClick('addNewTask')" class="btn"
+        <button (click)="addNewTask()" class="btn" [disabled]="addNewTaskButtonDisabled === true"
             [ngClass]="{'btn-primary': addNewTaskButtonDisabled === false, 'btn-disabled': addNewTaskButtonDisabled === true}">+
             Add New Task</button>
-        <!-- <div class="ellipsis-menu">
-            <div></div>
-        </div> -->
         <svg *ngIf="!showBoardOptionsModal && currentBoard" (click)="showBoardOptionsModal = true" width="5" height="20"
             xmlns="http://www.w3.org/2000/svg">
             <g fill="#828FA3" fill-rule="evenodd">
