@@ -7,3 +7,5 @@ URL: https://beautiful-fenglisu-74d90d.netlify.app/
 - [ ] add more animation
 - [ ] improve drag and drop animation
 - [ ] add backend
+- [ ] fix tablet design
+- [ ] fix mobile design
