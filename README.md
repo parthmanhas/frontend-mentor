@@ -10,3 +10,5 @@ URL: https://beautiful-fenglisu-74d90d.netlify.app/
 - [ ] fix tablet design
 - [ ] fix mobile design
 - [ ] remove duplicated code in scss
+- [ ] fix theme images in chrome
+- [ ] fix columns scroll not displaying full add new column
