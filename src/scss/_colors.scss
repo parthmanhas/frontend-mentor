@@ -20,6 +20,7 @@ $grey: #828FA3;
 $grey-light-75: #828fa3ca;
 $grey-light-50: #828fa388;
 $grey-light-25: #828fa33a;
+$grey-light-5: #828fa30e;
 $light-blue: #E4EBFA;
 $blue: #49C4E5;
 $cross-color: #828fa3;
@@ -41,4 +42,18 @@ $cross-color: #828fa3;
 
 .grey-light-text {
     color: $grey-light !important;
+}
+
+.red {
+    color: $red-dark;
+}
+
+.error {
+    color: $red-dark;
+    position: absolute;
+    padding-right: 1rem;
+}
+
+.error-border {
+    border: 1px solid $red-dark;
 }

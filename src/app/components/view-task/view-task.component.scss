@@ -13,6 +13,70 @@
     background-color: $black-50;
 }
 
+:host.dark-theme {
+    .container {
+        background-color: #2b2c37;
+    }
+    input:not([type="checkbox"]) {
+        color: white !important;
+        background-color: #2b2c37;
+    }
+
+    .subtasks-container {
+        .subtask-completed {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+        input:not([type="checkbox"]) {
+            background-color: #20212c;
+        }
+        input[type="checkbox"] {
+            filter: opacity(12%);
+        }
+        .subtask {
+            background-color: #20212c !important;
+            .checkbox-dark-theme-completed {
+                filter: opacity(100%);
+            }
+        }
+    }
+
+    textarea {
+        color: #828fa3 !important;
+        background-color: #2b2c37;
+    }
+
+    .status-dropdown {
+        background-color: #2b2c37;
+    }
+
+    .dropdown {
+        background-color: rgba(130, 143, 163, 0.15);
+        .option {
+            color: white !important;
+        }
+    }
+
+    .description-container + p,
+    .status-container > p {
+        color: white !important;
+    }
+
+    .task-options-modal {
+        background-color: #20212C;
+        border: 1px solid #383A4D;
+        & > p:nth-child(1) {
+            color: rgb(130, 143, 163) !important;
+        }
+    }
+
+    .confirm-delete-task-container {
+        background-color: #2b2c37;
+        .btn-secondary {
+            background-color: white;
+        }
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -133,28 +197,6 @@ input:not([type="checkbox"]) {
     }
 }
 
-// input[type="checkbox"] + input,
-// .description-container,
-// .title-container > .input-edit {
-//     background-color: #f4f7fd;
-//     border: 1px solid #828fa341;
-//     &:focus {
-//         border: 2px solid $purple-dark;
-//     }
-// }
-
-// input,
-// textarea {
-//     padding: 0.5rem;
-//     border: 1px solid #828fa341;
-//     border-radius: 2px;
-//     flex-grow: 1;
-//     outline: 0 none;
-//     &:focus {
-//         border: 2px solid $purple-dark;
-//     }
-// }
-
 .subtask,
 .title-container > input {
     padding: 0.5rem;
@@ -185,16 +227,6 @@ input:not([type="checkbox"]) {
     // right: 0;
     // top: 100%;
 }
-
-// .fade-in {
-//     opacity: 1;
-//     height: auto;
-// }
-
-// .fade-out {
-//     opacity: 0;
-//     height: 0;
-// }
 
 svg {
     &:hover {

@@ -1,11 +1,12 @@
 export interface AppState {
     boards: Board[],
     theme: string,
-    currentBoard: string | null,
-    currentColumn: string | undefined,
+    currentBoardId: string | null,
+    currentColumnId: string | undefined,
     currentTask: Task | null | undefined,
     sidebarVisible: boolean,
     createBoardModalVisible: boolean,
+    addNewTaskModalVisible: boolean | undefined,
     addNewColumnModalVisible: boolean,
     editColumnModalVisible: boolean,
     viewTaskModalVisible: boolean,
@@ -27,25 +28,24 @@ export interface Option {
 export interface Column {
     id: string,
     name: string,
+    parentBoardId: string
     tasks?: Task[],
-    parentBoardName: string
 }
 
 export interface Task {
     id: string,
     title: string,
     description: string,
-    status: string,
     subtasks?: Subtask[],
-    parentColumnName: string
-    parentBoardName: string
+    parentColumnId: string
+    parentBoardId: string
 }
 
 export interface Subtask {
     id: string,
     title: string,
     isCompleted: boolean
-    parentTaskTitle: string,
-    parentColumnName: string,
-    parentBoardName: string
+    parentTaskId: string,
+    parentColumnId: string,
+    parentBoardId: string
 }

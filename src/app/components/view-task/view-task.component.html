@@ -1,7 +1,7 @@
 <form [formGroup]="form">
     <div class="modal container p-2">
         <div class="title-container d-flex">
-            <input formControlName="title" class="bold black-medium-50-text l mr-1" value="{{task?.title}}" readonly>
+            <input formControlName="title" class="bold black-medium-50-text l mr-1" value="{{task.title}}" readonly>
             <svg *ngIf="!showOptionsModal" (click)="showOptionsModal = true" width="5" height="20"
                 xmlns="http://www.w3.org/2000/svg">
                 <g fill="#828FA3" fill-rule="evenodd">
@@ -25,25 +25,27 @@
         <div class="description-container mb-1">
             <textarea formControlName="description" class="bold grey-medium-50-text mr-1" readonly></textarea>
         </div>
-        <p class="bold grey-medium-50-text">Subtasks ({{completeSubtasks.length}} of {{this.task?.subtasks?.length}})
+        <p class="bold grey-medium-50-text">Subtasks ({{completeSubtasks.length}} of {{this.task.subtasks?.length}})
         </p>
         <div *ngIf="(task?.subtasks?.length ?? 0) > 0" class="subtasks-container mt-1">
             <ng-container *ngFor="let subtaskFormGroup of subtasksFormArray.controls; let i = index">
                 <ng-container [formGroup]="subtaskFormGroup">
-                    <div class="subtask mb-1 p-1" (click)="toggleCheckbox(i)">
-                        <input class="mr-1 checkbox" id="subtask-{{i}}" type="checkbox" formControlName="isCompleted">
-                        <input [formControl]="getTitleFormControl(i)"
-                            [ngClass]="{'subtask-completed': subtaskFormGroup.get('isCompleted')?.value}" readonly>
+                    <div class="subtask mb-1 p-1" (click)="toggleCheckbox(subtaskFormGroup)">
+                        <input class="mr-1 checkbox semi-bold"
+                            [class.checkbox-dark-theme-completed]="subtaskFormGroup.controls.isCompleted.value && theme === 'dark'"
+                            id="subtask-{{i}}" type="checkbox" [formControl]="subtaskFormGroup.controls.isCompleted">
+                        <input [formControl]="subtaskFormGroup.controls.title"
+                            [ngClass]="{'subtask-completed': subtaskFormGroup.controls.isCompleted.value}" readonly>
                     </div>
                 </ng-container>
             </ng-container>
         </div>
         <div class="status-container mt-1">
             <p class="bold grey-medium-50-text">Status</p>
-            <div class="status-dropdown semi-bold" [class.error-border]="!selectedOption  && submitted"
+            <div class="status-dropdown semi-bold" [class.error-border]="!selectedOptionNameFormControl && submitted"
                 [class.purple-border]="isDropdownOpen" (click)="toggleDropdown()">
                 <div class="selected-option">
-                    <input formControlName="selectedOption" readonly />
+                    <input [formControl]="selectedOptionNameFormControl" readonly />
                     <svg *ngIf="!isDropdownOpen" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
                         <path stroke="#635FC7" stroke-width="2" fill="none" d="m1 1 4 4 4-4" />
                     </svg>
@@ -51,11 +53,11 @@
                         <path stroke="#635FC7" stroke-width="2" fill="none" d="M9 6 5 2 1 6" />
                     </svg>
                 </div>
-                <span *ngIf="!selectedOption && submitted" class="error">Can't be empty</span>
+                <span *ngIf="!selectedOptionNameFormControl && submitted" class="error">Can't be empty</span>
             </div>
             <div class="dropdown" *ngIf="isDropdownOpen">
                 <div class="option" *ngFor="let option of filteredOptions" (click)="selectOption(option)">
-                    {{ option }}
+                    {{ option.name }}
                 </div>
             </div>
         </div>

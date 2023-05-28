@@ -7,24 +7,18 @@ import * as Actions from './app.actions';
 const initialState: AppState = {
     boards: [],
     theme: 'light',
-    currentBoard: null,
-    currentColumn: undefined,
+    currentBoardId: null,
+    currentColumnId: undefined,
     currentTask: null,
     sidebarVisible: false,
     createBoardModalVisible: false,
+    addNewTaskModalVisible: false,
     addNewColumnModalVisible: false,
     editColumnModalVisible: false,
     viewTaskModalVisible: false,
     editBoardModalVisible: false,
     editTaskModalVisible: false
 };
-
-// export const appReducer = createReducer(
-//   initialState,
-//   on(increment, state => ({ ...state, counter: state.counter + 1 })),
-//   on(decrement, state => ({ ...state, counter: state.counter - 1 })),
-//   on(reset, state => ({ ...state, counter: 0 }))
-// );
 
 export const appReducer = createReducer(
     initialState,
@@ -34,12 +28,15 @@ export const appReducer = createReducer(
     })),
     on(Actions.deleteBoard, (state, { board }) => ({
         ...state,
+        currentBoardId: null,
+        currentColumnId: undefined,
+        currentTask: null,
         boards: state.boards.filter(b => b.id !== board.id)
     })),
     on(Actions.addColumn, (state, { columns }) => ({
         ...state,
         boards: state.boards.map(b => {
-            if (b.name === columns[0].parentBoardName) {
+            if (b.id === columns[0].parentBoardId) {
                 return {
                     ...b,
                     columns: [...b.columns || [], ...columns]
@@ -51,22 +48,23 @@ export const appReducer = createReducer(
     on(Actions.deleteColumn, (state, { column }) => ({
         ...state,
         boards: state.boards.map(b => {
-            if (b.name === column.parentBoardName) {
+            if (b.id === column.parentBoardId) {
                 return {
                     ...b,
-                    columns: b.columns?.filter(c => c.name !== column.name)
+                    columns: b.columns?.filter(c => c.id !== column.id)
                 }
             }
             return b;
         })
     })),
-    on(Actions.addNewTask, (state, { task }) => ({
+    on(Actions.addNewTask, (state, { task, addNewTaskModalVisible }) => ({
         ...state,
+        addNewTaskModalVisible: addNewTaskModalVisible,
         boards: state.boards.map(b => {
-            if (b.name === task.parentBoardName && b.columns) {
+            if (b.id === task.parentBoardId && b.columns) {
                 const updatedColumns = b.columns.map(c => {
-                    // task.status is the column to which it belongs
-                    if (c.name === task.status) {
+                    // task.status is the column name to which it belongs
+                    if (c.id === task.parentColumnId) {
                         const updatedTasks = c.tasks ? [...c.tasks, task] : [task]
                         return { ...c, tasks: updatedTasks } as Column;
                     }
@@ -86,9 +84,13 @@ export const appReducer = createReducer(
         ...state,
         editTaskModalVisible
     })),
-    on(Actions.selectBoard, (state, { boardName }) => ({
+    on(Actions.toggleAddNewTask, (state, { addNewTaskModalVisible }) => ({
         ...state,
-        currentBoard: state.boards.filter(b => b.name === boardName)[0].name
+        addNewTaskModalVisible
+    })),
+    on(Actions.selectBoard, (state, { boardId }) => ({
+        ...state,
+        currentBoardId: state.boards.filter(b => b.id === boardId)[0].id
     })),
     on(Actions.changeTheme, (state, { theme }) => ({
         ...state,
@@ -106,22 +108,13 @@ export const appReducer = createReducer(
         ...state,
         addNewColumnModalVisible
     })),
-    on(Actions.editColumn, (state, { editColumnModalVisible, column }) => ({
-        ...state,
-        editColumnModalVisible,
-        currentColumn: column?.name
-    })),
-    on(Actions.updateColumnName, (state, { currentColumn, currentColumnName, latestColumnName }) => ({
+    on(Actions.updateColumnName, (state, { currentColumn, latestColumnName }) => ({
         ...state,
         boards: state.boards.map(b => {
-            if (b.name === currentColumn.parentBoardName) {
+            if (b.id === currentColumn.parentBoardId) {
                 const updatedColumns = b.columns?.map(c => {
-                    if (c.name === currentColumnName) {
-                        const updatedTasks = c.tasks?.map(t => {
-                            const updatedSubtasks = t.subtasks?.map(st => ({ ...st, parentColumnName: latestColumnName }))
-                            return { ...t, subtasks: updatedSubtasks, parentColumnName: latestColumnName }
-                        })
-                        return { ...c, name: latestColumnName, tasks: updatedTasks };
+                    if (c.id === currentColumn.id) {
+                        return { ...c, name: latestColumnName };
                     }
                     return c;
                 })
@@ -129,16 +122,16 @@ export const appReducer = createReducer(
             }
             return b;
         }),
-        currentColumn: latestColumnName
+        currentColumn: currentColumn.id
     })),
     on(Actions.addNewSubTask, (state, { subtask }) => ({
         ...state,
         boards: state.boards.map(b => {
-            if (b.name === subtask.parentBoardName && b.columns) {
+            if (b.id === subtask.parentBoardId && b.columns) {
                 const updatedColumns = b.columns.map(c => {
-                    if (c.name === subtask.parentColumnName && c.tasks) {
+                    if (c.id === subtask.parentColumnId && c.tasks) {
                         const updatedTasks = c.tasks.map(t => {
-                            if (t.title === subtask.parentTaskTitle) {
+                            if (t.id === subtask.parentTaskId) {
                                 const updatedSubtasks = t.subtasks ? [...t.subtasks, subtask] : [subtask]
                                 return { ...t, subtasks: updatedSubtasks };
                             }
@@ -158,16 +151,17 @@ export const appReducer = createReducer(
         viewTaskModalVisible,
         currentTask: task
     })),
-    on(Actions.updateTaskStatus, (state, { task, status }) => ({
+    on(Actions.updateTaskParentColumn, (state, { task, newColumnId }) => ({
         ...state,
+        currentTask: { ...state.currentTask!, parentColumnId: newColumnId },
         boards: state.boards.map(b => {
-            if (b.name === task.parentBoardName) {
+            if (b.id === task.parentBoardId) {
                 const updatedColumns = b.columns?.map(c => {
-                    if (c.name === task.parentColumnName) {
-                        const updatedTasks = c.tasks?.filter(t => t.title !== task.title);
+                    if (c.id === task.parentColumnId) {
+                        const updatedTasks = c.tasks?.filter(t => t.id !== task.id);
                         return { ...c, tasks: updatedTasks };
-                    } else if (c.name === status) {
-                        const updatedTasks = c.tasks ? [...c.tasks, { ...task, parentColumnName: status }] : [{ ...task, parentColumnName: status }];
+                    } else if (c.id === newColumnId) {
+                        const updatedTasks = c.tasks ? [...c.tasks, { ...task, parentColumnId: newColumnId }] : [{ ...task, parentColumnId: newColumnId }];
                         return { ...c, tasks: updatedTasks };
                     }
                     return c;
@@ -179,21 +173,14 @@ export const appReducer = createReducer(
     })),
     on(Actions.updateSubtasksStatus, (state, { task }) => ({
         ...state,
+        currentTask: task,
         boards: state.boards.map(b => {
-            if (b.name === task.parentBoardName) {
+            if (b.id === task.parentBoardId) {
                 const updatedColumns = b.columns?.map(c => {
-                    if (c.name === task.parentColumnName) {
+                    if (c.id === task.parentColumnId) {
                         const updatedTasks = c.tasks?.map(t => {
-                            if (t.title === task.title) {
-                                const updatedSubtasks = t.subtasks?.map(st => {
-                                    const updatedSubtask = task.subtasks?.filter(tst => tst.title === st.title)[0];
-                                    if (updatedSubtask) {
-                                        return { ...st, ...updatedSubtask };
-                                    } else {
-                                        return st
-                                    }
-                                })
-                                return { ...t, subtasks: updatedSubtasks };
+                            if (t.id === task.id) {
+                                return { ...t, subtasks: task.subtasks };
                             }
                             return t;
                         })
@@ -206,15 +193,15 @@ export const appReducer = createReducer(
             return b;
         })
     })),
-    on(Actions.deleteTask, (state, { task }) => ({
+    on(Actions.deleteTask, (state, { task, viewTaskModalVisible }) => ({
         ...state,
         currentTask: null,
-        viewTaskModalVisible: false,
+        viewTaskModalVisible: viewTaskModalVisible ?? state.viewTaskModalVisible,
         boards: state.boards.map(b => {
-            if (b.name === task?.parentBoardName) {
+            if (b.id === task?.parentBoardId) {
                 const updatedColumns = b.columns?.map(c => {
-                    if (c.name === task.parentColumnName) {
-                        const updatedTasks = c.tasks?.filter(t => t.title !== task.title);
+                    if (c.id === task.parentColumnId) {
+                        const updatedTasks = c.tasks?.filter(t => t.id !== task.id);
                         return { ...c, tasks: updatedTasks };
                     }
                     return c;
@@ -224,15 +211,15 @@ export const appReducer = createReducer(
             return b;
         })
     })),
-    on(Actions.updateTask, (state, { previousTask, updatedTask }) => ({
+    on(Actions.updateTask, (state, { task }) => ({
         ...state,
-        currentTask: updatedTask,
+        currentTask: task,
         boards: state.boards.map(b => {
-            if (b.name === previousTask.parentBoardName) {
+            if (b.id === task.parentBoardId) {
                 const updatedColumns = b.columns?.map(c => {
-                    if (c.name === previousTask.parentColumnName) {
-                        const filteredTaskAfterRemovingPreviousTask = c.tasks?.filter(t => t.title !== previousTask.title) || [];
-                        return { ...c, tasks: [...filteredTaskAfterRemovingPreviousTask, updatedTask] }
+                    if (c.id === task.parentColumnId) {
+                        const filteredTaskAfterRemovingPreviousTask = c.tasks?.filter(t => t.id !== task.id) || [];
+                        return { ...c, tasks: [...filteredTaskAfterRemovingPreviousTask, task] }
                     }
                     return c;
                 })
@@ -241,19 +228,28 @@ export const appReducer = createReducer(
             return b;
         })
     })),
-    on(Actions.updateBoard, (state, { previousBoardName, latestBoardName, columns }) => ({
+    on(Actions.updateBoard, (state, { boardId, latestBoardName, columns }) => ({
         ...state,
         viewTaskModalVisible: false,
-        currentBoard: latestBoardName,
+        currentBoard: boardId,
         boards: state.boards.map(b => {
-            if (b.name === previousBoardName) {
-                const updatedColumns = b.columns?.map(c => {
-                    const latestData = columns?.filter(col => col.previousName === c.name)[0];
+            if (b.id === boardId) {
+                let updatedColumns = b.columns?.map(c => {
+                    let latestData!: { id: string, name: string, parentBoardId: string };
+                    columns = columns?.filter(col => {
+                        if (col.id === c.id) {
+                            latestData = col;
+                            return false;
+                        }
+                        return true;
+                    });
                     if (latestData) {
-                        return { ...c, name: latestData.latestName, parentBoardName: latestBoardName };
+                        return { ...c, name: latestData.name };
                     }
-                    return { ...c, parentBoardName: latestBoardName };
+                    return { ...c };
+                    // return { ...c, parentBoardName: latestBoardName };
                 })
+                if (columns) updatedColumns?.push(...columns);
                 return { ...b, columns: updatedColumns, name: latestBoardName }
             }
             return b;
@@ -261,8 +257,8 @@ export const appReducer = createReducer(
     })),
     on(Actions.setCurrentTask, (state, { task }) => ({
         ...state,
-        currentTask: state.boards.filter(b => b.name === task.parentBoardName)[0]
-            .columns?.filter(c => c.name === task.parentColumnName)[0]
-            .tasks?.filter(t => t.title === task.title)[0]
+        currentTask: state.boards.filter(b => b.id === task.parentBoardId)[0]
+            .columns?.filter(c => c.id === task.parentColumnId)[0]
+            .tasks?.filter(t => t.id === task.id)[0]
     }))
 );

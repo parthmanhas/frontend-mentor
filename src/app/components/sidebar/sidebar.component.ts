@@ -1,11 +1,7 @@
 import { Component, EventEmitter, HostBinding, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { createBoardModalVisible, selectBoard } from "src/app/state/app.actions";
-import { AppState } from "src/app/state/app.state";
-
-type Board = {
-    name: String;
-}
+import { changeTheme, createBoardModalVisible, selectBoard } from "src/app/state/app.actions";
+import { AppState, Board } from "src/app/state/app.state";
 
 const mockedBoard = [
     { name: 'Platform Launch' },
@@ -40,18 +36,21 @@ export class SidebarComponent {
 
     public hide = false;
 
-    public boardList: Board[] = mockedBoard;
+    public boardList!: Board[];
     public isActive = -1;
+    public activeBoardId!: string | null;
+    public theme: boolean = false;
 
     constructor(private store: Store<{ app: AppState }>) {
         this.store.select(state => state).subscribe(state => {
             this.boardList = state.app.boards;
+            this.activeBoardId = state.app.currentBoardId;
         });
     }
 
     setActive(index: number): void {
         this.isActive = index;
-        this.store.dispatch(selectBoard({ boardName: this.boardList[index].name as string }));
+        this.store.dispatch(selectBoard({ boardId: this.boardList[index].id }));
     }
 
     hideSidebar() {
@@ -61,6 +60,10 @@ export class SidebarComponent {
 
     openCreateBoardModal() {
         this.store.dispatch(createBoardModalVisible({ createBoardModalVisible: true }));
+    }
+
+    changeTheme(value: boolean) {
+        this.store.dispatch(changeTheme({ theme: value ? 'dark' : 'light' }))
     }
 
 }

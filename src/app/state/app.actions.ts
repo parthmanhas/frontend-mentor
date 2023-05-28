@@ -8,9 +8,9 @@ export const changeTheme = createAction('[Sidebar] Change Theme', props<{ theme:
 export const addBoard = createAction('[Board] Add Board', props<{ board: Board }>());
 export const deleteBoard = createAction('[Board] Delete Board', props<{ board: Board }>());
 export const editBoard = createAction('[Board] Edit Board', props<{ editBoardModalVisible: boolean }>());
-export const selectBoard = createAction('[Board] Select Board', props<{ boardName: string }>());
+export const selectBoard = createAction('[Board] Select Board', props<{ boardId: string }>());
 export const createBoardModalVisible = createAction('[Board] Display create board modal', props<{ createBoardModalVisible: boolean }>());
-export const updateBoard = createAction('[Board] Update Board', props<{ previousBoardName: string, latestBoardName: string, columns?: [{ previousName: string, latestName: string }] }>());
+export const updateBoard = createAction('[Board] Update Board', props<{ boardId: string, latestBoardName: string, columns?: { id: string, name: string, parentBoardId: string }[] }>());
 
 // sidebar actions
 export const toggleSidebar = createAction('[Sidebar] Toggle Sidebar', props<{ sidebarVisible: boolean }>());
@@ -19,18 +19,18 @@ export const toggleSidebar = createAction('[Sidebar] Toggle Sidebar', props<{ si
 export const addColumn = createAction('[Board] Add Column', props<{ columns: Column[] }>());
 export const addNewColumnModalVisible = createAction('[Board] Add New Column Modal', props<{ addNewColumnModalVisible: boolean }>());
 export const deleteColumn = createAction('[Board] Delete Column', props<{ column: Column }>());
-export const editColumn = createAction('[Board] Edit Column', props<{ editColumnModalVisible: boolean, column?: Column }>());
 export const updateColumnName = createAction('[Board] Update Column', props<{ currentColumn: Column, currentColumnName: string, latestColumnName: string }>());
 
 // task actions
-export const addNewTask = createAction('[AddNewTask] Add new task', props<{ task: Task }>());
+export const addNewTask = createAction('[AddNewTask] Add new task', props<{ task: Task, addNewTaskModalVisible?: boolean }>());
 export const updateTaskTitle = createAction('[updateTaskTitle] Update task title', props<{ task: Task, title: string }>());
 export const updateTaskDescription = createAction('[updateTaskDescription] Update task description', props<{ task: Task, description: string }>());
-export const updateTaskStatus = createAction('[updateTaskStatus] Update task status', props<{ task: Task, status: string }>());
-export const updateTask = createAction('[updateTask] Update task', props<{ previousTask: Task, updatedTask: Task }>());
+export const updateTaskParentColumn = createAction('[updateTaskParentColumn] Update task parent column', props<{ task: Task, newColumnId: string }>());
+export const updateTask = createAction('[updateTask] Update task', props<{ task: Task }>());
 export const toggleViewTask = createAction('[toggleViewTask] Toggle view status', props<{ viewTaskModalVisible: boolean, task: Task | null }>());
-export const toggleEditTask = createAction('[toggleEditTask] Toggle edit task', props<{ editTaskModalVisible: boolean, task: Task | null | undefined }>());
-export const deleteTask = createAction('[deleteTask] Delete Task', props<{ task: Task }>());
+export const toggleEditTask = createAction('[toggleEditTask] Toggle edit task', props<{ editTaskModalVisible: boolean }>());
+export const toggleAddNewTask = createAction('[toggleAddNewTask] Toggle add new task', props<{ addNewTaskModalVisible: boolean }>());
+export const deleteTask = createAction('[deleteTask] Delete Task', props<{ task: Task, viewTaskModalVisible?: boolean }>());
 export const setCurrentTask = createAction('[setCurrentTask] Set Current task', props<{ task: Task }>());
 
 
