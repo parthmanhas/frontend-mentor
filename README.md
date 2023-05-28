@@ -9,3 +9,4 @@ URL: https://beautiful-fenglisu-74d90d.netlify.app/
 - [ ] add backend
 - [ ] fix tablet design
 - [ ] fix mobile design
+- [ ] remove duplicated code in scss
