@@ -62,5 +62,6 @@ export class AddNewBoardComponent extends BaseModalComponent<TForm> {
 
     override submitWhenFormValid(): void {
         this.store.dispatch(addBoard({ board: this.form.value as Board }));
+        this.store.dispatch(createBoardModalVisible({ createBoardModalVisible: false }));
     }
 }
