@@ -7,7 +7,7 @@
 <div *ngIf="!currentBoard && minOneBoardAvailable" class="empty-board"
     [class.empty-board-sidebar-open]="!sidebarVisible">
     <p class="pb-1 semi-bold grey-medium-50-text">No board selected. Select a board or create a new board</p>
-    <button class="btn btn-primary">+ Add New Board</button>
+    <button (click)="openCreateBoardModal()" class="btn btn-primary">+ Add New Board</button>
 </div>
 
 <div *ngIf="currentBoard && !minOneColumnAvailable" class="empty-board"

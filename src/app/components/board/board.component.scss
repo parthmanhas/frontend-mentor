@@ -15,20 +15,20 @@
 }
 
 :host.dark-theme {
-    background: #20212C;
+    background: #20212c;
     .column-heading > p {
-        color: #828FA3 !important;
+        color: #828fa3 !important;
     }
     .empty-board {
-        background: #20212C;
+        background: #20212c;
         & > p {
-            color: #828FA3 !important;
+            color: #828fa3 !important;
         }
     }
     .add-new-column {
         background-color: rgba(43, 44, 55, 0.25);
         & h2 {
-            color: #828FA3 !important;
+            color: #828fa3 !important;
         }
         &:hover {
             h2 {
@@ -37,13 +37,13 @@
         }
     }
     .task {
-        background-color: #2B2C37;
+        background-color: #2b2c37;
         box-shadow: none;
         .task-heading {
             color: white;
         }
         .task-subheading {
-            color: #828FA3 !important;
+            color: #828fa3 !important;
         }
         &:hover {
             p {
@@ -62,8 +62,16 @@
     transition: 0.5s;
 }
 
-.empty-board-sidebar-open {
-    transform: translateX(-15vw);
+@media (min-width: 768px) and (max-width: 1024px) {
+    .empty-board-sidebar-open {
+        transform: translateX(0) !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .empty-board-sidebar-open {
+        transform: translateX(-15vw);
+    }
 }
 
 .lane {

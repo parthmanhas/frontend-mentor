@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { MOBILE_MAX_WIDTH, TAB_MIN_WIDTH, TAB_MAX_WIDTH } from "src/app/constants/constants";
 import { addNewColumnModalVisible, createBoardModalVisible, toggleViewTask, updateTaskParentColumn } from "src/app/state/app.actions";
 import { AppState, Board, Column, Task } from "src/app/state/app.state";
 
@@ -11,9 +12,18 @@ import { AppState, Board, Column, Task } from "src/app/state/app.state";
 export class BoardComponent {
 
     public sidebarVisible = false;
+    public isMobile = false;
 
     @HostBinding('style')
     get translateBoard() {
+        // get current size of window
+        const windowWidth = window.innerWidth;
+
+        if (this.isMobile) {
+            return;
+        }
+
+
         if (this.sidebarVisible) {
             return {
                 transform: 'translateX(0)'
@@ -21,7 +31,7 @@ export class BoardComponent {
         }
         else {
             return {
-                transform: 'translateX(15vw)'
+                transform: windowWidth >= TAB_MIN_WIDTH && windowWidth <= TAB_MAX_WIDTH && this.minOneColumnAvailable ? 'translateX(30vw)' : 'translateX(15vw)'
             }
         }
     }
@@ -36,6 +46,7 @@ export class BoardComponent {
             this.sidebarVisible = state.app.sidebarVisible;
             this.minOneBoardAvailable = state.app.boards.length > 0;
             this.minOneColumnAvailable = (this.currentBoard?.columns?.length ?? -1) > 0;
+            this.isMobile = state.app.isMobile || false;
         });
 
     }
