@@ -36,6 +36,21 @@
     }
 }
 
+@media (max-width: 767px) {
+    .edit-board-container {
+        width: 60vw !important;
+        max-width: 60vw !important;
+    }
+}
+
+// between 768px and 1024px
+@media (min-width: 768px) and (max-width: 1024px) {
+    .edit-board-container {
+        max-width: 40vw !important;
+        width: 40vw !important;
+    }
+}
+
 .edit-board-container {
     background-color: white;
     padding: 2rem;
