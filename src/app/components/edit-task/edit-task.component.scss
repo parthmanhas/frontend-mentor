@@ -59,6 +59,18 @@
     }
 }
 
+@media (max-width: 767px) {
+    .container {
+        width: 70vw !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        width: 40vw !important;
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
