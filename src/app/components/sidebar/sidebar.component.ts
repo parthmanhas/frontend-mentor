@@ -1,13 +1,8 @@
-import { Component, EventEmitter, HostBinding, Output } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { changeTheme, createBoardModalVisible, selectBoard } from "src/app/state/app.actions";
+import { MOBILE_MAX_WIDTH } from "src/app/constants/constants";
+import { createBoardModalVisible, selectBoard } from "src/app/state/app.actions";
 import { AppState, Board } from "src/app/state/app.state";
-
-const mockedBoard = [
-    { name: 'Platform Launch' },
-    { name: 'Marketing Plan' },
-    { name: 'Roadmap' },
-]
 
 @Component({
     selector: 'app-sidebar',
@@ -16,18 +11,30 @@ const mockedBoard = [
 })
 export class SidebarComponent {
 
+    public isMobile = false;
+
     @Output()
     hideSidebarEvent = new EventEmitter<boolean>();
 
 
     @HostBinding('style')
     get hideSidebarPosition() {
+
+        if (this.isMobile && !this.sidebarVisible) {
+            return {
+                transform: 'translate(-50%, -200%)'
+            }
+        } else if (this.isMobile && this.sidebarVisible) {
+            return {
+                transform: 'translate(-50%, 0%)'
+            }
+        }
+
         if (this.hide) {
             return {
                 transform: 'translateX(-100%)'
             }
-        }
-        else {
+        } else {
             return {
                 transform: 'translateX(0)'
             }
@@ -39,12 +46,18 @@ export class SidebarComponent {
     public boardList!: Board[];
     public isActive = -1;
     public activeBoardId!: string | null;
-    public theme: boolean = false;
+    public theme: string = 'light';
+    public sidebarVisible = false;
 
-    constructor(private store: Store<{ app: AppState }>) {
+    constructor(private store: Store<{ app: AppState }>, private elementRef: ElementRef) {
         this.store.select(state => state).subscribe(state => {
             this.boardList = state.app.boards;
             this.activeBoardId = state.app.currentBoardId;
+            this.theme = state.app.theme
+            this.sidebarVisible = state.app.sidebarVisible;
+            this.isMobile = state.app.isMobile || false;
+            this.elementRef.nativeElement.style.top = `${state.app.mobileCss?.top}px`;
+            console.log(this.elementRef.nativeElement.style)
         });
     }
 
@@ -62,8 +75,6 @@ export class SidebarComponent {
         this.store.dispatch(createBoardModalVisible({ createBoardModalVisible: true }));
     }
 
-    changeTheme(value: boolean) {
-        this.store.dispatch(changeTheme({ theme: value ? 'dark' : 'light' }))
-    }
+
 
 }

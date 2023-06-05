@@ -9,7 +9,8 @@
 <div class="board-list">
     <p class="s semi-bold heading">ALL BOARDS ({{boardList.length}})</p>
     <ul>
-        <li *ngFor="let board of boardList; let i = index" [class.active]="board.id === activeBoardId" (click)="setActive(i)">
+        <li *ngFor="let board of boardList; let i = index" [class.active]="board.id === activeBoardId"
+            (click)="setActive(i)">
             <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M0 2.889A2.889 2.889 0 0 1 2.889 0H13.11A2.889 2.889 0 0 1 16 2.889V13.11A2.888 2.888 0 0 1 13.111 16H2.89A2.889 2.889 0 0 1 0 13.111V2.89Zm1.333 5.555v4.667c0 .859.697 1.556 1.556 1.556h6.889V8.444H1.333Zm8.445-1.333V1.333h-6.89A1.556 1.556 0 0 0 1.334 2.89V7.11h8.445Zm4.889-1.333H11.11v4.444h3.556V5.778Zm0 5.778H11.11v3.11h2a1.556 1.556 0 0 0 1.556-1.555v-1.555Zm0-7.112V2.89a1.555 1.555 0 0 0-1.556-1.556h-2v3.111h3.556Z"
@@ -27,14 +28,7 @@
         </li>
     </ul>
 </div>
-<div class="select-theme mb-1">
-    <img src="assets/icon-light-theme.svg" alt="">
-    <label class="toggle-switch">
-        <input type="checkbox" [(ngModel)]="theme" (ngModelChange)="changeTheme($event)">
-        <span class="slider"></span>
-    </label>
-    <img src="assets/icon-dark-theme.svg" alt="">
-</div>
+<app-slider [class.dark-theme]="theme === 'dark'" class="mb-1"></app-slider>
 <div class="hide-sidebar-container mb-1" (click)="hideSidebar()">
     <svg width="18" height="16" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -43,7 +37,6 @@
     </svg>
     <p class="semi-bold">Hide Sidebar</p>
 </div>
-
 <div class="show-sidebar-container p-1" (click)="hideSidebar()" [class.hide-animate]="!hide">
     <svg width="16" height="11" xmlns="http://www.w3.org/2000/svg">
         <path
