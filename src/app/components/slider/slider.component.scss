@@ -1,0 +1,68 @@
+@import "../../../scss/colors";
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: $grey-light;
+    padding: 1rem;
+    border-radius: 5px;
+    height: 4rem;
+}
+
+:host.dark-theme {
+    background-color: #20212c;
+}
+
+.toggle-switch {
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $purple-dark;
+    border-radius: 4rem;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.5rem;
+    width: 1.5rem;
+    left: 0.3rem;
+    bottom: 0.3rem;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: $purple-dark;
+}
+
+input:checked + .slider:before {
+    transform: translateX(1.85rem);
+}
+
+.select-theme {
+    & img {
+        height: 3vh;
+        width: 3vh;
+    }
+}
