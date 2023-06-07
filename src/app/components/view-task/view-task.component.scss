@@ -62,8 +62,8 @@
     }
 
     .task-options-modal {
-        background-color: #20212C;
-        border: 1px solid #383A4D;
+        background-color: #20212c;
+        border: 1px solid #383a4d;
         & > p:nth-child(1) {
             color: rgb(130, 143, 163) !important;
         }
@@ -74,6 +74,12 @@
         .btn-secondary {
             background-color: white;
         }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        width: 35vw !important;
     }
 }
 
@@ -233,8 +239,10 @@ svg {
         cursor: pointer;
     }
     box-sizing: content-box;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    @media (min-width: 769px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 
 .grey {
@@ -278,6 +286,22 @@ svg {
     align-items: center;
     flex-direction: column;
     background-color: $black-50;
+}
+
+@media (max-width: 767px) {
+    .container {
+        width: 60vw !important;
+        min-height: 40vh !important;
+    }
+    .confirm-delete-task-container {
+        max-width: 70vw !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .confirm-delete-task-container {
+        max-width: 35vw !important;
+    }
 }
 
 .confirm-delete-task-container {
