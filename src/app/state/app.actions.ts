@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Board, Column, Subtask, Task } from './app.state';
+import { Board, Column, MobileCss, Subtask, Task } from './app.state';
 
 // application actions
 export const changeTheme = createAction('[Sidebar] Change Theme', props<{ theme: string }>());
@@ -19,7 +19,7 @@ export const toggleSidebar = createAction('[Sidebar] Toggle Sidebar', props<{ si
 export const addColumn = createAction('[Board] Add Column', props<{ columns: Column[] }>());
 export const addNewColumnModalVisible = createAction('[Board] Add New Column Modal', props<{ addNewColumnModalVisible: boolean }>());
 export const deleteColumn = createAction('[Board] Delete Column', props<{ column: Column }>());
-export const updateColumnName = createAction('[Board] Update Column', props<{ currentColumn: Column, currentColumnName: string, latestColumnName: string }>());
+export const updateColumnName = createAction('[Board] Update Column', props<{ column: Column, updatedName: string }>());
 
 // task actions
 export const addNewTask = createAction('[AddNewTask] Add new task', props<{ task: Task, addNewTaskModalVisible?: boolean }>());
@@ -39,3 +39,7 @@ export const addNewSubTask = createAction('[addNewSubTask] Add new sub task', pr
 export const updateSubtaskTitle = createAction('[updateSubtaskTitle] Update Subtask Title', props<{ board: Board, column: Column, task: Task, subtask: Subtask, title: string }>());
 export const updateSubtasksStatus = createAction('[updateSubtasksStatus] Update Subtask status', props<{ task: Task }>());
 // export const updateSubtaskStatus = createAction('[updateSubtaskStatus] Update Subtask Status', props<{ board: Board, column: Column, task: Task, subtask: Subtask, isCompleted: boolean }>());
+
+// mobile
+export const toggleMobile = createAction('[toggleMobile] toggle mobile', props<{ isMobile: boolean }>());
+export const setMobileCss = createAction('[setMobileCss] set css required for mobile', props<{ mobileCss: MobileCss }>());

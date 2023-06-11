@@ -11,7 +11,13 @@ export interface AppState {
     editColumnModalVisible: boolean,
     viewTaskModalVisible: boolean,
     editBoardModalVisible: boolean,
-    editTaskModalVisible: boolean
+    editTaskModalVisible: boolean,
+    isMobile?: boolean,
+    mobileCss?: MobileCss
+}
+
+export interface MobileCss {
+    top: string
 }
 
 export interface Board {
