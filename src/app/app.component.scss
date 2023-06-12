@@ -5,3 +5,12 @@
     height: 100vh;
     overflow: hidden;
 }
+
+.mobile-background {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5450980392);
+    position: absolute;
+    z-index: 0;
+    display: none;
+}

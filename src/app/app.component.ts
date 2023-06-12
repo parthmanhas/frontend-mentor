@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, OnChanges, QueryList, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { AppState } from "./state/app.state";
-import { toggleSidebar } from "./state/app.actions";
+import { AppState, MobileCss } from "./state/app.state";
+import { toggleMobile, toggleSidebar } from "./state/app.actions";
+import { MOBILE_MAX_WIDTH } from "./constants/constants";
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,22 @@ export class AppComponent {
   public editBoardModalVisible = false;
   public editTaskModalVisible = false;
   public theme = 'light';
+  public isMobile = false;
+
+  @ViewChild('mobileBackground')
+  public mobileBackground: ElementRef | undefined;
+
+  mobileCss: MobileCss | undefined;
 
   constructor(private store: Store<{ app: AppState }>) {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= MOBILE_MAX_WIDTH) {
+      this.store.dispatch(toggleMobile({ isMobile: true }));
+    }
+
+  }
+
+  ngAfterViewInit() {
     this.store.select(state => state).subscribe(state => {
       this.createNewBoard = state.app.createBoardModalVisible;
       this.addNewTaskModalVisible = state.app.addNewTaskModalVisible;
@@ -30,6 +45,18 @@ export class AppComponent {
       this.editBoardModalVisible = state.app.editBoardModalVisible;
       this.editTaskModalVisible = state.app.editTaskModalVisible;
       this.theme = state.app.theme
+      this.isMobile = state.app.isMobile || false;
+      this.sidebarVisible = state.app.sidebarVisible;
+      this.mobileCss = state.app.mobileCss;
+      if (this.mobileBackground) {
+        this.mobileBackground.nativeElement.style.top = `${this.mobileCss?.top}px`;
+      }
+
+      if(this.sidebarVisible && this.mobileBackground) {
+        this.mobileBackground.nativeElement.style.display = `block`;
+      } else if (!this.sidebarVisible && this.mobileBackground) {
+        this.mobileBackground.nativeElement.style.display = `none`;
+      }
     });
   }
 

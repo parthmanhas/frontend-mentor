@@ -16,6 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ViewTaskComponent } from './components/view-task/view-task.component';
 import { EditBoardComponent } from './components/edit-board/edit-board.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
     AddNewColumnComponent,
     ViewTaskComponent,
     EditBoardComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
