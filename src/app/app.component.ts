@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnChanges, QueryList, ViewChild } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState, MobileCss } from "./state/app.state";
 import { toggleMobile, toggleSidebar } from "./state/app.actions";
@@ -48,14 +48,10 @@ export class AppComponent {
       this.isMobile = state.app.isMobile || false;
       this.sidebarVisible = state.app.sidebarVisible;
       this.mobileCss = state.app.mobileCss;
-      if (this.mobileBackground) {
+      
+      if (this.mobileBackground && this.isMobile) {
+        this.mobileBackground.nativeElement.style.display = this.sidebarVisible ? 'block' : 'none';
         this.mobileBackground.nativeElement.style.top = `${this.mobileCss?.top}px`;
-      }
-
-      if(this.sidebarVisible && this.mobileBackground) {
-        this.mobileBackground.nativeElement.style.display = `block`;
-      } else if (!this.sidebarVisible && this.mobileBackground) {
-        this.mobileBackground.nativeElement.style.display = `none`;
       }
     });
   }

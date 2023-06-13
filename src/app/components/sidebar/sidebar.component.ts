@@ -56,8 +56,9 @@ export class SidebarComponent {
             this.theme = state.app.theme
             this.sidebarVisible = state.app.sidebarVisible;
             this.isMobile = state.app.isMobile || false;
-            this.elementRef.nativeElement.style.top = `${state.app.mobileCss?.top}px`;
-            console.log(this.elementRef.nativeElement.style)
+            if (this.isMobile) {
+                this.elementRef.nativeElement.style.top = `${state.app.mobileCss?.top}px`;
+            }
         });
     }
 
