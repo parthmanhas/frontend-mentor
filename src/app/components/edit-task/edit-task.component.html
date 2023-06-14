@@ -8,7 +8,7 @@
     <div class="description-container mb-1">
         <textarea formControlName="description" class="bold grey-medium-50-text mr-1"></textarea>
     </div>
-    <p class="bold grey-medium-50-text">{{task.subtasks?.length === 0 ? 'No Subtasks' : 'Subtasks'}}</p>
+    <p class="bold grey-medium-50-text">{{task?.subtasks?.length === 0 ? 'No Subtasks' : 'Subtasks'}}</p>
     <div *ngIf="(task?.subtasks?.length ?? 0) > 0" class="subtasks-container mt-1">
         <div class="subtask mb-1" *ngFor="let subtaskFormGroup of subtasks.controls; let i = index">
             <ng-container [formGroup]="subtaskFormGroup">
@@ -30,7 +30,7 @@
     <button class="btn btn-secondary" (click)="addSubtask()">+ Add New Subtask</button>
     <div class="status-container mt-1">
         <p class="bold grey-medium-50-text">Status</p>
-        <div class="status-dropdown semi-bold" [class.purple-border]="isDropdownOpen" (click)="toggleDropdown()">
+        <div class="status-dropdown semi-bold" [class.purple-border]="isDropdownOpen" (click)="toggleDropdown()" (keydown.enter)="toggleDropdown()" tabindex="0">
             <div class="selected-option" [formGroup]="getActiveDropDownOptionFormGroup()">
                 <input formControlName="name" readonly />
                 <svg *ngIf="!isDropdownOpen" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +43,7 @@
         </div>
         <div class="dropdown" *ngIf="isDropdownOpen">
             <div class="option" *ngFor="let optionFormGroup of getInActiveDropDownOptionsFormArray(); let i = index;"
-                (click)="selectOption(getOptionId(optionFormGroup))">
+                (click)="selectOption(getOptionId(optionFormGroup))" (keydown.enter)="selectOption(getOptionId(optionFormGroup))" tabindex="0">
                 {{getOptionName(optionFormGroup)}}
             </div>
         </div>

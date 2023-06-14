@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState, MobileCss } from "./state/app.state";
 import { toggleMobile, toggleSidebar } from "./state/app.actions";
@@ -9,7 +9,7 @@ import { MOBILE_MAX_WIDTH } from "./constants/constants";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'kanban';
   public sidebarVisible = false;
   public addNewTaskModalVisible: boolean | undefined = false;

@@ -1,5 +1,4 @@
-import { Component, Output, EventEmitter, ElementRef, AfterViewInit } from "@angular/core";
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, ElementRef, AfterViewInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { deleteBoard, editBoard, setMobileCss, toggleAddNewTask, toggleSidebar } from "src/app/state/app.actions";
 import { AppState, Board } from "src/app/state/app.state";
@@ -40,7 +39,11 @@ export class NavbarComponent implements AfterViewInit {
 
     deleteBoard() {
         this.deleteBoardModalVisible = false;
-        this.store.dispatch(deleteBoard({ board: this.currentBoard! }));
+        if (!this.currentBoard) {
+            console.error('No board selected!');
+            return;
+        }
+        this.store.dispatch(deleteBoard({ board: this.currentBoard }));
     }
 
     showEditBoardModal() {

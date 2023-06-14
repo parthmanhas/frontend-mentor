@@ -30,7 +30,7 @@
         <div class="column-edit-options">
         </div>
     </div>
-    <div *ngFor="let task of column.tasks" draggable="true" (dragstart)="onDragStart($event, task)" class="task p-2 mb-1" (click)="openViewTaskModal(task)">
+    <div *ngFor="let task of column.tasks" draggable="true" (dragstart)="onDragStart($event, task)" class="task p-2 mb-1" (click)="openViewTaskModal(task)" (keydown.enter)="openViewTaskModal(task)" tabindex="0">
         <p class="task-heading bold">{{task.title}}</p>
         <p *ngIf="(task?.subtasks?.length ?? 0) > 0" class="task-subheading grey-medium-50-text bold">
             {{ getCompletedSubtasksCount(task) }} of {{ task?.subtasks?.length }} subtasks done
@@ -38,7 +38,7 @@
         <p *ngIf="!task?.subtasks" class="task-subheading grey-medium-50-text bold">No subtasks</p>
     </div>
 </div>
-<div *ngIf="currentBoard && minOneColumnAvailable" (click)="openAddNewColumnModal()" class="lane mr-2">
+<div *ngIf="currentBoard && minOneColumnAvailable" (click)="openAddNewColumnModal()" (keydown.enter)="openAddNewColumnModal()" tabindex="0" class="lane mr-2">
     <div class="p-1">
         <p class="mb-1 grey-light-text bold"></p>
     </div>

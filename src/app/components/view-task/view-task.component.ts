@@ -1,30 +1,10 @@
 import { Component } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from "@angular/forms";
+import { FormControl, Validators, FormBuilder } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { deleteTask, toggleEditTask, toggleViewTask, updateSubtasksStatus, updateTask, updateTaskParentColumn } from "src/app/state/app.actions";
 import { AppState, Board, Subtask, Task } from "src/app/state/app.state";
 import { BaseModalComponent } from "../base-modal/base-modal.component";
-
-type TSelectedOption = FormGroup<{
-    name: FormControl<string | null>,
-    columnId: FormControl<string | null>
-}>
-
-type TSubtask = FormGroup<{
-    id: FormControl<string | null>,
-    title: FormControl<string | null>,
-    isCompleted: FormControl<boolean | null>,
-    parentTaskId: FormControl<string | null>,
-    parentColumnId: FormControl<string | null>,
-    parentBoardId: FormControl<string | null>,
-}>
-
-type TForm = {
-    title: FormControl<string | null>,
-    description: FormControl<string | null>,
-    subtasks: FormArray<TSubtask>,
-    selectedOption: TSelectedOption
-}
+import { TForm, TSubtask } from "./view-task.types";
 
 @Component({
     selector: 'app-view-task',
@@ -33,13 +13,6 @@ type TForm = {
 })
 export class ViewTaskComponent extends BaseModalComponent<TForm> {
     override whenClickOccuredOutsideModal(): void {
-        // if (this.task?.parentColumnId !== this.selectedOption.controls.columnId.value) {
-        //     this.store.dispatch(updateTaskParentColumn({ task: this.task!, newColumnId: this.selectedOption.controls.columnId.value! }));
-        // }
-        // // this.task.subtasks = this.task.subtasks?.map(st => {
-        // //     if (this.form.value.subtasks?.filter(formValueSt => formValueSt.))
-        // // })
-        // this.store.dispatch(updateSubtasksStatus({ task: { ...this.task!, subtasks: [...(this.form.value.subtasks || []), ...(this.task.subtasks || [])] as Subtask[] } }));
         this.store.dispatch(toggleViewTask({ viewTaskModalVisible: false, task: this.task }));
     }
     override checkIfOutsideModalClicked(target: EventTarget | null): boolean {
@@ -54,12 +27,12 @@ export class ViewTaskComponent extends BaseModalComponent<TForm> {
         throw new Error("Method not implemented.");
     }
 
-    public task!: Task;
+    public task: Task | null = null;
     public completeSubtasks: Subtask[] = [];
     public incompleteSubtasks: Subtask[] = [];
-    public currentBoard!: Board;
+    public currentBoard: Board | null = null;
     public showOptionsModal = false;
-    public theme!: string;
+    public theme: string | undefined;
 
     public options: { columnId: string, name: string }[] | undefined = undefined;
 
@@ -70,7 +43,9 @@ export class ViewTaskComponent extends BaseModalComponent<TForm> {
         this.store.select(state => state).subscribe(state => {
             if (!state.app.currentTask) return;
             this.theme = state.app.theme;
-            this.task = state.app.currentTask;
+            if (state.app.currentTask) {
+                this.task = state.app.currentTask;
+            }
             this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
             this.options = this.currentBoard.columns?.map(c => ({ columnId: c.id, name: c.name }));
             const selectedOption = this.options?.filter(option => option.columnId === this.task?.parentColumnId)[0];
@@ -83,18 +58,22 @@ export class ViewTaskComponent extends BaseModalComponent<TForm> {
                     columnId: ['', Validators.required]
                 })
             })
+            if (!this.task) {
+                console.error('Task should not be empty');
+                return;
+            }
             this.form.controls.title.setValue(this.task.title);
             this.form.controls.description.setValue(this.task.description);
             this.form.controls.selectedOption.setValue({
-                name: selectedOption?.name!,
-                columnId: selectedOption?.columnId!
-            })
-            // this.form.get('selectedOption')?.get('name')?.setValue(selectedOption?.name);
-            // this.form.get('selectedOption')?.get('columnId')?.setValue(selectedOption?.columnId);
-            // this.form.get('title')?.setValue(this.task?.title);
-            // this.form.get('description')?.setValue(this.task?.description);
+                name: selectedOption?.name || '',
+                columnId: selectedOption?.columnId || ''
+            });
             this.subtasksFormArray.clear();
             this.task?.subtasks?.forEach((subtask) => {
+                if (!this.task) {
+                    console.error('Task should not be empty');
+                    return;
+                }
                 this.subtasksFormArray.push(this.formBuilder.group({
                     id: [subtask.id],
                     isCompleted: [subtask.isCompleted],
@@ -131,14 +110,21 @@ export class ViewTaskComponent extends BaseModalComponent<TForm> {
     }
 
     selectOption(option: { columnId: string, name: string }) {
-        console.log(option)
+        if (!this.task) {
+            console.error('No task to update');
+            return;
+        }
         this.isDropdownOpen = false;
         this.selectedOption?.setValue(option);
         this.store.dispatch(updateTaskParentColumn({ task: this.task, newColumnId: option.columnId }));
     }
 
     deleteTask() {
-        this.store.dispatch(deleteTask({ task: this.task!, viewTaskModalVisible: false }));
+        if (!this.task) {
+            console.error('No task to delete');
+            return;
+        }
+        this.store.dispatch(deleteTask({ task: this.task, viewTaskModalVisible: false }));
         this.deleteTaskModalVisible = false;
     }
 
@@ -148,15 +134,13 @@ export class ViewTaskComponent extends BaseModalComponent<TForm> {
     }
 
     toggleCheckbox(subtask: TSubtask): void {
+        if (!this.task) {
+            console.error('No task to update subtask checkbox');
+            return;
+        }
         subtask.controls.isCompleted.setValue(!subtask.controls.isCompleted.value);
-        const subtasks = this.task.subtasks?.map(st => ({ ...st, isCompleted: this.form.value.subtasks?.filter(tst => tst.id === st.id)[0].isCompleted! }));
+        const subtasks = this.task.subtasks?.map(st => ({ ...st, isCompleted: this.form.value.subtasks?.filter(tst => tst.id === st.id)[0].isCompleted || false }));
         this.store.dispatch(updateSubtasksStatus({ task: { ...this.task, subtasks } }));
-        // const subtaskFormGroup = this.subtasksFormArray.at(index);
-        // const isCompletedControl = subtaskFormGroup.controls.isCompleted;
-
-        // if (isCompletedControl) {
-        //     isCompletedControl.setValue(!isCompletedControl.value);
-        // }
     }
 
     showEditTaskModal() {

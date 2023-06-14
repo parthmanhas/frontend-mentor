@@ -1,5 +1,5 @@
-import { Component, HostListener, TemplateRef, ViewChild } from "@angular/core";
-import { AbstractControl, FormArray, FormArrayName, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, HostListener } from "@angular/core";
+import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
 
 @Component({
     template: ''
@@ -7,7 +7,7 @@ import { AbstractControl, FormArray, FormArrayName, FormControl, FormGroup, Vali
 export abstract class BaseModalComponent<T extends { [K in keyof T]: AbstractControl<any, any>; }> {
 
     public form!: FormGroup<T>;
-    public isDropdownOpen: boolean = false;
+    public isDropdownOpen = false;
     public submitted = false;
 
     abstract whenClickOccuredOutsideModal(): void;

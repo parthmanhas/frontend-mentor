@@ -1,20 +1,11 @@
-import { Component, EventEmitter, HostListener, Output } from "@angular/core";
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { addBoard, addColumn, addNewColumnModalVisible } from "src/app/state/app.actions";
+import { addColumn, addNewColumnModalVisible } from "src/app/state/app.actions";
 import { AppState, Board, Column } from "src/app/state/app.state";
 import { v4 as uuidv4 } from 'uuid';
 import { BaseModalComponent } from "../base-modal/base-modal.component";
-
-type TColumn = FormGroup<{
-    id: FormControl<string | null>,
-    name: FormControl<string | null>
-    parentBoardId: FormControl<string | null>
-}>
-
-type TForm = {
-    columns: FormArray<TColumn>
-}
+import { TColumn, TForm } from "./add-new-column.types";
 @Component({
     selector: 'app-add-new-column',
     templateUrl: './add-new-column.component.html',
@@ -46,10 +37,6 @@ export class AddNewColumnComponent extends BaseModalComponent<TForm> {
     }
 
     addColumn() {
-        // const columnFormControl = new FormControl(null, Validators.required);
-        // columnFormControl.valueChanges.subscribe(value => {
-        //     this.submitted = false;
-        // })
         this.form.controls.columns.push(this.formBuilder.group({
             id: [uuidv4(), Validators.required],
             name: ['', Validators.required],
@@ -64,7 +51,7 @@ export class AddNewColumnComponent extends BaseModalComponent<TForm> {
         this.form.controls.columns.removeAt(index);
     }
 
-    getFormControlsArray(): any[] {
+    getFormControlsArray() {
         return Object.keys(this.form.controls);
     }
 

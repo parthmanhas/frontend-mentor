@@ -10,7 +10,7 @@ import { AppState } from "src/app/state/app.state";
 })
 export class SliderComponent {
 
-    public theme: boolean = false;
+    public theme = false;
 
     constructor(private store: Store<{ app: AppState }>) { }
 

@@ -1,29 +1,11 @@
 import { Component } from "@angular/core";
 import { BaseModalComponent } from "../base-modal/base-modal.component";
 import { Store } from "@ngrx/store";
-import { FormControl, FormArray, FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { AppState, Board, Column } from "src/app/state/app.state";
-import { addColumn, deleteColumn, editBoard, selectBoard, updateBoard } from "src/app/state/app.actions";
+import { FormControl, FormBuilder, Validators } from "@angular/forms";
+import { AppState, Board } from "src/app/state/app.state";
+import { deleteColumn, editBoard, updateBoard } from "src/app/state/app.actions";
 import { v4 as uuidv4 } from 'uuid';
-
-
-type TColumn = FormGroup<{
-    id: FormControl<string | null>,
-    name: FormControl<string | null>,
-    parentBoardId: FormControl<string | null>,
-    visible: FormControl<boolean | null>,
-    delete: FormControl<boolean | null>
-}>
-
-type TBoard = FormGroup<{
-    id: FormControl<string | null>,
-    name: FormControl<string | null>
-}>
-
-type TForm = {
-    board: TBoard,
-    columns: FormArray<TColumn>
-}
+import { TBoard, TColumn, TForm } from "./edit-board.types";
 
 @Component({
     selector: 'app-edit-board',
@@ -32,7 +14,7 @@ type TForm = {
 })
 export class EditBoardComponent extends BaseModalComponent<TForm> {
 
-    public currentBoard!: Board;
+    public currentBoard: Board | null = null;
 
     override whenClickOccuredOutsideModal(): void {
         this.store.dispatch(editBoard({ editBoardModalVisible: false }));
@@ -48,15 +30,35 @@ export class EditBoardComponent extends BaseModalComponent<TForm> {
         // console.log(this.form.value)
         const toDelete = this.form.value.columns?.filter(c => c.delete === true);
         const toAdd = this.form.value.columns?.filter(c => c.delete === false);
+        if (!this.currentBoard) {
+            console.error('Board not found while submitting');
+            return;
+        }
+        if (!this.form.value.board?.name) {
+            console.error('Board name is null');
+            return;
+        }
+        if (!toAdd) {
+            console.error('No Column to add');
+            return;
+        }
         this.store.dispatch(
             updateBoard({
-                boardId: this.currentBoard?.id!,
-                latestBoardName: this.form.value.board!.name!,
-                columns: toAdd?.map(c => ({ id: c.id!, name: c.name!, parentBoardId: c.parentBoardId! }))
+                boardId: this.currentBoard.id,
+                latestBoardName: this.form.value.board.name,
+                columns: toAdd.map(c => {
+                    if (!c.id || !c.name || !c.parentBoardId) {
+                        throw new Error('Column id, name or parentBoardId is null');
+                    }
+                    return { id: c.id, name: c.name, parentBoardId: c.parentBoardId };
+                })
             })
         );
         toDelete?.forEach(c => {
-            this.store.dispatch(deleteColumn({ column: { id: c.id!, name: c.name!, parentBoardId: c.parentBoardId! } }));
+            if (!c.id || !c.name || !c.parentBoardId) {
+                throw new Error('Column id, name or parentBoardId is null');
+            }
+            this.store.dispatch(deleteColumn({ column: { id: c.id, name: c.name, parentBoardId: c.parentBoardId } }));
         })
     }
 
@@ -75,6 +77,10 @@ export class EditBoardComponent extends BaseModalComponent<TForm> {
             this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
             this.columns.clear();
             this.currentBoard.columns?.forEach(column => {
+                if (!this.currentBoard) {
+                    console.error('Board not found');
+                    return;
+                }
                 this.columns.push(this.formBuilder.group({
                     id: [column.id, Validators.required],
                     name: [column.name, Validators.required],
@@ -95,10 +101,6 @@ export class EditBoardComponent extends BaseModalComponent<TForm> {
         return this.form.controls.columns;
     }
 
-    // getColumnName(index: number): FormControl {
-    //     return this.columns.at(index).get('name') as FormControl;
-    // }
-
     getColumnName(formGroup: TBoard): FormControl {
         return formGroup.controls.name;
     }
@@ -116,10 +118,14 @@ export class EditBoardComponent extends BaseModalComponent<TForm> {
     }
 
     addColumn() {
+        if (!this.currentBoard) {
+            console.error('Board not found');
+            return;
+        }
         const formGroup = this.formBuilder.group({
             id: [uuidv4(), Validators.required],
             name: ['', Validators.required],
-            parentBoardId: [this.currentBoard?.id, Validators.required],
+            parentBoardId: [this.currentBoard.id, Validators.required],
             visible: [true, Validators.required],
             delete: [false, Validators.required]
         })

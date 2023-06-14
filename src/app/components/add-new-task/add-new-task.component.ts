@@ -1,42 +1,11 @@
-import { Component, EventEmitter, HostListener, Output } from "@angular/core";
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component } from "@angular/core";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { addNewTask, toggleAddNewTask } from "src/app/state/app.actions";
-import { AppState, Board, Column, Subtask, Task } from "src/app/state/app.state";
+import { AppState, Board, Column, Task } from "src/app/state/app.state";
 import { v4 as uuidv4 } from 'uuid';
 import { BaseModalComponent } from "../base-modal/base-modal.component";
-
-type TSubtask = FormGroup<{
-    id: FormControl<string | null>,
-    title: FormControl<string | null>,
-    isCompleted: FormControl<boolean | null>,
-    parentTaskId: FormControl<string | null>
-    parentColumnId: FormControl<string | null>
-    parentBoardId: FormControl<string | null>,
-}>
-
-type TColumn = FormGroup<{
-    id: FormControl<string | null>,
-    name: FormControl<string | null>
-}>
-
-type TSelectedOption = FormGroup<{
-    id: FormControl<string | null>,
-    name: FormControl<string | null>
-}>
-
-type TTask = FormGroup<{
-    id: FormControl<string | null>,
-    title: FormControl<string | null>,
-    description: FormControl<string | null>,
-    subtasks: FormArray<TSubtask>
-}>
-
-type TForm = {
-    task: TTask,
-    selectedOption: TSelectedOption,
-    columns: FormArray<TColumn>,
-}
+import { TColumn, TForm, TSubtask } from "./add-new-task.types";
 
 @Component({
     selector: 'app-add-new-task',
@@ -56,10 +25,17 @@ export class AddNewTaskComponent extends BaseModalComponent<TForm> {
     }
 
     override submitWhenFormValid(): void {
-        // console.log(this.form.value)
+        if(!this.currentBoard) {
+            console.error('Board not found while submitting');
+            return;
+        }
+        if(!this.form.value.selectedOption?.id) {
+            console.error('No column selected');
+            return;
+        }
         const task: Task = this.form.value.task as Task;
-        task.parentBoardId = this.currentBoard?.id!;
-        task.parentColumnId = this.form.value.selectedOption!.id!;
+        task.parentBoardId = this.currentBoard.id;
+        task.parentColumnId = this.form.value.selectedOption.id;
         this.store.dispatch(addNewTask({ task, addNewTaskModalVisible: false }));
     }
 
@@ -71,7 +47,6 @@ export class AddNewTaskComponent extends BaseModalComponent<TForm> {
         this.store.select(state => state).subscribe(state => {
             this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
             this.currentColumn = this.currentBoard.columns?.filter(c => c.id === state.app.currentColumnId)[0];
-            // this.options = this.currentBoard?.columns?.map(c => ({ name: c.name, id: c.id })) || [];
 
             this.form = this.formBuilder.group({
                 task: this.formBuilder.group({
@@ -93,10 +68,13 @@ export class AddNewTaskComponent extends BaseModalComponent<TForm> {
                     id: c.id
                 }))
             })
-
+            if(this.columns.at(0)) {
+                console.error('No Columns fetched from store');
+                return;
+            }
             this.selectedOption.setValue({
-                id: this.columns.at(0).get('id')?.value!,
-                name: this.columns.at(0).get('name')?.value!
+                id: this.columns.at(0).controls.id.value,
+                name: this.columns.at(0).controls.name.value
             })
         });
     }
@@ -113,10 +91,6 @@ export class AddNewTaskComponent extends BaseModalComponent<TForm> {
         return this.form.controls.task;
     }
 
-    // get taskId(): FormControl {
-    //     return this.form.get('taskId') as FormControl;
-    // }
-
     addSubtask() {
         const subtask: TSubtask = this.formBuilder.group({
             id: new FormControl<string>(uuidv4(), Validators.required),
@@ -132,7 +106,6 @@ export class AddNewTaskComponent extends BaseModalComponent<TForm> {
 
     removeSubtask(index: number): void {
         this.form.controls.task.controls.subtasks.removeAt(index);
-        // (this.form.get('subtasks') as FormArray).removeAt(index);
     }
 
     getFormControlsArray(): any[] {

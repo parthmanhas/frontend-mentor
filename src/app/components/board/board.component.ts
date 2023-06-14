@@ -1,8 +1,8 @@
-import { Component, HostBinding, Input } from "@angular/core";
+import { Component, HostBinding } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { MOBILE_MAX_WIDTH, TAB_MIN_WIDTH, TAB_MAX_WIDTH } from "src/app/constants/constants";
+import { TAB_MIN_WIDTH, TAB_MAX_WIDTH } from "src/app/constants/constants";
 import { addNewColumnModalVisible, createBoardModalVisible, toggleViewTask, updateTaskParentColumn } from "src/app/state/app.actions";
-import { AppState, Board, Column, Task } from "src/app/state/app.state";
+import { AppState, Board, Task } from "src/app/state/app.state";
 
 @Component({
     selector: 'app-board',
@@ -37,8 +37,8 @@ export class BoardComponent {
     }
 
     public currentBoard: Board | null = null;
-    public minOneBoardAvailable: boolean = false;
-    public minOneColumnAvailable: boolean = false;
+    public minOneBoardAvailable = false;
+    public minOneColumnAvailable = false;
 
     constructor(private store: Store<{ app: AppState }>) {
         this.store.select(state => state).subscribe(state => {

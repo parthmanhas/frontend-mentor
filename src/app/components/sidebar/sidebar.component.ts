@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Output } from "@angular/core";
+import { Component, ElementRef, EventEmitter, HostBinding, Output } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { MOBILE_MAX_WIDTH } from "src/app/constants/constants";
 import { createBoardModalVisible, selectBoard } from "src/app/state/app.actions";
 import { AppState, Board } from "src/app/state/app.state";
 
@@ -46,7 +45,7 @@ export class SidebarComponent {
     public boardList!: Board[];
     public isActive = -1;
     public activeBoardId!: string | null;
-    public theme: string = 'light';
+    public theme = 'light';
     public sidebarVisible = false;
 
     constructor(private store: Store<{ app: AppState }>, private elementRef: ElementRef) {

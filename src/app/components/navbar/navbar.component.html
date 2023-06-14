@@ -43,9 +43,12 @@
         </svg>
         <div *ngIf="showBoardOptionsModal" class="board-options-modal p-1">
             <p (click)="edit = true; showBoardOptionsModal = false; showEditBoardModal();"
+                (keydown.enter)="edit = true; showBoardOptionsModal = false; showEditBoardModal();" tabindex="0"
                 class="grey-medium-50-text pb-1 option">Edit Board
             </p>
-            <p (click)="deleteBoardModalVisible = true; showBoardOptionsModal = false" class="red option">Delete Board
+            <p (click)="deleteBoardModalVisible = true; showBoardOptionsModal = false"
+                (keydown.enter)="deleteBoardModalVisible = true; showBoardOptionsModal = false" tabindex="0" class="red option">
+                Delete Board
             </p>
         </div>
     </div>

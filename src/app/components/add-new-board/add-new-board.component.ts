@@ -1,22 +1,11 @@
-import { Component, EventEmitter, HostListener, Output } from "@angular/core";
-import { FormArray, FormBuilder, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { addBoard, createBoardModalVisible } from "src/app/state/app.actions";
 import { AppState, Board } from "src/app/state/app.state";
 import { v4 as uuidv4 } from 'uuid';
 import { BaseModalComponent } from "../base-modal/base-modal.component";
-
-type TColumn = FormGroup<{
-    id: FormControl<string | null>,
-    name: FormControl<string | null>
-}>
-
-type TForm = {
-    id: FormControl<string | null>,
-    name: FormControl<string | null>
-    columns: FormArray<TColumn>
-}
-
+import { TForm, TColumn } from "./add-new-board.types";
 @Component({
     selector: 'app-add-new-board',
     templateUrl: './add-new-board.component.html',
