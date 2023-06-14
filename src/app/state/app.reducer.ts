@@ -144,14 +144,10 @@ export const appReducer = createReducer(
         const updatedColumns = boardToUpdate.columns?.map(c => c.id === newColumnId ? columnWithTaskAdded : c.id === task.parentColumnId ? columnWithTaskRemoved : c);
         const updatedBoard = { ...boardToUpdate, columns: updatedColumns } satisfies Board;
 
-        if(!state.currentTask) {
-            throw new Error('Current Task should not be empty!');
-        }
-
         return {
             ...state,
             boards: state.boards.map(b => b.id === task.parentBoardId ? updatedBoard : b),
-            currentTask: { ...state.currentTask, parentColumnId: newColumnId },
+            currentTask: updatedTask,
         } satisfies AppState;
 
 
