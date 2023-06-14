@@ -13,59 +13,13 @@
     background-color: $black-50;
 }
 
-:host.dark-theme {
-    .container {
-        background-color: #2b2c37;
-        p {
-            color: white !important;
-        }
-    }
-
-    .btn-secondary {
-        background-color: white;
-    }
-
-    input:not([type="checkbox"]) {
-        background-color: #2b2c37;
-        color: white !important;
-    }
-
-    textarea {
-        color: rgba(255, 255, 255, 0.25) !important;
-        background-color: #2b2c37;
-    }
-
-    .status-dropdown {
-        background-color: #2b2c37;
-    }
-
-    .dropdown {
-        background-color: rgba(130, 143, 163, 0.15);
-        p {
-            color: white;
-        }
-    }
-
-    .description-container + p,
-    .status-container > p {
-        color: white !important;
-    }
-
-    .task-options-modal {
-        background-color: rgba(130, 143, 163, 0.1);
-        & > p:nth-child(1) {
-            color: rgb(130, 143, 163) !important;
-        }
-    }
-}
-
-@media (max-width: 767px) {
+@media (width <= 767px) {
     .container {
         width: 70vw !important;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (width >= 768px) and (width <= 1024px) {
     .container {
         width: 40vw !important;
     }
@@ -80,8 +34,10 @@
     border-radius: 5px;
     min-height: 10vh;
     width: 30vw;
+
     & > * {
         width: 100%;
+
         & > p {
             margin-bottom: 0.5rem;
         }
@@ -92,15 +48,31 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
     & > p {
         width: 70%;
     }
+
     position: relative;
     margin-top: 0.5rem;
 }
 
+input,
+textarea {
+    padding: 0.5rem;
+    border: 1px solid #828fa341;
+    border-radius: 2px;
+    flex-grow: 1;
+    outline: 0 none;
+
+    &:focus {
+        border: 2px solid $purple-dark;
+    }
+}
+
 .description-container {
     margin-top: 0.5rem;
+
     & > textarea {
         max-width: 100%;
         min-width: 100%;
@@ -131,22 +103,12 @@ svg {
     box-sizing: content-box;
     fill: $cross-color;
     cursor: pointer;
+
     &:hover {
         fill: $red-dark !important;
     }
-    flex-shrink: 0;
-}
 
-input,
-textarea {
-    padding: 0.5rem;
-    border: 1px solid #828fa341;
-    border-radius: 2px;
-    flex-grow: 1;
-    outline: 0 none;
-    &:focus {
-        border: 2px solid $purple-dark;
-    }
+    flex-shrink: 0;
 }
 
 .status-dropdown {
@@ -155,9 +117,11 @@ textarea {
     background-color: $white;
     border: 1px solid #828fa341;
     border-radius: 2px;
+
     &:focus {
         outline: none;
     }
+
     position: relative;
 }
 
@@ -175,6 +139,7 @@ textarea {
 .option {
     padding: 0.5rem;
     cursor: pointer;
+
     &:hover {
         background-color: $grey-light-25;
     }
@@ -189,10 +154,53 @@ textarea {
     border-radius: 5px;
     margin-top: 0.5rem;
     transition: opacity 0.3s, height 0.3s;
-    // position: absolute;
-    // opacity: 0;
-    // height: 0;
-    // left: 0;
-    // right: 0;
-    // top: 100%;
+}
+
+:host.dark-theme {
+    .container {
+        background-color: #2b2c37;
+
+        p {
+            color: white !important;
+        }
+    }
+
+    .btn-secondary {
+        background-color: white;
+    }
+
+    input:not([type="checkbox"]) {
+        background-color: #2b2c37;
+        color: white !important;
+    }
+
+    textarea {
+        color: rgb(255 255 255 / 25%) !important;
+        background-color: #2b2c37;
+    }
+
+    .status-dropdown {
+        background-color: #2b2c37;
+    }
+
+    .dropdown {
+        background-color: rgb(130 143 163 / 15%);
+
+        p {
+            color: white;
+        }
+    }
+
+    .description-container + p,
+    .status-container > p {
+        color: white !important;
+    }
+
+    .task-options-modal {
+        background-color: rgb(130 143 163 / 10%);
+
+        & > p:nth-child(1) {
+            color: rgb(130 143 163) !important;
+        }
+    }
 }

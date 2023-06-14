@@ -13,30 +13,7 @@
     background-color: $black-50;
 }
 
-:host.dark-theme {
-    .edit-board-container {
-        background: #20212c;
-        p {
-            color: white !important;
-        }
-    }
-
-    input {
-        color: white !important;
-        background-color: #2b2c37;
-    }
-
-    textarea {
-        color: white !important;
-        background-color: #2b2c37;
-    }
-
-    .btn-secondary {
-        background-color: white;
-    }
-}
-
-@media (max-width: 767px) {
+@media (width <= 767px) {
     .edit-board-container {
         width: 60vw !important;
         max-width: 60vw !important;
@@ -44,7 +21,7 @@
 }
 
 // between 768px and 1024px
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (width >= 768px) and (width <= 1024px) {
     .edit-board-container {
         max-width: 40vw !important;
         width: 40vw !important;
@@ -66,22 +43,6 @@
     }
 }
 
-.column {
-    display: flex;
-    align-items: center;
-    input {
-        flex-grow: 1;
-    }
-    svg {
-        flex-shrink: 0;
-        fill: $cross-color;
-        cursor: pointer;
-        &:hover {
-            fill: $red-dark !important;
-        }
-    }
-}
-
 input {
     padding: 0.5rem;
     border: 1px solid #828fa341;
@@ -89,8 +50,28 @@ input {
     flex-grow: 1;
     outline: 0 none;
     font-size: 1rem;
+
     &:focus {
         border: 2px solid $purple-dark;
+    }
+}
+
+.column {
+    display: flex;
+    align-items: center;
+
+    input {
+        flex-grow: 1;
+    }
+
+    svg {
+        flex-shrink: 0;
+        fill: $cross-color;
+        cursor: pointer;
+
+        &:hover {
+            fill: $red-dark !important;
+        }
     }
 }
 
@@ -100,7 +81,32 @@ input {
     justify-content: flex-end;
     position: relative;
     width: 100%;
+
     span {
         position: absolute;
+    }
+}
+
+:host.dark-theme {
+    .edit-board-container {
+        background: #20212c;
+
+        p {
+            color: white !important;
+        }
+    }
+
+    input {
+        color: white !important;
+        background-color: #2b2c37;
+    }
+
+    textarea {
+        color: white !important;
+        background-color: #2b2c37;
+    }
+
+    .btn-secondary {
+        background-color: white;
     }
 }

@@ -31,16 +31,13 @@
 
 .slider {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: $purple-dark;
     border-radius: 4rem;
     transition: 0.4s;
 }
 
-.slider:before {
+.slider::before {
     position: absolute;
     content: "";
     height: 1.5rem;
@@ -56,7 +53,7 @@ input:checked + .slider {
     background-color: $purple-dark;
 }
 
-input:checked + .slider:before {
+input:checked + .slider::before {
     transform: translateX(1.85rem);
 }
 

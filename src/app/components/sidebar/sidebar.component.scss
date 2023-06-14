@@ -12,62 +12,14 @@
     background-color: $white;
     transition: 0.5s;
     z-index: 1;
+
     // transform: translateX(-100%);
 }
 
-:host.dark-theme {
-    background: #2b2c37;
-    border-right: 1px solid #3e3f4e;
-    .logo-container > p {
-        color: white;
-    }
-    .board-list > p,
-    li > p,
-    .hide-sidebar-container > p {
-        color: #828fa3;
-    }
-
-    .hide-sidebar-container > svg,
-    li > svg {
-        fill: #828fa3;
-    }
-
-    .hide-sidebar-container:hover {
-        background-color: white !important;
-        &::before {
-            background-color: white !important;
-        }
-        p {
-            color: $purple-dark;
-        }
-        svg {
-            fill: $purple-dark;
-        }
-    }
-
-    .hide-animate {
-        background-color: #2b2c37;
-        svg {
-            fill: #2b2c37;
-        }
-    }
-
-    ul > li:hover {
-        background-color: white !important;
-        &::before {
-            background-color: white !important;
-        }
-        p {
-            color: $purple-dark !important;
-        }
-        svg {
-            fill: $purple-dark !important;
-        }
-    }
-
-    // .show-sidebar-container {
-    //     background-color: #2b2c37;
-    // }
+svg {
+    fill: $grey-medium-50;
+    margin-right: 1rem;
+    z-index: 1;
 }
 
 .show-sidebar-container {
@@ -82,87 +34,11 @@
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     transition: 0.5s;
+
     svg {
         fill: $white;
         margin-right: 0;
         z-index: 1;
-    }
-}
-
-svg {
-    fill: $grey-medium-50;
-    margin-right: 1rem;
-    z-index: 1;
-}
-
-.board-list {
-    height: 100%;
-    padding-top: 4rem;
-    .heading {
-        margin-bottom: 1rem;
-    }
-    p {
-        color: $grey-medium-50;
-    }
-
-    ul > li {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        position: relative;
-        height: 3rem;
-        @media (min-width: 768px) {
-            &:hover {
-                background-color: rgba(99, 95, 199, 0.1);
-                border-top-right-radius: 30px;
-                border-bottom-right-radius: 30px;
-                &::before {
-                    content: "";
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    transform: translateX(-100%);
-                    z-index: 0;
-                    background-color: rgba(99, 95, 199, 0.1);
-                }
-                p {
-                    color: $purple-dark;
-                }
-                svg {
-                    fill: $purple-dark;
-                }
-            }
-        }
-    }
-
-    ul > li:nth-last-child(1) {
-        svg {
-            fill: $purple-dark;
-        }
-    }
-
-    li.active {
-        background-color: $purple-dark !important;
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
-        p {
-            color: $white !important;
-        }
-
-        svg {
-            fill: white !important;
-        }
-        position: relative;
-        &::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: $grey-light !important;
-            transform: translateX(-90%);
-            z-index: 0;
-            background-color: $purple-dark !important;
-        }
     }
 }
 
@@ -174,24 +50,109 @@ svg {
     border-bottom-right-radius: 30px;
     position: relative;
     cursor: pointer;
+
     p {
         color: $grey-medium-50;
     }
-    &:hover {
-        background-color: rgba(99, 95, 199, 0.1);
+}
+
+.hide-sidebar-container:hover {
+    background-color: rgb(99 95 199 / 10%);
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: translateX(-100%);
+        z-index: 0;
+        background-color: rgb(99 95 199 / 10%);
+    }
+
+    & > p {
+        color: $purple-dark;
+    }
+
+    & > svg {
+        fill: $purple-dark;
+    }
+
+}
+
+.board-list {
+    height: 100%;
+    padding-top: 4rem;
+
+    .heading {
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: $grey-medium-50;
+    }
+
+    li.active {
+        background-color: $purple-dark !important;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+
+        p {
+            color: $white !important;
+        }
+
+        svg {
+            fill: white !important;
+        }
+
+        position: relative;
+
         &::before {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
-            transform: translateX(-100%);
+            transform: translateX(-90%);
             z-index: 0;
-            background-color: rgba(99, 95, 199, 0.1);
+            background-color: $purple-dark !important;
         }
-        & > p {
-            color: $purple-dark;
+    }
+
+    ul > li {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 3rem;
+
+        @media (width >= 768px) {
+            &:hover {
+                background-color: rgb(99 95 199 / 10%);
+                border-top-right-radius: 30px;
+                border-bottom-right-radius: 30px;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    transform: translateX(-100%);
+                    z-index: 0;
+                    background-color: rgb(99 95 199 / 10%);
+                }
+
+                p {
+                    color: $purple-dark;
+                }
+
+                svg {
+                    fill: $purple-dark;
+                }
+            }
         }
-        & > svg {
+    }
+
+    ul > li:nth-last-child(1) {
+        svg {
             fill: $purple-dark;
         }
     }
@@ -216,16 +177,15 @@ svg {
     background-color: $white;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (width >= 768px) and (width <= 1024px) {
     :host {
         width: 30vw;
     }
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
     :host {
         position: absolute;
-        width: max-content;
         height: max-content;
         left: 50%;
         transform: translateX(-50%);
@@ -235,6 +195,7 @@ svg {
         z-index: 1;
         margin-top: 1rem;
     }
+
     .show-sidebar-container {
         display: none;
     }
@@ -249,10 +210,71 @@ svg {
 
     .board-list {
         padding-top: 1rem;
+
         li.active {
             &::before {
                 width: 1rem;
             }
+        }
+    }
+}
+
+:host.dark-theme {
+    background: #2b2c37;
+    border-right: 1px solid #3e3f4e;
+
+    li > svg,
+    .hide-sidebar-container > svg {
+        fill: #828fa3;
+    }
+
+    li > p,
+    .board-list > p,
+    .hide-sidebar-container > p {
+        color: #828fa3;
+    }
+
+    .logo-container > p {
+        color: white;
+    }
+
+    .hide-animate {
+        background-color: #2b2c37;
+
+        svg {
+            fill: #2b2c37;
+        }
+    }
+
+    ul > li:hover {
+        background-color: white !important;
+
+        &::before {
+            background-color: white !important;
+        }
+
+        p {
+            color: $purple-dark !important;
+        }
+
+        svg {
+            fill: $purple-dark !important;
+        }
+    }
+
+    .hide-sidebar-container:hover {
+        background-color: white !important;
+
+        &::before {
+            background-color: white !important;
+        }
+
+        p {
+            color: $purple-dark;
+        }
+
+        svg {
+            fill: $purple-dark;
         }
     }
 }

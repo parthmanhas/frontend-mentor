@@ -13,14 +13,13 @@
     background-color: $black-50;
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
     .container {
         width: 60vw !important;
     }
 }
 
-//between 768px and 1024px
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (width >= 768px) and (width <= 1024px) {
     .container {
         min-height: 22vh !important;
         width: 30vw !important;
@@ -36,8 +35,10 @@
     border-radius: 5px;
     min-height: 30vh;
     width: 25vw;
+
     & > * {
         width: 100%;
+
         & > p {
             margin-bottom: 0.5rem;
         }
@@ -58,6 +59,7 @@ input {
     border-radius: 2px;
     flex-grow: 1;
     outline: 0 none;
+
     &:focus {
         border: 2px solid $purple-dark;
     }
@@ -66,13 +68,16 @@ input {
 .column {
     display: flex;
     align-items: center;
+
     input {
         flex-grow: 1;
     }
+
     svg {
         flex-shrink: 0;
         fill: $cross-color;
         cursor: pointer;
+
         &:hover {
             fill: $red-dark !important;
         }
