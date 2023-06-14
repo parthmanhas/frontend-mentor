@@ -10,6 +10,7 @@
 .btn-primary {
     background-color: $purple-dark;
     color: $white;
+
     &:hover {
         background-color: $purple-light;
         cursor: pointer;
@@ -19,6 +20,7 @@
 .btn-secondary {
     background-color: #625fc70e;
     color: $purple-dark;
+
     &:hover {
         background-color: #625fc742;
         cursor: pointer;
@@ -28,6 +30,7 @@
 .btn-destructive {
     background-color: $red-dark;
     color: $white;
+
     &:hover {
         background-color: $red-light;
         cursor: pointer;

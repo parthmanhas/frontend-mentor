@@ -13,34 +13,6 @@
 //     }
 // }
 
-:host.dark-theme {
-    background: #2b2c37;
-    border-bottom: 1px solid #3e3f4e;
-    .btn-disabled {
-        color: darken(white, 50%);
-    }
-    .btn-primary {
-        color: white;
-    }
-    .logo-container > p,
-    .action-container > p {
-        color: white;
-    }
-    .board-options-modal {
-        background-color: #2b2c37;
-        border: 1px solid #383a4d;
-        & p:nth-child(1) {
-            color: rgb(130, 143, 163) !important;
-        }
-    }
-    .confirm-delete-board-container {
-        background-color: #2b2c37;
-        .btn-secondary {
-            background-color: white;
-        }
-    }
-}
-
 .logo-container {
     width: 40vw;
     display: flex;
@@ -57,6 +29,7 @@
     display: flex;
     align-items: center;
     position: relative;
+
     & > * {
         margin-left: 5px;
     }
@@ -69,13 +42,13 @@
     width: max-content;
     background-color: ghostwhite;
     border-radius: 3px;
-    border: 1px solid rgba(99, 95, 199, 0.5);
-    
+    border: 1px solid rgb(99 95 199 / 50%);
 }
 
 .option {
     padding: 0.5rem;
     cursor: pointer;
+
     &:hover {
         background-color: $grey-light-25;
     }
@@ -100,10 +73,11 @@ svg {
     background-color: $black-50;
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
     .action-container {
         justify-content: flex-end !important;
     }
+
     .confirm-delete-board-container {
         max-width: 70vw !important;
     }
@@ -118,13 +92,12 @@ svg {
         left: -20%;
     }
 
-    .logo-container  {
+    .logo-container {
         width: auto;
     }
 }
 
-//between 768px and 1024px
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (width >= 768px) and (width <= 1024px) {
     .confirm-delete-board-container {
         max-width: 50vw !important;
     }
@@ -138,15 +111,16 @@ svg {
     max-width: 30vw;
     display: flex;
     flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
+
     & > p:nth-child(2) {
         color: #828fa3;
     }
+
     .confirm-delete-board-button-container {
         width: 100%;
         display: flex;
         justify-content: space-between;
+
         button {
             flex-grow: 0.45;
         }
@@ -161,4 +135,39 @@ svg {
 .mobile-add-new-task-enabled {
     background-color: #635fc77a;
     cursor: pointer;
+}
+
+:host.dark-theme {
+    background: #2b2c37;
+    border-bottom: 1px solid #3e3f4e;
+
+    .btn-disabled {
+        color: darken(white, 50%);
+    }
+
+    .btn-primary {
+        color: white;
+    }
+
+    .logo-container > p,
+    .action-container > p {
+        color: white;
+    }
+
+    .board-options-modal {
+        background-color: #2b2c37;
+        border: 1px solid #383a4d;
+
+        & p:nth-child(1) {
+            color: rgb(130 143 163) !important;
+        }
+    }
+
+    .confirm-delete-board-container {
+        background-color: #2b2c37;
+
+        .btn-secondary {
+            background-color: white;
+        }
+    }
 }
