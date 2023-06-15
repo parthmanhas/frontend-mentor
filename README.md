@@ -14,3 +14,4 @@ URL: https://beautiful-fenglisu-74d90d.netlify.app/
 - [x] fix theme images in chrome
 - [x] fix columns scroll not displaying full add new column
 - [x] Allow users to drag and drop tasks to change their status and re-order them in a column
+- [x] add dialog html component
