@@ -56,6 +56,17 @@ export class AddNewColumnComponent extends BaseModalComponent<TForm> {
     }
 
     override submitWhenFormValid(): void {
-        this.store.dispatch(addColumn({ columns: this.form.value.columns as Column[] }));
+        if (!this.form.value.columns) {
+            console.error('No Columns to add');
+            return;
+        }
+        this.store.dispatch(addColumn({
+            columns: this.form.value.columns.map(c => {
+                if (!c.id || !c.name || !c.parentBoardId) {
+                    throw new Error('Invalid column data');
+                }
+                return { id: c.id, name: c.name, parentBoardId: c.parentBoardId } satisfies Column
+            })
+        }));
     }
 }

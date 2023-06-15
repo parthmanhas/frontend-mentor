@@ -35,9 +35,13 @@ export class AddNewBoardComponent extends BaseModalComponent<TForm> {
     }
 
     addColumn() {
+        const boardId = this.form.value.id;
+        if(!boardId) throw new Error('Board Id is not defined');
+        
         this.form.controls.columns.push(this.formBuilder.group({
             id: uuidv4(),
-            name: ['', Validators.required]
+            name: ['', Validators.required],
+            parentBoardId: [boardId, Validators.required]
         }));
     }
 

@@ -17,6 +17,7 @@ import { ViewTaskComponent } from './components/view-task/view-task.component';
 import { EditBoardComponent } from './components/edit-board/edit-board.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { SliderComponent } from './components/slider/slider.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    DragDropModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ app: appReducer }),
     StoreDevtoolsModule.instrument()

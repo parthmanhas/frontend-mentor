@@ -68,7 +68,7 @@ export class AddNewTaskComponent extends BaseModalComponent<TForm> {
                     id: c.id
                 }))
             })
-            if(this.columns.at(0)) {
+            if(!this.columns.at(0)) {
                 console.error('No Columns fetched from store');
                 return;
             }

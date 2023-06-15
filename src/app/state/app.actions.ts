@@ -19,7 +19,8 @@ export const toggleSidebar = createAction('[Sidebar] Toggle Sidebar', props<{ si
 export const addColumn = createAction('[Board] Add Column', props<{ columns: Column[] }>());
 export const addNewColumnModalVisible = createAction('[Board] Add New Column Modal', props<{ addNewColumnModalVisible: boolean }>());
 export const deleteColumn = createAction('[Board] Delete Column', props<{ column: Column }>());
-export const updateColumnName = createAction('[Board] Update Column', props<{ column: Column, updatedName: string }>());
+export const updateColumnName = createAction('[Board] Update Column Name', props<{ column: Column, updatedName: string }>());
+export const updateColumnTasks = createAction('[Board] update Column Tasks', props<{ column: Column }>());
 
 // task actions
 export const addNewTask = createAction('[AddNewTask] Add new task', props<{ task: Task, addNewTaskModalVisible?: boolean }>());

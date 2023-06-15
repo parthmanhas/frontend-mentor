@@ -74,7 +74,4 @@ export class SidebarComponent {
     openCreateBoardModal() {
         this.store.dispatch(createBoardModalVisible({ createBoardModalVisible: true }));
     }
-
-
-
 }

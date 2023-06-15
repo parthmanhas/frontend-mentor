@@ -64,6 +64,10 @@
     border-radius: 50%;
 }
 
+.columns-container {
+    display: flex;
+}
+
 .column {
     min-width: 18rem;
 }
