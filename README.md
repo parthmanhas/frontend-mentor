@@ -7,7 +7,7 @@ URL: https://beautiful-fenglisu-74d90d.netlify.app/
 - [x] in some html files there are still form controls access using functions, remove them and make html code concise
 - [ ] add more animation
 - [x] improve drag and drop animation (used angular cdk)
-- [ ] add backend
+- [ ] add backend, save data when tab changes or application closes
 - [x] fix tablet design
 - [x] fix mobile design
 - [x] remove duplicated code in scss
