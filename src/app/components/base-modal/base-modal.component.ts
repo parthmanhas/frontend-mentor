@@ -1,34 +1,43 @@
-import { Component, HostListener } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from "@angular/core";
 import { AbstractControl, FormArray, FormGroup } from "@angular/forms";
 
 @Component({
     template: ''
 })
-export abstract class BaseModalComponent<T extends { [K in keyof T]: AbstractControl<any, any>; }> {
+export abstract class BaseModalComponent<T extends { [K in keyof T]: AbstractControl<any, any>; }> implements AfterViewInit {
 
     public form!: FormGroup<T>;
     public isDropdownOpen = false;
     public submitted = false;
 
+    @ViewChild('modal')
+    modal: ElementRef<HTMLDialogElement> | undefined;
+
     abstract whenClickOccuredOutsideModal(): void;
-    abstract checkIfOutsideModalClicked(target: EventTarget | null): boolean;
-    // abstract addFormControls(): void;
     abstract submitWhenFormValid(): void;
 
-    @HostListener('document:click', ['$event'])
-    onClick(event: MouseEvent) {
-        if (this.isOutsideModalClicked(event.target)) {
-            // Click occurred outside the modal
-            this.whenClickOccuredOutsideModal();
+    ngAfterViewInit(): void {
+        if (!this.modal) {
+            console.error('Modal is not defined');
+            return;
         }
-    }
-
-    isOutsideModalClicked(target: EventTarget | null): boolean {
-        return this.checkIfOutsideModalClicked(target);
-    }
-
-    constructor() {
-        // this.addFormControls();
+        this.modal.nativeElement.addEventListener('click', (e) => {
+            if (!this.modal) {
+                console.error('Modal is not defined');
+                return;
+            }
+            const dialogDimensions = this.modal.nativeElement.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                this.modal.nativeElement.close();
+                this.whenClickOccuredOutsideModal();
+            }
+        });
+        this.modal.nativeElement.showModal();
     }
 
     toggleDropdown() {
@@ -46,7 +55,7 @@ export abstract class BaseModalComponent<T extends { [K in keyof T]: AbstractCon
         return control?.invalid && this.submitted || false;
     }
 
-    isControlInvalidByIndex(controlName:string, index: number): boolean {
+    isControlInvalidByIndex(controlName: string, index: number): boolean {
         const control = (this.form?.get(controlName) as FormArray)?.at(index);
         return control?.invalid && this.submitted || false;
     }

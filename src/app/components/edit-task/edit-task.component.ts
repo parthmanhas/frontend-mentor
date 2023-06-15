@@ -16,12 +16,6 @@ export class EditTaskComponent extends BaseModalComponent<TForm> {
     override whenClickOccuredOutsideModal(): void {
         this.store.dispatch(toggleEditTask({ editTaskModalVisible: false }));
     }
-    override checkIfOutsideModalClicked(target: EventTarget | null): boolean {
-        if (target instanceof Element && target.localName === 'app-edit-task') {
-            return true;
-        }
-        return false;
-    }
 
     override submitWhenFormValid(): void {
         const activeColumn = this.getActiveDropDownOptionFormGroup();

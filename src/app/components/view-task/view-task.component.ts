@@ -15,13 +15,6 @@ export class ViewTaskComponent extends BaseModalComponent<TForm> {
     override whenClickOccuredOutsideModal(): void {
         this.store.dispatch(toggleViewTask({ viewTaskModalVisible: false, task: this.task }));
     }
-    override checkIfOutsideModalClicked(target: EventTarget | null): boolean {
-        if (target instanceof Element && target.localName === 'app-view-task') {
-            return true;
-        }
-
-        return false;
-    }
 
     override submitWhenFormValid(): void {
         throw new Error("Method not implemented.");

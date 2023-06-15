@@ -10,7 +10,19 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: $black-50;
+    // background-color: $black-50;
+}
+
+dialog {
+    border: none;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &::backdrop {
+        background-color: $black-50;
+    }
 }
 
 @media (width <= 767px) {
