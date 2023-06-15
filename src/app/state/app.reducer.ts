@@ -36,16 +36,33 @@ export const appReducer = createReducer(
     on(Actions.addColumn, (state, { columns }) => {
         const { parentBoardId } = columns[0];
         const boardToUpdate = state.boards.find(b => b.id === parentBoardId);
-        if (!boardToUpdate) return state;
+        if (!boardToUpdate) {
+            throw new Error('Board not found');
+        }; 
 
         const updatedColumns = [...(boardToUpdate.columns || []), ...columns];
         const updatedBoards = state.boards.map(b => (b.id === parentBoardId ? { ...b, columns: updatedColumns } satisfies Board : b));
         return { ...state, boards: updatedBoards } satisfies AppState;
     }),
+    on(Actions.updateColumnTasks, (state, { column }) => {
+        const { parentBoardId } = column;
+        const boardToUpdate = state.boards.find(b => b.id === parentBoardId);
+        if (!boardToUpdate) {
+            throw new Error('Board not found');
+        };
+
+        const updatedColumn = { ...column, tasks: column?.tasks } satisfies Column;
+        const updatedColumns = boardToUpdate.columns?.map(c => (c.id === column.id ? updatedColumn : c));
+        const updatedBoard = { ...boardToUpdate, columns: updatedColumns } satisfies Board;
+        const updatedBoards = state.boards.map(b => (b.id === parentBoardId ? updatedBoard : b));
+        return { ...state, boards: updatedBoards } satisfies AppState;
+    }),
     on(Actions.deleteColumn, (state, { column }) => {
         const { parentBoardId } = column;
         const boardToUpdate = state.boards.find(b => b.id === parentBoardId);
-        if (!boardToUpdate) return state;
+        if (!boardToUpdate) {
+            throw new Error('Board not found');
+        };
 
         const updatedColumns = boardToUpdate.columns?.filter(c => c.id !== column.id);
         const updatedBoards = state.boards.map(b => (b.id === parentBoardId ? { ...b, columns: updatedColumns } satisfies Board : b));
@@ -55,10 +72,14 @@ export const appReducer = createReducer(
         const { parentBoardId } = task;
         const { parentColumnId } = task;
         const boardToUpdate = state.boards.find(b => b.id === parentBoardId);
-        if (!boardToUpdate) return state;
+        if (!boardToUpdate) {
+            throw new Error('Board not found');
+        }; 
 
         const columnToUpdate = boardToUpdate.columns?.find(c => c.id === parentColumnId);
-        if (!columnToUpdate) return state;
+        if (!columnToUpdate) {
+            throw new Error('Column not found');
+        };
 
         const updatedTasks = [...(columnToUpdate.tasks || []), task];
         const updatedColumns = boardToUpdate.columns?.map(c => c.id === parentColumnId ? ({ ...c, tasks: updatedTasks } satisfies Column) : c);
