@@ -17,13 +17,6 @@ export class AddNewTaskComponent extends BaseModalComponent<TForm> {
         this.store.dispatch(toggleAddNewTask({ addNewTaskModalVisible: false }));
     }
 
-    override checkIfOutsideModalClicked(target: EventTarget | null): boolean {
-        if (target instanceof Element && target.localName === 'app-add-new-task') {
-            return true;
-        }
-        return false;
-    }
-
     override submitWhenFormValid(): void {
         if(!this.currentBoard) {
             console.error('Board not found while submitting');

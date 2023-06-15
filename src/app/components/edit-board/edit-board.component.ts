@@ -19,12 +19,6 @@ export class EditBoardComponent extends BaseModalComponent<TForm> {
     override whenClickOccuredOutsideModal(): void {
         this.store.dispatch(editBoard({ editBoardModalVisible: false }));
     }
-    override checkIfOutsideModalClicked(target: EventTarget | null): boolean {
-        if (target instanceof Element && target.localName === 'app-edit-board') {
-            return true;
-        }
-        return false;
-    }
 
     override submitWhenFormValid(): void {
         // console.log(this.form.value)

@@ -1,82 +1,139 @@
-<form [formGroup]="form">
-    <div class="modal container p-2">
-        <div class="title-container d-flex">
-            <input formControlName="title" class="bold black-medium-50-text l mr-1" value="{{task?.title}}" readonly>
-            <svg *ngIf="!showOptionsModal" (click)="showOptionsModal = true" width="5" height="20"
-                xmlns="http://www.w3.org/2000/svg">
-                <g fill="#828FA3" fill-rule="evenodd">
-                    <circle cx="2.308" cy="2.308" r="2.308" />
-                    <circle cx="2.308" cy="10" r="2.308" />
-                    <circle cx="2.308" cy="17.692" r="2.308" />
-                </g>
-            </svg>
-            <svg *ngIf="showOptionsModal" (click)="showOptionsModal = false" width="15" height="15"
-                xmlns="http://www.w3.org/2000/svg">
-                <g fill="#828FA3" fill-rule="evenodd">
-                    <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
-                    <path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
-                </g>
-            </svg>
-            <div *ngIf="showOptionsModal" class="task-options-modal p-1">
-                <p (click)="showEditTaskModal()" (keydown.enter)="showEditTaskModal()" tabindex="0"
-                    class="grey-medium-50-text pb-1 option">Edit Task</p>
-                <p (click)="deleteTaskModalVisible = true; showOptionsModal = false;"
-                    (keydown.enter)="deleteTaskModalVisible = true; showOptionsModal = false;" tabindex="0"
-                    class="red option">Delete Task</p>
+<dialog #modal>
+    <form [formGroup]="form">
+        <div class="modal container p-2">
+            <div class="title-container d-flex">
+                <input formControlName="title"
+                    class="bold black-medium-50-text l mr-1"
+                    value="{{task?.title}}"
+                    readonly>
+                <svg *ngIf="!showOptionsModal"
+                    (click)="showOptionsModal = true"
+                    width="5"
+                    height="20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#828FA3"
+                        fill-rule="evenodd">
+                        <circle cx="2.308"
+                            cy="2.308"
+                            r="2.308" />
+                        <circle cx="2.308"
+                            cy="10"
+                            r="2.308" />
+                        <circle cx="2.308"
+                            cy="17.692"
+                            r="2.308" />
+                    </g>
+                </svg>
+                <svg *ngIf="showOptionsModal"
+                    (click)="showOptionsModal = false"
+                    width="15"
+                    height="15"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#828FA3"
+                        fill-rule="evenodd">
+                        <path d="m12.728 0 2.122 2.122L2.122 14.85 0 12.728z" />
+                        <path d="M0 2.122 2.122 0 14.85 12.728l-2.122 2.122z" />
+                    </g>
+                </svg>
+                <div *ngIf="showOptionsModal"
+                    class="task-options-modal p-1">
+                    <p (click)="showEditTaskModal()"
+                        (keydown.enter)="showEditTaskModal()"
+                        tabindex="0"
+                        class="grey-medium-50-text pb-1 option">Edit Task</p>
+                    <p (click)="deleteTaskModalVisible = true; showOptionsModal = false;"
+                        (keydown.enter)="deleteTaskModalVisible = true; showOptionsModal = false;"
+                        tabindex="0"
+                        class="red option">Delete Task</p>
+                </div>
             </div>
-        </div>
-        <div class="description-container mb-1">
-            <textarea formControlName="description" class="bold grey-medium-50-text mr-1" readonly></textarea>
-        </div>
-        <p class="bold grey-medium-50-text">Subtasks ({{completeSubtasks.length}} of {{this.task?.subtasks?.length}})
-        </p>
-        <div *ngIf="(task?.subtasks?.length ?? 0) > 0" class="subtasks-container mt-1">
-            <ng-container *ngFor="let subtaskFormGroup of subtasksFormArray.controls; let i = index">
-                <ng-container [formGroup]="subtaskFormGroup">
-                    <div class="subtask mb-1 p-1" (click)="toggleCheckbox(subtaskFormGroup)"
-                        (keydown.enter)="toggleCheckbox(subtaskFormGroup)" tabindex="0">
-                        <input class="mr-1 checkbox semi-bold"
-                            [class.checkbox-dark-theme-completed]="subtaskFormGroup.controls.isCompleted.value && theme === 'dark'"
-                            id="subtask-{{i}}" type="checkbox" [formControl]="subtaskFormGroup.controls.isCompleted">
-                        <input [formControl]="subtaskFormGroup.controls.title"
-                            [ngClass]="{'subtask-completed': subtaskFormGroup.controls.isCompleted.value}" readonly>
-                    </div>
+            <div class="description-container mb-1">
+                <textarea formControlName="description"
+                    class="bold grey-medium-50-text mr-1"
+                    readonly></textarea>
+            </div>
+            <p class="bold grey-medium-50-text">Subtasks ({{completeSubtasks.length}} of
+                {{this.task?.subtasks?.length}})
+            </p>
+            <div *ngIf="(task?.subtasks?.length ?? 0) > 0"
+                class="subtasks-container mt-1">
+                <ng-container *ngFor="let subtaskFormGroup of subtasksFormArray.controls; let i = index">
+                    <ng-container [formGroup]="subtaskFormGroup">
+                        <div class="subtask mb-1 p-1"
+                            (click)="toggleCheckbox(subtaskFormGroup)"
+                            (keydown.enter)="toggleCheckbox(subtaskFormGroup)"
+                            tabindex="0">
+                            <input class="mr-1 checkbox semi-bold"
+                                [class.checkbox-dark-theme-completed]="subtaskFormGroup.controls.isCompleted.value && theme === 'dark'"
+                                id="subtask-{{i}}"
+                                type="checkbox"
+                                [formControl]="subtaskFormGroup.controls.isCompleted">
+                            <input [formControl]="subtaskFormGroup.controls.title"
+                                [ngClass]="{'subtask-completed': subtaskFormGroup.controls.isCompleted.value}"
+                                readonly>
+                        </div>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-        </div>
-        <div class="status-container mt-1">
-            <p class="bold grey-medium-50-text">Status</p>
-            <div class="status-dropdown semi-bold" [class.error-border]="!selectedOptionNameFormControl && submitted"
-                [class.purple-border]="isDropdownOpen" (click)="toggleDropdown()" (keydown.enter)="toggleDropdown()"
-                tabindex="0">
-                <div class="selected-option">
-                    <input [formControl]="selectedOptionNameFormControl" readonly />
-                    <svg *ngIf="!isDropdownOpen" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="#635FC7" stroke-width="2" fill="none" d="m1 1 4 4 4-4" />
-                    </svg>
-                    <svg *ngIf="isDropdownOpen" width="10" height="7" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="#635FC7" stroke-width="2" fill="none" d="M9 6 5 2 1 6" />
-                    </svg>
-                </div>
-                <span *ngIf="!selectedOptionNameFormControl && submitted" class="error">Can't be empty</span>
             </div>
-            <div class="dropdown" *ngIf="isDropdownOpen">
-                <div class="option" *ngFor="let option of filteredOptions" (click)="selectOption(option)"
-                    (keydown.enter)="selectOption(option)" tabindex="0">
-                    {{ option.name }}
+            <div class="status-container mt-1">
+                <p class="bold grey-medium-50-text">Status</p>
+                <div class="status-dropdown semi-bold"
+                    [class.error-border]="!selectedOptionNameFormControl && submitted"
+                    [class.purple-border]="isDropdownOpen"
+                    (click)="toggleDropdown()"
+                    (keydown.enter)="toggleDropdown()"
+                    tabindex="0">
+                    <div class="selected-option">
+                        <input [formControl]="selectedOptionNameFormControl"
+                            readonly />
+                        <svg *ngIf="!isDropdownOpen"
+                            width="10"
+                            height="7"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="#635FC7"
+                                stroke-width="2"
+                                fill="none"
+                                d="m1 1 4 4 4-4" />
+                        </svg>
+                        <svg *ngIf="isDropdownOpen"
+                            width="10"
+                            height="7"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="#635FC7"
+                                stroke-width="2"
+                                fill="none"
+                                d="M9 6 5 2 1 6" />
+                        </svg>
+                    </div>
+                    <span *ngIf="!selectedOptionNameFormControl && submitted"
+                        class="error">Can't be empty</span>
                 </div>
+                <div class="dropdown"
+                    *ngIf="isDropdownOpen">
+                    <div class="option"
+                        *ngFor="let option of filteredOptions"
+                        (click)="selectOption(option)"
+                        (keydown.enter)="selectOption(option)"
+                        tabindex="0">
+                        {{ option.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div *ngIf="deleteTaskModalVisible && task"
+        class="confirm-delete-task-modal">
+        <div class="confirm-delete-task-container">
+            <p class="l bold mb-1 red">Delete this task?</p>
+            <p class="mb-1">Are you sure you want to delete the ‘{{task.title}}’ task and its subtasks? This action
+                cannot
+                be reversed.</p>
+            <div class="confirm-delete-task-button-container">
+                <button (click)="deleteTask()"
+                    class="btn btn-destructive">Delete</button>
+                <button (click)="deleteTaskModalVisible = false"
+                    class="btn btn-secondary">Cancel</button>
             </div>
         </div>
     </div>
-</form>
-<div *ngIf="deleteTaskModalVisible && task" class="confirm-delete-task-modal">
-    <div class="confirm-delete-task-container">
-        <p class="l bold mb-1 red">Delete this task?</p>
-        <p class="mb-1">Are you sure you want to delete the ‘{{task.title}}’ task and its subtasks? This action cannot
-            be reversed.</p>
-        <div class="confirm-delete-task-button-container">
-            <button (click)="deleteTask()" class="btn btn-destructive">Delete</button>
-            <button (click)="deleteTaskModalVisible = false" class="btn btn-secondary">Cancel</button>
-        </div>
-    </div>
-</div>
+</dialog>

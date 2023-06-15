@@ -15,13 +15,6 @@ export class AddNewColumnComponent extends BaseModalComponent<TForm> {
     override whenClickOccuredOutsideModal(): void {
         this.store.dispatch(addNewColumnModalVisible({ addNewColumnModalVisible: false }));
     }
-    override checkIfOutsideModalClicked(target: EventTarget | null): boolean {
-        if (target instanceof Element && target.localName === 'app-add-new-column') {
-            return true;
-        }
-        return false;
-    }
-
 
     public currentBoard!: Board;
     public hasFormControls = false;
