@@ -1,8 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { Board, Column, MobileCss, Subtask, Task } from './app.state';
+import { AppState, Board, Column, DatabaseAppState, MobileCss, Subtask, Task } from './app.state';
 
 // application actions
 export const changeTheme = createAction('[Sidebar] Change Theme', props<{ theme: string }>());
+export const addAppState = createAction('[App] Add App State', props<{ appState: DatabaseAppState, isMobile: boolean }>());
 
 // board actions
 export const addBoard = createAction('[Board] Add Board', props<{ board: Board }>());

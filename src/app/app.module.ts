@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { Firestore, connectFirestoreEmulator, getFirestore, initializeFirestore, provideFirestore } from '@angular/fire/firestore';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +21,7 @@ import { EditBoardComponent } from './components/edit-board/edit-board.component
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,21 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DragDropModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ app: appReducer }),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => {
+      let firestore: Firestore;
+      if (environment.useEmulators) {
+        // long polling required for Cypress
+        firestore = initializeFirestore(getApp(), {
+          experimentalForceLongPolling: true,
+        });
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      } else {
+        firestore = getFirestore();
+      }
+      return firestore;
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
