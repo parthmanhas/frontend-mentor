@@ -2,6 +2,7 @@ import { Component, ElementRef, AfterViewInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { deleteBoard, editBoard, setMobileCss, toggleAddNewTask, toggleSidebar } from "src/app/state/app.actions";
 import { AppState, Board } from "src/app/state/app.state";
+import { AuthService } from "../service/auth.service";
 
 @Component({
     selector: 'app-navbar',
@@ -18,7 +19,7 @@ export class NavbarComponent implements AfterViewInit {
     public currentBoard: Board | null = null;
     public sidebarVisible = false;
 
-    constructor(private store: Store<{ app: AppState }>, private elementRef: ElementRef) {
+    constructor(private store: Store<{ app: AppState }>, private elementRef: ElementRef, private authService: AuthService) {
         this.store.select(state => state).subscribe(state => {
             if (!state.app.boards) return;
             this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
@@ -53,5 +54,9 @@ export class NavbarComponent implements AfterViewInit {
 
     toggleMobileSideBar(value: boolean) {
         this.store.dispatch(toggleSidebar({ sidebarVisible: value }));
+    }
+
+    logout() {
+        this.authService.logout();
     }
 }
