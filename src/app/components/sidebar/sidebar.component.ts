@@ -42,7 +42,7 @@ export class SidebarComponent {
 
     public hide = false;
 
-    public boardList!: Board[];
+    public boardList: Board[] | null = null;
     public isActive = -1;
     public activeBoardId!: string | null;
     public theme = 'light';
@@ -63,6 +63,10 @@ export class SidebarComponent {
 
     setActive(index: number): void {
         this.isActive = index;
+        if (!this.boardList) {
+            console.error('No boards found!');
+            return;
+        }
         this.store.dispatch(selectBoard({ boardId: this.boardList[index].id }));
     }
 

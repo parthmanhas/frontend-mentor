@@ -7,7 +7,7 @@
     <p class="xl bold ml-1">kanban</p>
 </div>
 <div class="board-list">
-    <p class="s semi-bold heading">ALL BOARDS ({{boardList.length}})</p>
+    <p class="s semi-bold heading">ALL BOARDS ({{boardList?.length}})</p>
     <ul>
         <li *ngFor="let board of boardList; let i = index" [class.active]="board.id === activeBoardId"
             (click)="setActive(i)" (keydown.enter)="setActive(i)" tabindex="0">

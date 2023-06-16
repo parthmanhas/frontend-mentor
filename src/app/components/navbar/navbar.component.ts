@@ -20,13 +20,14 @@ export class NavbarComponent implements AfterViewInit {
 
     constructor(private store: Store<{ app: AppState }>, private elementRef: ElementRef) {
         this.store.select(state => state).subscribe(state => {
+            if (!state.app.boards) return;
             this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
             this.addNewTaskButtonDisabled = !((this.currentBoard?.columns?.length ?? 0) > 0);
             this.sidebarVisible = state.app.sidebarVisible;
             this.isMobile = state.app.isMobile || false;
         });
     }
-    
+
     ngAfterViewInit() {
         this.store.dispatch(setMobileCss({ mobileCss: { top: this.elementRef.nativeElement.offsetHeight } }));
     }

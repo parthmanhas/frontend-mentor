@@ -17,7 +17,8 @@ const initialState: AppState = {
     editColumnModalVisible: false,
     viewTaskModalVisible: false,
     editBoardModalVisible: false,
-    editTaskModalVisible: false
+    editTaskModalVisible: false,
+    isMobile: false,
 };
 
 export const appReducer = createReducer(
@@ -38,7 +39,7 @@ export const appReducer = createReducer(
         const boardToUpdate = state.boards.find(b => b.id === parentBoardId);
         if (!boardToUpdate) {
             throw new Error('Board not found');
-        }; 
+        };
 
         const updatedColumns = [...(boardToUpdate.columns || []), ...columns];
         const updatedBoards = state.boards.map(b => (b.id === parentBoardId ? { ...b, columns: updatedColumns } satisfies Board : b));
@@ -74,7 +75,7 @@ export const appReducer = createReducer(
         const boardToUpdate = state.boards.find(b => b.id === parentBoardId);
         if (!boardToUpdate) {
             throw new Error('Board not found');
-        }; 
+        };
 
         const columnToUpdate = boardToUpdate.columns?.find(c => c.id === parentColumnId);
         if (!columnToUpdate) {
@@ -238,6 +239,23 @@ export const appReducer = createReducer(
     on(Actions.setMobileCss, (state, { mobileCss }) => ({
         ...state,
         mobileCss: mobileCss ?? state.mobileCss,
+    })),
+    on(Actions.addAppState, (state, { appState, isMobile }) => ({
+        ...state,
+        boards: appState.boards,
+        theme: appState.theme,
+        currentBoardId: null,
+        currentColumnId: undefined,
+        currentTask: null,
+        sidebarVisible: false,
+        createBoardModalVisible: false,
+        addNewTaskModalVisible: false,
+        addNewColumnModalVisible: false,
+        editColumnModalVisible: false,
+        viewTaskModalVisible: false,
+        editBoardModalVisible: false,
+        editTaskModalVisible: false,
+        isMobile
     }))
 
 );

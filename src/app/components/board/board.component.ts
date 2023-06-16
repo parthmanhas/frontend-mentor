@@ -4,12 +4,7 @@ import { TAB_MIN_WIDTH, TAB_MAX_WIDTH } from "src/app/constants/constants";
 import { addNewColumnModalVisible, createBoardModalVisible, toggleViewTask, updateColumnTasks, updateTaskParentColumn } from "src/app/state/app.actions";
 import { AppState, Board, Task } from "src/app/state/app.state";
 import {
-    CdkDragDrop,
-    CdkDrag,
-    CdkDropList,
-    CdkDropListGroup,
     moveItemInArray,
-    transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -50,6 +45,7 @@ export class BoardComponent {
 
     constructor(private store: Store<{ app: AppState }>) {
         this.store.select(state => state).subscribe(state => {
+            if (!state.app.boards) return;
             this.currentBoard = state.app.boards.filter(b => b.id === state.app.currentBoardId)[0];
             this.sidebarVisible = state.app.sidebarVisible;
             this.minOneBoardAvailable = state.app.boards.length > 0;

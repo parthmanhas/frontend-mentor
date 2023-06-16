@@ -16,6 +16,17 @@ export interface AppState {
     mobileCss?: MobileCss
 }
 
+export interface DatabaseAppState {
+    boards: Board[],
+    theme: string
+}
+
+export interface User {
+    id: string,
+    email: string,
+    appState: DatabaseAppState,
+}
+
 export interface MobileCss {
     top: string
 }
