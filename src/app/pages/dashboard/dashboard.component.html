@@ -1,0 +1,21 @@
+<app-navbar [class.dark-theme]="theme === 'dark'"></app-navbar>
+<app-sidebar [class.dark-theme]="theme === 'dark'"
+    (openCreatBoardModalEvent)="createNewBoard = true"
+    (hideSidebarEvent)="hideSidebarVisibleEvent()"></app-sidebar>
+<app-board [class.dark-theme]="theme === 'dark'"></app-board>
+<app-add-new-task [class.dark-theme]="theme === 'dark'"
+    *ngIf="addNewTaskModalVisible"></app-add-new-task>
+<app-add-new-board [class.dark-theme]="theme === 'dark'"
+    *ngIf="createNewBoard"
+    (closeModalEvent)="createNewBoard = false"></app-add-new-board>
+<app-add-new-column [class.dark-theme]="theme === 'dark'"
+    *ngIf="addNewColumnModalVisible"></app-add-new-column>
+<app-view-task [class.dark-theme]="theme === 'dark'"
+    *ngIf="viewTaskModalVisible"></app-view-task>
+<app-edit-board [class.dark-theme]="theme === 'dark'"
+    *ngIf="editBoardModalVisible"></app-edit-board>
+<app-edit-task [class.dark-theme]="theme === 'dark'"
+    *ngIf="editTaskModalVisible"></app-edit-task>
+<!-- <app-view-task *ngIf="true"></app-view-task> -->
+<div #mobileBackground
+    class="mobile-background"></div>
