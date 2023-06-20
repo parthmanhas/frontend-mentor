@@ -38,7 +38,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const task: Task = {
@@ -86,7 +87,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const columnToDelete: Column = {
@@ -150,7 +152,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.updateColumnName({
@@ -198,6 +201,7 @@ describe('app.reducer.ts', () => {
                 }
             ] // Updated currentColumn ID
             ,
+
             theme: '',
             currentBoardId: null,
             currentColumnId: undefined,
@@ -209,7 +213,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const newState = appReducer(initialState, action);
@@ -261,7 +266,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.addNewSubTask({
@@ -327,7 +333,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         // Act
@@ -384,7 +391,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.updateTaskParentColumn({
@@ -444,7 +452,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         // Act
@@ -515,7 +524,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.updateSubtasksStatus({
@@ -598,7 +608,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         // Act
@@ -649,7 +660,8 @@ describe('app.reducer.ts', () => {
             addNewColumnModalVisible: false,
             editColumnModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.deleteTask({
@@ -689,7 +701,8 @@ describe('app.reducer.ts', () => {
             addNewColumnModalVisible: false,
             editColumnModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         // Act
@@ -740,7 +753,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.updateTask({
@@ -793,7 +807,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         // Act
@@ -829,7 +844,8 @@ describe('app.reducer.ts', () => {
             addNewColumnModalVisible: false,
             editColumnModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.updateBoard({
@@ -879,7 +895,8 @@ describe('app.reducer.ts', () => {
             addNewColumnModalVisible: false,
             editColumnModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         // Act
@@ -945,7 +962,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         const action = Actions.setCurrentTask({
@@ -1019,7 +1037,8 @@ describe('app.reducer.ts', () => {
             editColumnModalVisible: false,
             viewTaskModalVisible: false,
             editBoardModalVisible: false,
-            editTaskModalVisible: false
+            editTaskModalVisible: false,
+            user: null
         };
 
         // Act
