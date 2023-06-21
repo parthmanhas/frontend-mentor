@@ -13,7 +13,8 @@ export interface AppState {
     editBoardModalVisible: boolean,
     editTaskModalVisible: boolean,
     isMobile?: boolean,
-    mobileCss?: MobileCss
+    mobileCss?: MobileCss,
+    user: { id: string, email: string } | null
 }
 
 export interface DatabaseAppState {

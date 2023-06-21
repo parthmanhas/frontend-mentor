@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { Firestore, connectFirestoreEmulator, getFirestore, initializeFirestore, provideFirestore } from '@angular/fire/firestore';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -22,6 +21,14 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { environment } from 'src/environments/environment';
+import { LoginComponent } from './pages/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import { LogoComponent } from './components/logo/logo.component';
+import { AuthModule, provideAuth, connectAuthEmulator, getAuth } from '@angular/fire/auth';
+import { AuthService } from './components/service/auth.service';
 
 @NgModule({
   declarations: [
@@ -35,14 +42,27 @@ import { environment } from 'src/environments/environment';
     ViewTaskComponent,
     EditBoardComponent,
     EditTaskComponent,
-    SliderComponent
+    SliderComponent,
+    LoginComponent,
+    DashboardComponent,
+    LogoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     FormsModule,
     DragDropModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    provideAuth(() => {
+      const auth = getAuth();
+      if (environment.useEmulators) {
+        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+      }
+      return auth;
+    }),
     StoreModule.forRoot({ app: appReducer }),
     StoreDevtoolsModule.instrument(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -60,7 +80,7 @@ import { environment } from 'src/environments/environment';
       return firestore;
     }),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

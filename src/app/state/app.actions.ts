@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { AppState, Board, Column, DatabaseAppState, MobileCss, Subtask, Task } from './app.state';
+import { Board, Column, DatabaseAppState, MobileCss, Subtask, Task } from './app.state';
 
 // application actions
 export const changeTheme = createAction('[Sidebar] Change Theme', props<{ theme: string }>());
 export const addAppState = createAction('[App] Add App State', props<{ appState: DatabaseAppState, isMobile: boolean }>());
+export const setUser = createAction('[App] Set User', props<{ user: { id: string, email: string } }>());
 
 // board actions
 export const addBoard = createAction('[Board] Add Board', props<{ board: Board }>());
@@ -34,7 +35,6 @@ export const toggleEditTask = createAction('[toggleEditTask] Toggle edit task', 
 export const toggleAddNewTask = createAction('[toggleAddNewTask] Toggle add new task', props<{ addNewTaskModalVisible: boolean }>());
 export const deleteTask = createAction('[deleteTask] Delete Task', props<{ task: Task, viewTaskModalVisible?: boolean }>());
 export const setCurrentTask = createAction('[setCurrentTask] Set Current task', props<{ task: Task }>());
-
 
 // subtask actions
 export const addNewSubTask = createAction('[addNewSubTask] Add new sub task', props<{ subtask: Subtask }>());

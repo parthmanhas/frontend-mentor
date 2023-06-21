@@ -19,6 +19,7 @@ const initialState: AppState = {
     editBoardModalVisible: false,
     editTaskModalVisible: false,
     isMobile: false,
+    user: null
 };
 
 export const appReducer = createReducer(
@@ -256,6 +257,10 @@ export const appReducer = createReducer(
         editBoardModalVisible: false,
         editTaskModalVisible: false,
         isMobile
-    }))
+    })),
+    on(Actions.setUser, (state, { user }) => ({
+        ...state,
+        user
+    })),
 
 );

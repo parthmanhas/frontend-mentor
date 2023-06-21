@@ -1,10 +1,5 @@
 <div class="logo-container m-2">
-    <div class="logo">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <p *ngIf="(isMobile && !currentBoard) || !isMobile" class="xl bold ml-1">kanban</p>
+    <app-logo></app-logo>
     <p *ngIf="currentBoard && isMobile" class="xl bold ml-1">{{currentBoard.name}}</p>
     <svg class="p-1" *ngIf="isMobile && !sidebarVisible" (click)="toggleMobileSideBar(!sidebarVisible)" width="10"
         height="7" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +21,7 @@
             (click)="addNewTask()" width="12" height="12" xmlns="http://www.w3.org/2000/svg">
             <path fill="#FFF" d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z" />
         </svg>
-        <svg *ngIf="!showBoardOptionsModal && currentBoard" (click)="showBoardOptionsModal = true" width="5" height="20"
+        <svg *ngIf="!showBoardOptionsModal" (click)="showBoardOptionsModal = true" width="5" height="20"
             xmlns="http://www.w3.org/2000/svg">
             <g fill="#828FA3" fill-rule="evenodd">
                 <circle cx="2.308" cy="2.308" r="2.308" />
@@ -42,13 +37,17 @@
             </g>
         </svg>
         <div *ngIf="showBoardOptionsModal" class="board-options-modal p-1">
-            <p (click)="edit = true; showBoardOptionsModal = false; showEditBoardModal();"
+            <p *ngIf="currentBoard" (click)="edit = true; showBoardOptionsModal = false; showEditBoardModal();"
                 (keydown.enter)="edit = true; showBoardOptionsModal = false; showEditBoardModal();" tabindex="0"
                 class="grey-medium-50-text pb-1 option">Edit Board
             </p>
-            <p (click)="deleteBoardModalVisible = true; showBoardOptionsModal = false"
+            <p *ngIf="currentBoard" (click)="deleteBoardModalVisible = true; showBoardOptionsModal = false"
                 (keydown.enter)="deleteBoardModalVisible = true; showBoardOptionsModal = false" tabindex="0" class="red option">
                 Delete Board
+            </p>
+            <p (click)="logout()"
+                (keydown.enter)="logout()" tabindex="0" class="red option">
+                Logout
             </p>
         </div>
     </div>
