@@ -1,8 +1,3 @@
 {
-    "html.format.wrapAttributes": "force",
-    "search.exclude": {
-        "**/node_modules": false,
-        "**/bower_components": true,
-        "**/dist": true
-    }
+    "colorTheme": "blueberry-dark-theme",
 }

@@ -1,284 +1,66 @@
-@import "../../../scss/colors";
-
-:host {
-    display: flex;
-    flex-direction: column;
-    width: 15vw;
-    position: absolute;
-    border-right: 1px solid $grey-light;
-    height: 100vh;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    background-color: $white;
-    transition: 0.5s;
-    z-index: 1;
-
-    // transform: translateX(-100%);
+:host,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  flex-shrink: 0;
+  text-decoration: none;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-app-logo {
-    margin-top: 0.5rem
+:host,
+:not(span, a, ul, ol, li, p) {
+  display: flex;
+}
+
+ul,
+ol {
+  text-indent: 0;
+  padding-inline-start: 1.5em;
+}
+
+p:empty::before {
+  content: '';
+  display: inline-block;
+}
+
+img {
+  object-fit: contain;
 }
 
 svg {
-    fill: $grey-medium-50;
-    margin-right: 1rem;
-    z-index: 1;
+  overflow: visible;
 }
 
-.show-sidebar-container {
-    position: absolute;
-    display: flex;
-    left: 100%;
-    top: 93%;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    background-color: $purple-dark;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    transition: 0.5s;
-
-    svg {
-        fill: $white;
-        margin-right: 0;
-        z-index: 1;
-    }
+:host {
+  position: relative;
+  width: 103px;
+  height: 800px;
+  align-items: flex-start;
+  overflow: hidden;
 }
-
-.hide-sidebar-container {
-    display: flex;
-    align-items: center;
-    padding: 1rem 0;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    position: relative;
-    cursor: pointer;
-
-    p {
-        color: $grey-medium-50;
-    }
+.rectangle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 20px 20px 0;
+  background-color: #373b53;
 }
-
-.hide-sidebar-container:hover {
-    background-color: rgb(99 95 199 / 10%);
-
-    &::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform: translateX(-100%);
-        z-index: 0;
-        background-color: rgb(99 95 199 / 10%);
-    }
-
-    & > p {
-        color: $purple-dark;
-    }
-
-    & > svg {
-        fill: $purple-dark;
-    }
-
-}
-
-.board-list {
+.group11 {
+  position: absolute;
+  left: 0;
+  top: 659px;
+  width: 103px;
+  height: 117px;
+  overflow: visible;
+  &__icon {
+    width: 100%;
     height: 100%;
-    padding-top: 4rem;
-
-    .heading {
-        margin-bottom: 1rem;
-    }
-
-    p {
-        color: $grey-medium-50;
-    }
-
-    li.active {
-        background-color: $purple-dark !important;
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
-
-        p {
-            color: $white !important;
-        }
-
-        svg {
-            fill: white !important;
-        }
-
-        position: relative;
-
-        &::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transform: translateX(-90%);
-            z-index: 0;
-            background-color: $purple-dark !important;
-        }
-    }
-
-    ul > li {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        position: relative;
-        height: 3rem;
-
-        @media (width >= 768px) {
-            &:hover {
-                background-color: rgb(99 95 199 / 10%);
-                border-top-right-radius: 30px;
-                border-bottom-right-radius: 30px;
-
-                &::before {
-                    content: "";
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    transform: translateX(-100%);
-                    z-index: 0;
-                    background-color: rgb(99 95 199 / 10%);
-                }
-
-                p {
-                    color: $purple-dark;
-                }
-
-                svg {
-                    fill: $purple-dark;
-                }
-            }
-        }
-    }
-
-    ul > li:nth-last-child(1) {
-        svg {
-            fill: $purple-dark;
-        }
-    }
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.hide-sidebar {
-    transform: translateX(-100%);
-}
-
-.hide {
-    display: none;
-}
-
-.hide-animate {
-    transform: translateX(-100%);
-    z-index: -2;
-    background-color: $white;
-}
-
-@media (width >= 768px) and (width <= 1024px) {
-    :host {
-        width: 30vw;
-    }
-}
-
-@media (width <= 767px) {
-    :host {
-        position: absolute;
-        height: max-content;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 9%;
-        width: 65vw;
-        border-radius: 10px;
-        z-index: 1;
-        margin-top: 1rem;
-    }
-
-    .show-sidebar-container {
-        display: none;
-    }
-
-    .logo-container {
-        display: none;
-    }
-
-    .hide-sidebar-container {
-        display: none;
-    }
-
-    .board-list {
-        padding-top: 1rem;
-
-        li.active {
-            &::before {
-                width: 1rem;
-            }
-        }
-    }
-}
-
-:host.dark-theme {
-    background: #2b2c37;
-    border-right: 1px solid #3e3f4e;
-
-    li > svg,
-    .hide-sidebar-container > svg {
-        fill: #828fa3;
-    }
-
-    li > p,
-    .board-list > p,
-    .hide-sidebar-container > p {
-        color: #828fa3;
-    }
-
-    .logo-container > p {
-        color: white;
-    }
-
-    .hide-animate {
-        background-color: #2b2c37;
-
-        svg {
-            fill: #2b2c37;
-        }
-    }
-
-    ul > li:hover {
-        background-color: white !important;
-
-        &::before {
-            background-color: white !important;
-        }
-
-        p {
-            color: $purple-dark !important;
-        }
-
-        svg {
-            fill: $purple-dark !important;
-        }
-    }
-
-    .hide-sidebar-container:hover {
-        background-color: white !important;
-
-        &::before {
-            background-color: white !important;
-        }
-
-        p {
-            color: $purple-dark;
-        }
-
-        svg {
-            fill: $purple-dark;
-        }
-    }
+    object-fit: cover;
+  }
 }

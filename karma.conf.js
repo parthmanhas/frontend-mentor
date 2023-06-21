@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/kanban'),
+      dir: require('path').join(__dirname, './coverage/invoice-app'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -1,16 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap';
-@import './scss/index';
-
-* {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+cl-root {
+    font-family: sans-serif;
+    background-color: #f2f2f2;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
 }
-
-.error-border {
-    border: 1px solid $red-dark;
-}
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
