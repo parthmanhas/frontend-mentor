@@ -1,0 +1,109 @@
+@import "../../../styles";
+
+.view-invoice-details {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 2rem;
+    &--light {
+        background-color: #FFF;
+    }
+    &--dark {
+        color: white;
+        * {
+            color: #DFE3FA;
+        }
+        background-color: #1E2139;
+    }
+    &__id-shipping-address-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+    }
+    &__id-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    &__shipping-address {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__dates-billing-email-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        * {
+            flex: 1;
+        }
+    }
+    &__billing {
+        color: #858bb2;
+        &__address {
+            &__name {
+                color: #0c0e16;
+            }
+        }
+    }
+    &__email {
+        color: #858bb2;
+        &__value {
+            color: #0c0e16;
+        }
+    }
+    &__dates-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    &__invoice-date {
+        margin-bottom: 1rem;
+        color: #858bb2;
+        &__value {
+            color: #0c0e16;
+        }
+    }
+    &__payment-due-date {
+        color: #858bb2;
+        &__value {
+            color: #0c0e16;
+        }
+    }
+    
+    &__amount_due {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        &--light {
+            background-color: map-get($component-palette, view-invoice-details, light-mode, amount, background);
+        }
+        &--dark {
+            background-color: map-get($component-palette, view-invoice-details, dark-mode, amount, background);
+        }
+        &__heading {
+            &--light {
+                color: map-get($component-palette, view-invoice-details, light-mode, amount, text);
+            }
+            &--dark {
+                color: map-get($component-palette, view-invoice-details, dark-mode, amount, text);
+            }
+        }
+        &__value {
+            &--light {
+                font-weight: 700;
+                font-size: 2rem;
+                color: map-get($component-palette, view-invoice-details, light-mode, amount, text);
+            }
+            &--dark {
+                font-weight: 700;
+                font-size: 2rem;
+                color: map-get($component-palette, view-invoice-details, dark-mode, amount, text);
+            }
+        }
+    }
+}

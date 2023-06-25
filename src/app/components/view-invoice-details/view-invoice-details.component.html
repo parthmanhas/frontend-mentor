@@ -1,0 +1,37 @@
+<div [ngClass]="classes">
+    <div class="view-invoice-details__id-shipping-address-wrapper">
+        <div class="view-invoice-details__id-wrapper">
+            <p class="view-invoice-details__id bold--heavy">#{{id}}</p>
+            <p class="view-invoice-details__order-category">{{orderCategory}}</p>
+        </div>
+        <p class="view-invoice-details__shipping-address" [innerHTML]="shippingAddress"></p>
+    </div>
+    <div class="view-invoice-details__dates-billing-email-wrapper">
+        <div class="view-invoice-details__dates-wrapper">
+            <div class="view-invoice-details__invoice-date">
+                <p class="view-invoice-details__invoice-date__heading">Invoice Date</p>
+                <p class="view-invoice-details__invoice-date__value bold--heavy">{{invoiceDate}}</p>
+            </div>
+            <div class="view-invoice-details__payment-due-date">
+                <p class="view-invoice-details__payment-due-date__heading">Payment Due</p>
+                <p class="view-invoice-details__payment-due-date__value bold--heavy">{{paymentDueDate}}</p>
+            </div>
+        </div>
+        <div class="view-invoice-details__billing">
+            <div class="view-invoice-details__billing__heading">Bill To</div>
+            <div class="view-invoice-details__billing__address-wrapper">
+                <p class="view-invoice-details__billing__address__name bold--heavy">{{name}}</p>
+                <p class="view-invoice-details__billing__address" [innerHTML]="billingAddress"></p>                
+            </div>
+        </div>
+        <div class="view-invoice-details__email">
+            <p class="view-invoice-details__email__heading">Sent to</p>
+            <p class="view-invoice-details__email__value bold--heavy">{{email}}</p>
+        </div>
+    </div>
+    <app-view-invoice-details-table [theme]="theme" [headings]="headings" [items]="items"></app-view-invoice-details-table>
+    <div class="view-invoice-details__amount_due" [ngClass]="'view-invoice-details__amount_due--' + theme">
+        <p [ngClass]="'view-invoice-details__amount_due__heading--' + theme">Amount Due</p>
+        <p [ngClass]="'view-invoice-details__amount_due__value--' + theme">{{amountDue}}</p>
+    </div>
+</div>
