@@ -1,0 +1,45 @@
+.input {
+    display: flex;
+    flex-direction: column;
+
+    input {
+        margin-top: 1rem;
+        outline: none;
+        border: 1px solid #dfe3fa;
+        padding: 1rem;
+        border-radius: 4px;
+    }
+
+    &--light {
+        label {
+            color: #7E88C3;
+        }
+    }
+
+    &--dark {
+        label {
+            color: #DFE3FA
+        }
+    }
+
+    &--weight {
+        &--normal > * {
+            font-weight: 500;
+        }
+        &--bold > * {
+            font-weight: 700;
+        }
+    }
+
+    &--size {
+        &--small > *{
+            font-size: 1rem;
+        }
+        &--medium > *{
+            font-size: 1.5rem;
+        }
+        &--large > * {
+            font-size: 2rem;
+        }
+    }
+}
