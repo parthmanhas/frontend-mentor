@@ -176,3 +176,130 @@
         </button>
     </div>
 </div>
+
+<!-- invoice-actions container calc(100vh-7rem) -> 7rem is height of sidebar -->
+<div
+    class="w-[100vw] pb-24 md:pt-10 md:h-[calc(100vh-7rem)] lg:h-[100vh] bg-whisper-50 flex justify-center items-center overflow-y-auto overflow-x-hidden dark:bg-[#141625]">
+    <div class="lg:w-[60vw] md:w-[90vw] w-[95vw] md:h-full">
+        <!-- go back-container -->
+        <div (click)="goBackToViewInvoices()" class="flex items-center p-5 text-lg">
+            <svg class="cursor-pointer" width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.342.886L2.114 5.114l4.228 4.228" stroke="#9277FF" stroke-width="2" fill="none"
+                    fill-rule="evenodd" />
+            </svg>
+            <p
+                class="ml-3 font-bold cursor-pointer hover:text-ship-cove-500 dark:text-white dark:hover:text-bali-hai-600">
+                Go Back</p>
+        </div>
+        <!-- status-container -->
+        <div class="flex justify-between bg-white py-5 px-7 rounded-xl mb-5 dark:bg-mirage-950">
+            <div class="flex items-center w-full justify-between md:w-0">
+                <p class="mr-3 text-wild-blue-yonder-600">Status</p>
+                <div class="flex items-center justify-center rounded pl-7 pr-7 pt-2 pb-2 min-w-[100px]"
+                    [ngClass]="getStatusClass">
+                    <svg preserveAspectRatio="none" width="8" height="8" viewBox="0 0 8 8" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle *ngIf="editForm.value.status === 'paid'" class="fill-[#33D69F]" cx="4" cy="4" r="4" />
+                        <circle *ngIf="editForm.value.status === 'pending'" class="fill-[#ff8f00]" cx="4" cy="4"
+                            r="4" />
+                        <circle *ngIf="editForm.value.status === 'draft'" class="fill-[#373b53] dark:fill-selago-100"
+                            cx="4" cy="4" r="4" />
+                    </svg>
+                    <p *ngIf="editForm.value.status === 'paid'" class="ml-3 text-shamrock-400 font-bold">
+                        {{editForm.value.status |
+                        titlecase}}</p>
+                    <p *ngIf="editForm.value.status === 'draft'"
+                        class="ml-3 text-oxford-blue-800 dark:text-selago-100 font-bold">{{editForm.value.status |
+                        titlecase}}</p>
+                    <p *ngIf="editForm.value.status === 'pending'" class="ml-3 text-pizazz-600 font-bold">
+                        {{editForm.value.status |
+                        titlecase}}</p>
+                </div>
+            </div>
+            <div
+                class="fixed bottom-0 left-0 text-center bg-white dark:bg-mirage-950 w-full px-7 py-4 h-[5rem] md:static md:bottom-auto md:left-auto md:bg-transparent md:w-auto md:px-0 md:py-0">
+                <button (click)="editFormVisible = true"
+                    class="px-4 py-3 rounded-full text-ship-cove-500 font-bold bg-selago-50 hover:bg-selago-100 dark:bg-ebony-clay-950 dark:text-selago-100 dark:hover:bg-white dark:hover:text-ship-cove-500">Edit</button>
+                <button (click)="deleteFormVisible = true"
+                    class="ml-3 px-4 py-3 rounded-full font-bold bg-burnt-sienna-500 text-white hover:bg-burnt-sienna-400">Delete</button>
+                <button (click)="markAsPaid()"
+                    [ngClass]="{'bg-green-900 hover:bg-green-900 cursor-auto text-wild-blue-yonder-700': editForm.value.status === 'paid'}"
+                    class="ml-3 px-4 py-3 rounded-full font-bold bg-green-500 text-white hover:bg-green-400">Mark
+                    as
+                    Paid</button>
+                <button (click)="markAsPending()"
+                    [ngClass]="{'bg-yellow-900 hover:bg-yellow-900 cursor-auto text-wild-blue-yonder-700': editForm.value.status === 'paid' || editForm.value.status === 'pending'}"
+                    class="ml-3 px-4 py-3 rounded-full font-bold bg-yellow-500 text-white hover:bg-yellow-400">Mark
+                    as
+                    Pending</button>
+            </div>
+        </div>
+        <!-- invoice-details container -->
+        <div class="bg-white rounded-xl p-7 dark:bg-mirage-950">
+            <div class="flex justify-between mb-5">
+                <div>
+                    <p class="font-bold dark:text-white">#{{editForm.value.id}}</p>
+                    <p class="text-wild-blue-yonder-600">{{editForm.value.projectName}}</p>
+                </div>
+                <div>
+                    <p class="text-wild-blue-yonder-600" [innerHTML]="getAddress()"></p>
+                </div>
+            </div>
+            <!-- dates-bill-sent container -->
+            <div class="flex justify-between mb-10">
+                <!-- dates-container -->
+                <div>
+                    <div class="mb-5">
+                        <p class="text-wild-blue-yonder-600">Invoice Date</p>
+                        <p class="font-bold dark:text-selago-100">{{editForm.value.purchaseDate | date}}</p>
+                    </div>
+                    <div>
+                        <p class="text-wild-blue-yonder-600">Payment Due</p>
+                        <p class="font-bold dark:text-selago-100">{{editForm.value.paymentDueDate | date}}</p>
+                    </div>
+                </div>
+                <!-- bill container -->
+                <div>
+                    <p class="text-wild-blue-yonder-600">Bill To</p>
+                    <p class="font-bold dark:text-selago-100">{{editForm.value.client?.name}}</p>
+                    <p class="text-wild-blue-yonder-600">{{editForm.value.client?.address?.street}}</p>
+                    <p class="text-wild-blue-yonder-600">{{editForm.value.client?.address?.city}}</p>
+                    <p class="text-wild-blue-yonder-600">{{editForm.value.client?.address?.postCode}}</p>
+                    <p class="text-wild-blue-yonder-600">{{editForm.value.client?.address?.country}}</p>
+                </div>
+                <!-- sent container -->
+                <div>
+                    <p class="text-wild-blue-yonder-600">Sent To</p>
+                    <p class="font-bold dark:text-selago-100">{{editForm.value.client?.email}}</p>
+                </div>
+            </div>
+            <!-- items-container -->
+            <div class="bg-selago-50 rounded-t-xl p-7 pb-5 overflow-y-auto h-[50vh] dark:bg-ebony-clay-950">
+                <!-- items-container -->
+                <div class="grid grid-cols-4 mb-5">
+                    <p class="text-wild-blue-yonder-600 font-bold">Item Name</p>
+                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end">Quantity</p>
+                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end">Price</p>
+                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end">Total</p>
+                </div>
+
+                <div *ngFor="let item of editForm.controls.items.controls"
+                    class="grid grid-cols-4 mb-3 text-lg font-bold">
+                    <p class="dark:text-white">{{item.value.name}}</p>
+                    <p class="text-ship-cove-500 justify-self-end dark:text-selago-100">{{item.value.quantity}}</p>
+                    <p class="text-ship-cove-500 justify-self-end dark:text-selago-100">{{item.value.price | currency:
+                        'USD'}}
+                    </p>
+                    <p class="justify-self-end dark:text-white">{{ (item.value.quantity || 0) * (item.value.price || 0)
+                        | currency: 'USD' }}</p>
+                </div>
+
+            </div>
+            <!-- amount-due-container -->
+            <div class="flex justify-between bg-oxford-blue-800 p-7 rounded-b-xl dark:bg-vulcan-950">
+                <p class="text-white">Amount Due</p>
+                <p class="font-bold text-white">{{total | currency: 'USD'}}</p>
+            </div>
+        </div>
+    </div>
+</div>
