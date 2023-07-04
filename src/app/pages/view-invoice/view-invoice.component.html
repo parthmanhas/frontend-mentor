@@ -303,3 +303,20 @@
         </div>
     </div>
 </div>
+
+<!-- delete-container -->
+<div *ngIf="deleteFormVisible" class="fixed inset-0 bg-black bg-opacity-50 z-50 w-full h-full">
+    <div id="delete-form"
+        class="w-3/4 md:w-auto bg-white rounded-xl p-7 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 dark:bg-mirage-950 dark:text-white">
+        <p class="text-center text-2xl font-bold mb-5">Confirm Deletion</p>
+        <p class="text-center text-oxford-blue-800 dark:text-selago-100 mb-10">Are you sure you want to delete invoice
+            #{{editForm.value.id}}?
+            This action cannot be undone.</p>
+        <div class="flex justify-center">
+            <button (click)="deleteFormVisible = false"
+                class="px-4 py-3 rounded-full text-ship-cove-500 font-bold bg-selago-50 dark:bg-ebony-clay-950 dark:text-selago-100 dark:hover:bg-selago-100 dark:hover:text-ship-cove-500">Cancel</button>
+            <button (click)="deleteInvoice()"
+                class="ml-3 px-4 py-3 rounded-full font-bold bg-burnt-sienna-500 dark:hover:bg-burnt-sienna-400 text-white">Delete</button>
+        </div>
+    </div>
+</div>
