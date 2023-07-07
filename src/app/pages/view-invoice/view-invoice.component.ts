@@ -31,6 +31,7 @@ export class ViewInvoiceComponent {
 
     }
 
+    // initialize invoice form
     initInvoiceForm(invoice: Invoice) {        
         this.editForm = this.fb.nonNullable.group({
             // probability of collision is 1 in 2^32
@@ -62,6 +63,7 @@ export class ViewInvoiceComponent {
         this.editForm.value.items?.forEach(item => this.total += (item.quantity ?? 0) * (item.price ?? 0));
     }
 
+    // initialize item form
     initItemForm(item: InvoiceItem): InvoiceItemForm {
         return this.fb.nonNullable.group({
             name: [item.name, Validators.required],
