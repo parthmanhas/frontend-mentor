@@ -149,4 +149,50 @@ export class ViewInvoiceComponent {
 
     }
 
+    deleteItem(index: number) {
+        this.editForm.controls.items.removeAt(index);
+    }
+
+    handleCancel() {
+        this.editFormVisible = false;
+        this.editForm.reset();
+    }
+
+    saveChanges() {
+        this.editForm.markAsDirty();
+        this.submitted = true;
+        if (this.editForm.valid) {
+            this.editFormVisible = false;
+            const modifiedInvoice: Invoice = this.editForm.value as Required<Invoice>;
+            this.appComponent.invoices$.next(this.appComponent.invoices$.value.map(invoice => invoice.id === modifiedInvoice.id ? modifiedInvoice : invoice));
+        } else {
+            console.error('Form invalid');
+            console.log(this.editForm)
+        }
+    }
+
+    initItem(): FormGroup {
+        return this.fb.nonNullable.group({
+            name: ['', Validators.required],
+            quantity: ['', [Validators.required, Validators.min(1)]],
+            price: ['', Validators.required],
+        });
+    }
+
+    addNewItem() {
+        this.editForm.controls.items.push(this.initItem());
+    }
+
+    inputInvalidClass(control: FormControl) {
+        if (control.invalid && this.submitted)
+            return "border-red-500 dark:border-red-500";
+        return '';
+    }
+
+    labelInvalidClass(control: FormControl) {
+        if (control.invalid && this.submitted)
+            return "text-red-500 dark:text-red-500";
+        return '';
+    }
+
 }
