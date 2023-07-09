@@ -191,3 +191,106 @@
     </div>
 </div>
 
+<!-- invoices-container -->
+<div
+    class="w-[100vw] h-[calc(100%-5rem)] md:h-[100vh] p-5 bg-whisper-50 flex justify-center overflow-y-auto dark:bg-[#141625]">
+    <div class="w-[90vw] md:w-5/6 lg:w-[60vw]">
+        <!-- top container -->
+        <div class="flex justify-between mt-10">
+            <div>
+                <p class="font-bold text-3xl text-vulcan-950 dark:text-white">Invoices</p>
+                <p *ngIf="filters$.value.length === 0" class="text-bali-hai-600 dark:text-selago-100">{{invoices.length > 0 ? 'There are ' + invoices.length
+                    + ' total invoices'
+                    : 'No Invoices'}}</p>
+                <p *ngIf="filters$.value.length > 0" class="text-bali-hai-600 dark:text-selago-100">There are {{internalInvoices.length}} {{filters$.value.join(',')}} invoices</p>
+            </div>
+            <!-- filter by status -->
+            <div class="flex">
+                <div (click)="showDropdown($event)"
+                    class="flex items-center mr-5 md:mr-20 hover:cursor-pointer relative">
+                    <p class="mr-3 font-bold text-lg dark:text-white hidden md:block">Filter by status</p>
+                    <p class="mr-3 font-bold text-lg dark:text-white md:hidden">Filter</p>
+                    <svg *ngIf="!dropdownVisible" width="11" height="7" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1l4.228 4.228L9.456 1" stroke="#7C5DFA" stroke-width="2" fill="none"
+                            fill-rule="evenodd" />
+                    </svg>
+                    <svg *ngIf="dropdownVisible" class="rotate-180" width="11" height="7"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1l4.228 4.228L9.456 1" stroke="#7C5DFA" stroke-width="2" fill="none"
+                            fill-rule="evenodd" />
+                    </svg>
+                    <!-- filter by status dropdown -->
+                    <div #dropdown *ngIf="dropdownVisible" (click)="stopPropagation($event)"
+                        class="absolute -left-1/4 p-3 top-3/4 bg-white md:w-[135%] rounded-lg text-lg border dark:border-0 shadow-lg dark:bg-ebony-clay-950 dark:text-white">
+                        <label class="p-3 rounded font-bold flex items-center">
+                            <input class="mr-2 accent-cornflower-blue-500" type="checkbox" [(ngModel)]="paidChecked"
+                                (change)="filterInvoices('paid', $event)">
+                            Paid
+                        </label>
+
+                        <label class="p-3 rounded font-bold flex items-center">
+                            <input class="mr-2 accent-cornflower-blue-500" type="checkbox" [(ngModel)]="pendingChecked"
+                                (change)="filterInvoices('pending', $event)">
+                            Pending
+                        </label>
+
+                        <label class="p-3 rounded font-bold flex items-center">
+                            <input class="mr-2 accent-cornflower-blue-500" type="checkbox" [(ngModel)]="draftChecked"
+                                (change)="filterInvoices('draft', $event)">
+                            Draft
+                        </label>
+                    </div>
+                </div>
+                <button (click)="createNewInvoiceVisible = true"
+                    class="flex items-center justify-center pt-3 pb-3 pl-4 pr-4 rounded-full bg-cornflower-blue-500 text-white font-bold hover:bg-heliotrope-400">
+                    <div class="bg-white rounded-full h-10 w-10 flex items-center justify-center">
+                        <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.313 10.023v-3.71h3.71v-2.58h-3.71V.023h-2.58v3.71H.023v2.58h3.71v3.71z"
+                                fill="#7C5DFA" fill-rule="nonzero" />
+                        </svg>
+                    </div>
+                    <span class="ml-5">New Invoice</span>
+                </button>
+            </div>
+        </div>
+        <!-- invoices container -->
+        <div *ngIf="internalInvoices.length > 0" class="mt-10">
+            <div (click)="selectInvoice(invoice)" *ngFor="let invoice of internalInvoices"
+                class="bg-white grid grid-cols-[10%_20%_20%_20%_30%] md:grid-cols-6 p-5 rounded cursor-pointer mb-3 place-items-center hover:border border-cornflower-blue-500 dark:bg-mirage-950">
+                <p class="font-bold text-vulcan-950 dark:text-white">#{{invoice.id}}</p>
+                <p class="text-bali-hai-600 dark:text-selago-100">{{invoice.purchaseDate | date}}</p>
+                <p class="text-bali-hai-600 dark:text-selago-100">{{invoice.client.name}}</p>
+                <p class="font-bold text-vulcan-950 dark:text-white">{{calculateTotalItemsAmount(invoice) | currency:
+                    'USD'}}</p>
+                <div class="flex items-center justify-center rounded px-3 xs:px-5 md:px-7 py-2 xs:min-w-[100px]"
+                    [ngClass]="getStatusClass(invoice.status)">
+                    <svg preserveAspectRatio="none" width="8" height="8" viewBox="0 0 8 8" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle *ngIf="invoice.status === 'paid'" class="fill-[#33D69F]" cx="4" cy="4" r="4" />
+                        <circle *ngIf="invoice.status === 'pending'" class="fill-[#ff8f00]" cx="4" cy="4" r="4" />
+                        <circle *ngIf="invoice.status === 'draft'" class="fill-[#373b53] dark:fill-selago-100" cx="4"
+                            cy="4" r="4" />
+                    </svg>
+                    <p *ngIf="invoice.status === 'paid'" class="ml-3 text-shamrock-400 font-bold">{{invoice.status |
+                        titlecase}}</p>
+                    <p *ngIf="invoice.status === 'draft'"
+                        class="ml-3 text-oxford-blue-800 font-bold dark:text-selago-100">{{invoice.status |
+                        titlecase}}</p>
+                    <p *ngIf="invoice.status === 'pending'" class="ml-3 text-pizazz-600 font-bold">{{invoice.status |
+                        titlecase}}</p>
+                </div>
+                <svg class="hidden md:block" width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1l4 4-4 4" stroke="#7C5DFA" stroke-width="2" fill="none" fill-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- no invoices container -->
+        <div *ngIf="internalInvoices.length === 0" class="w-full h-3/4 flex items-center justify-center flex-col">
+            <img src="assets/illustration-empty.svg">
+            <p class="font-bold text-5xl text-vulcan-950 dark:text-white">There is nothing here</p>
+            <p class="text-bali-hai-600 text-2xl">Create an invoice by clicking the <span class="font-bold">New
+                    Invoice</span> button and get started</p>
+        </div>
+    </div>
+</div>
