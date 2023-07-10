@@ -81,4 +81,22 @@ export class ViewInvoicesComponent {
         }))
     }
 
+    get itemsFormArrayControls() {
+        return this.newInvoiceForm.controls.items
+    }
+
+    // filter invoices by status
+    filterInvoices(status: 'paid' | 'pending' | 'draft', event: Event) {
+        if ((event.target as HTMLInputElement).checked) {
+            this.filters$.next([...this.filters$.value, status]);
+        } else {
+            this.filters$.next(this.filters$.value.filter(filter => filter !== status));
+        }
+
+        if (this.filters$.value.length === 0) {
+            this.internalInvoices = this.invoices;
+        } else {
+            this.internalInvoices = this.invoices.filter(invoice => this.filters$.value.includes(invoice.status));
+        }
+    }
 }
