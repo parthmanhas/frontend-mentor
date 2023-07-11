@@ -99,4 +99,97 @@ export class ViewInvoicesComponent {
             this.internalInvoices = this.invoices.filter(invoice => this.filters$.value.includes(invoice.status));
         }
     }
+    // calculate total amount of all items in an invoice
+    calculateTotalItemsAmount(invoice: Invoice) {
+        return invoice.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    }
+
+    showDropdown(event: MouseEvent) {
+        this.dropdownVisible = !this.dropdownVisible;
+        event.stopPropagation();
+    }
+
+    stopPropagation(event: MouseEvent) {
+        event.stopPropagation();
+    }
+
+    getStatusClass(status: 'paid' | 'pending' | 'draft') {
+        const classes = [''];
+        switch (status) {
+            case 'paid':
+                classes.push('bg-shamrock-50 dark:bg-shamrock-400 dark:bg-opacity-5');
+                break;
+            case 'pending':
+                classes.push('bg-pizazz-50 dark:bg-pizazz-600 dark:bg-opacity-5');
+                break;
+            case 'draft':
+                classes.push('bg-oxford-blue-50 dark:bg-selago-100 dark:bg-opacity-5');
+                break;
+        }
+
+        return classes.join(' ');
+    }
+
+    getStatusCircle(status: 'paid' | 'pending' | 'draft') {
+        switch (status) {
+            case 'paid':
+                return '#33D69F';
+            case 'pending':
+                return '#FBBF24';
+            case 'draft':
+                return '#F87171';
+        }
+    }
+
+    toggleCheckbox(type: string, event: Event): void {
+        event.stopPropagation();
+
+        switch (type) {
+            case 'paid':
+                this.paidChecked = !this.paidChecked;
+                break;
+            case 'pending':
+                this.pendingChecked = !this.pendingChecked;
+                break;
+            case 'draft':
+                this.draftChecked = !this.draftChecked;
+                break;
+            default:
+                break;
+        }
+    }
+
+    toggleTheme(theme: 'light' | 'dark') {
+        this.appComponent.theme$.next(theme);
+    }
+
+    selectInvoice(invoice: Invoice) {
+        // this.appComponent.selectedInvoice$.next(invoice);
+        const navigationExtras = { state: { fromViewInvoices: true } };
+        this.router.navigate(['/view-invoice', invoice.id], navigationExtras);
+    }
+
+    initItem(): FormGroup {
+        return this.fb.group({
+            name: ['', Validators.required],
+            quantity: ['', [Validators.required, Validators.min(1)]],
+            price: ['', Validators.required],
+        });
+    }
+
+    get items() {
+        return this.newInvoiceForm.controls.items as FormArray<InvoiceItemForm>;
+    }
+
+    addNewItem() {
+        this.newInvoiceForm.controls.items.push(this.initItem());
+    }
+
+    deleteItem(index: number) {
+        this.newInvoiceForm.controls.items.removeAt(index);
+    }
+
+    getTotal(item: FormGroup) {
+        return item.get('quantity')?.value * item.get('price')?.value;
+    }
 }
