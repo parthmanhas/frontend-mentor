@@ -192,4 +192,35 @@ export class ViewInvoicesComponent {
     getTotal(item: FormGroup) {
         return item.get('quantity')?.value * item.get('price')?.value;
     }
+
+    submit(status: 'pending' | 'draft') {
+        this.newInvoiceForm.markAsDirty();
+        this.submitted = true;
+        this.newInvoiceForm.controls.status.setValue(status);
+        if(this.newInvoiceForm.valid) {
+            const newInvoice: Invoice = this.newInvoiceForm.value as Invoice;
+            this.appComponent.invoices$.next([...this.appComponent.invoices$.value, newInvoice]);
+            this.createNewInvoiceVisible = false;
+            this.newInvoiceForm.reset();
+        } else {
+            console.info('Form is invalid');
+        }
+    }
+
+    inputInvalidClass(control: FormControl) {
+        if (control.invalid && this.submitted)
+            return "border-red-500 dark:border-red-500";
+        return '';
+    }
+
+    labelInvalidClass(control: FormControl) {
+        if (control.invalid && this.submitted)
+            return "text-red-500 dark:text-red-500";
+        return '';
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    }
+
 }
