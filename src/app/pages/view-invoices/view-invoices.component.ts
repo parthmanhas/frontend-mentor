@@ -99,6 +99,7 @@ export class ViewInvoicesComponent {
             this.internalInvoices = this.invoices.filter(invoice => this.filters$.value.includes(invoice.status));
         }
     }
+
     // calculate total amount of all items in an invoice
     calculateTotalItemsAmount(invoice: Invoice) {
         return invoice.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
