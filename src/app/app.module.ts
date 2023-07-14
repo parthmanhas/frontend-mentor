@@ -3,36 +3,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ButtonComponent } from './components/button/button.component';
-import { CommonModule } from '@angular/common';
-import { StatusComponent } from './components/status/status.component';
-import { InvoiceComponent } from './components/invoice/invoice.component';
-import { ViewInvoiceStatusComponent } from './components/view-invoice-status/view-invoice-status.component';
-import { ViewInvoiceDetailsComponent } from './components/view-invoice-details/view-invoice-details.component';
-import { InputComponent } from './components/input/input.component';
-import { EditInvoiceTable } from './components/edit-invoice-table/edit-invoice-table.component';
-import { ViewInvoiceDetailsTableComponent } from './components/view-invoice-details-table/view-invoice-details-table.component';
-import { IconComponent } from './components/icon/icon.component';
+import { CommonModule, DatePipe } from '@angular/common';
+import { ViewInvoicesComponent } from './pages/view-invoices/view-invoices.component';
+import { ViewInvoiceComponent } from './pages/view-invoice/view-invoice.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AccessGuard } from './guards/access-guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ButtonComponent,
-    EditInvoiceTable,
-    IconComponent,
-    InvoiceComponent,
-    InputComponent,
-    ViewInvoiceStatusComponent,
-    ViewInvoiceDetailsComponent,
-    ViewInvoiceDetailsTableComponent,
-    StatusComponent,
+    ViewInvoicesComponent,
+    ViewInvoiceComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AccessGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
