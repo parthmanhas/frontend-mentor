@@ -3,7 +3,7 @@
 <!-- edit-form container -->
 <div *ngIf="editFormVisible" class="w-full h-full bg-black opacity-50 fixed"></div>
 <div *ngIf="editFormVisible" [formGroup]="editForm"
-    class="fixed z-10 p-10 pb-0 w-full h-[calc(100%-5rem)] md:p-0 md:pl-[8vw] md:pr-[3vw] md:pt-[3vw] md:w-[80vw] md:h-[calc(100%-7rem)] lg:w-[40vw] lg:h-full bg-white overflow-y-auto dark:bg-[#141625] dark:text-white">
+    class="fixed z-30 p-3 sm:p-10 pb-0 w-full h-[calc(100%-5rem)] md:p-0 md:pl-[8vw] md:pr-[3vw] md:pt-[3vw] md:w-[80%] md:h-[calc(100%-7rem)] lg:h-full bg-white overflow-y-auto dark:bg-[#141625] dark:text-white">
     <p class="text-2xl font-bold dark:text-white">Edit #{{editForm.value.id}}</p>
     <p class="font-bold text-cornflower-blue-500 mt-10">Bill Form</p>
     <!-- street address -->
@@ -121,27 +121,41 @@
     <!-- item list -->
     <p class="text-lg text-ship-cove-500 mb-5 mt-10 font-bold">Item List</p>
     <div>
-        <div class="grid grid-cols-[30%_10%_20%_20%_10%] mb-3 gap-2 md:gap-3">
-            <p class="text-ship-cove-500 dark:text-selago-100">Item List</p>
-            <p class="text-ship-cove-500 dark:text-selago-100">Quantity</p>
-            <p class="text-ship-cove-500 dark:text-selago-100">Price</p>
-            <p class="text-ship-cove-500 dark:text-selago-100 text-center">Total</p>
+        <div class="sm:grid grid-cols-10 mb-3 gap-2 md:gap-3 hidden">
+            <p class="text-ship-cove-500 dark:text-selago-100 col-span-3">Item List</p>
+            <p class="text-ship-cove-500 dark:text-selago-100 col-span-1">Qty</p>
+            <p class="text-ship-cove-500 dark:text-selago-100 col-span-2">Price</p>
+            <p class="text-ship-cove-500 dark:text-selago-100 text-center col-span-3 flex justify-center">Total</p>
             <p></p>
         </div>
+        <!-- item -->
         <div *ngFor="let item of editForm.controls.items.controls; let i = index"
-            class="grid grid-cols-[30%_10%_20%_20%_10%] gap-2 md:gap-3 mb-3 items-center">
+            class="grid grid-cols-10 gap-2 md:gap-3 mb-5 sm:mb-3 items-center">
             <!-- item name -->
-            <input class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="text"
-                [formControl]="item.controls.name" [ngClass]="inputInvalidClass(item.controls.name)" />
+            <div class="flex flex-col col-span-full sm:col-span-3">
+                <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Item List</p>
+                <input class="sm:col-span-3 border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950"
+                    type="text" [formControl]="item.controls.name" [ngClass]="inputInvalidClass(item.controls.name)" />
+            </div>
             <!-- qty -->
+            <div class="flex flex-col col-span-2 sm:col-span-1">
+                <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Qty</p>
             <input class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950 text-center"
-                type="text" [formControl]="item.controls.quantity" [ngClass]="inputInvalidClass(item.controls.name)" />
+                    type="text" [formControl]="item.controls.quantity"
+                    [ngClass]="inputInvalidClass(item.controls.name)" />
+            </div>
             <!-- price -->
+            <div class="flex flex-col col-span-3 sm:col-span-2">
+                <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Price</p>
             <input class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="text"
                 [formControl]="item.controls.price" [ngClass]="inputInvalidClass(item.controls.name)" />
+            </div>
             <!-- total -->
-            <p class="text-ship-cove-500 text-center dark:text-white">{{(item.value.quantity || 0) * (item.value.price
-                || 0)}}</p>
+            <div class="flex flex-col col-span-3">
+                <p class="text-ship-cove-500 dark:text-selago-100 text-center sm:hidden">Total</p>
+                <p class="text-ship-cove-500 text-center dark:text-white">{{(item.value.quantity || 0) *
+                    (item.value.price || 0)}}</p>
+            </div>
             <!-- delete -->
             <svg (click)="deleteItem(i)" class="cursor-pointer hover:fill-red-500 fill-[#888EB0] justify-self-end"
                 width="13" height="16" xmlns="http://www.w3.org/2000/svg">
@@ -165,13 +179,13 @@
     <p class="text-red-500" *ngIf="editForm.controls.items.controls.length === 0 && submitted">- An item must be
         added</p>
     <!-- buttons-container -->
-    <div class="sticky bottom-0 right-0 w-full p-5 flex justify-end bg-white z-10 dark:bg-[#141625]">
+    <div class="p-5 sm:p-0 flex flex-col sm:flex-row sm:justify-between justify-center bg-white z-10 dark:bg-[#141625]">
         <button (click)="handleCancel()"
             class="rounded-full bg-selago-50 text-cornflower-blue-500 dark:bg-ebony-clay-950 dark:text-selago-100 dark:hover:bg-selago-50 dark:hover:text-cornflower-blue-500 flex justify-center items-center py-4 px-6 font-bold mr-3">
             Cancel
         </button>
         <button (click)="saveChanges()"
-            class="rounded-full bg-cornflower-blue-500 dark:hover:bg-cornflower-blue-400 flex justify-center items-center py-4 px-6 font-bold text-selago-50">
+            class="w-full sm:w-auto rounded-full bg-cornflower-blue-500 dark:hover:bg-cornflower-blue-400 flex justify-center items-center py-4 px-6 font-bold text-selago-50">
             Save Changes
         </button>
     </div>
