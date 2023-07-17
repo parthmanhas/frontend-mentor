@@ -140,15 +140,15 @@
             <!-- qty -->
             <div class="flex flex-col col-span-2 sm:col-span-1">
                 <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Qty</p>
-            <input class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950 text-center"
+                <input class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950 text-center"
                     type="text" [formControl]="item.controls.quantity"
                     [ngClass]="inputInvalidClass(item.controls.name)" />
             </div>
             <!-- price -->
             <div class="flex flex-col col-span-3 sm:col-span-2">
                 <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Price</p>
-            <input class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="text"
-                [formControl]="item.controls.price" [ngClass]="inputInvalidClass(item.controls.name)" />
+                <input class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="text"
+                    [formControl]="item.controls.price" [ngClass]="inputInvalidClass(item.controls.name)" />
             </div>
             <!-- total -->
             <div class="flex flex-col col-span-3">
@@ -181,7 +181,7 @@
     <!-- buttons-container -->
     <div class="p-5 sm:p-0 flex flex-col sm:flex-row sm:justify-between justify-center bg-white z-10 dark:bg-[#141625]">
         <button (click)="handleCancel()"
-            class="rounded-full bg-selago-50 text-cornflower-blue-500 dark:bg-ebony-clay-950 dark:text-selago-100 dark:hover:bg-selago-50 dark:hover:text-cornflower-blue-500 flex justify-center items-center py-4 px-6 font-bold mr-3">
+            class="w-full mb-3 sm:mb-0 sm:w-auto rounded-full bg-selago-50 text-cornflower-blue-500 dark:bg-ebony-clay-950 dark:text-selago-100 dark:hover:bg-selago-50 dark:hover:text-cornflower-blue-500 flex justify-center items-center py-4 px-6 font-bold mr-3">
             Cancel
         </button>
         <button (click)="saveChanges()"
@@ -192,11 +192,12 @@
 </div>
 
 <!-- invoice-actions container calc(100vh-7rem) -> 7rem is height of sidebar -->
-<div
-    class="w-[100vw] pb-24 md:pt-10 md:h-[calc(100vh-7rem)] lg:h-[100vh] bg-whisper-50 flex justify-center items-center overflow-y-auto overflow-x-hidden dark:bg-[#141625]">
+<div 
+    [ngClass]="{'fixed': editFormVisible}"
+    class="w-full pb-24 md:pt-10 md:h-[calc(100vh-7rem)] lg:h-[100vh] bg-whisper-50 flex justify-center items-center overflow-y-auto overflow-x-hidden dark:bg-[#141625]">
     <div class="lg:w-[60vw] md:w-[90vw] w-[95vw] md:h-full">
         <!-- go back-container -->
-        <div (click)="goBackToViewInvoices()" class="flex items-center p-5 text-lg">
+        <div (click)="goBackToViewInvoices()" class="flex items-center p-5 whitespace-nowrap text-lg">
             <svg class="cursor-pointer" width="7" height="10" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.342.886L2.114 5.114l4.228 4.228" stroke="#9277FF" stroke-width="2" fill="none"
                     fill-rule="evenodd" />
@@ -206,8 +207,9 @@
                 Go Back</p>
         </div>
         <!-- status-container -->
-        <div class="flex justify-between bg-white py-5 px-7 rounded-xl mb-5 dark:bg-mirage-950">
-            <div class="flex items-center w-full justify-between md:w-0">
+        <div
+            class="flex flex-col sm:flex-row sm:flex-wrap justify-center justify-between whitespace-nowrap bg-white py-5 px-7 rounded-xl mb-5 dark:bg-mirage-950">
+            <div class="flex items-center w-full justify-between mb-5">
                 <p class="mr-3 text-wild-blue-yonder-600">Status</p>
                 <div class="flex items-center justify-center rounded pl-7 pr-7 pt-2 pb-2 min-w-[100px]"
                     [ngClass]="getStatusClass">
@@ -230,28 +232,27 @@
                         titlecase}}</p>
                 </div>
             </div>
-            <div
-                class="fixed bottom-0 left-0 text-center bg-white dark:bg-mirage-950 w-full px-7 py-4 h-[5rem] md:static md:bottom-auto md:left-auto md:bg-transparent md:w-auto md:px-0 md:py-0">
-                <button (click)="editFormVisible = true"
-                    class="px-4 py-3 rounded-full text-ship-cove-500 font-bold bg-selago-50 hover:bg-selago-100 dark:bg-ebony-clay-950 dark:text-selago-100 dark:hover:bg-white dark:hover:text-ship-cove-500">Edit</button>
-                <button (click)="deleteFormVisible = true"
-                    class="ml-3 px-4 py-3 rounded-full font-bold bg-burnt-sienna-500 text-white hover:bg-burnt-sienna-400">Delete</button>
-                <button (click)="markAsPaid()"
-                    [ngClass]="{'bg-green-900 hover:bg-green-900 cursor-auto text-wild-blue-yonder-700': editForm.value.status === 'paid'}"
-                    class="ml-3 px-4 py-3 rounded-full font-bold bg-green-500 text-white hover:bg-green-400">Mark
-                    as
-                    Paid</button>
-                <button (click)="markAsPending()"
-                    [ngClass]="{'bg-yellow-900 hover:bg-yellow-900 cursor-auto text-wild-blue-yonder-700': editForm.value.status === 'paid' || editForm.value.status === 'pending'}"
-                    class="ml-3 px-4 py-3 rounded-full font-bold bg-yellow-500 text-white hover:bg-yellow-400">Mark
-                    as
-                    Pending</button>
-            </div>
+            <button (click)="markAsPaid()"
+                [ngClass]="{'bg-green-600 hover:bg-green-600 dark:bg-green-900 dark:hover:bg-green-900 cursor-auto text-wild-blue-yonder-300 dark:text-wild-blue-yonder-700': editForm.value.status === 'paid'}"
+                class="mb-5 sm:mb-0 p-3 flex-1 rounded-full ml-3 font-bold bg-green-500 text-white hover:bg-green-400">Mark
+                as
+                Paid</button>
+            <button (click)="markAsPending()"
+                [ngClass]="{'bg-yellow-600 hover:bg-yellow-600 dark:bg-yellow-900 dark:hover:bg-yellow-900 cursor-auto text-wild-blue-yonder-300 dark:text-wild-blue-yonder-700': editForm.value.status === 'paid' || editForm.value.status === 'pending'}"
+                class="mb-5 sm:mb-0 p-3 flex-1 rounded-full ml-3 font-bold bg-yellow-500 text-white hover:bg-yellow-400">Mark
+                as
+                Pending</button>
+            <button (click)="editFormVisible = true"
+                class="mb-5 sm:mb-0 p-3 flex-1 rounded-full ml-3 text-ship-cove-500 font-bold bg-selago-50 hover:bg-selago-100 dark:bg-ebony-clay-950 dark:text-selago-100 dark:hover:bg-white dark:hover:text-ship-cove-500">Edit
+                Invoice</button>
+            <button (click)="deleteFormVisible = true"
+                class="mb-5 sm:mb-0 p-3 flex-1 rounded-full ml-3 font-bold bg-burnt-sienna-500 text-white hover:bg-burnt-sienna-400">Delete
+                Invoice</button>
         </div>
         <!-- invoice-details container -->
         <div class="bg-white rounded-xl p-7 dark:bg-mirage-950">
-            <div class="flex justify-between mb-5">
-                <div>
+            <div class="flex flex-col sm:flex-row justify-between mb-5">
+                <div class="mb-5 sm:mb-0">
                     <p class="font-bold dark:text-white">#{{editForm.value.id}}</p>
                     <p class="text-wild-blue-yonder-600">{{editForm.value.projectName}}</p>
                 </div>
@@ -260,9 +261,9 @@
                 </div>
             </div>
             <!-- dates-bill-sent container -->
-            <div class="flex justify-between mb-10">
+            <div class="flex flex-wrap justify-between mb-10">
                 <!-- dates-container -->
-                <div>
+                <div class="mr-10 sm:mr-0">
                     <div class="mb-5">
                         <p class="text-wild-blue-yonder-600">Invoice Date</p>
                         <p class="font-bold dark:text-selago-100">{{editForm.value.purchaseDate | date}}</p>
@@ -290,22 +291,23 @@
             <!-- items-container -->
             <div class="bg-selago-50 rounded-t-xl p-7 pb-5 overflow-y-auto h-[50vh] dark:bg-ebony-clay-950">
                 <!-- items-container -->
-                <div class="grid grid-cols-4 mb-5">
-                    <p class="text-wild-blue-yonder-600 font-bold">Item Name</p>
-                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end">Quantity</p>
-                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end">Price</p>
-                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end">Total</p>
+                <div class="hidden sm:grid grid-cols-10 mb-5">
+                    <p class="text-wild-blue-yonder-600 font-bold col-span-3">Item Name</p>
+                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end col-span-1">Quantity</p>
+                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end col-span-3">Price</p>
+                    <p class="text-wild-blue-yonder-600 font-bold justify-self-end col-span-3">Total</p>
                 </div>
 
                 <div *ngFor="let item of editForm.controls.items.controls"
-                    class="grid grid-cols-4 mb-3 text-lg font-bold">
-                    <p class="dark:text-white">{{item.value.name}}</p>
-                    <p class="text-ship-cove-500 justify-self-end dark:text-selago-100">{{item.value.quantity}}</p>
-                    <p class="text-ship-cove-500 justify-self-end dark:text-selago-100">{{item.value.price | currency:
-                        'USD'}}
-                    </p>
-                    <p class="justify-self-end dark:text-white">{{ (item.value.quantity || 0) * (item.value.price || 0)
-                        | currency: 'USD' }}</p>
+                    class="grid grid-cols-10 gap-1 sm:gap-3 mb-3 sm:text-lg sm:font-bold">
+                    <p class="dark:text-white col-span-full sm:col-span-3">{{item.value.name}}</p>
+                    <p class="text-ship-cove-500 sm:justify-self-end dark:text-selago-100 col-span-1 sm:col-span-1">
+                        {{item.value.quantity}}</p>
+                    <p class="text-ship-cove-500 dark:text-selago-100 col-span-1 sm:hidden">x</p>
+                    <p class="text-ship-cove-500 sm:justify-self-end dark:text-selago-100 col-span-3 sm:col-span-3">
+                        {{item.value.price | currency: 'USD'}}</p>
+                    <p class="justify-self-end dark:text-white col-span-5 sm:col-span-3 font-bold">{{
+                        (item.value.quantity || 0) * (item.value.price || 0) | currency: 'USD' }}</p>
                 </div>
 
             </div>

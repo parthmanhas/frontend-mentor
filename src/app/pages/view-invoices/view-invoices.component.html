@@ -1,10 +1,11 @@
 <app-sidebar></app-sidebar>
 
 <!-- create-invoice-form container -->
+<!-- todo should be consistent in both forms -->
 <div *ngIf="createNewInvoiceVisible" (click)="createNewInvoiceVisible = false"
-    class="w-full h-full bg-black opacity-50 fixed"></div>
+    class="z-20 w-full h-full bg-black opacity-50 fixed"></div>
 <div [formGroup]="newInvoiceForm" *ngIf="createNewInvoiceVisible"
-    class="fixed z-10 p-10 pb-0 w-full h-[calc(100%-5rem)] md:p-0 md:pl-[8vw] md:pr-[3vw] md:pt-[3vw] md:w-[80vw] md:h-[calc(100%-7rem)] lg:w-[40vw] lg:h-full bg-white overflow-y-auto dark:bg-[#141625] dark:text-white">
+    class="fixed z-30 p-3 sm:p-10 pb-0 w-full h-[calc(100%-5rem)] md:p-0 md:pl-[8vw] md:pr-[3vw] md:pt-[3vw] md:w-[80vw] md:h-[calc(100%-7rem)] lg:w-[40vw] lg:h-full bg-white overflow-y-auto dark:bg-[#141625] dark:text-white">
     <p class="text-2xl font-bold dark:text-white">New Invoice</p>
     <p class="font-bold text-cornflower-blue-500 mt-10">Bill Form</p>
     <!-- street address -->
@@ -95,9 +96,9 @@
     </ng-container>
 
     <!-- date and due -->
-    <div class="flex justify-between mb-5">
+    <div class="flex flex-col sm:flex-row sm:justify-between mb-5">
         <!-- invoice issue date -->
-        <div class="flex flex-col">
+        <div class="flex flex-col mb-5 sm:mb-0">
             <label [ngClass]="labelInvalidClass(newInvoiceForm.controls.purchaseDate)"
                 class="text-ship-cove-500 dark:text-selago-100">Issue Date</label>
             <input [ngClass]="inputInvalidClass(newInvoiceForm.controls.purchaseDate)" formControlName="purchaseDate"
@@ -110,7 +111,8 @@
                 class="text-ship-cove-500 dark:text-selago-100">Payment Due</label>
             <input [ngClass]="inputInvalidClass(newInvoiceForm.controls.paymentDueDate)"
                 formControlName="paymentDueDate"
-                class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="date" [min]="newInvoiceForm.controls.purchaseDate.value" />
+                class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="date"
+                [min]="newInvoiceForm.controls.purchaseDate.value" />
         </div>
     </div>
     <!-- project name -->
@@ -123,32 +125,45 @@
     <!-- item list -->
     <p class="text-lg text-ship-cove-500 mb-5 mt-10 font-bold">Item List</p>
     <div>
-        <div class="grid grid-cols-[30%_10%_20%_20%_10%] mb-3 gap-3">
-            <p class="text-ship-cove-500 dark:text-selago-100">Item List</p>
-            <p class="text-ship-cove-500 dark:text-selago-100">Quantity</p>
-            <p class="text-ship-cove-500 dark:text-selago-100">Price</p>
-            <p class="text-ship-cove-500 dark:text-selago-100 text-center">Total</p>
+        <div class="hidden sm:grid grid-cols-10 mb-3 gap-3">
+            <p class="text-ship-cove-500 dark:text-selago-100 sm:col-span-3">Item List</p>
+            <p class="text-ship-cove-500 dark:text-selago-100 sm:col-span-1">Qty</p>
+            <p class="text-ship-cove-500 dark:text-selago-100 sm:col-span-2">Price</p>
+            <p class="text-ship-cove-500 dark:text-selago-100 sm:col-span-2 flex justify-center">Total</p>
             <p></p>
         </div>
         <div *ngFor="let item of items.controls; let i = index;"
-            class="grid grid-cols-[30%_10%_20%_20%_10%] gap-3 mb-3 items-center text-white">
+            class="grid grid-cols-10 gap-3 mb-12 sm:mb-3 items-center text-white">
             <!-- item name -->
+            <div class="flex flex-col col-span-full sm:col-span-3">
+                <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Item List</p>
             <input [ngClass]="inputInvalidClass(item.controls.name)"
                 class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="text"
                 [formControl]="item.controls.name" />
+            </div>
             <!-- qty -->
+            <div class="flex flex-col col-span-2 sm:col-span-1">
+                <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Quantity</p>
             <input [ngClass]="inputInvalidClass(item.controls.quantity)"
                 class="appearance-none border rounded p-3 font-bold text-center dark:bg-mirage-950 dark:border-ebony-clay-950"
                 type="text" [formControl]="item.controls.quantity" />
+            </div>
             <!-- price -->
+            <div class="flex flex-col col-span-4 sm:col-span-2">
+                <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Price</p>
             <input [ngClass]="inputInvalidClass(item.controls.price)"
                 class="appearance-none border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950"
                 type="text" [formControl]="item.controls.price" />
+            </div>
             <!-- total -->
+            <div class="flex flex-col col-span-3 sm:col-span-2">
+                <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden text-center">Total</p>
             <p class="text-ship-cove-500 text-center dark:text-white">{{getTotal(item)}}</p>
+            </div>
             <!-- delete -->
-            <svg (click)="deleteItem(i)" class="cursor-pointer fill-[#888EB0] hover:fill-red-500 justify-self-end"
-                width="13" height="16" xmlns="http://www.w3.org/2000/svg">
+            <svg class="col-span-1" (click)="deleteItem(i)"
+                class="cursor-pointer fill-[#888EB0] hover:fill-red-500 justify-self-end" width="13" height="16"
+                xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M11.583 3.556v10.666c0 .982-.795 1.778-1.777 1.778H2.694a1.777 1.777 0 01-1.777-1.778V3.556h10.666zM8.473 0l.888.889h3.111v1.778H.028V.889h3.11L4.029 0h4.444z"
                     fill-rule="nonzero" />
