@@ -220,6 +220,11 @@ export class ViewInvoicesComponent {
         return '';
     }
 
+    discard() {
+        this.newInvoiceForm.reset();
+        this.createNewInvoiceVisible = false;
+    }
+
     ngOnDestroy() {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }

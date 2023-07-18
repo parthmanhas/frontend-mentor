@@ -137,28 +137,28 @@
             <!-- item name -->
             <div class="flex flex-col col-span-full sm:col-span-3">
                 <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Item List</p>
-            <input [ngClass]="inputInvalidClass(item.controls.name)"
-                class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="text"
-                [formControl]="item.controls.name" />
+                <input [ngClass]="inputInvalidClass(item.controls.name)"
+                    class="border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950" type="text"
+                    [formControl]="item.controls.name" />
             </div>
             <!-- qty -->
             <div class="flex flex-col col-span-2 sm:col-span-1">
                 <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Quantity</p>
-            <input [ngClass]="inputInvalidClass(item.controls.quantity)"
-                class="appearance-none border rounded p-3 font-bold text-center dark:bg-mirage-950 dark:border-ebony-clay-950"
-                type="text" [formControl]="item.controls.quantity" />
+                <input [ngClass]="inputInvalidClass(item.controls.quantity)"
+                    class="appearance-none border rounded p-3 font-bold text-center dark:bg-mirage-950 dark:border-ebony-clay-950"
+                    type="text" [formControl]="item.controls.quantity" />
             </div>
             <!-- price -->
             <div class="flex flex-col col-span-4 sm:col-span-2">
                 <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden">Price</p>
-            <input [ngClass]="inputInvalidClass(item.controls.price)"
-                class="appearance-none border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950"
-                type="text" [formControl]="item.controls.price" />
+                <input [ngClass]="inputInvalidClass(item.controls.price)"
+                    class="appearance-none border rounded p-3 font-bold dark:bg-mirage-950 dark:border-ebony-clay-950"
+                    type="text" [formControl]="item.controls.price" />
             </div>
             <!-- total -->
             <div class="flex flex-col col-span-3 sm:col-span-2">
                 <p class="text-ship-cove-500 dark:text-selago-100 sm:hidden text-center">Total</p>
-            <p class="text-ship-cove-500 text-center dark:text-white">{{getTotal(item)}}</p>
+                <p class="text-ship-cove-500 text-center dark:text-white">{{getTotal(item)}}</p>
             </div>
             <!-- delete -->
             <svg class="col-span-1" (click)="deleteItem(i)"
@@ -184,43 +184,41 @@
     <p class="text-red-500" *ngIf="newInvoiceForm.controls.items.controls.length === 0 && submitted">- An item must be
         added</p>
     <!-- buttons-container -->
-    <div class="sticky bottom-0 right-0 p-5 flex justify-end justify-between bg-white z-10 dark:bg-[#141625]">
-        <!-- left -->
-        <div>
-            <button
-                class="rounded-full bg-selago-200 dark:hover:bg-selago-50 text-ship-cove-500 flex justify-center items-center py-4 px-6 font-bold mr-3">
-                Discard
-            </button>
-        </div>
-        <!-- right -->
-        <div class="flex">
-            <button (click)="submit('draft')"
-                class="rounded-full bg-oxford-blue-800 dark:hover:bg-oxford-blue-500 dark:hover:text-white text-bali-hai-600 flex justify-center items-center py-4 px-6 font-bold mr-3">
-                Save as Draft
-            </button>
-            <button (click)="submit('pending')"
-                class="rounded-full bg-cornflower-blue-500 dark:hover:bg-heliotrope-400 flex justify-center items-center py-4 px-6 font-bold text-selago-50">
-                Save & Send
-            </button>
-        </div>
+    <div class="p-5 sm:p-0 flex flex-col sm:flex-row sm:justify-between justify-center bg-white z-10 dark:bg-[#141625]">
+        <button (click)="discard()"
+            class="w-full mb-3 sm:mb-0 rounded-full bg-selago-200 dark:hover:bg-selago-50 text-ship-cove-500 flex justify-center items-center py-4 px-6 font-bold">
+            Discard
+        </button>
+        <button (click)="submit('draft')"
+            class="w-full sm:mx-3 mb-3 sm:mb-0 rounded-full bg-oxford-blue-800 dark:hover:bg-oxford-blue-500 dark:hover:text-white text-bali-hai-600 flex justify-center items-center py-4 px-6 font-bold">
+            Save as Draft
+        </button>
+        <button (click)="submit('pending')"
+            class="w-full rounded-full bg-cornflower-blue-500 dark:hover:bg-heliotrope-400 flex justify-center items-center py-4 px-6 font-bold text-selago-50">
+            Save & Send
+        </button>
     </div>
 </div>
 
 <!-- invoices-container -->
-<div
-    class="w-[100vw] h-[calc(100%-5rem)] md:h-[100vh] p-5 bg-whisper-50 flex justify-center overflow-y-auto dark:bg-[#141625]">
+<div [ngClass]="{'fixed': createNewInvoiceVisible}"
+    class="w-full h-[calc(100%-5rem)] md:h-[100vh] p-5 bg-whisper-50 flex justify-center dark:bg-[#141625]">
     <div class="w-[90vw] md:w-5/6 lg:w-[60vw]">
         <!-- top container -->
-        <div class="flex justify-between mt-10">
-            <div>
-                <p class="font-bold text-3xl text-vulcan-950 dark:text-white">Invoices</p>
-                <p *ngIf="filters$.value.length === 0" class="text-bali-hai-600 dark:text-selago-100">{{invoices.length > 0 ? 'There are ' + invoices.length
+        <div class="sm:flex sm:justify-between sm:mt-10">
+            <div class="mb-5 sm:mb-0">
+                <p class="text-center sm:text-left font-bold text-3xl text-vulcan-950 dark:text-white">Invoices</p>
+                <p *ngIf="filters$.value.length === 0"
+                    class="text-center sm:text-left text-bali-hai-600 dark:text-selago-100">{{invoices.length > 0 ?
+                    'There are ' + invoices.length
                     + ' total invoices'
                     : 'No Invoices'}}</p>
-                <p *ngIf="filters$.value.length > 0" class="text-bali-hai-600 dark:text-selago-100">There are {{internalInvoices.length}} {{filters$.value.join(',')}} invoices</p>
+                <p *ngIf="filters$.value.length > 0"
+                    class="text-center sm:text-left text-bali-hai-600 dark:text-selago-100">There are
+                    {{internalInvoices.length}} {{filters$.value.join(',')}} invoices</p>
             </div>
-            <!-- filter by status -->
-            <div class="flex">
+            <!-- filter by status and new invoice button-->
+            <div class="flex justify-between">
                 <div (click)="showDropdown($event)"
                     class="flex items-center mr-5 md:mr-20 hover:cursor-pointer relative">
                     <p class="mr-3 font-bold text-lg dark:text-white hidden md:block">Filter by status</p>
@@ -271,11 +269,18 @@
         <!-- invoices container -->
         <div *ngIf="internalInvoices.length > 0" class="mt-10">
             <div (click)="selectInvoice(invoice)" *ngFor="let invoice of internalInvoices"
-                class="bg-white grid grid-cols-[10%_20%_20%_20%_30%] md:grid-cols-6 p-5 rounded cursor-pointer mb-3 place-items-center hover:border border-cornflower-blue-500 dark:bg-mirage-950">
-                <p class="font-bold text-vulcan-950 dark:text-white">#{{invoice.id}}</p>
-                <p class="text-bali-hai-600 dark:text-selago-100">{{invoice.purchaseDate | date}}</p>
-                <p class="text-bali-hai-600 dark:text-selago-100">{{invoice.client.name}}</p>
-                <p class="font-bold text-vulcan-950 dark:text-white">{{calculateTotalItemsAmount(invoice) | currency:
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center bg-white p-5 rounded cursor-pointer mb-3 hover:border border-cornflower-blue-500 dark:bg-mirage-950">
+                <p class="flex justify-between text-vulcan-950 dark:text-white"><span
+                        class="sm:hidden text-vulcan-950 dark:text-white">Id</span>#{{invoice.id}}</p>
+                <p class="flex justify-between text-bali-hai-600 dark:text-selago-100"><span
+                        class="sm:hidden text-bali-hai-600 dark:text-selago-100">Purchase
+                        Date</span>{{invoice.purchaseDate | date}}</p>
+                <p class="flex justify-between text-bali-hai-600 dark:text-selago-100"><span
+                        class="sm:hidden text-bali-hai-600 dark:text-selago-100">Client
+                        Name</span>{{invoice.client.name}}</p>
+                <p class="flex justify-between mb-5 sm:mb-0 font-bold text-vulcan-950 dark:text-white"><span
+                        class="sm:hidden font-bold text-vulcan-950 dark:text-white">Total</span>{{calculateTotalItemsAmount(invoice)
+                    | currency:
                     'USD'}}</p>
                 <div class="flex items-center justify-center rounded px-3 xs:px-5 md:px-7 py-2 xs:min-w-[100px]"
                     [ngClass]="getStatusClass(invoice.status)">
@@ -294,7 +299,7 @@
                     <p *ngIf="invoice.status === 'pending'" class="ml-3 text-pizazz-600 font-bold">{{invoice.status |
                         titlecase}}</p>
                 </div>
-                <svg class="hidden md:block" width="7" height="10" xmlns="http://www.w3.org/2000/svg">
+                <svg class="hidden sm:block" width="7" height="10" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 1l4 4-4 4" stroke="#7C5DFA" stroke-width="2" fill="none" fill-rule="evenodd" />
                 </svg>
             </div>
